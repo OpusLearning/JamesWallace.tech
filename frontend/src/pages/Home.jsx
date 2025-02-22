@@ -36,17 +36,20 @@ export default function Home() {
             let you focus on growing your business.
           </p>
           <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <Link to="/get-started" className="btn btn-primary btn-lg">
+            <Link
+              to="/get-started"
+              className="btn btn-primary btn-lg pulse-glow"
+            >
               Get a Free Consultation
             </Link>
             <Link to="/portfolio" className="btn btn-secondary btn-lg">
-              See Our Work
+              See My Work
             </Link>
           </div>
         </div>
 
         {/* Feature Section */}
-        <h2 className="text-center mb-4">How We Help Local Businesses</h2>
+        <h2 className="text-center mb-4">How I Help Local Businesses</h2>
         <div className="row">
           <div className="col-12 col-md-4 mb-4">
             <FeatureCard
@@ -104,7 +107,7 @@ function FeatureCard({ icon, title, description }) {
           {icon}
         </div>
         <h5 className="card-title text-light">{title}</h5>
-        <p className="card-text text-secondary">{description}</p>
+        <p className="card-text text-white">{description}</p>
       </div>
     </div>
   );
