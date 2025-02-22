@@ -141,9 +141,3 @@ This project is licensed under the MIT Licence.
 Contact
 For questions or feedback, feel free to reach out:
 
-Email: james.william.wallace@gmail.com
-Portfolio: Purple Pixel Portfolio
-css
-Copy
-
-This README is written in Markdown, providing a comprehensive overview of the project, clear setup instructions, feature highlights, and detailed deployment/CI/CD guidelines. Feel free to customise it further to suit your needs!
