@@ -7,8 +7,11 @@ import Footer from "./components/Footer";
 import Portfolio from "./components/Portfolio";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import GetStarted from "./pages/GetStarted";
+import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/Privacy";
+import CalendlyPage from "./pages/Calendly";
+import Pricing from "./pages/Pricing";
+import Services from "./pages/Services";
 
 const App = () => {
   return (
@@ -21,8 +24,11 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
-            <Route path="/get-started" element={<GetStarted />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/calendly" element={<CalendlyPage />} />
           </Routes>
         </main>
         <Footer />
