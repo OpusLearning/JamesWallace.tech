@@ -16,7 +16,7 @@ Welcome to **JamesWallace.tech** – a cutting-edge portfolio and trading platfo
 - [Licence](#licence)
 - [Contact](#contact)
 
-----
+-----
 
 ## Overview
 
