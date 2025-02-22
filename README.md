@@ -2,7 +2,7 @@
 
 Welcome to **JamesWallace.tech** – a cutting-edge portfolio and trading platform that showcases my projects, experience, and technical expertise. This project seamlessly integrates modern UI design, CI/CD best practices, and AI-driven features to create a polished, production-ready application.
 
-----
+-------
 
 ## Table of Contents
 
