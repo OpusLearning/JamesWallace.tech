@@ -22,7 +22,7 @@ Welcome to **JamesWallace.tech** – a cutting-edge portfolio and trading platfo
 
 **JamesWallace.tech** is not just a portfolio – it’s my main trading platform. Built with a monolithic architecture for simplicity and rapid iteration, the project features a modern, responsive UI, an interactive trading dashboard, and a lightweight AI assistant powered by Hugging Face models. The site is designed to stand out both in design and function, leveraging contemporary web technologies and cloud infrastructure.
 
----
+-----
 
 ## Quick Start
 
