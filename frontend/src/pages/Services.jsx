@@ -23,10 +23,7 @@ import {
   faDocker,
 } from "@fortawesome/free-brands-svg-icons";
 
-// Set your primary colour (blue) to #0d6efd
-const primaryColor = "#0d6efd";
-
-// TechIcon Component: renders a technology icon with label and link.
+// TechIcon Component: Renders a technology icon with label and link.
 const TechIcon = ({ icon, name, link }) => {
   return (
     <a
@@ -34,7 +31,7 @@ const TechIcon = ({ icon, name, link }) => {
       target="_blank"
       rel="noopener noreferrer"
       className="d-flex flex-column align-items-center m-2 text-decoration-none"
-      style={{ color: primaryColor }}
+      style={{ color: "#fff" }}
     >
       <FontAwesomeIcon icon={icon} className="fs-4 mb-1" />
       <span className="small text-center">{name}</span>
@@ -42,23 +39,30 @@ const TechIcon = ({ icon, name, link }) => {
   );
 };
 
-// ServiceCard Component: renders an individual service card.
+// ServiceCard Component: Renders an individual service card.
 const ServiceCard = ({ title, description, icon, techIcons }) => (
   <div
     className="card h-100 shadow-sm border-0"
-    style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
+    style={{
+      background: "rgba(0, 0, 0, 0.5)",
+      backdropFilter: "blur(10px)",
+      borderRadius: "0.5rem",
+    }}
   >
     <div className="card-body">
-      <div
-        className="d-flex justify-content-center mb-3"
-        style={{ color: primaryColor }}
-      >
-        <FontAwesomeIcon icon={icon} className="display-4" />
+      <div className="d-flex justify-content-center mb-3">
+        <FontAwesomeIcon
+          icon={icon}
+          className="display-4"
+          style={{ color: "#fff" }}
+        />
       </div>
-      <h2 className="h5 fw-bold text-center" style={{ color: primaryColor }}>
+      <h2 className="h5 fw-bold text-center" style={{ color: "#fff" }}>
         {title}
       </h2>
-      <p className="text-center text-muted">{description}</p>
+      <p className="text-center" style={{ color: "#fff" }}>
+        {description}
+      </p>
       {techIcons && (
         <div className="d-flex flex-wrap justify-content-center mt-3">
           {techIcons.map((tech, index) => (
@@ -70,7 +74,7 @@ const ServiceCard = ({ title, description, icon, techIcons }) => (
   </div>
 );
 
-// Services Component: renders the Services page.
+// Services Component: Renders the Services page.
 const Services = () => {
   const services = [
     {
@@ -160,14 +164,7 @@ const Services = () => {
 
   return (
     <div className="container py-5">
-      <h1
-        className="text-center fw-bold mb-5"
-        style={{
-          color: "#fff",
-          padding: "1rem",
-          borderRadius: "0.5rem",
-        }}
-      >
+      <h1 className="text-center fw-bold mb-5" style={{ color: "#fff" }}>
         Services
       </h1>
       <div className="row">

@@ -8,7 +8,7 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
-// Define your primary colour as the Bootstrap blue (#0d6efd)
+// Set your primary colour as blue (#0d6efd)
 const primaryColor = "#0d6efd";
 
 // Helper: Multiply discounted price by 2 to compute regular price.
@@ -46,19 +46,21 @@ const PricingCard = ({
   return (
     <div
       className="card h-100 shadow-sm border-0"
-      style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backdropFilter: "blur(10px)",
+        borderRadius: "0.5rem",
+      }}
     >
       <div className="card-body d-flex flex-column">
-        <div
-          className="d-flex justify-content-center mb-3"
-          style={{ color: primaryColor }}
-        >
-          <FontAwesomeIcon icon={icon} size="2x" />
+        <div className="d-flex justify-content-center mb-3">
+          <FontAwesomeIcon
+            icon={icon}
+            size="2x"
+            style={{ color: primaryColor }}
+          />
         </div>
-        <h3
-          className="h5 fw-bold mb-2 text-center"
-          style={{ color: primaryColor }}
-        >
+        <h3 className="h5 fw-bold text-center" style={{ color: "#fff" }}>
           {title}
         </h3>
         <div
@@ -87,7 +89,7 @@ const PricingCard = ({
                 icon={faCheck}
                 className="text-success me-2 mt-1"
               />
-              <span style={{ color: primaryColor }}>{feature}</span>
+              <span style={{ color: "#fff" }}>{feature}</span>
             </li>
           ))}
         </ul>
@@ -284,10 +286,7 @@ const Pricing = () => {
   return (
     <div className="container py-4">
       <CountdownTimer expiry={offerExpiry} />
-      <h1
-        className="text-center fw-bold mb-4"
-        style={{ color: "rgba(255,255,255,0.85)" }}
-      >
+      <h1 className="text-center fw-bold mb-4" style={{ color: "#fff" }}>
         Pricing Plans
       </h1>
       <div className="d-flex justify-content-center mb-4">

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import {
   FaCode,
   FaPaintBrush,
+  FaDraftingCompass,
   FaCogs,
   FaRocket,
   FaHandshake,
@@ -31,7 +32,7 @@ export default function About() {
         className="container"
         style={{ paddingTop: "120px", paddingBottom: "120px" }}
       >
-        {/* Heading */}
+        {/* Heading Section */}
         <div className="text-center mb-5">
           <motion.h1
             className="display-4 mb-3"
@@ -61,7 +62,7 @@ export default function About() {
           className="card mx-auto mb-5"
           style={{
             maxWidth: "400px",
-            backgroundColor: "rgba(128,128,128,0.3)",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
             border: "none",
             backdropFilter: "blur(10px)",
           }}
@@ -74,11 +75,7 @@ export default function About() {
               src={profileImage}
               alt="James Wallace"
               className="rounded-circle mb-3"
-              style={{
-                width: "128px",
-                height: "128px",
-                objectFit: "cover",
-              }}
+              style={{ width: "128px", height: "128px", objectFit: "cover" }}
             />
             <h3 className="card-title text-white">James Wallace</h3>
             <p className="card-subtitle mb-2 text-white">
@@ -94,7 +91,7 @@ export default function About() {
         </div>
         <div className="row">
           <ProcessCard
-            icon={<FaPaintBrush size={40} />}
+            icon={<FaDraftingCompass size={40} />}
             title="Custom Wireframing"
             description="Every project starts with a deep understanding of your business. I design tailored wireframes to map out a user-centric digital experience."
           />
@@ -153,7 +150,7 @@ function ProcessCard({ icon, title, description }) {
         className="card h-100 text-center"
         whileHover={{ scale: 1.05 }}
         style={{
-          backgroundColor: "rgba(128,128,128,0.3)",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
           backdropFilter: "blur(10px)",
           border: "none",
         }}
@@ -175,7 +172,7 @@ function CoreValueCard({ icon, title, description }) {
         className="card h-100 text-center"
         whileHover={{ scale: 1.05 }}
         style={{
-          backgroundColor: "rgba(128,128,128,0.3)",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
           backdropFilter: "blur(10px)",
           border: "none",
         }}
