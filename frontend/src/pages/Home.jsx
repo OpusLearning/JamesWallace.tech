@@ -58,10 +58,7 @@ export default function Home() {
             let you focus on growing your business.
           </p>
           <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <Link
-              to="/get-started"
-              className="btn btn-primary btn-lg pulse-glow"
-            >
+            <Link to="/calendly" className="btn btn-primary btn-lg pulse-glow">
               Get a Free Consultation
             </Link>
             <Link to="/portfolio" className="btn btn-secondary btn-lg">
