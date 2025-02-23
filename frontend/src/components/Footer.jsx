@@ -27,33 +27,45 @@ export default function Footer() {
       {/* Social Media Icons */}
       <div className="footer-social d-flex justify-content-center gap-3 mt-3">
         <a
-          href="https://facebook.com"
+          href="https://www.facebook.com/profile.php?id=61573496098584"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FaFacebook />
         </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://x.com/WallaceJam6591"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaTwitter />
         </a>
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/jameswallace.tech/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FaInstagram />
         </a>
         <a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/in/james-wallace-979432352/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FaLinkedin />
         </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.youtube.com/channel/UCQfo7QoY5ByWgk0F1_3hEdw"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaYoutube />
         </a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.tiktok.com/@james.wallace950"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaTiktok />
         </a>
       </div>
