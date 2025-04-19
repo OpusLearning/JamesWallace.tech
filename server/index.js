@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   const start = performance.now();
   res.once("finish", () => {
     const ms = (performance.now() - start).toFixed(1);
-    console.log(`→ [perf] ${req.method} ${req.path} completed in ${ms} ms`);
+    console.log(`→ [perf] ${req.method} ${req.path} completed in ${ms} ms`);
   });
   next();
 });
@@ -124,7 +124,6 @@ app.post("/api/agent", async (req, res) => {
   }
 
   try {
-    // First pass: ask model whether to call a tool
     const chatResp = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: message }],
@@ -136,13 +135,11 @@ app.post("/api/agent", async (req, res) => {
 
     let reply;
     if (choice.finish_reason === "function_call") {
-      // Execute the requested function
       const { name, arguments: jsonArgs } = choice.message.function_call;
       const args = JSON.parse(jsonArgs);
       const fnResult = await handleFunctionCall(name, args);
       console.log("[api/agent] fnResult=", fnResult);
 
-      // Second pass: feed the function result back to get a user‑facing reply
       const followUp = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
@@ -152,16 +149,14 @@ app.post("/api/agent", async (req, res) => {
         ],
       });
       reply = followUp.choices[0].message.content;
-      console.log("[api/agent] final reply=", reply);
     } else {
-      // Simple text reply
       reply = choice.message.content;
     }
 
     console.log(
       `→ [perf] /api/agent LLM loop completed in ${(
         performance.now() - t0
-      ).toFixed(1)} ms`
+      ).toFixed(1)} ms`
     );
     return res.json({ reply });
   } catch (err) {
@@ -187,12 +182,10 @@ app.post("/api/transcribe", async (req, res) => {
 
   const t0 = performance.now();
   try {
-    // Write Base64 to temp file
     const tmpPath = path.join("/tmp", `audio-${Date.now()}.webm`);
     fs.writeFileSync(tmpPath, Buffer.from(audioBase64, "base64"));
     console.log("[api/transcribe] wrote file=", tmpPath);
 
-    // Call Whisper
     const transcription = await openai.audio.transcriptions.create({
       model: "whisper-1",
       file: fs.createReadStream(tmpPath),
@@ -204,7 +197,7 @@ app.post("/api/transcribe", async (req, res) => {
     console.log(
       `→ [perf] /api/transcribe completed in ${(performance.now() - t0).toFixed(
         1
-      )} ms`
+      )} ms`
     );
     return res.json({ transcript: transcription });
   } catch (err) {
@@ -216,7 +209,7 @@ app.post("/api/transcribe", async (req, res) => {
 });
 
 /**
- * 8. /api/tts — Text‑to‑Speech (non‑streaming fallback)
+ * 8. /api/tts — Text‑to‑Speech (non‑streaming fallback, robust handler)
  */
 app.post("/api/tts", async (req, res) => {
   console.log("[api/tts] body=", req.body);
@@ -227,22 +220,32 @@ app.post("/api/tts", async (req, res) => {
 
   const t0 = performance.now();
   try {
-    // Non‑streaming: returns raw Base64 audio
-    const base64 = await openai.audio.speech.create({
+    // SDK may return a Base64 string or a Response object
+    const ttsResult = await openai.audio.speech.create({
       model: "tts-1",
       input: text,
       voice,
       format,
       stream: false,
     });
-    const buffer = Buffer.from(base64, "base64");
-    console.log("[api/tts] buffer length=", buffer.length);
 
+    let buffer;
+    if (typeof ttsResult === "string") {
+      console.log("[api/tts] received Base64 string");
+      buffer = Buffer.from(ttsResult, "base64");
+    } else {
+      console.log("[api/tts] received Response object, reading ArrayBuffer");
+      const arrayBuf = await ttsResult.arrayBuffer();
+      buffer = Buffer.from(arrayBuf);
+    }
+
+    console.log("[api/tts] buffer length=", buffer.length);
     console.log(
       `→ [perf] /api/tts (non‑stream) completed in ${(
         performance.now() - t0
-      ).toFixed(1)} ms`
+      ).toFixed(1)} ms`
     );
+
     res.writeHead(200, { "Content-Type": `audio/${format}` });
     return res.end(buffer);
   } catch (err) {
@@ -252,7 +255,8 @@ app.post("/api/tts", async (req, res) => {
 });
 
 /**
- * 9. /api/tts-stream — Streaming TTS with chunk‑size logging & fallback
+ * 9. /api/tts-stream — Streaming TTS with fallback
+ *     (unchanged)
  */
 app.post("/api/tts-stream", async (req, res) => {
   console.log("[api/tts-stream] body=", req.body);
@@ -278,7 +282,6 @@ app.post("/api/tts-stream", async (req, res) => {
     "Transfer-Encoding": "chunked",
   });
 
-  // Helper to request a streaming response
   async function fetchStream(input, attempts = 3) {
     try {
       console.log(
@@ -321,11 +324,11 @@ app.post("/api/tts-stream", async (req, res) => {
       console.log(
         `→ [perf] segment ${idx} streamed in ${(
           performance.now() - tSeg
-        ).toFixed(1)} ms`
+        ).toFixed(1)} ms`
       );
     } catch (err) {
       console.error(`[tts-stream][${idx}] streaming failed`, err);
-      // Fallback to non‑streaming
+      // fallback to non‑streaming
       try {
         const base64 = await openai.audio.speech.create({
           model: "tts-1",
@@ -340,7 +343,7 @@ app.post("/api/tts-stream", async (req, res) => {
         console.log(
           `→ [perf] segment ${idx} fallback in ${(
             performance.now() - tSeg
-          ).toFixed(1)} ms`
+          ).toFixed(1)} ms`
         );
       } catch (fb) {
         console.error(`[tts-stream][${idx}] fallback failed`, fb);
@@ -352,7 +355,7 @@ app.post("/api/tts-stream", async (req, res) => {
   console.log(
     `→ [perf] /api/tts-stream total time ${(performance.now() - t0).toFixed(
       1
-    )} ms for ${segments.length} segments`
+    )} ms for ${segments.length} segments`
   );
   res.end();
 });
