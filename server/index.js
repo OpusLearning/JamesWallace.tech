@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   const start = performance.now();
   res.once("finish", () => {
     const ms = (performance.now() - start).toFixed(1);
-    console.log(`→ [perf] ${req.method} ${req.path} completed in ${ms} ms`);
+    console.log(`→ [perf] ${req.method} ${req.path} completed in ${ms} ms`);
   });
   next();
 });
@@ -89,7 +89,6 @@ const functions = [
     },
   },
 ];
-
 if (!functions.length) {
   console.error("⚠️ functions array is empty—agent calls will fail.");
 }
@@ -159,8 +158,11 @@ app.post("/api/agent", async (req, res) => {
       reply = choice.message.content;
     }
 
-    const duration = (performance.now() - t0).toFixed(1);
-    console.log(`→ [perf] /api/agent LLM loop completed in ${duration} ms`);
+    console.log(
+      `→ [perf] /api/agent LLM loop completed in ${(
+        performance.now() - t0
+      ).toFixed(1)} ms`
+    );
     return res.json({ reply });
   } catch (err) {
     console.error("[/api/agent] error:", err.response?.data || err);
@@ -199,8 +201,11 @@ app.post("/api/transcribe", async (req, res) => {
     });
     console.log("[api/transcribe] transcription=", transcription);
 
-    const duration = (performance.now() - t0).toFixed(1);
-    console.log(`→ [perf] /api/transcribe completed in ${duration} ms`);
+    console.log(
+      `→ [perf] /api/transcribe completed in ${(performance.now() - t0).toFixed(
+        1
+      )} ms`
+    );
     return res.json({ transcript: transcription });
   } catch (err) {
     console.error("[/api/transcribe] error:", err.response?.data || err);
@@ -233,9 +238,11 @@ app.post("/api/tts", async (req, res) => {
     const buffer = Buffer.from(base64, "base64");
     console.log("[api/tts] buffer length=", buffer.length);
 
-    const duration = (performance.now() - t0).toFixed(1);
-    console.log(`→ [perf] /api/tts (non‑stream) completed in ${duration} ms`);
-
+    console.log(
+      `→ [perf] /api/tts (non‑stream) completed in ${(
+        performance.now() - t0
+      ).toFixed(1)} ms`
+    );
     res.writeHead(200, { "Content-Type": `audio/${format}` });
     return res.end(buffer);
   } catch (err) {
@@ -254,10 +261,11 @@ app.post("/api/tts-stream", async (req, res) => {
     return res.status(400).json({ error: 'Missing or invalid "text"' });
   }
 
-  // Chunk text into ~1k slices
+  // chunk into ~4k–5k slices
   const segments = [];
+  const CHUNK_SIZE = 4000;
   for (let i = 0; i < text.length; ) {
-    let slice = text.slice(i, i + 1000);
+    let slice = text.slice(i, i + CHUNK_SIZE);
     const lastDot = slice.lastIndexOf(". ");
     if (lastDot > 50) slice = slice.slice(0, lastDot + 1);
     segments.push(slice);
@@ -270,7 +278,7 @@ app.post("/api/tts-stream", async (req, res) => {
     "Transfer-Encoding": "chunked",
   });
 
-  // Helper to fetch a streaming Response
+  // Helper to request a streaming response
   async function fetchStream(input, attempts = 3) {
     try {
       console.log(
@@ -288,7 +296,7 @@ app.post("/api/tts-stream", async (req, res) => {
       });
     } catch (err) {
       if (attempts > 1 && err.status === 500) {
-        console.warn("[fetchStream] retrying due to server error");
+        console.warn("[fetchStream] retrying segment due to server error");
         await new Promise((r) => setTimeout(r, 500));
         return fetchStream(input, attempts - 1);
       }
@@ -301,7 +309,7 @@ app.post("/api/tts-stream", async (req, res) => {
     const tSeg = performance.now();
     try {
       const response = await fetchStream(seg);
-      const reader = response.body;
+      const reader = response.body; // Node Readable
       await new Promise((resolve, reject) => {
         reader.on("data", (chunk) => {
           console.log(`[tts-stream][${idx}] chunk size=`, chunk.length);
@@ -313,27 +321,26 @@ app.post("/api/tts-stream", async (req, res) => {
       console.log(
         `→ [perf] segment ${idx} streamed in ${(
           performance.now() - tSeg
-        ).toFixed(1)} ms`
+        ).toFixed(1)} ms`
       );
     } catch (err) {
       console.error(`[tts-stream][${idx}] streaming failed`, err);
       // Fallback to non‑streaming
       try {
-        const resp = await openai.audio.speech.create({
+        const base64 = await openai.audio.speech.create({
           model: "tts-1",
           input: seg,
           voice,
           format,
           stream: false,
         });
-        const arrayBuffer = await resp.arrayBuffer();
-        const buf = Buffer.from(arrayBuffer);
+        const buf = Buffer.from(base64, "base64");
         console.log(`[tts-stream][${idx}] fallback chunk size=`, buf.length);
         res.write(buf);
         console.log(
           `→ [perf] segment ${idx} fallback in ${(
             performance.now() - tSeg
-          ).toFixed(1)} ms`
+          ).toFixed(1)} ms`
         );
       } catch (fb) {
         console.error(`[tts-stream][${idx}] fallback failed`, fb);
@@ -345,7 +352,7 @@ app.post("/api/tts-stream", async (req, res) => {
   console.log(
     `→ [perf] /api/tts-stream total time ${(performance.now() - t0).toFixed(
       1
-    )} ms for ${segments.length} segments`
+    )} ms for ${segments.length} segments`
   );
   res.end();
 });
