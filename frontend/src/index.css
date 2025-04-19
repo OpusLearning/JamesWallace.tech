@@ -185,7 +185,128 @@ footer a:hover {
     box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
   }
 }
+/* subtle “icy” glow text */
+.futuristic-text {
+  color: #8adcf6;
+  text-shadow: 0 1px 4px rgba(138, 220, 246, 0.6),
+    0 0 8px rgba(138, 220, 246, 0.3);
+}
 
-.pulse-glow {
-  animation: pulseGlow 2s infinite;
+/* softer button glow */
+.futuristic-button {
+  color: #fff;
+  background-color: rgba(20, 30, 40, 0.8);
+  border: 1px solid #4da3d9;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(77, 163, 217, 0.4), 0 2px 8px rgba(20, 30, 40, 0.5);
+  transition: background-color 0.2s ease;
+}
+.futuristic-button:hover {
+  background-color: rgba(30, 45, 60, 0.9);
+}
+
+/* glass‑style card */
+.futuristic-card {
+  background: rgba(10, 15, 25, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(77, 163, 217, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* waveform: animated gradient line */
+.waveform {
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  animation: hueShift 8s infinite linear;
+}
+@keyframes hueShift {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.chat-window {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.futuristic-button {
+  background: linear-gradient(45deg, #0ff, #f0f);
+  border: none;
+  color: #111;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.futuristic-card {
+  background: #111;
+  padding: 1.5rem;
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+  color: #eee;
+}
+
+.futuristic-text {
+  color: #0ff;
+}
+
+.waveform {
+  background: #111;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Existing imports… e.g. Bootstrap, base styles
+   ────────────────────────────────────────────────────────────── */
+
+/* 1. Two‑column layout for chat + visualizer */
+.voice-chat-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.chat-panel {
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.visualizer-panel {
+  background: #111;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. Futuristic button / canvas styling (optional) */
+.futuristic-button {
+  background: linear-gradient(135deg, #6f00ff, #00ffe5);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(111, 0, 255, 0.7), 0 0 8px rgba(0, 255, 229, 0.7);
+  transition: transform 0.1s ease-in-out;
+}
+.futuristic-button:active {
+  transform: scale(0.95);
+}
+
+/* 3. Responsive fallback */
+@media (max-width: 768px) {
+  .voice-chat-grid {
+    grid-template-columns: 1fr;
+  }
 }

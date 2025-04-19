@@ -1,5 +1,3 @@
-// frontend/src/components/VoiceRecorder.jsx
-
 import React, { useState, useRef, useEffect } from "react";
 
 export default function VoiceRecorder({ onTranscribed }) {
@@ -49,55 +47,48 @@ export default function VoiceRecorder({ onTranscribed }) {
     };
   }, []);
 
-  // 2) draw frequency spectrum + gradient fill
+  // 2) draw frequency spectrum + gradient fill when recording
   useEffect(() => {
     const canvas = canvasRef.current;
     const analyser = analyserRef.current;
     const data = dataArrayRef.current;
     if (!canvas || !analyser) return;
-
     const ctx = canvas.getContext("2d");
 
     function draw() {
       analyser.getByteFrequencyData(data);
-
-      // clear
       ctx.fillStyle = "#111";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // build gradient fill under the curve
-      const lineGrad = ctx.createLinearGradient(0, 0, canvas.width, 0);
-      lineGrad.addColorStop(0, "rgba(0,255,255,0.8)");
-      lineGrad.addColorStop(0.5, "rgba(255,0,255,0.8)");
-      lineGrad.addColorStop(1, "rgba(0,255,255,0.8)");
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      grad.addColorStop(0, "rgba(0,255,255,0.8)");
+      grad.addColorStop(0.5, "rgba(255,0,255,0.8)");
+      grad.addColorStop(1, "rgba(0,255,255,0.8)");
 
-      // draw the “curve”
+      // draw filled shape
       ctx.beginPath();
-      const slice = canvas.width / data.length;
       let x = 0;
+      const slice = canvas.width / data.length;
       data.forEach((v, i) => {
-        const percent = v / 255;
-        const y = canvas.height - percent * canvas.height;
+        const y = canvas.height - (v / 255) * canvas.height;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
         x += slice;
       });
-      // line back to bottom right, then bottom left for fill
       ctx.lineTo(canvas.width, canvas.height);
       ctx.lineTo(0, canvas.height);
       ctx.closePath();
-
-      ctx.fillStyle = lineGrad;
+      ctx.fillStyle = grad;
       ctx.fill();
 
-      // optionally draw top curve outline
+      // stroke top edge
       ctx.strokeStyle = "#fff";
       ctx.lineWidth = 1;
       ctx.beginPath();
       x = 0;
       data.forEach((v, i) => {
-        const percent = v / 255;
-        const y = canvas.height - percent * canvas.height;
+        const y = canvas.height - (v / 255) * canvas.height;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
         x += slice;
@@ -113,7 +104,7 @@ export default function VoiceRecorder({ onTranscribed }) {
     return () => cancelAnimationFrame(rafIdRef.current);
   }, [recording]);
 
-  // 3) When recording stops, send for transcription
+  // 3) send audio off for Whisper
   const handleStop = () => {
     const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
     const reader = new FileReader();
@@ -148,17 +139,15 @@ export default function VoiceRecorder({ onTranscribed }) {
   return (
     <div className="futuristic-card mx-auto" style={{ maxWidth: 420 }}>
       <h5 className="futuristic-text text-center mb-3">Voice Recorder</h5>
-
       <canvas
         ref={canvasRef}
         width={380}
         height={120}
         className="waveform rounded mb-3"
       />
-
       <div className="text-center">
         <button
-          className={`futuristic-button px-4 py-2`}
+          className="futuristic-button px-4 py-2"
           onClick={recording ? stopRecording : startRecording}
         >
           {recording ? "🛑 Stop" : "🎙️ Record"}
