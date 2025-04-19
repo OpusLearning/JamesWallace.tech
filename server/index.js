@@ -15,9 +15,21 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import fs from "fs";
 import path from "path";
+import { performance } from "perf_hooks";
 import { OpenAI } from "openai";
 
 const app = express();
+
+// Global request‑timing middleware
+app.use((req, res, next) => {
+  const start = performance.now();
+  res.once("finish", () => {
+    const ms = (performance.now() - start).toFixed(1);
+    console.log(`→ [perf] ${req.method} ${req.path} completed in ${ms} ms`);
+  });
+  next();
+});
+
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(bodyParser.json({ limit: "15mb" }));
 
@@ -77,6 +89,7 @@ const functions = [
     },
   },
 ];
+
 if (!functions.length) {
   console.error("⚠️ functions array is empty—agent calls will fail.");
 }
@@ -101,9 +114,10 @@ async function handleFunctionCall(name, args) {
 }
 
 /**
- * 6. /api/agent — function‑calling LLM loop
+ * 6. /api/agent — function‑calling LLM loop with metrics
  */
 app.post("/api/agent", async (req, res) => {
+  const t0 = performance.now();
   console.log("[api/agent] body=", req.body);
   const { message } = req.body;
   if (typeof message !== "string" || !message.trim()) {
@@ -121,8 +135,9 @@ app.post("/api/agent", async (req, res) => {
     const choice = chatResp.choices[0];
     console.log("[api/agent] choice=", choice);
 
-    // If it wants to call a function...
+    let reply;
     if (choice.finish_reason === "function_call") {
+      // Execute the requested function
       const { name, arguments: jsonArgs } = choice.message.function_call;
       const args = JSON.parse(jsonArgs);
       const fnResult = await handleFunctionCall(name, args);
@@ -137,13 +152,16 @@ app.post("/api/agent", async (req, res) => {
           { role: "function", name, content: JSON.stringify(fnResult) },
         ],
       });
-      const reply = followUp.choices[0].message.content;
+      reply = followUp.choices[0].message.content;
       console.log("[api/agent] final reply=", reply);
-      return res.json({ reply });
+    } else {
+      // Simple text reply
+      reply = choice.message.content;
     }
 
-    // Otherwise, just return the text
-    return res.json({ reply: choice.message.content });
+    const duration = (performance.now() - t0).toFixed(1);
+    console.log(`→ [perf] /api/agent LLM loop completed in ${duration} ms`);
+    return res.json({ reply });
   } catch (err) {
     console.error("[/api/agent] error:", err.response?.data || err);
     return res
@@ -153,7 +171,7 @@ app.post("/api/agent", async (req, res) => {
 });
 
 /**
- * 7. /api/transcribe — Whisper transcription
+ * 7. /api/transcribe — Whisper transcription with metrics
  */
 app.post("/api/transcribe", async (req, res) => {
   console.log(
@@ -165,8 +183,9 @@ app.post("/api/transcribe", async (req, res) => {
     return res.status(400).json({ error: 'Missing or invalid "audioBase64"' });
   }
 
+  const t0 = performance.now();
   try {
-    // Write out to a temp file
+    // Write Base64 to temp file
     const tmpPath = path.join("/tmp", `audio-${Date.now()}.webm`);
     fs.writeFileSync(tmpPath, Buffer.from(audioBase64, "base64"));
     console.log("[api/transcribe] wrote file=", tmpPath);
@@ -179,6 +198,9 @@ app.post("/api/transcribe", async (req, res) => {
       response_format: "text",
     });
     console.log("[api/transcribe] transcription=", transcription);
+
+    const duration = (performance.now() - t0).toFixed(1);
+    console.log(`→ [perf] /api/transcribe completed in ${duration} ms`);
     return res.json({ transcript: transcription });
   } catch (err) {
     console.error("[/api/transcribe] error:", err.response?.data || err);
@@ -198,6 +220,7 @@ app.post("/api/tts", async (req, res) => {
     return res.status(400).json({ error: 'Missing or invalid "text"' });
   }
 
+  const t0 = performance.now();
   try {
     // Non‑streaming: returns raw Base64 audio
     const base64 = await openai.audio.speech.create({
@@ -207,9 +230,11 @@ app.post("/api/tts", async (req, res) => {
       format,
       stream: false,
     });
-    // Convert Base64 to binary
     const buffer = Buffer.from(base64, "base64");
     console.log("[api/tts] buffer length=", buffer.length);
+
+    const duration = (performance.now() - t0).toFixed(1);
+    console.log(`→ [perf] /api/tts (non‑stream) completed in ${duration} ms`);
 
     res.writeHead(200, { "Content-Type": `audio/${format}` });
     return res.end(buffer);
@@ -229,7 +254,7 @@ app.post("/api/tts-stream", async (req, res) => {
     return res.status(400).json({ error: 'Missing or invalid "text"' });
   }
 
-  // Chunk text into ~1k slices to avoid long single calls
+  // Chunk text into ~1k slices
   const segments = [];
   for (let i = 0; i < text.length; ) {
     let slice = text.slice(i, i + 1000);
@@ -239,7 +264,7 @@ app.post("/api/tts-stream", async (req, res) => {
     i += slice.length;
   }
 
-  // Setup chunked HTTP response
+  const t0 = performance.now();
   res.writeHead(200, {
     "Content-Type": `audio/${format}`,
     "Transfer-Encoding": "chunked",
@@ -271,14 +296,12 @@ app.post("/api/tts-stream", async (req, res) => {
     }
   }
 
-  // Stream each segment
   for (let idx = 0; idx < segments.length; idx++) {
     const seg = segments[idx];
+    const tSeg = performance.now();
     try {
-      // This returns a Fetch Response
       const response = await fetchStream(seg);
       const reader = response.body;
-      // Node.js Readable, so pipe directly:
       await new Promise((resolve, reject) => {
         reader.on("data", (chunk) => {
           console.log(`[tts-stream][${idx}] chunk size=`, chunk.length);
@@ -287,6 +310,11 @@ app.post("/api/tts-stream", async (req, res) => {
         reader.on("end", resolve);
         reader.on("error", reject);
       });
+      console.log(
+        `→ [perf] segment ${idx} streamed in ${(
+          performance.now() - tSeg
+        ).toFixed(1)} ms`
+      );
     } catch (err) {
       console.error(`[tts-stream][${idx}] streaming failed`, err);
       // Fallback to non‑streaming
@@ -298,19 +326,27 @@ app.post("/api/tts-stream", async (req, res) => {
           format,
           stream: false,
         });
-        // This resp is also a Fetch Response; read as ArrayBuffer
         const arrayBuffer = await resp.arrayBuffer();
         const buf = Buffer.from(arrayBuffer);
         console.log(`[tts-stream][${idx}] fallback chunk size=`, buf.length);
         res.write(buf);
+        console.log(
+          `→ [perf] segment ${idx} fallback in ${(
+            performance.now() - tSeg
+          ).toFixed(1)} ms`
+        );
       } catch (fb) {
         console.error(`[tts-stream][${idx}] fallback failed`, fb);
-        break; // give up on further segments
+        break;
       }
     }
   }
 
-  console.log("[api/tts-stream] complete");
+  console.log(
+    `→ [perf] /api/tts-stream total time ${(performance.now() - t0).toFixed(
+      1
+    )} ms for ${segments.length} segments`
+  );
   res.end();
 });
 
