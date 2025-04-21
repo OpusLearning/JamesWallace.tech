@@ -37,6 +37,11 @@ export default function Header() {
                 Contact
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/visualizer">
+                Visualizer
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
