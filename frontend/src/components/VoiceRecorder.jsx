@@ -1,5 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
+/**
+ * VoiceRecorder
+ * - live frequency‑spectrum visualization while recording
+ * - stops, assembles the blob, sends to /api/transcribe
+ */
 export default function VoiceRecorder({ onTranscribed }) {
   const [recording, setRecording] = useState(false);
   const mediaRecorderRef = useRef(null);
@@ -10,7 +15,7 @@ export default function VoiceRecorder({ onTranscribed }) {
   const rafIdRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // 1) init mic + analyser + recorder
+  // 1) Initialise mic + analyser + recorder once
   useEffect(() => {
     async function init() {
       try {
@@ -41,13 +46,14 @@ export default function VoiceRecorder({ onTranscribed }) {
       }
     }
     init();
+
     return () => {
       cancelAnimationFrame(rafIdRef.current);
       audioCtxRef.current?.close();
     };
   }, []);
 
-  // 2) draw frequency spectrum + gradient fill when recording
+  // 2) Draw the live frequency spectrum when recording
   useEffect(() => {
     const canvas = canvasRef.current;
     const analyser = analyserRef.current;
@@ -57,16 +63,18 @@ export default function VoiceRecorder({ onTranscribed }) {
 
     function draw() {
       analyser.getByteFrequencyData(data);
+
+      // clear background
       ctx.fillStyle = "#111";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // build gradient fill under the curve
+      // gradient fill under the curve
       const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
       grad.addColorStop(0, "rgba(0,255,255,0.8)");
       grad.addColorStop(0.5, "rgba(255,0,255,0.8)");
       grad.addColorStop(1, "rgba(0,255,255,0.8)");
 
-      // draw filled shape
+      // draw filled polygon
       ctx.beginPath();
       let x = 0;
       const slice = canvas.width / data.length;
@@ -104,7 +112,7 @@ export default function VoiceRecorder({ onTranscribed }) {
     return () => cancelAnimationFrame(rafIdRef.current);
   }, [recording]);
 
-  // 3) send audio off for Whisper
+  // 3) When recorder stops, assemble & send to Whisper
   const handleStop = () => {
     const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
     const reader = new FileReader();
@@ -128,11 +136,11 @@ export default function VoiceRecorder({ onTranscribed }) {
 
   const startRecording = () => {
     audioChunksRef.current = [];
-    mediaRecorderRef.current.start();
+    mediaRecorderRef.current?.start();
     setRecording(true);
   };
   const stopRecording = () => {
-    mediaRecorderRef.current.stop();
+    mediaRecorderRef.current?.stop();
     setRecording(false);
   };
 
