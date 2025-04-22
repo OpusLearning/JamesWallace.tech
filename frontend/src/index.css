@@ -1,52 +1,79 @@
+/*───────────────────────────────────────────────────────────────────────────────
+  Variables & Base
+───────────────────────────────────────────────────────────────────────────────*/
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* Colors */
+  --clr-bg-1: #0d1b2a;
+  --clr-bg-2: #000814;
+  --clr-bg-overlay: rgba(10, 15, 25, 0.6);
+  --clr-accent: #00ffe5;
+  --clr-accent-alt: #6f00ff;
+  --clr-text: rgba(255, 255, 255, 0.87);
+  --clr-muted: rgba(255, 255, 255, 0.6);
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Layout */
+  --radius: 0.5rem;
+  --transition: 0.3s ease-in-out;
 }
 
-/* Fix White Space Issue & Remove Scroll */
-html,
-body {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* No horizontal scrolling */
-  background: linear-gradient(135deg, #0e1628, #16213e, #1a1a2e);
 }
 
-/* Apply Background to All Pages */
+html {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  color-scheme: light dark;
+}
+
+body {
+  background: linear-gradient(180deg, var(--clr-bg-1), var(--clr-bg-2));
+  color: var(--clr-text);
+  overflow-x: hidden;
+}
+
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Make sure root fills full viewport */
-  width: 100vw;
+  min-height: 100vh;
   background: linear-gradient(
       135deg,
       rgba(14, 22, 40, 0.9),
       rgba(22, 33, 62, 0.9)
     ),
-    url("/topography.svg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+    url("/topography.svg") center/cover fixed;
+  position: relative;
 }
-
-/* Reduce SVG Intensity but Ensure It’s Visible */
 #root::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("/topography.svg") repeat;
-  background-size: cover;
-  opacity: 0.06; /* Balanced to be visible but not overpowering */
+  inset: 0;
+  background: url("/topography.svg") repeat center;
+  opacity: 0.06;
   z-index: -1;
 }
 
-/* Navbar */
+/*───────────────────────────────────────────────────────────────────────────────
+  Typography & Utilities
+───────────────────────────────────────────────────────────────────────────────*/
+.futuristic-text {
+  color: var(--clr-accent);
+  text-shadow: 0 1px 4px var(--clr-muted), 0 0 8px var(--clr-muted);
+}
+.text-center {
+  text-align: center;
+}
+
+/*───────────────────────────────────────────────────────────────────────────────
+  Navbar & Footer
+───────────────────────────────────────────────────────────────────────────────*/
 .navbar {
   backdrop-filter: blur(12px);
   background: linear-gradient(
@@ -54,170 +81,154 @@ body {
     rgba(0, 0, 0, 0.95),
     rgba(11, 19, 43, 0.9)
   );
-  transition: all 0.3s ease-in-out;
+  transition: var(--transition);
+}
+.navbar .nav-link {
+  color: var(--clr-text);
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.75rem 1.2rem;
+  transition: color 0.2s;
+}
+.navbar .nav-link:hover {
+  color: var(--clr-accent);
 }
 
-/* Footer */
 footer {
-  width: 100%;
+  margin-top: auto;
+  padding: 1.5rem;
   background: linear-gradient(
     to right,
     rgba(11, 19, 43, 0.95),
     rgba(0, 0, 0, 0.95)
   );
-  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
-  padding: 20px;
-  margin-top: auto;
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+footer a {
+  color: #fff !important;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+footer a:hover {
+  opacity: 0.8;
+}
+
+/*───────────────────────────────────────────────────────────────────────────────
+  Voice‑Chat Layout
+───────────────────────────────────────────────────────────────────────────────*/
+.voice-chat-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "chat-panel visualizer-panel"
+    "recorder-panel recorder-panel";
+  gap: 1.5rem;
+  height: calc(100vh - 120px); /* subtract header/footer */
+  margin: 1rem;
+}
+
+.chat-panel {
+  grid-area: chat-panel;
+  background: var(--clr-bg-overlay);
+  padding: 1rem;
+  border-radius: var(--radius);
+  overflow-y: auto;
+}
+.visualizer-panel {
+  grid-area: visualizer-panel;
+  background: var(--clr-bg-overlay);
+  padding: 1rem;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+}
+.recorder-panel {
+  grid-area: recorder-panel;
+  background: var(--clr-bg-overlay);
+  padding: 1rem;
+  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-/* Navbar Links */
-.navbar .nav-link {
-  font-weight: 500;
-  text-transform: uppercase;
-  padding: 0.75rem 1.2rem;
-  transition: color 0.3s ease-in-out;
-}
-
-.navbar .nav-link:hover {
-  color: #00c2ff;
-}
-
-/* Title Enhancements */
-.hero h1 {
-  font-size: 3.8rem;
-  font-weight: bold;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, #ffffff, #d4d4d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Fix About & Get Started Page Text */
-.about-text,
-.get-started-text {
-  color: white !important;
-}
-
-/* CTA Button */
-.cta-btn {
-  background: linear-gradient(45deg, #009fff, #00c2ff);
-  color: white;
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 14px 28px;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
-  margin-top: 1rem;
-  box-shadow: 0 5px 15px rgba(0, 192, 255, 0.3);
-}
-
-.cta-btn:hover {
-  background: linear-gradient(45deg, #0077cc, #0094dd);
-  transform: scale(1.1);
-}
-
-/* Footer Links & Icons - Fully White */
-footer a {
-  color: white !important;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Social Media Icons */
-.footer-social {
+/*───────────────────────────────────────────────────────────────────────────────
+  Chat & Recorder Inner
+───────────────────────────────────────────────────────────────────────────────*/
+.chat-window {
   display: flex;
-  gap: 15px;
-  margin-top: 10px;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.footer-social a {
-  color: white !important;
-  font-size: 1.4rem;
-  transition: transform 0.3s ease;
+.loading-spinner,
+.neon-spinner {
+  margin: 1rem auto;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
-
-.footer-social a:hover {
-  transform: scale(1.2);
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--clr-accent);
 }
-
-/* Responsive Fixes */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 10px;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-  }
-
-  .cta-btn {
-    font-size: 1.1rem;
-    padding: 12px 20px;
-  }
-
-  .footer-social {
-    gap: 10px;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
-
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(33, 150, 243, 0);
-  }
+.neon-spinner {
+  width: 2rem;
+  height: 2rem;
+  background: rgba(0, 255, 255, 0.2);
+  animation: neonPulse 1.5s ease-in-out infinite;
+}
+@keyframes neonPulse {
+  0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+    box-shadow: 0 0 4px var(--clr-accent), inset 0 0 4px var(--clr-accent);
+  }
+  50% {
+    box-shadow: 0 0 12px var(--clr-accent), inset 0 0 12px var(--clr-accent);
   }
 }
-/* subtle “icy” glow text */
-.futuristic-text {
-  color: #8adcf6;
-  text-shadow: 0 1px 4px rgba(138, 220, 246, 0.6),
-    0 0 8px rgba(138, 220, 246, 0.3);
-}
 
-/* softer button glow */
+/*───────────────────────────────────────────────────────────────────────────────
+  Buttons & Cards
+───────────────────────────────────────────────────────────────────────────────*/
 .futuristic-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
   color: #fff;
-  background-color: rgba(20, 30, 40, 0.8);
-  border: 1px solid #4da3d9;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(77, 163, 217, 0.4), 0 2px 8px rgba(20, 30, 40, 0.5);
-  transition: background-color 0.2s ease;
+  background: linear-gradient(135deg, var(--clr-accent-alt), var(--clr-accent));
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(111, 0, 255, 0.7), 0 0 10px rgba(0, 255, 229, 0.7);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .futuristic-button:hover {
-  background-color: rgba(30, 45, 60, 0.9);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(111, 0, 255, 0.9), 0 0 20px rgba(0, 255, 229, 0.9);
 }
-
-/* glass‑style card */
 .futuristic-card {
-  background: rgba(10, 15, 25, 0.6);
+  background: var(--clr-bg-overlay);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(77, 163, 217, 0.2);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 1rem;
+  box-shadow: 0 0 20px rgba(0, 255, 229, 0.2);
 }
 
-/* waveform: animated gradient line */
+/*───────────────────────────────────────────────────────────────────────────────
+  Canvas Accent
+───────────────────────────────────────────────────────────────────────────────*/
 .waveform {
   background: rgba(0, 0, 0, 0.4);
-  border: none;
   animation: hueShift 8s infinite linear;
 }
 @keyframes hueShift {
@@ -229,100 +240,71 @@ footer a:hover {
   }
 }
 
-.chat-window {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  height: 60vh;
-  overflow-y: auto;
-}
-
-.futuristic-button {
-  background: linear-gradient(45deg, #0ff, #f0f);
-  border: none;
-  color: #111;
-  font-weight: bold;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-}
-
-.futuristic-card {
-  background: #111;
-  padding: 1.5rem;
-  box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
-  color: #eee;
-}
-
-.futuristic-text {
-  color: #0ff;
-}
-
-.waveform {
-  background: #111;
-}
-
-/* ──────────────────────────────────────────────────────────────
-   Existing imports… e.g. Bootstrap, base styles
-   ────────────────────────────────────────────────────────────── */
-
-/* 1. Two‑column layout for chat + visualizer */
-.voice-chat-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.chat-panel {
-  background: #1e1e1e;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.visualizer-panel {
-  background: #111;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 2. Futuristic button / canvas styling (optional) */
-.futuristic-button {
-  background: linear-gradient(135deg, #6f00ff, #00ffe5);
-  border: none;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 8px rgba(111, 0, 255, 0.7), 0 0 8px rgba(0, 255, 229, 0.7);
-  transition: transform 0.1s ease-in-out;
-}
-.futuristic-button:active {
-  transform: scale(0.95);
-}
-
-/* 3. Responsive fallback */
+/*───────────────────────────────────────────────────────────────────────────────
+  Responsive (mobile)
+───────────────────────────────────────────────────────────────────────────────*/
 @media (max-width: 768px) {
   .voice-chat-grid {
     grid-template-columns: 1fr;
+    grid-template-rows:
+      auto /* chat */
+      auto /* visualizer */
+      auto; /* recorder */
+    grid-template-areas:
+      "chat-panel"
+      "visualizer-panel"
+      "recorder-panel";
+    height: auto;
+    margin: 0.5rem;
+  }
+  .voice-chat-grid > * + * {
+    margin-top: 1rem;
+  }
+  .chat-panel {
+    max-height: none;
   }
 }
-/* nice centered spinner */
-.loading-spinner {
-  margin: 1rem auto;
-  width: 3rem;
-  height: 3rem;
-  border: 4px solid rgba(255, 255, 255, 0.2);
-  border-top-color: #0ff; /* bright cyan accent */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+/* recorder button */
+.recorder-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #004080, #00c2ff);
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 0 8px rgba(0, 194, 255, 0.4),
+    inset 0 0 6px rgba(0, 64, 128, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+.recorder-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 194, 255, 0.7),
+    inset 0 0 8px rgba(0, 64, 128, 0.6);
+}
+
+.recorder-btn.recording {
+  background: linear-gradient(135deg, #ff0040, #ff8000);
+  box-shadow: 0 0 12px rgba(255, 0, 64, 0.7), inset 0 0 8px rgba(128, 0, 0, 0.6);
+}
+
+.recorder-btn .mic-icon {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.recorder-btn .btn-label {
+  line-height: 1;
+}
+
+/* ensure the panel centers on mobile */
+@media (max-width: 768px) {
+  .recorder-panel {
+    justify-content: center;
   }
 }

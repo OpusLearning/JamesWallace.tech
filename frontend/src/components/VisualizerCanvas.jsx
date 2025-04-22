@@ -1,5 +1,4 @@
 // frontend/src/components/VisualizerCanvas.jsx
-
 export default class VisualizerCanvas {
   constructor() {
     this.canvas = null;
@@ -7,60 +6,18 @@ export default class VisualizerCanvas {
     this.audioCtx = null;
     this.analyser = null;
     this.source = null;
-    this.timeData = null;
     this.freqData = null;
     this.rafId = null;
-    this.mode = "waveform"; // 'waveform' or 'spectrum'
+    this.mode = "radial"; // only radial mode shown here
   }
 
-  /**
-   * Bind a <canvas> element and its 2D context
-   * @param {HTMLCanvasElement} canvasEl
-   */
+  /** Bind a <canvas> element */
   init(canvasEl) {
     this.canvas = canvasEl;
     this.ctx = canvasEl.getContext("2d");
   }
 
-  /**
-   * Start visualizing a live MediaStream (e.g. microphone)
-   * @param {MediaStream} stream
-   * @param {'waveform'|'spectrum'} mode
-   */
-  startStream(stream, mode = "waveform") {
-    this._teardownAudio();
-    this.mode = mode;
-    this._setupAudioContext();
-    this.source = this.audioCtx.createMediaStreamSource(stream);
-    this.source.connect(this.analyser);
-    this._draw();
-  }
-
-  /**
-   * Start visualizing an HTMLMediaElement (e.g. TTS audio)
-   * @param {HTMLMediaElement} mediaEl
-   * @param {'waveform'|'spectrum'} mode
-   */
-  startMediaElement(mediaEl, mode = "waveform") {
-    this._teardownAudio();
-    this.mode = mode;
-    this._setupAudioContext();
-    this.source = this.audioCtx.createMediaElementSource(mediaEl);
-    // Route source both to analyser and to output
-    this.source.connect(this.analyser);
-    this.analyser.connect(this.audioCtx.destination);
-    this._draw();
-  }
-
-  /** Stop any ongoing draw loop */
-  stop() {
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-      this.rafId = null;
-    }
-  }
-
-  /** Fully tear down existing AudioContext and nodes */
+  /** Tear down everything */
   async destroy() {
     this.stop();
     this.source?.disconnect();
@@ -71,16 +28,23 @@ export default class VisualizerCanvas {
     }
   }
 
-  /** Create AudioContext, analyser node, and data buffers */
+  /** Stop draw loop */
+  stop() {
+    if (this.rafId != null) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+  }
+
+  /** (Re)create AudioContext + analyser + data array */
   _setupAudioContext() {
     this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     this.analyser = this.audioCtx.createAnalyser();
     this.analyser.fftSize = 2048;
-    this.timeData = new Uint8Array(this.analyser.fftSize);
     this.freqData = new Uint8Array(this.analyser.frequencyBinCount);
   }
 
-  /** Disconnect and close any existing AudioContext */
+  /** Disconnect & close existing context */
   async _teardownAudio() {
     this.stop();
     this.source?.disconnect();
@@ -91,56 +55,69 @@ export default class VisualizerCanvas {
     }
   }
 
-  /** Internal draw loop for both waveform and spectrum */
+  /**
+   * Visualize a live MediaStream (mic)
+   * @param {MediaStream} stream
+   */
+  async startStream(stream) {
+    this.mode = "radial";
+    await this._teardownAudio();
+    this._setupAudioContext();
+    this.source = this.audioCtx.createMediaStreamSource(stream);
+    this.source.connect(this.analyser);
+    this._draw();
+  }
+
+  /**
+   * Visualize an HTMLMediaElement (e.g. TTS playback)
+   * @param {HTMLMediaElement} mediaEl
+   */
+  async startMediaElement(mediaEl) {
+    this.mode = "radial";
+    await this._teardownAudio();
+    this._setupAudioContext();
+    this.source = this.audioCtx.createMediaElementSource(mediaEl);
+    this.source.connect(this.analyser);
+    this.analyser.connect(this.audioCtx.destination);
+    this._draw();
+  }
+
+  /** Internal draw loop */
   _draw() {
-    if (!this.canvas || !this.ctx || !this.analyser) return;
+    if (!this.ctx || !this.analyser) return;
 
-    const { width, height } = this.canvas;
     const ctx = this.ctx;
+    const { width: w, height: h } = this.canvas;
+    const cx = w / 2;
+    const cy = h / 2;
+    const maxR = Math.min(cx, cy) * 0.9; // leave some padding
 
-    this.rafId = requestAnimationFrame(() => this._draw());
+    // clear canvas each frame
+    ctx.clearRect(0, 0, w, h);
 
-    // Clear canvas
-    ctx.fillStyle = "#111";
-    ctx.fillRect(0, 0, width, height);
+    // only radial mode
+    this.analyser.getByteFrequencyData(this.freqData);
+    const slice = (Math.PI * 2) / this.freqData.length;
 
-    if (this.mode === "waveform") {
-      this.analyser.getByteTimeDomainData(this.timeData);
+    for (let i = 0; i < this.freqData.length; i++) {
+      const v = this.freqData[i] / 255; // 0→1
+      const len = maxR * (0.2 + 0.8 * v); // from 20%→100% radius
+      const ang = i * slice - Math.PI / 2; // start at top (–90°)
 
-      const grad = ctx.createLinearGradient(0, 0, width, 0);
-      grad.addColorStop(0, "#0ff");
-      grad.addColorStop(0.5, "#f0f");
-      grad.addColorStop(1, "#0ff");
+      const x1 = cx + Math.cos(ang) * (maxR * 0.2);
+      const y1 = cy + Math.sin(ang) * (maxR * 0.2);
+      const x2 = cx + Math.cos(ang) * len;
+      const y2 = cy + Math.sin(ang) * len;
 
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = grad;
+      ctx.strokeStyle = `rgba(0,200,255,${0.3 + v * 0.7})`;
+      ctx.lineWidth = 2 + v * 3;
       ctx.beginPath();
-
-      const slice = width / this.timeData.length;
-      let x = 0;
-      for (let i = 0; i < this.timeData.length; i++) {
-        const v = this.timeData[i] / 128.0;
-        const y = (v * height) / 2;
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        x += slice;
-      }
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
       ctx.stroke();
-    } else {
-      this.analyser.getByteFrequencyData(this.freqData);
-
-      const barWidth = width / this.freqData.length;
-      for (let i = 0; i < this.freqData.length; i++) {
-        const v = this.freqData[i] / 255.0;
-        const barHeight = v * height;
-        const hue = (i / this.freqData.length) * 360;
-        ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
-        ctx.fillRect(
-          i * barWidth,
-          height - barHeight,
-          barWidth * 0.8,
-          barHeight
-        );
-      }
     }
+
+    // schedule next frame
+    this.rafId = requestAnimationFrame(() => this._draw());
   }
 }

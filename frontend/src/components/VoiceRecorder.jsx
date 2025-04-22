@@ -1,45 +1,30 @@
+// frontend/src/components/VoiceRecorder.jsx
 import React, { useState, useRef, useEffect } from "react";
 
-/**
- * VoiceRecorder
- * - live frequency‑spectrum visualization while recording
- * - stops, assembles the blob, sends to /api/transcribe
- */
-export default function VoiceRecorder({ onTranscribed }) {
+export default function VoiceRecorder({
+  onStreamStart = () => {},
+  onStreamStop = () => {},
+  onTranscribed,
+}) {
   const [recording, setRecording] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
-  const audioCtxRef = useRef(null);
-  const analyserRef = useRef(null);
-  const dataArrayRef = useRef(null);
-  const rafIdRef = useRef(null);
-  const canvasRef = useRef(null);
+  const streamRef = useRef(null);
 
-  // 1) Initialise mic + analyser + recorder once
+  // 1) init MediaRecorder
   useEffect(() => {
     async function init() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
-        const audioCtx = new (window.AudioContext ||
-          window.webkitAudioContext)();
-        audioCtxRef.current = audioCtx;
+        streamRef.current = stream;
 
-        const source = audioCtx.createMediaStreamSource(stream);
-        const analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 2048;
-        analyserRef.current = analyser;
-        source.connect(analyser);
-
-        dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
-
+        // instantiate recorder
         const mr = new MediaRecorder(stream);
         mediaRecorderRef.current = mr;
-        mr.addEventListener("dataavailable", (e) => {
-          audioChunksRef.current.push(e.data);
-        });
-        mr.addEventListener("stop", handleStop);
+        mr.ondataavailable = (e) => audioChunksRef.current.push(e.data);
+        mr.onstop = handleStop;
       } catch (err) {
         console.error("🔴 Mic init failed", err);
         alert("Unable to access microphone");
@@ -47,73 +32,15 @@ export default function VoiceRecorder({ onTranscribed }) {
     }
     init();
 
+    // cleanup
     return () => {
-      cancelAnimationFrame(rafIdRef.current);
-      audioCtxRef.current?.close();
+      mediaRecorderRef.current?.stream?.getTracks().forEach((t) => t.stop());
     };
   }, []);
 
-  // 2) Draw the live frequency spectrum when recording
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const analyser = analyserRef.current;
-    const data = dataArrayRef.current;
-    if (!canvas || !analyser) return;
-    const ctx = canvas.getContext("2d");
-
-    function draw() {
-      analyser.getByteFrequencyData(data);
-
-      // clear background
-      ctx.fillStyle = "#111";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // gradient fill under the curve
-      const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
-      grad.addColorStop(0, "rgba(0,255,255,0.8)");
-      grad.addColorStop(0.5, "rgba(255,0,255,0.8)");
-      grad.addColorStop(1, "rgba(0,255,255,0.8)");
-
-      // draw filled polygon
-      ctx.beginPath();
-      let x = 0;
-      const slice = canvas.width / data.length;
-      data.forEach((v, i) => {
-        const y = canvas.height - (v / 255) * canvas.height;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-        x += slice;
-      });
-      ctx.lineTo(canvas.width, canvas.height);
-      ctx.lineTo(0, canvas.height);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // stroke top edge
-      ctx.strokeStyle = "#fff";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      x = 0;
-      data.forEach((v, i) => {
-        const y = canvas.height - (v / 255) * canvas.height;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-        x += slice;
-      });
-      ctx.stroke();
-
-      rafIdRef.current = requestAnimationFrame(draw);
-    }
-
-    if (recording) draw();
-    else cancelAnimationFrame(rafIdRef.current);
-
-    return () => cancelAnimationFrame(rafIdRef.current);
-  }, [recording]);
-
-  // 3) When recorder stops, assemble & send to Whisper
+  // 2) when recorder stops, send for transcription
   const handleStop = () => {
+    onStreamStop();
     const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
     const reader = new FileReader();
     reader.onloadend = async () => {
@@ -134,33 +61,39 @@ export default function VoiceRecorder({ onTranscribed }) {
     audioChunksRef.current = [];
   };
 
+  // start/stop handlers
   const startRecording = () => {
     audioChunksRef.current = [];
-    mediaRecorderRef.current?.start();
+    mediaRecorderRef.current.start();
     setRecording(true);
+    onStreamStart(streamRef.current);
   };
   const stopRecording = () => {
-    mediaRecorderRef.current?.stop();
+    mediaRecorderRef.current.stop();
     setRecording(false);
+    // onStreamStop() will be invoked in handleStop
   };
 
   return (
-    <div className="futuristic-card mx-auto" style={{ maxWidth: 420 }}>
+    <div className="recorder-panel">
       <h5 className="futuristic-text text-center mb-3">Voice Recorder</h5>
-      <canvas
-        ref={canvasRef}
-        width={380}
-        height={120}
-        className="waveform rounded mb-3"
-      />
-      <div className="text-center">
-        <button
-          className="futuristic-button px-4 py-2"
-          onClick={recording ? stopRecording : startRecording}
+      <button
+        className={`recorder-btn ${recording ? "recording" : ""}`}
+        onClick={recording ? stopRecording : startRecording}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="mic-icon"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="20"
+          height="20"
         >
-          {recording ? "🛑 Stop" : "🎙️ Record"}
-        </button>
-      </div>
+          <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" />
+          <path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21h-3a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-3.08A7 7 0 0 0 19 11z" />
+        </svg>
+        <span className="btn-label">{recording ? "Stop" : "Record"}</span>
+      </button>
     </div>
   );
 }
