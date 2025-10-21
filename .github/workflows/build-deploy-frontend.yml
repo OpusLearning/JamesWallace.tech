@@ -43,6 +43,7 @@ jobs:
             if [ ! -d ".git" ]; then
               git clone git@github.com:OpusLearning/JamesWallace.tech.git .
             fi
+            git config --global --add safe.directory /var/www/jameswallace.tech
 
             # fetch and switch to the pushed branch
             git fetch origin "$BRANCH"
