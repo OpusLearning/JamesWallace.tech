@@ -189,3 +189,29 @@ footer a:hover {
 .pulse-glow {
   animation: pulseGlow 2s infinite;
 }
+/* --- NAV CONSISTENCY OVERRIDES --- */
+/* Base: all nav links are white, including visited */
+.navbar .nav-link,
+.navbar .nav-link:visited {
+  color: #ffffff !important;
+}
+
+/* Hover: light blue accent (matches your style) */
+.navbar .nav-link:hover {
+  color: #00c2ff !important;
+  text-decoration: none;
+}
+
+/* Active/focus states stay white (no odd blue or grey) */
+.navbar .nav-link:active,
+.navbar .nav-link:focus,
+.navbar .nav-link.active {
+  color: #ffffff !important;
+}
+
+/* If Bootstrap adds .disabled or aria-disabled, keep it dim */
+.navbar .nav-link.disabled,
+.navbar .nav-link[aria-disabled="true"] {
+  color: rgba(255, 255, 255, 0.5) !important;
+  pointer-events: none;
+}

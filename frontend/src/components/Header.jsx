@@ -13,10 +13,16 @@ export default function Header() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/portfolio" className="nav-link text-white">
-                Portfolio
-              </Link>
+              <a
+                className="nav-link"
+                href="https://blog.jameswallace.tech"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Blog
+              </a>
             </li>
+
             <li className="nav-item">
               <Link to="/pricing" className="nav-link text-white">
                 Pricing
