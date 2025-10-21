@@ -1,58 +1,78 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUniversalAccess,
-  faBrain,
-  faWrench,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBrain, faCheck } from "@fortawesome/free-solid-svg-icons";
+import pricingHero from "../assets/pricing.webp"; // <-- make sure this exists
 
-// Set your primary colour as blue (#0d6efd)
 const primaryColor = "#0d6efd";
 
-// Helper: Multiply discounted price by 2 to compute regular price.
-const getRegularPrice = (price) => {
-  if (typeof price === "number") {
-    return `£${(price * 2).toFixed(0)}`;
-  } else {
-    const match = price.match(/£([\d.]+)/);
-    if (match) {
-      const regular = parseFloat(match[1]) * 2;
-      return `£${regular.toFixed(0)}/month`;
-    }
-    return price;
-  }
+/* ---------------- Countdown ---------------- */
+const calculateTimeLeft = (expiry) => {
+  const diff = expiry.getTime() - new Date().getTime();
+  return {
+    total: diff,
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
 };
 
+const CountdownTimer = ({ expiry }) => {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(expiry));
+  useEffect(() => {
+    const t = setInterval(() => setTimeLeft(calculateTimeLeft(expiry)), 1000);
+    return () => clearInterval(t);
+  }, [expiry]);
+
+  if (timeLeft.total <= 0) {
+    return (
+      <div className="text-center mb-4">
+        <p className="fs-5 text-white fw-bold mb-1">Offer period ended</p>
+        <p className="text-white-50 m-0">Next promotion expected Summer 2025</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="text-center mb-4">
+      <p className="fs-5 fw-bold text-white mb-1">
+        Introductory Offer – valid until{" "}
+        <span className="text-info">1 April 2025</span>
+      </p>
+      <p className="display-6 fw-bold text-white m-0">
+        {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
+        {timeLeft.seconds}s
+      </p>
+    </div>
+  );
+};
+
+/* ---------------- Card ---------------- */
 const PricingCard = ({
   title,
-  oneOffPrice,
-  subscriptionPrice,
+  hourlyRate,
+  blockPrice,
+  subRate,
   features,
   icon,
   pricingMode,
-  isDiscountActive,
 }) => {
   const navigate = useNavigate();
-  const discountedPrice =
-    pricingMode === "subscription" ? subscriptionPrice : oneOffPrice;
-  const regularPrice = getRegularPrice(discountedPrice);
-
-  const goToCalendly = () => {
-    navigate("/calendly");
-  };
+  const price = pricingMode === "subscription" ? subRate : blockPrice;
 
   return (
     <div
-      className="card h-100 shadow-sm border-0"
+      className="card h-100 border-0 shadow-lg"
       style={{
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        background:
+          "linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
         backdropFilter: "blur(10px)",
-        borderRadius: "0.5rem",
+        borderRadius: "1rem",
+        border: "1px solid rgba(255,255,255,0.2)",
       }}
     >
-      <div className="card-body d-flex flex-column">
+      <div className="card-body d-flex flex-column text-white">
         <div className="d-flex justify-content-center mb-3">
           <FontAwesomeIcon
             icon={icon}
@@ -60,47 +80,33 @@ const PricingCard = ({
             style={{ color: primaryColor }}
           />
         </div>
-        <h3 className="h5 fw-bold text-center" style={{ color: "#fff" }}>
-          {title}
-        </h3>
+        <h3 className="h5 fw-bold text-center mb-2">{title}</h3>
+
         <div
           className="fs-4 fw-bold mb-3 text-center"
           style={{ color: primaryColor }}
         >
-          {isDiscountActive ? (
-            <>
-              <span className="text-muted text-decoration-line-through me-2">
-                {regularPrice}
-              </span>
-              <span>
-                {typeof discountedPrice === "number"
-                  ? `£${discountedPrice}`
-                  : discountedPrice}
-              </span>
-            </>
-          ) : (
-            <span>{regularPrice}</span>
-          )}
+          £{price}
+          <span className="fs-6 text-white-50 ms-1">
+            {pricingMode === "subscription" ? "/month" : " / block"}
+          </span>
         </div>
-        <ul className="list-unstyled mb-4">
-          {features.map((feature, index) => (
-            <li key={index} className="d-flex align-items-start mb-2">
+
+        <ul className="list-unstyled mb-4 text-white-50 text-start">
+          {features.map((f, i) => (
+            <li key={i} className="d-flex align-items-start mb-2">
               <FontAwesomeIcon
                 icon={faCheck}
                 className="text-success me-2 mt-1"
               />
-              <span style={{ color: "#fff" }}>{feature}</span>
+              <span>{f}</span>
             </li>
           ))}
         </ul>
+
         <button
-          className="btn mt-auto pulse-glow"
-          onClick={goToCalendly}
-          style={{
-            backgroundColor: primaryColor,
-            borderColor: primaryColor,
-            color: "#fff",
-          }}
+          onClick={() => navigate("/calendly")}
+          className="btn btn-primary mt-auto fw-semibold"
         >
           Book a Free Consultation
         </button>
@@ -109,228 +115,156 @@ const PricingCard = ({
   );
 };
 
-const calculateTimeLeft = (expiry) => {
-  const difference = expiry.getTime() - new Date().getTime();
-  return {
-    total: difference,
-    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / (1000 * 60)) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
-  };
-};
-
-const CountdownTimer = ({ expiry }) => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(expiry));
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(expiry));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [expiry]);
-
-  if (timeLeft.total <= 0) {
-    return (
-      <div className="text-center mb-4">
-        <p className="fs-5 text-white fw-bold">Offer expired</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="text-center mb-4">
-      <p className="fs-5 text-white fw-bold">
-        Limited-Time Offer: 50% Discount until April 1, 2025!
-      </p>
-      <p className="display-6 fw-bold text-white">
-        {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
-        {timeLeft.seconds}s
-      </p>
-    </div>
-  );
-};
-
-const Pricing = () => {
+/* ---------------- Page ---------------- */
+export default function Pricing() {
   const [pricingMode, setPricingMode] = useState("oneOff");
-
-  // Set the offer expiry date (April 1, 2025)
   const offerExpiry = new Date("2025-04-01T00:00:00");
-  const isDiscountActive = new Date() < offerExpiry;
 
-  // Pricing packages with discounted prices.
-  const pricingPackages = [
+  // Subscription deliberately cheaper than block.
+  const packages = [
     {
-      title: "Single Page (One-page site)",
-      oneOffPrice: 99,
-      subscriptionPrice: 10,
-      icon: faUniversalAccess,
-      features: [
-        "Cost-effective one-page design",
-        "Modern, responsive layout",
-        "Perfect for establishing your online presence",
-      ],
-    },
-    {
-      title: "Basic (Starter site)",
-      oneOffPrice: 199,
-      subscriptionPrice: 20,
-      icon: faUniversalAccess,
-      features: [
-        "3–5 page professional website",
-        "Essential pages including a contact form",
-        "Ideal for small businesses entering the digital world",
-      ],
-    },
-    {
-      title: "Silver (Standard site)",
-      oneOffPrice: 299,
-      subscriptionPrice: 30,
-      icon: faUniversalAccess,
-      features: [
-        "Up to 5-page custom website",
-        "Mobile-friendly and SEO optimised",
-        "Showcases your brand identity",
-      ],
-    },
-    {
-      title: "Gold (Expanded site)",
-      oneOffPrice: 429,
-      subscriptionPrice: 40,
-      icon: faUniversalAccess,
-      features: [
-        "Expanded website with 5–10 pages",
-        "Enhanced customisation and functionality",
-        "Supports your growing business needs",
-      ],
-    },
-    {
-      title: "Platinum (Premium site)",
-      oneOffPrice: 825,
-      subscriptionPrice: 60,
-      icon: faUniversalAccess,
-      features: [
-        "Comprehensive, tailor-made website solution",
-        "Includes professional branding, SEO fundamentals and training",
-        "Elevates your online presence",
-      ],
-    },
-    {
-      title: "Shopping Cart (E-commerce)",
-      oneOffPrice: 479,
-      subscriptionPrice: 50,
-      icon: faUniversalAccess,
-      features: [
-        "User-friendly online store setup",
-        "Responsive design for a seamless shopping experience",
-        "Ideal for small or boutique shops",
-      ],
-    },
-    {
-      title: "Basic Accessibility Website",
-      oneOffPrice: 249,
-      subscriptionPrice: 25,
-      icon: faUniversalAccess,
-      features: [
-        "3-page fully accessible website",
-        "Basic WCAG 2.1 compliance",
-        "Mobile-responsive and SEO friendly",
-      ],
-    },
-    {
-      title: "Standard AI-Enhanced Website",
-      oneOffPrice: 499,
-      subscriptionPrice: 35,
-      icon: faUniversalAccess,
-      features: [
-        "6-page website with AI-powered accessibility tools",
-        "WCAG 2.1 AA compliant",
-        "Custom branding and automated monitoring",
-      ],
-    },
-    {
-      title: "Starter AI Automation Package",
-      oneOffPrice: 199,
-      subscriptionPrice: 15,
+      title: "Foundation Plan",
+      hourlyRate: 40,
+      blockPrice: 160,
+      subRate: 140,
       icon: faBrain,
       features: [
-        "AI-powered workflow automation",
-        "Efficient task scheduling",
-        "Integrated chatbot for common queries",
+        "£40/hr or £160 per 4-hour block (1 hr × 4 sessions)",
+        "Core tuition – Computer Science or Maths (KS2–GCSE)",
+        "Structured lessons focused on mastery & confidence",
+        "Best for building foundations or steady catch-up",
       ],
     },
     {
-      title: "Standard Maintenance",
-      oneOffPrice: 49,
-      subscriptionPrice: 49,
-      icon: faWrench,
+      title: "Focus Plan",
+      hourlyRate: 55,
+      blockPrice: 220,
+      subRate: 190,
+      icon: faBrain,
       features: [
-        "Regular security updates",
-        "Timely bug fixes",
-        "Ongoing accessibility improvements",
+        "£55/hr or £220 per 4-hour block (1 hr × 4 sessions)",
+        "ADHD/ASD/Dyslexia-friendly resources & scaffolds",
+        "Weekly progress summaries for parents",
+        "Aligned with AQA, OCR, or Edexcel",
       ],
     },
     {
-      title: "Pro WCAG Compliance Support",
-      oneOffPrice: 99,
-      subscriptionPrice: 99,
-      icon: faWrench,
+      title: "Performance Plan",
+      hourlyRate: 70,
+      blockPrice: 280,
+      subRate: 240,
+      icon: faBrain,
       features: [
-        "Monthly WCAG audits",
-        "Accessibility bug fixes",
-        "Automated compliance reports",
+        "£70/hr or £280 per 4-hour block (1 hr × 4 sessions)",
+        "Full exam strategy, timed practice, & revision",
+        "Parent reviews with next-step planning",
+        "Ideal for GCSE/A-Level exam preparation",
       ],
     },
   ];
 
   return (
-    <div className="container py-4">
-      <CountdownTimer expiry={offerExpiry} />
-      <h1 className="text-center fw-bold mb-4" style={{ color: "#fff" }}>
-        Pricing Plans
-      </h1>
-      <div className="d-flex justify-content-center mb-4">
-        <button
-          onClick={() => setPricingMode("oneOff")}
-          className={`btn me-2 ${
-            pricingMode === "oneOff" ? "btn-primary" : "btn-light"
-          }`}
-          style={{
-            backgroundColor:
-              pricingMode === "oneOff" ? primaryColor : undefined,
-            borderColor: pricingMode === "oneOff" ? primaryColor : undefined,
-          }}
-        >
-          One-Off Payment
-        </button>
-        <button
-          onClick={() => setPricingMode("subscription")}
-          className={`btn ${
-            pricingMode === "subscription" ? "btn-primary" : "btn-light"
-          }`}
-          style={{
-            backgroundColor:
-              pricingMode === "subscription" ? primaryColor : undefined,
-            borderColor:
-              pricingMode === "subscription" ? primaryColor : undefined,
-          }}
-        >
-          Subscription
-        </button>
-      </div>
-      <div className="row">
-        {pricingPackages.map((pkg, index) => (
-          <div key={index} className="col-12 col-md-6 col-lg-4 mb-4">
-            <PricingCard
-              pricingMode={pricingMode}
-              isDiscountActive={isDiscountActive}
-              {...pkg}
-            />
+    <div className="text-light">
+      {/* ---------- INLINE HERO (no cropping) ---------- */}
+      <div
+        className="container"
+        style={{ paddingTop: "90px", paddingBottom: "10px" }}
+      >
+        <div className="row align-items-center g-4">
+          <div className="col-12 col-lg-6">
+            <div
+              className="rounded-4 shadow-lg overflow-hidden"
+              style={{
+                background: "#0b1226",
+                border: "1px solid rgba(255,255,255,0.12)",
+              }}
+            >
+              <img
+                src={pricingHero}
+                alt="Calm student at laptop"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  aspectRatio: "16/10",
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  backgroundColor: "rgba(0,0,0,0.05)", // soft fill behind image
+                }}
+              />
+            </div>
           </div>
-        ))}
+
+          <div className="col-12 col-lg-6 text-center text-lg-start">
+            <h1 className="display-5 fw-bold mb-3">
+              Fair, Simple, Transparent Pricing
+            </h1>
+            <p className="lead text-white-50 mb-3">
+              Flexible options to suit your goals: buy a 4-hour block or save
+              with a monthly subscription. Clear, predictable costs — no
+              surprises.
+            </p>
+
+            {/* small neutral pills to echo Home */}
+            <div className="d-flex flex-wrap gap-2 mb-2">
+              {[
+                "Block or Monthly",
+                "Cancel any time",
+                "Online or Derbyshire",
+              ].map((t) => (
+                <span
+                  key={t}
+                  className="badge rounded-pill"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.35)",
+                    color: "#fff",
+                    fontWeight: 500,
+                    padding: ".5rem .8rem",
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- Plans ---------- */}
+      <div className="container py-5" style={{ filter: "brightness(1.06)" }}>
+        <CountdownTimer expiry={offerExpiry} />
+
+        <h2 className="text-center fw-bold mb-4 text-white">Tutoring Plans</h2>
+
+        <div className="d-flex justify-content-center mb-4">
+          <button
+            onClick={() => setPricingMode("oneOff")}
+            className={`btn me-2 fw-semibold ${
+              pricingMode === "oneOff" ? "btn-primary" : "btn-outline-light"
+            }`}
+          >
+            One-Off Block
+          </button>
+          <button
+            onClick={() => setPricingMode("subscription")}
+            className={`btn fw-semibold ${
+              pricingMode === "subscription"
+                ? "btn-primary"
+                : "btn-outline-light"
+            }`}
+          >
+            Monthly Subscription
+          </button>
+        </div>
+
+        <div className="row">
+          {packages.map((pkg, i) => (
+            <div key={i} className="col-12 col-md-6 col-lg-4 mb-4">
+              <PricingCard {...pkg} pricingMode={pricingMode} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
-};
-
-export default Pricing;
+}

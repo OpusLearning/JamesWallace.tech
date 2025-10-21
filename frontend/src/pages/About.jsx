@@ -1,14 +1,19 @@
+import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaCode,
-  FaPaintBrush,
-  FaDraftingCompass,
+  FaBrain,
+  FaChalkboardTeacher,
+  FaChild,
+  FaGraduationCap,
+  FaHandsHelping,
+  FaLaptopCode,
   FaCogs,
   FaRocket,
-  FaHandshake,
 } from "react-icons/fa";
-import profileImage from "../assets/profile.webp"; // Replace with your actual image
-import backgroundImage from "../assets/homepage.webp"; // Reusing Home page background
+
+import tutorImage from "../assets/tutor.webp";
+import specialistHero from "../assets/specialist.png";
+import backgroundImage from "../assets/homepage.webp";
 
 export default function About() {
   return (
@@ -16,126 +21,177 @@ export default function About() {
       className="position-relative text-light"
       style={{ minHeight: "100vh" }}
     >
-      {/* Background Image with Dark Overlay */}
+      {/* Subtle page background */}
       <div
         className="position-absolute w-100 h-100"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "brightness(0.5)",
-          zIndex: -1,
+          filter: "brightness(0.35)",
+          zIndex: -2,
         }}
-      ></div>
+      />
 
       <div
         className="container"
-        style={{ paddingTop: "120px", paddingBottom: "120px" }}
+        style={{ paddingTop: "100px", paddingBottom: "80px" }}
       >
-        {/* Heading Section */}
-        <div className="text-center mb-5">
-          <motion.h1
-            className="display-4 mb-3"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            About James Wallace: Driving Local Business Success
-          </motion.h1>
-          <p className="lead">
-            With over a decade of experience in{" "}
-            <strong>
-              web development, AI automation, and digital strategy
-            </strong>
-            , I specialise in empowering <strong>local businesses</strong> with
-            bespoke, high-performance solutions. My mission? To bridge the gap
-            between{" "}
-            <strong>
-              cutting-edge technology and real-world business growth
-            </strong>
-            .
-          </p>
-        </div>
+        {/* ===== Hero section ===== */}
+        <div className="row align-items-center g-4 mb-5">
+          <div className="col-12 col-lg-6">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="rounded-3 shadow-lg overflow-hidden"
+              style={{
+                background: "#0b1226",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <img
+                src={specialistHero}
+                alt="Calm tutoring environment with student at a laptop"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  maxHeight: "420px",
+                  objectFit: "cover",
+                }}
+              />
+            </motion.div>
+          </div>
 
-        {/* Profile Section */}
-        <motion.div
-          className="card mx-auto mb-5"
-          style={{
-            maxWidth: "400px",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            border: "none",
-            backdropFilter: "blur(10px)",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <div className="card-body text-center">
-            <img
-              src={profileImage}
-              alt="James Wallace"
-              className="rounded-circle mb-3"
-              style={{ width: "128px", height: "128px", objectFit: "cover" }}
-            />
-            <h3 className="card-title text-white">James Wallace</h3>
-            <p className="card-subtitle mb-2 text-white">
-              Your trusted local partner for innovative websites &amp; AI
-              solutions
+          <div className="col-12 col-lg-6 text-center text-lg-start">
+            <motion.h1
+              className="display-5 fw-bold mb-3 text-white"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Calm, Structured, Confident Learning
+            </motion.h1>
+
+            <p
+              className="lead mb-3"
+              style={{ color: "rgba(255,255,255,0.85)", lineHeight: 1.6 }}
+            >
+              Specialist tutoring for <strong>neurodiverse learners</strong> —
+              ADHD, Autism and Dyslexia. GCSE & A-Level{" "}
+              <strong>Computer Science</strong> and{" "}
+              <strong>KS2–KS3 Maths</strong>, taught with clarity and care.
+            </p>
+
+            {/* Slim credential badges */}
+            <div className="d-flex flex-wrap gap-2 mt-3 mb-2">
+              {[
+                "BSc Computing",
+                "MEd",
+                "QTS",
+                "Enhanced DBS",
+                "ASD Awareness",
+              ].map((t) => (
+                <span
+                  key={t}
+                  className="badge rounded-pill"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.35)",
+                    color: "#fff",
+                    fontWeight: 500,
+                    padding: "0.5rem .8rem",
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            <p
+              className="mb-0"
+              style={{
+                color: "rgba(255,255,255,0.92)",
+                fontSize: "1.05rem",
+                lineHeight: "1.7",
+                textShadow: "0 1px 4px rgba(0,0,0,0.35)",
+              }}
+            >
+              Parents get clear communication and practical strategies that work
+              at home. Students feel seen, supported, and capable — and the
+              grades follow.
             </p>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Process Section */}
+        {/* ===== Optional portrait ===== */}
+        {tutorImage && (
+          <div className="text-center mb-5">
+            <img
+              src={tutorImage}
+              alt="James Wallace — Specialist Tutor"
+              className="rounded-circle shadow"
+              style={{
+                width: "160px",
+                height: "160px",
+                objectFit: "cover",
+                border: "3px solid rgba(255,255,255,.85)",
+              }}
+            />
+          </div>
+        )}
+
+        {/* ===== Teaching Focus ===== */}
         <div className="text-center mb-4">
-          <h2 className="h3 text-white">My Process</h2>
+          <h3 className="h4 fw-bold text-white">My Teaching Focus</h3>
         </div>
         <div className="row">
-          <ProcessCard
-            icon={<FaDraftingCompass size={40} />}
-            title="Custom Wireframing"
-            description="Every project starts with a deep understanding of your business. I design tailored wireframes to map out a user-centric digital experience."
+          <FocusCard
+            icon={<FaLaptopCode size={40} />}
+            title="Computer Science (GCSE & A-Level)"
+            description="Python, algorithms, logic, and NEA mentoring — clear, step-by-step teaching that builds mastery."
           />
-          <ProcessCard
-            icon={<FaCode size={40} />}
-            title="Tailored Development"
-            description="Using industry best practices, I build high-performance websites with AI-enhanced features to boost usability, engagement, and accessibility."
+          <FocusCard
+            icon={<FaChalkboardTeacher size={40} />}
+            title="Maths (KS2–KS3)"
+            description="Concrete → visual → abstract progression for secure number facts and method fluency."
           />
-          <ProcessCard
-            icon={<FaCogs size={40} />}
-            title="Rigorous Testing"
-            description="From performance optimization to accessibility compliance, every project undergoes extensive testing to ensure a seamless user experience."
+          <FocusCard
+            icon={<FaBrain size={40} />}
+            title="ADHD & ASD Support"
+            description="Short focus blocks, visual cues, and routine — supporting attention and working memory."
           />
-          <ProcessCard
-            icon={<FaRocket size={40} />}
-            title="Launch & Growth"
-            description="Once live, I provide continuous support, AI-driven optimizations, and data-driven strategies to keep your business growing."
+          <FocusCard
+            icon={<FaChild size={40} />}
+            title="Individualised Learning"
+            description="Teaching adapted to each learner’s pace, interests, and goals — with simple, actionable next steps."
           />
         </div>
 
-        {/* Core Values Section */}
-        <div className="text-center my-4">
-          <h2 className="h3 text-white">My Core Values</h2>
+        {/* ===== Core Values ===== */}
+        <div className="text-center mt-5 mb-4">
+          <h3 className="h4 fw-bold text-white">Core Values</h3>
         </div>
         <div className="row">
-          <CoreValueCard
-            icon={<FaCode size={40} />}
-            title="Technical Excellence"
-            description="I use the latest technologies to build robust, scalable, and secure digital solutions for local businesses."
+          <FocusCard
+            icon={<FaHandsHelping size={40} />}
+            title="Empathy & Partnership"
+            description="Regular parent updates; alignment with school targets and EHCP where relevant."
           />
-          <CoreValueCard
-            icon={<FaPaintBrush size={40} />}
-            title="Creative Design"
-            description="A great website isn’t just functional – it should be visually engaging and intuitive to use. I ensure a seamless UX/UI."
+          <FocusCard
+            icon={<FaGraduationCap size={40} />}
+            title="Evidence-Based Practice"
+            description="Grounded in cognitive science and proven SEN strategies that actually stick."
           />
-          <CoreValueCard
+          <FocusCard
             icon={<FaCogs size={40} />}
-            title="Innovation"
-            description="By integrating AI and automation, I create solutions that streamline business operations and maximize efficiency."
+            title="Structure & Clarity"
+            description="Predictable lesson flow and visual frameworks to reduce overwhelm."
           />
-          <CoreValueCard
-            icon={<FaHandshake size={40} />}
-            title="Client Partnership"
-            description="I work closely with local businesses, forming strong partnerships that deliver measurable results."
+          <FocusCard
+            icon={<FaRocket size={40} />}
+            title="Growth & Confidence"
+            description="Small wins compound into momentum; students learn to trust their process."
           />
         </div>
       </div>
@@ -143,44 +199,29 @@ export default function About() {
   );
 }
 
-function ProcessCard({ icon, title, description }) {
+function FocusCard({ icon, title, description }) {
   return (
     <div className="col-12 col-md-6 col-lg-3 mb-4">
       <motion.div
         className="card h-100 text-center"
         whileHover={{ scale: 1.05 }}
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          background:
+            "linear-gradient(145deg, rgba(20,30,60,0.75), rgba(10,15,30,0.6))",
           backdropFilter: "blur(10px)",
+          borderRadius: "0.75rem",
           border: "none",
         }}
       >
-        <div className="card-body">
+        <div className="card-body d-flex flex-column">
           <div className="mb-3 text-white">{icon}</div>
-          <h5 className="card-title text-white">{title}</h5>
-          <p className="card-text text-white">{description}</p>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-function CoreValueCard({ icon, title, description }) {
-  return (
-    <div className="col-12 col-md-6 col-lg-3 mb-4">
-      <motion.div
-        className="card h-100 text-center"
-        whileHover={{ scale: 1.05 }}
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          backdropFilter: "blur(10px)",
-          border: "none",
-        }}
-      >
-        <div className="card-body">
-          <div className="mb-3 text-white">{icon}</div>
-          <h5 className="card-title text-white">{title}</h5>
-          <p className="card-text text-white">{description}</p>
+          <h5 className="card-title text-white fw-semibold">{title}</h5>
+          <p
+            className="card-text text-white flex-grow-1"
+            style={{ color: "rgba(255,255,255,0.95)", lineHeight: 1.6 }}
+          >
+            {description}
+          </p>
         </div>
       </motion.div>
     </div>
