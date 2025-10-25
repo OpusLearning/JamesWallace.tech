@@ -1,88 +1,93 @@
-name: Build & Deploy Frontend
+name: Deploy frontend to VPS
 
 on:
   push:
-    branches: ["main", "tutoring-rebrand"]
-  workflow_dispatch: {}
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
-  group: deploy-${{ github.ref }}
-  cancel-in-progress: true
+  group: deploy-frontend
+  cancel-in-progress: false
+
+env:
+  # Pin Node major or a specific version (e.g. '20.12.2').
+  NODE_VERSION: "20"
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
     steps:
-      - name: Checkout repository
+      - name: Checkout (for context only)
         uses: actions/checkout@v4
-
-      # Sanity CI build on runner with Node 20
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
+          fetch-depth: 1
 
-      - name: Install & Build (CI)
-        working-directory: frontend
-        run: |
-          npm ci
-          npm run build
-
-      # Deploy & build on server (Node 20 via nvm), KEEP lockfile
-      - name: Deploy via SSH (build on server with Node 20)
-        uses: appleboy/ssh-action@v0.1.5
+      - name: SSH to server and deploy
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
-          port: ${{ secrets.SERVER_PORT }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          timeout: "40m"
+          command_timeout: "30m"
           script_stop: true
+          debug: false
           script: |
             set -euo pipefail
             set -x
 
             BRANCH="${GITHUB_REF_NAME:-main}"
+            NODE_VERSION="${NODE_VERSION:-20}"   # respects workflow env
             echo "Deploying branch: $BRANCH"
 
-            # Ensure Node 20
+            # --- Node via nvm (disable auto-use noise) ---
+            export NVM_AUTO_USE=false
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
             . "$NVM_DIR/nvm.sh"
-            nvm install 20
-            nvm use 20
+
+            nvm install "$NODE_VERSION" --latest-npm
+            nvm use "$NODE_VERSION"
             echo "Using Node $(node -v) and npm $(npm -v)"
 
-            # Sync repo
+            # --- Sync repo on server ---
             cd /var/www/jameswallace.tech
             if [ ! -d ".git" ]; then
               git clone git@github.com:OpusLearning/JamesWallace.tech.git .
             fi
-            git config --global --add safe.directory /var/www/jameswallace.tech
+
+            git config --global safe.directory /var/www/jameswallace.tech
             git fetch origin "$BRANCH"
             git checkout "$BRANCH" || git checkout -b "$BRANCH" "origin/$BRANCH"
             git pull --ff-only origin "$BRANCH"
 
-            # Build (keep lockfile)
+            # --- Build frontend (keep lockfile) ---
             cd frontend
 
-            # do NOT delete package-lock.json
+            # refresh node_modules only (do NOT delete package-lock.json)
             rm -rf node_modules
 
-            # isolated, throwaway npm cache to avoid ENOTEMPTY on shared cache
+            # isolated npm cache to avoid ENOTEMPTY on shared runners
             export npm_config_cache="/tmp/npm-cache-$RANDOM"
             rm -rf "$npm_config_cache" || true
 
             if [ -f package-lock.json ]; then
               npm ci --no-audit --no-fund
             else
-              echo "WARNING: package-lock.json missing on server; falling back to npm install"
+              echo "WARNING: package-lock.json missing; falling back to npm install"
               npm install --no-audit --no-fund
             fi
 
             npx vite build
 
-            # Reload web server (non-fatal)
+            # --- Reload web server (non-fatal) ---
             sudo systemctl reload nginx || true
