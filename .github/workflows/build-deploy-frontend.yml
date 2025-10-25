@@ -5,7 +5,6 @@ on:
     branches: ["main", "tutoring-rebrand"]
   workflow_dispatch: {}
 
-# Prevent duplicate runs from racing each other
 concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: true
@@ -13,12 +12,11 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # CI sanity build on the runner (Node 20) to catch compile issues early
+      # Sanity CI build on runner with Node 20
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -26,13 +24,13 @@ jobs:
           cache: "npm"
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install and Build Frontend (CI sanity check)
+      - name: Install & Build (CI)
         working-directory: frontend
         run: |
           npm ci
           npm run build
 
-      # Deploy & build on server with Node 20 (via nvm), clean install, vite build
+      # Deploy & build on server (Node 20 via nvm), KEEP lockfile
       - name: Deploy via SSH (build on server with Node 20)
         uses: appleboy/ssh-action@v0.1.5
         with:
@@ -44,12 +42,12 @@ jobs:
           script_stop: true
           script: |
             set -euo pipefail
-            set -x  # debug each command
+            set -x
 
             BRANCH="${GITHUB_REF_NAME:-main}"
             echo "Deploying branch: $BRANCH"
 
-            # Ensure Node 20 on the server (install nvm if missing)
+            # Ensure Node 20
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
             . "$NVM_DIR/nvm.sh"
@@ -67,26 +65,24 @@ jobs:
             git checkout "$BRANCH" || git checkout -b "$BRANCH" "origin/$BRANCH"
             git pull --ff-only origin "$BRANCH"
 
-            # Clean install & build with Vite (keep lockfile if present)
+            # Build (keep lockfile)
             cd frontend
 
-            # remove only node_modules; DO NOT delete package-lock.json
+            # do NOT delete package-lock.json
             rm -rf node_modules
 
-            # use an isolated npm cache to avoid ENOTEMPTY issues on shared caches
+            # isolated, throwaway npm cache to avoid ENOTEMPTY on shared cache
             export npm_config_cache="/tmp/npm-cache-$RANDOM"
             rm -rf "$npm_config_cache" || true
 
-            # install deps: ci if lockfile exists, otherwise install
             if [ -f package-lock.json ]; then
-              npm ci --no-audit --no-fund || { echo "npm ci failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
+              npm ci --no-audit --no-fund
             else
-              echo "No package-lock.json on server; using npm install"
-              npm install --no-audit --no-fund || { echo "npm install failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
+              echo "WARNING: package-lock.json missing on server; falling back to npm install"
+              npm install --no-audit --no-fund
             fi
 
-            # build
-            npx vite build || { echo "vite build failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
+            npx vite build
 
             # Reload web server (non-fatal)
             sudo systemctl reload nginx || true
