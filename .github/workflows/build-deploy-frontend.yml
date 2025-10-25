@@ -13,11 +13,12 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # CI sanity build on the runner (Node 20)
+      # CI sanity build on the runner (Node 20) to catch compile issues early
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -43,6 +44,8 @@ jobs:
           script_stop: true
           script: |
             set -euo pipefail
+            set -x  # debug each command
+
             BRANCH="${GITHUB_REF_NAME:-main}"
             echo "Deploying branch: $BRANCH"
 
@@ -64,24 +67,26 @@ jobs:
             git checkout "$BRANCH" || git checkout -b "$BRANCH" "origin/$BRANCH"
             git pull --ff-only origin "$BRANCH"
 
-            # Clean install & build with Vite (keep lockfile!)
+            # Clean install & build with Vite (keep lockfile if present)
             cd frontend
+
             # remove only node_modules; DO NOT delete package-lock.json
             rm -rf node_modules
 
-            # use an isolated npm cache to avoid ENOTEMPTY issues
+            # use an isolated npm cache to avoid ENOTEMPTY issues on shared caches
             export npm_config_cache="/tmp/npm-cache-$RANDOM"
             rm -rf "$npm_config_cache" || true
 
-            # prefer ci when lockfile exists; fall back to install if ever missing
+            # install deps: ci if lockfile exists, otherwise install
             if [ -f package-lock.json ]; then
-              npm ci --no-audit --no-fund
+              npm ci --no-audit --no-fund || { echo "npm ci failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
             else
-              echo "package-lock.json missing; using npm install"
-              npm install --no-audit --no-fund
+              echo "No package-lock.json on server; using npm install"
+              npm install --no-audit --no-fund || { echo "npm install failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
             fi
 
-            npx vite build
+            # build
+            npx vite build || { echo "vite build failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
 
-            # Reload web server
+            # Reload web server (non-fatal)
             sudo systemctl reload nginx || true
