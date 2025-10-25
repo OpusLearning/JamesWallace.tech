@@ -92,7 +92,7 @@ function OfferCard({ icon, title, price, subtitle, bullets, blurb }) {
   );
 }
 
-/* ---------- Main Page ---------- */
+/* ---------- Page ---------- */
 export default function Pricing() {
   const offers = [
     {
@@ -169,9 +169,9 @@ export default function Pricing() {
             "🇬🇧 UK-based",
             "💻 Online 1:1",
             "📚 Evidence-based",
-          ].map((t) => (
+          ].map((tag) => (
             <span
-              key={t}
+              key={tag}
               className="badge rounded-pill"
               style={{
                 backgroundColor: "rgba(255,255,255,0.06)",
@@ -181,14 +181,14 @@ export default function Pricing() {
                 padding: ".5rem .8rem",
               }}
             >
-              {t}
+              {tag}
             </span>
           ))}
         </div>
         <BookButton />
       </div>
 
-      {/* OFFER CARDS */}
+      {/* OFFERS */}
       <div className="container py-5">
         <h2 className="text-center fw-bold mb-4 text-white">Support Options</h2>
         <div className="row">

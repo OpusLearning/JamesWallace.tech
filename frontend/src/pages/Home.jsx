@@ -1,26 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaStore, FaChartLine, FaRobot, FaMobileAlt } from "react-icons/fa";
-import { MdSupportAgent } from "react-icons/md";
-import backgroundImage from "../assets/homepage.webp"; // Ensure the path is correct
+import {
+  FaBrain,
+  FaLaptopCode,
+  FaCalculator,
+  FaHandsHelping,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 
-// FeatureCard component: renders an individual feature card with frosted dark grey background.
+import heroImage from "../assets/home.webp"; // new calm hero image
+import backgroundImage from "../assets/homepage.webp"; // subtle background fallback
+import tutorImage from "../assets/tutor.webp"; // your tutor portrait
+
+// Shared card component
 function FeatureCard({ icon, title, description }) {
   return (
-    <div
-      className="card h-100 text-center border-0"
-      style={{
-        background: "rgba(0, 0, 0, 0.5)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "0.5rem",
-      }}
-    >
-      <div className="card-body d-flex flex-column">
-        <div className="mb-3" style={{ color: "#fff" }}>
-          {icon}
+    <div className="col-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+      <div
+        className="card h-100 text-center border-0 shadow-lg"
+        style={{
+          background:
+            "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))",
+          backdropFilter: "blur(10px)",
+          borderRadius: "1rem",
+          border: "1px solid rgba(255,255,255,0.15)",
+        }}
+      >
+        <div className="card-body d-flex flex-column text-white">
+          <div className="mb-3">{icon}</div>
+          <h5 className="fw-bold mb-2">{title}</h5>
+          <p className="flex-grow-1" style={{ color: "rgba(255,255,255,0.9)" }}>
+            {description}
+          </p>
         </div>
-        <h5 className="card-title text-white">{title}</h5>
-        <p className="card-text text-white flex-grow-1">{description}</p>
       </div>
     </div>
   );
@@ -32,79 +44,130 @@ export default function Home() {
       className="position-relative text-light"
       style={{ minHeight: "100vh" }}
     >
-      {/* Background Image with Dark Overlay */}
+      {/* Fallback background gradient */}
       <div
         className="position-absolute w-100 h-100"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "brightness(0.5)",
+          filter: "brightness(0.25)",
           zIndex: -10,
         }}
-      ></div>
+      />
 
-      {/* Main Content Container */}
-      <div className="container" style={{ paddingTop: "120px" }}>
-        {/* Hero Section */}
-        <div className="text-center mb-5">
-          <h1 className="display-4">AI Solutions for Small Businesses</h1>
-          <p className="lead">
-            Struggling with marketing, customer management, or online sales? Our{" "}
-            <strong>
-              AI-driven solutions automate tasks, boost visibility, and
-              streamline operations
-            </strong>{" "}
-            let you focus on growing your business.
-          </p>
-          <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <Link to="/calendly" className="btn btn-primary btn-lg pulse-glow">
-              Get a Free Consultation
-            </Link>
-            <Link to="/portfolio" className="btn btn-secondary btn-lg">
-              See My Work
-            </Link>
+      {/* Hero section */}
+      <div className="container" style={{ paddingTop: "90px" }}>
+        <div className="row align-items-center mb-5 g-4">
+          <div className="col-12 col-lg-6 text-center text-lg-start">
+            <h1 className="display-5 fw-bold mb-3 text-white">
+              Calm, Structured, Confident Learning
+            </h1>
+            <p className="lead" style={{ color: "rgba(255,255,255,0.85)" }}>
+              Specialist one-to-one tuition for{" "}
+              <strong>neurodiverse learners</strong> — supporting{" "}
+              <strong>ADHD, Autism, and Dyslexia</strong> with evidence-based
+              teaching. GCSE & A-Level <strong>Computer Science</strong> and{" "}
+              <strong>KS2–KS4 Maths</strong> taught with clarity and care.
+            </p>
+            <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
+              <Link
+                to="/calendly"
+                className="btn btn-primary btn-lg fw-semibold pulse-glow"
+              >
+                Book a Free Consultation
+              </Link>
+              <Link
+                to="/services"
+                className="btn btn-outline-light btn-lg fw-semibold"
+              >
+                Explore Subjects
+              </Link>
+            </div>
+          </div>
+
+          <div className="col-12 col-lg-6 text-center">
+            <img
+              src={heroImage}
+              alt="Calm learning environment"
+              className="rounded-4 shadow-lg"
+              style={{
+                width: "100%",
+                maxWidth: "540px",
+                objectFit: "cover",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            />
           </div>
         </div>
 
-        {/* Feature Section */}
-        <h2 className="text-center mb-4">How I Help Local Businesses</h2>
+        {/* Divider line */}
+        <hr
+          style={{
+            borderColor: "rgba(255,255,255,0.15)",
+            margin: "3rem 0 2rem 0",
+          }}
+        />
+
+        {/* Tutor portrait */}
+        <div className="text-center mb-4">
+          <img
+            src={tutorImage}
+            alt="James Wallace — Specialist Tutor"
+            className="rounded-circle shadow-lg"
+            style={{
+              width: "160px",
+              height: "160px",
+              objectFit: "cover",
+              border: "3px solid rgba(255,255,255,0.85)",
+            }}
+          />
+          <p
+            className="mt-3 mb-0 text-white fw-semibold"
+            style={{ fontSize: "0.95rem", opacity: 0.9 }}
+          >
+            <small>
+              <strong>BSc Computing | MEd | QTS | Enhanced DBS</strong>
+            </small>
+          </p>
+          <p
+            className="text-white-50 mt-2"
+            style={{ fontSize: "1.05rem", fontStyle: "italic" }}
+          >
+            Helping neurodiverse learners unlock calm, confident understanding.
+          </p>
+        </div>
+
+        {/* Feature section */}
+        <h2 className="text-center fw-bold mb-5 text-white">
+          How I Help Students Thrive
+        </h2>
         <div className="row">
-          <div className="col-12 col-md-4 mb-4 d-flex align-items-stretch">
-            <FeatureCard
-              icon={<FaStore size={40} />}
-              title="Boost Sales"
-              description="Improve online and in-store sales with AI-powered marketing and customer engagement."
-            />
-          </div>
-          <div className="col-12 col-md-4 mb-4 d-flex align-items-stretch">
-            <FeatureCard
-              icon={<FaChartLine size={40} />}
-              title="Smarter Decisions"
-              description="Use AI-driven analytics to understand customer behaviour and predict trends."
-            />
-          </div>
-          <div className="col-12 col-md-4 mb-4 d-flex align-items-stretch">
-            <FeatureCard
-              icon={<FaRobot size={40} />}
-              title="Automate Tasks"
-              description="Save hours by letting AI handle scheduling, invoicing, and customer follow-ups."
-            />
-          </div>
-          <div className="col-12 col-md-4 mb-4 d-flex align-items-stretch">
-            <FeatureCard
-              icon={<MdSupportAgent size={40} />}
-              title="Better Customer Support"
-              description="AI chatbots provide instant responses to customer enquiries, boosting satisfaction."
-            />
-          </div>
-          <div className="col-12 col-md-4 mb-4 d-flex align-items-stretch">
-            <FeatureCard
-              icon={<FaMobileAlt size={40} />}
-              title="Mobile-Friendly"
-              description="Our solutions ensure your business looks great on any device, reaching more customers."
-            />
-          </div>
+          <FeatureCard
+            icon={<FaLaptopCode size={36} />}
+            title="Computer Science Mastery"
+            description="Step-by-step teaching of algorithms, logic, and Python projects for GCSE & A-Level success."
+          />
+          <FeatureCard
+            icon={<FaCalculator size={36} />}
+            title="Maths Confidence"
+            description="Visual and structured learning that builds fluency, problem-solving, and lasting understanding."
+          />
+          <FeatureCard
+            icon={<FaBrain size={36} />}
+            title="ADHD & ASD-Friendly Learning"
+            description="Low-pressure sessions using focus blocks, visual cues, and repetition to support memory and focus."
+          />
+          <FeatureCard
+            icon={<FaChalkboardTeacher size={36} />}
+            title="Exam Technique & Study Skills"
+            description="Predictable routines, scaffolding, and active recall strategies for confident performance."
+          />
+          <FeatureCard
+            icon={<FaHandsHelping size={36} />}
+            title="Parent Partnership"
+            description="Regular communication, progress tracking, and shared goals to reinforce success at home."
+          />
         </div>
       </div>
     </div>
