@@ -1,75 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBrain, faCheck } from "@fortawesome/free-solid-svg-icons";
-import pricingHero from "../assets/pricing.webp"; // <-- make sure this exists
+import {
+  faBrain,
+  faCheck,
+  faClock,
+  faClipboardList,
+  faGraduationCap,
+} from "@fortawesome/free-solid-svg-icons";
 
-const primaryColor = "#0d6efd";
+const primaryColor = "#2563eb";
 
-/* ---------------- Countdown ---------------- */
-const calculateTimeLeft = (expiry) => {
-  const diff = expiry.getTime() - new Date().getTime();
-  return {
-    total: diff,
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-  };
-};
-
-const CountdownTimer = ({ expiry }) => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(expiry));
-  useEffect(() => {
-    const t = setInterval(() => setTimeLeft(calculateTimeLeft(expiry)), 1000);
-    return () => clearInterval(t);
-  }, [expiry]);
-
-  if (timeLeft.total <= 0) {
-    return (
-      <div className="text-center mb-4">
-        <p className="fs-5 text-white fw-bold mb-1">Offer period ended</p>
-        <p className="text-white-50 m-0">Next promotion expected Summer 2025</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="text-center mb-4">
-      <p className="fs-5 fw-bold text-white mb-1">
-        Introductory Offer – valid until{" "}
-        <span className="text-info">1 April 2025</span>
-      </p>
-      <p className="display-6 fw-bold text-white m-0">
-        {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
-        {timeLeft.seconds}s
-      </p>
-    </div>
-  );
-};
-
-/* ---------------- Card ---------------- */
-const PricingCard = ({
-  title,
-  hourlyRate,
-  blockPrice,
-  subRate,
-  features,
-  icon,
-  pricingMode,
-}) => {
+/* ---------- Reusable CTA ---------- */
+function BookButton({ className = "" }) {
   const navigate = useNavigate();
-  const price = pricingMode === "subscription" ? subRate : blockPrice;
+  return (
+    <button
+      onClick={() => navigate("/calendly")}
+      className={"btn fw-semibold text-white border-0 " + className}
+      style={{
+        backgroundColor: primaryColor,
+        borderRadius: "9999px",
+        minWidth: "14rem",
+        boxShadow: "0 16px 32px rgba(37,99,235,.4)",
+      }}
+    >
+      Book a Free 20-Minute Call
+    </button>
+  );
+}
 
+/* ---------- Offer Card ---------- */
+function OfferCard({ icon, title, price, subtitle, bullets, blurb }) {
   return (
     <div
-      className="card h-100 border-0 shadow-lg"
+      className="card h-100 border-0 shadow-lg d-flex flex-column"
       style={{
         background:
-          "linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+          "linear-gradient(145deg, rgba(15,15,20,0.9), rgba(30,30,40,0.4))",
         backdropFilter: "blur(10px)",
         borderRadius: "1rem",
-        border: "1px solid rgba(255,255,255,0.2)",
+        border: "1px solid rgba(255,255,255,0.15)",
+        color: "#fff",
       }}
     >
       <div className="card-body d-flex flex-column text-white">
@@ -81,188 +53,239 @@ const PricingCard = ({
           />
         </div>
         <h3 className="h5 fw-bold text-center mb-2">{title}</h3>
-
         <div
-          className="fs-4 fw-bold mb-3 text-center"
+          className="fs-4 fw-bold text-center mb-1"
           style={{ color: primaryColor }}
         >
           £{price}
-          <span className="fs-6 text-white-50 ms-1">
-            {pricingMode === "subscription" ? "/month" : " / block"}
-          </span>
         </div>
-
-        <ul className="list-unstyled mb-4 text-white-50 text-start">
-          {features.map((f, i) => (
+        {subtitle && (
+          <div className="text-center text-white-50 mb-3">{subtitle}</div>
+        )}
+        {blurb && (
+          <p
+            className="text-white-50 text-center mb-3"
+            style={{ fontSize: ".95rem", lineHeight: 1.5 }}
+          >
+            {blurb}
+          </p>
+        )}
+        <ul
+          className="list-unstyled mb-4 text-white-50 text-start"
+          style={{ fontSize: ".95rem", lineHeight: 1.5 }}
+        >
+          {bullets.map((line, i) => (
             <li key={i} className="d-flex align-items-start mb-2">
               <FontAwesomeIcon
                 icon={faCheck}
                 className="text-success me-2 mt-1"
               />
-              <span>{f}</span>
+              <span>{line}</span>
             </li>
           ))}
         </ul>
-
-        <button
-          onClick={() => navigate("/calendly")}
-          className="btn btn-primary mt-auto fw-semibold"
-        >
-          Book a Free Consultation
-        </button>
+        <div className="mt-auto d-flex justify-content-center">
+          <BookButton />
+        </div>
       </div>
     </div>
   );
-};
+}
 
-/* ---------------- Page ---------------- */
+/* ---------- Page ---------- */
 export default function Pricing() {
-  const [pricingMode, setPricingMode] = useState("oneOff");
-  const offerExpiry = new Date("2025-04-01T00:00:00");
-
-  // Subscription deliberately cheaper than block.
-  const packages = [
+  const offers = [
     {
-      title: "Foundation Plan",
-      hourlyRate: 40,
-      blockPrice: 160,
-      subRate: 140,
-      icon: faBrain,
-      features: [
-        "£40/hr or £160 per 4-hour block (1 hr × 4 sessions)",
-        "Core tuition – Computer Science or Maths (KS2–GCSE)",
-        "Structured lessons focused on mastery & confidence",
-        "Best for building foundations or steady catch-up",
+      title: "Starter Session",
+      price: "45",
+      subtitle: "60 mins",
+      icon: faClipboardList,
+      blurb:
+        "A first working session to see what’s going on and what will actually help.",
+      bullets: [
+        "Diagnostic chat with parent (10–15 mins)",
+        "45-min focused session with your child",
+        "Mini plan: 3 quick wins + next steps",
+        "One-off; ideal to assess fit",
       ],
     },
     {
-      title: "Focus Plan",
-      hourlyRate: 55,
-      blockPrice: 220,
-      subRate: 190,
+      title: "Weekly Tutoring",
+      price: "38",
+      subtitle: "per 60-min session",
       icon: faBrain,
-      features: [
-        "£55/hr or £220 per 4-hour block (1 hr × 4 sessions)",
-        "ADHD/ASD/Dyslexia-friendly resources & scaffolds",
-        "Weekly progress summaries for parents",
-        "Aligned with AQA, OCR, or Edexcel",
+      blurb:
+        "Ongoing 1:1 support to build calm routines, confidence and steady progress.",
+      bullets: [
+        "Same weekly slot, online",
+        "Custom plan (ADHD / Dyslexia / ASD-aware)",
+        "Parent recap (bullet points in email)",
+        "Resource share (templates / tools)",
       ],
     },
     {
-      title: "Performance Plan",
-      hourlyRate: 70,
-      blockPrice: 280,
-      subRate: 240,
-      icon: faBrain,
-      features: [
-        "£70/hr or £280 per 4-hour block (1 hr × 4 sessions)",
-        "Full exam strategy, timed practice, & revision",
-        "Parent reviews with next-step planning",
-        "Ideal for GCSE/A-Level exam preparation",
+      title: "Homework System Sprint",
+      price: "199",
+      subtitle: "2-week intensive",
+      icon: faClock,
+      blurb:
+        "Rapid setup of a working homework routine so evenings stop being a fight.",
+      bullets: [
+        "Two 60-min sessions",
+        "‘Now-Next-Done’ board setup",
+        "Printable weekly plan + friction audit",
+        "Parent coaching call (20 mins)",
+        "Great for chaos → structure fast",
+      ],
+    },
+    {
+      title: "Exam Support Block",
+      price: "349",
+      subtitle: "6 × 60-min sessions",
+      icon: faGraduationCap,
+      blurb:
+        "Focused GCSE / A-level prep with structure, timing practice and calm exam habits.",
+      bullets: [
+        "Six 60-min sessions over 3–6 weeks",
+        "Retrieval practice + assistive tech setup",
+        "Time-boxing + test-day routine",
+        "Progress snapshot at end",
       ],
     },
   ];
 
   return (
-    <div className="text-light">
-      {/* ---------- INLINE HERO (no cropping) ---------- */}
-      <div
-        className="container"
-        style={{ paddingTop: "90px", paddingBottom: "10px" }}
-      >
-        <div className="row align-items-center g-4">
-          <div className="col-12 col-lg-6">
-            <div
-              className="rounded-4 shadow-lg overflow-hidden"
+    <div className="text-light" style={{ backgroundColor: "#000" }}>
+      {/* HERO (single column, no image) */}
+      <div className="container py-5 text-center">
+        <h1 className="display-5 fw-bold mb-3 text-white">Working Together</h1>
+        <p className="lead text-white-50 mb-4">
+          Calm, structured tutoring for neurodiverse learners. Clear rates,
+          simple bundles, and no surprises.
+        </p>
+        <div className="d-flex flex-wrap gap-2 justify-content-center mb-3">
+          {[
+            "✅ Enhanced DBS",
+            "🇬🇧 UK-based",
+            "💻 Online 1:1",
+            "📚 Evidence-based",
+          ].map((tag) => (
+            <span
+              key={tag}
+              className="badge rounded-pill"
               style={{
-                background: "#0b1226",
-                border: "1px solid rgba(255,255,255,0.12)",
+                backgroundColor: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.35)",
+                color: "#fff",
+                fontWeight: 500,
+                padding: ".5rem .8rem",
               }}
             >
-              <img
-                src={pricingHero}
-                alt="Calm student at laptop"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  aspectRatio: "16/10",
-                  objectFit: "contain",
-                  objectPosition: "center",
-                  backgroundColor: "rgba(0,0,0,0.05)", // soft fill behind image
-                }}
-              />
-            </div>
-          </div>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <BookButton />
+      </div>
 
-          <div className="col-12 col-lg-6 text-center text-lg-start">
-            <h1 className="display-5 fw-bold mb-3">
-              Fair, Simple, Transparent Pricing
-            </h1>
-            <p className="lead text-white-50 mb-3">
-              Flexible options to suit your goals: buy a 4-hour block or save
-              with a monthly subscription. Clear, predictable costs — no
-              surprises.
-            </p>
-
-            {/* small neutral pills to echo Home */}
-            <div className="d-flex flex-wrap gap-2 mb-2">
-              {[
-                "Block or Monthly",
-                "Cancel any time",
-                "Online or Derbyshire",
-              ].map((t) => (
-                <span
-                  key={t}
-                  className="badge rounded-pill"
-                  style={{
-                    backgroundColor: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.35)",
-                    color: "#fff",
-                    fontWeight: 500,
-                    padding: ".5rem .8rem",
-                  }}
-                >
-                  {t}
-                </span>
-              ))}
+      {/* OFFERS */}
+      <div className="container py-5">
+        <h2 className="text-center fw-bold mb-4 text-white">Support Options</h2>
+        <div className="row">
+          {offers.map((offer, i) => (
+            <div key={i} className="col-12 col-md-6 col-lg-3 mb-4 d-flex">
+              <OfferCard {...offer} />
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* ---------- Plans ---------- */}
-      <div className="container py-5" style={{ filter: "brightness(1.06)" }}>
-        <CountdownTimer expiry={offerExpiry} />
-
-        <h2 className="text-center fw-bold mb-4 text-white">Tutoring Plans</h2>
-
-        <div className="d-flex justify-content-center mb-4">
-          <button
-            onClick={() => setPricingMode("oneOff")}
-            className={`btn me-2 fw-semibold ${
-              pricingMode === "oneOff" ? "btn-primary" : "btn-outline-light"
-            }`}
+      {/* INCLUDED */}
+      <div className="container pb-4">
+        <div
+          className="rounded-4 p-4 mb-4"
+          style={{ backgroundColor: "#111827", border: "1px solid #374151" }}
+        >
+          <h3 className="h5 fw-bold text-white mb-3">
+            What’s included (all plans)
+          </h3>
+          <ul
+            className="list-unstyled text-white-50 mb-0"
+            style={{ fontSize: ".95rem", lineHeight: 1.5 }}
           >
-            One-Off Block
-          </button>
-          <button
-            onClick={() => setPricingMode("subscription")}
-            className={`btn fw-semibold ${
-              pricingMode === "subscription"
-                ? "btn-primary"
-                : "btn-outline-light"
-            }`}
-          >
-            Monthly Subscription
-          </button>
+            {[
+              "Personalised structure for the learner’s profile",
+              "Templates your child actually uses (not theory)",
+              "Simple metrics: what worked / where stuck",
+              "Email support between sessions (fair use)",
+            ].map((item, idx) => (
+              <li key={idx} className="d-flex align-items-start mb-2">
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className="text-success me-2 mt-1"
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
-        <div className="row">
-          {packages.map((pkg, i) => (
-            <div key={i} className="col-12 col-md-6 col-lg-4 mb-4">
-              <PricingCard {...pkg} pricingMode={pricingMode} />
+      {/* INFO GRID */}
+      <div className="container pb-5">
+        <div className="row g-3">
+          {[
+            {
+              h: "Availability & location",
+              p: "Online (UK). Weekdays early evening; Saturday mornings in some cases.",
+            },
+            {
+              h: "DBS & safeguarding",
+              p: "Enhanced DBS (updated). Parents welcome to sit in / observe sessions.",
+            },
+            {
+              h: "Payment & invoicing",
+              p: "Invoice monthly via bank transfer. No hidden fees, no marketplace mark-up.",
+            },
+            {
+              h: "Cancellation",
+              p: "24-hour notice → no charge. Under 24 hours → session charged (we re-book wherever possible).",
+            },
+          ].map((box, i) => (
+            <div key={i} className="col-12 col-md-6 col-lg-3">
+              <div
+                className="h-100 rounded-4 p-3"
+                style={{
+                  backgroundColor: "#0a0a0a",
+                  border: "1px solid #1f2937",
+                }}
+              >
+                <h4 className="h6 fw-bold text-white mb-2">{box.h}</h4>
+                <p
+                  className="text-white-50 mb-0"
+                  style={{ fontSize: ".95rem" }}
+                  dangerouslySetInnerHTML={{ __html: box.p }}
+                />
+              </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* FINAL CTA */}
+      <div className="container pb-5">
+        <div
+          className="rounded-4 p-4 d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between gap-3"
+          style={{ backgroundColor: "#111827", border: "1px solid #1f2937" }}
+        >
+          <div>
+            <h2 className="h5 fw-bold text-white mb-2">Next step</h2>
+            <p className="text-white-50 m-0" style={{ fontSize: ".95rem" }}>
+              We’ll talk calmly about what’s going on, map next steps, and
+              you’ll leave with a plan — even if you don’t book.
+            </p>
+          </div>
+          <BookButton />
         </div>
       </div>
     </div>
