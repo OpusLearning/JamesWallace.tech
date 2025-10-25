@@ -2,10 +2,9 @@ name: Build & Deploy Frontend
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
 
-# Prevent overlapping deploys
 concurrency:
   group: deploy-frontend-${{ github.ref }}
   cancel-in-progress: true
@@ -18,7 +17,6 @@ env:
   SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
   SSH_KEY: ${{ secrets.SSH_KEY }}
   SSH_PORT: ${{ secrets.SSH_PORT }}
-  # Optional: if your host key is pinned; otherwise omit
   SSH_FINGERPRINT: ${{ secrets.SSH_FINGERPRINT }}
 
 jobs:
@@ -26,13 +24,9 @@ jobs:
     name: Deploy to VPS
     runs-on: ubuntu-latest
     if: ${{ github.ref_name == 'main' }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Validate workflow YAML (quick fail on syntax)
-        run: echo "YAML loaded OK"
 
       - name: SSH Deploy
         uses: appleboy/ssh-action@v1.0.3
