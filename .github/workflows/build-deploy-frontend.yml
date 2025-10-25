@@ -66,10 +66,16 @@ jobs:
 
             # Clean install & build with Vite
             cd frontend
+            # start clean
             rm -rf node_modules package-lock.json
-            npm cache clean --force
-            npm ci
-            npx vite build
+
+            # avoid ENOTEMPTY on shared ~/.npm cache: use an isolated, throwaway cache
+            export npm_config_cache="/tmp/npm-cache-$RANDOM"
+            rm -rf "$npm_config_cache" || true
+
+             # install & build (quiet, fast)
+             npm ci --no-audit --no-fund
+             npx vite build
 
             # Reload web server
             sudo systemctl reload nginx || true
