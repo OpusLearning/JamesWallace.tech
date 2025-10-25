@@ -1,58 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUniversalAccess,
   faBrain,
-  faWrench,
   faCheck,
+  faClock,
+  faClipboardList,
+  faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
-// Set your primary colour as blue (#0d6efd)
-const primaryColor = "#0d6efd";
+const primaryColor = "#2563eb";
 
-// Helper: Multiply discounted price by 2 to compute regular price.
-const getRegularPrice = (price) => {
-  if (typeof price === "number") {
-    return `£${(price * 2).toFixed(0)}`;
-  } else {
-    const match = price.match(/£([\d.]+)/);
-    if (match) {
-      const regular = parseFloat(match[1]) * 2;
-      return `£${regular.toFixed(0)}/month`;
-    }
-    return price;
-  }
-};
-
-const PricingCard = ({
-  title,
-  oneOffPrice,
-  subscriptionPrice,
-  features,
-  icon,
-  pricingMode,
-  isDiscountActive,
-}) => {
+/* ---------- Reusable CTA ---------- */
+function BookButton({ className = "" }) {
   const navigate = useNavigate();
-  const discountedPrice =
-    pricingMode === "subscription" ? subscriptionPrice : oneOffPrice;
-  const regularPrice = getRegularPrice(discountedPrice);
-
-  const goToCalendly = () => {
-    navigate("/calendly");
-  };
-
   return (
-    <div
-      className="card h-100 shadow-sm border-0"
+    <button
+      onClick={() => navigate("/calendly")}
+      className={"btn fw-semibold text-white border-0 " + className}
       style={{
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "0.5rem",
+        backgroundColor: primaryColor,
+        borderRadius: "9999px",
+        minWidth: "14rem",
+        boxShadow: "0 16px 32px rgba(37,99,235,.4)",
       }}
     >
-      <div className="card-body d-flex flex-column">
+      Book a Free 20-Minute Call
+    </button>
+  );
+}
+
+/* ---------- Offer Card ---------- */
+function OfferCard({ icon, title, price, subtitle, bullets, blurb }) {
+  return (
+    <div
+      className="card h-100 border-0 shadow-lg d-flex flex-column"
+      style={{
+        background:
+          "linear-gradient(145deg, rgba(15,15,20,0.9), rgba(30,30,40,0.4))",
+        backdropFilter: "blur(10px)",
+        borderRadius: "1rem",
+        border: "1px solid rgba(255,255,255,0.15)",
+        color: "#fff",
+      }}
+    >
+      <div className="card-body d-flex flex-column text-white">
         <div className="d-flex justify-content-center mb-3">
           <FontAwesomeIcon
             icon={icon}
@@ -60,277 +52,242 @@ const PricingCard = ({
             style={{ color: primaryColor }}
           />
         </div>
-        <h3 className="h5 fw-bold text-center" style={{ color: "#fff" }}>
-          {title}
-        </h3>
+        <h3 className="h5 fw-bold text-center mb-2">{title}</h3>
         <div
-          className="fs-4 fw-bold mb-3 text-center"
+          className="fs-4 fw-bold text-center mb-1"
           style={{ color: primaryColor }}
         >
-          {isDiscountActive ? (
-            <>
-              <span className="text-muted text-decoration-line-through me-2">
-                {regularPrice}
-              </span>
-              <span>
-                {typeof discountedPrice === "number"
-                  ? `£${discountedPrice}`
-                  : discountedPrice}
-              </span>
-            </>
-          ) : (
-            <span>{regularPrice}</span>
-          )}
+          £{price}
         </div>
-        <ul className="list-unstyled mb-4">
-          {features.map((feature, index) => (
-            <li key={index} className="d-flex align-items-start mb-2">
+        {subtitle && (
+          <div className="text-center text-white-50 mb-3">{subtitle}</div>
+        )}
+        {blurb && (
+          <p
+            className="text-white-50 text-center mb-3"
+            style={{ fontSize: ".95rem", lineHeight: 1.5 }}
+          >
+            {blurb}
+          </p>
+        )}
+        <ul
+          className="list-unstyled mb-4 text-white-50 text-start"
+          style={{ fontSize: ".95rem", lineHeight: 1.5 }}
+        >
+          {bullets.map((line, i) => (
+            <li key={i} className="d-flex align-items-start mb-2">
               <FontAwesomeIcon
                 icon={faCheck}
                 className="text-success me-2 mt-1"
               />
-              <span style={{ color: "#fff" }}>{feature}</span>
+              <span>{line}</span>
             </li>
           ))}
         </ul>
-        <button
-          className="btn mt-auto pulse-glow"
-          onClick={goToCalendly}
-          style={{
-            backgroundColor: primaryColor,
-            borderColor: primaryColor,
-            color: "#fff",
-          }}
-        >
-          Book a Free Consultation
-        </button>
+        <div className="mt-auto d-flex justify-content-center">
+          <BookButton />
+        </div>
       </div>
     </div>
   );
-};
+}
 
-const calculateTimeLeft = (expiry) => {
-  const difference = expiry.getTime() - new Date().getTime();
-  return {
-    total: difference,
-    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / (1000 * 60)) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
-  };
-};
-
-const CountdownTimer = ({ expiry }) => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(expiry));
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(expiry));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [expiry]);
-
-  if (timeLeft.total <= 0) {
-    return (
-      <div className="text-center mb-4">
-        <p className="fs-5 text-white fw-bold">Offer expired</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="text-center mb-4">
-      <p className="fs-5 text-white fw-bold">
-        Limited-Time Offer: 50% Discount until April 1, 2025!
-      </p>
-      <p className="display-6 fw-bold text-white">
-        {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{" "}
-        {timeLeft.seconds}s
-      </p>
-    </div>
-  );
-};
-
-const Pricing = () => {
-  const [pricingMode, setPricingMode] = useState("oneOff");
-
-  // Set the offer expiry date (April 1, 2025)
-  const offerExpiry = new Date("2025-04-01T00:00:00");
-  const isDiscountActive = new Date() < offerExpiry;
-
-  // Pricing packages with discounted prices.
-  const pricingPackages = [
+/* ---------- Main Page ---------- */
+export default function Pricing() {
+  const offers = [
     {
-      title: "Single Page (One-page site)",
-      oneOffPrice: 99,
-      subscriptionPrice: 10,
-      icon: faUniversalAccess,
-      features: [
-        "Cost-effective one-page design",
-        "Modern, responsive layout",
-        "Perfect for establishing your online presence",
+      title: "Starter Session",
+      price: "45",
+      subtitle: "60 mins",
+      icon: faClipboardList,
+      blurb:
+        "A first working session to see what’s going on and what will actually help.",
+      bullets: [
+        "Diagnostic chat with parent (10–15 mins)",
+        "45-min focused session with your child",
+        "Mini plan: 3 quick wins + next steps",
+        "One-off; ideal to assess fit",
       ],
     },
     {
-      title: "Basic (Starter site)",
-      oneOffPrice: 199,
-      subscriptionPrice: 20,
-      icon: faUniversalAccess,
-      features: [
-        "3–5 page professional website",
-        "Essential pages including a contact form",
-        "Ideal for small businesses entering the digital world",
-      ],
-    },
-    {
-      title: "Silver (Standard site)",
-      oneOffPrice: 299,
-      subscriptionPrice: 30,
-      icon: faUniversalAccess,
-      features: [
-        "Up to 5-page custom website",
-        "Mobile-friendly and SEO optimised",
-        "Showcases your brand identity",
-      ],
-    },
-    {
-      title: "Gold (Expanded site)",
-      oneOffPrice: 429,
-      subscriptionPrice: 40,
-      icon: faUniversalAccess,
-      features: [
-        "Expanded website with 5–10 pages",
-        "Enhanced customisation and functionality",
-        "Supports your growing business needs",
-      ],
-    },
-    {
-      title: "Platinum (Premium site)",
-      oneOffPrice: 825,
-      subscriptionPrice: 60,
-      icon: faUniversalAccess,
-      features: [
-        "Comprehensive, tailor-made website solution",
-        "Includes professional branding, SEO fundamentals and training",
-        "Elevates your online presence",
-      ],
-    },
-    {
-      title: "Shopping Cart (E-commerce)",
-      oneOffPrice: 479,
-      subscriptionPrice: 50,
-      icon: faUniversalAccess,
-      features: [
-        "User-friendly online store setup",
-        "Responsive design for a seamless shopping experience",
-        "Ideal for small or boutique shops",
-      ],
-    },
-    {
-      title: "Basic Accessibility Website",
-      oneOffPrice: 249,
-      subscriptionPrice: 25,
-      icon: faUniversalAccess,
-      features: [
-        "3-page fully accessible website",
-        "Basic WCAG 2.1 compliance",
-        "Mobile-responsive and SEO friendly",
-      ],
-    },
-    {
-      title: "Standard AI-Enhanced Website",
-      oneOffPrice: 499,
-      subscriptionPrice: 35,
-      icon: faUniversalAccess,
-      features: [
-        "6-page website with AI-powered accessibility tools",
-        "WCAG 2.1 AA compliant",
-        "Custom branding and automated monitoring",
-      ],
-    },
-    {
-      title: "Starter AI Automation Package",
-      oneOffPrice: 199,
-      subscriptionPrice: 15,
+      title: "Weekly Tutoring",
+      price: "38",
+      subtitle: "per 60-min session",
       icon: faBrain,
-      features: [
-        "AI-powered workflow automation",
-        "Efficient task scheduling",
-        "Integrated chatbot for common queries",
+      blurb:
+        "Ongoing 1:1 support to build calm routines, confidence and steady progress.",
+      bullets: [
+        "Same weekly slot, online",
+        "Custom plan (ADHD / Dyslexia / ASD-aware)",
+        "Parent recap (bullet points in email)",
+        "Resource share (templates / tools)",
       ],
     },
     {
-      title: "Standard Maintenance",
-      oneOffPrice: 49,
-      subscriptionPrice: 49,
-      icon: faWrench,
-      features: [
-        "Regular security updates",
-        "Timely bug fixes",
-        "Ongoing accessibility improvements",
+      title: "Homework System Sprint",
+      price: "199",
+      subtitle: "2-week intensive",
+      icon: faClock,
+      blurb:
+        "Rapid setup of a working homework routine so evenings stop being a fight.",
+      bullets: [
+        "Two 60-min sessions",
+        "‘Now-Next-Done’ board setup",
+        "Printable weekly plan + friction audit",
+        "Parent coaching call (20 mins)",
+        "Great for chaos → structure fast",
       ],
     },
     {
-      title: "Pro WCAG Compliance Support",
-      oneOffPrice: 99,
-      subscriptionPrice: 99,
-      icon: faWrench,
-      features: [
-        "Monthly WCAG audits",
-        "Accessibility bug fixes",
-        "Automated compliance reports",
+      title: "Exam Support Block",
+      price: "349",
+      subtitle: "6 × 60-min sessions",
+      icon: faGraduationCap,
+      blurb:
+        "Focused GCSE / A-level prep with structure, timing practice and calm exam habits.",
+      bullets: [
+        "Six 60-min sessions over 3–6 weeks",
+        "Retrieval practice + assistive tech setup",
+        "Time-boxing + test-day routine",
+        "Progress snapshot at end",
       ],
     },
   ];
 
   return (
-    <div className="container py-4">
-      <CountdownTimer expiry={offerExpiry} />
-      <h1 className="text-center fw-bold mb-4" style={{ color: "#fff" }}>
-        Pricing Plans
-      </h1>
-      <div className="d-flex justify-content-center mb-4">
-        <button
-          onClick={() => setPricingMode("oneOff")}
-          className={`btn me-2 ${
-            pricingMode === "oneOff" ? "btn-primary" : "btn-light"
-          }`}
-          style={{
-            backgroundColor:
-              pricingMode === "oneOff" ? primaryColor : undefined,
-            borderColor: pricingMode === "oneOff" ? primaryColor : undefined,
-          }}
-        >
-          One-Off Payment
-        </button>
-        <button
-          onClick={() => setPricingMode("subscription")}
-          className={`btn ${
-            pricingMode === "subscription" ? "btn-primary" : "btn-light"
-          }`}
-          style={{
-            backgroundColor:
-              pricingMode === "subscription" ? primaryColor : undefined,
-            borderColor:
-              pricingMode === "subscription" ? primaryColor : undefined,
-          }}
-        >
-          Subscription
-        </button>
+    <div className="text-light" style={{ backgroundColor: "#000" }}>
+      {/* HERO (single column, no image) */}
+      <div className="container py-5 text-center">
+        <h1 className="display-5 fw-bold mb-3 text-white">Working Together</h1>
+        <p className="lead text-white-50 mb-4">
+          Calm, structured tutoring for neurodiverse learners. Clear rates,
+          simple bundles, and no surprises.
+        </p>
+        <div className="d-flex flex-wrap gap-2 justify-content-center mb-3">
+          {[
+            "✅ Enhanced DBS",
+            "🇬🇧 UK-based",
+            "💻 Online 1:1",
+            "📚 Evidence-based",
+          ].map((t) => (
+            <span
+              key={t}
+              className="badge rounded-pill"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.35)",
+                color: "#fff",
+                fontWeight: 500,
+                padding: ".5rem .8rem",
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        <BookButton />
       </div>
-      <div className="row">
-        {pricingPackages.map((pkg, index) => (
-          <div key={index} className="col-12 col-md-6 col-lg-4 mb-4">
-            <PricingCard
-              pricingMode={pricingMode}
-              isDiscountActive={isDiscountActive}
-              {...pkg}
-            />
+
+      {/* OFFER CARDS */}
+      <div className="container py-5">
+        <h2 className="text-center fw-bold mb-4 text-white">Support Options</h2>
+        <div className="row">
+          {offers.map((offer, i) => (
+            <div key={i} className="col-12 col-md-6 col-lg-3 mb-4 d-flex">
+              <OfferCard {...offer} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* INCLUDED */}
+      <div className="container pb-4">
+        <div
+          className="rounded-4 p-4 mb-4"
+          style={{ backgroundColor: "#111827", border: "1px solid #374151" }}
+        >
+          <h3 className="h5 fw-bold text-white mb-3">
+            What’s included (all plans)
+          </h3>
+          <ul
+            className="list-unstyled text-white-50 mb-0"
+            style={{ fontSize: ".95rem", lineHeight: 1.5 }}
+          >
+            {[
+              "Personalised structure for the learner’s profile",
+              "Templates your child actually uses (not theory)",
+              "Simple metrics: what worked / where stuck",
+              "Email support between sessions (fair use)",
+            ].map((item, idx) => (
+              <li key={idx} className="d-flex align-items-start mb-2">
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className="text-success me-2 mt-1"
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* INFO GRID */}
+      <div className="container pb-5">
+        <div className="row g-3">
+          {[
+            {
+              h: "Availability & location",
+              p: "Online (UK). Weekdays early evening; Saturday mornings in some cases.",
+            },
+            {
+              h: "DBS & safeguarding",
+              p: "Enhanced DBS (updated). Parents welcome to sit in / observe sessions.",
+            },
+            {
+              h: "Payment & invoicing",
+              p: "Invoice monthly via bank transfer. No hidden fees, no marketplace mark-up.",
+            },
+            {
+              h: "Cancellation",
+              p: "24-hour notice → no charge. Under 24 hours → session charged (we re-book wherever possible).",
+            },
+          ].map((box, i) => (
+            <div key={i} className="col-12 col-md-6 col-lg-3">
+              <div
+                className="h-100 rounded-4 p-3"
+                style={{
+                  backgroundColor: "#0a0a0a",
+                  border: "1px solid #1f2937",
+                }}
+              >
+                <h4 className="h6 fw-bold text-white mb-2">{box.h}</h4>
+                <p
+                  className="text-white-50 mb-0"
+                  style={{ fontSize: ".95rem" }}
+                  dangerouslySetInnerHTML={{ __html: box.p }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* FINAL CTA */}
+      <div className="container pb-5">
+        <div
+          className="rounded-4 p-4 d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between gap-3"
+          style={{ backgroundColor: "#111827", border: "1px solid #1f2937" }}
+        >
+          <div>
+            <h2 className="h5 fw-bold text-white mb-2">Next step</h2>
+            <p className="text-white-50 m-0" style={{ fontSize: ".95rem" }}>
+              We’ll talk calmly about what’s going on, map next steps, and
+              you’ll leave with a plan — even if you don’t book.
+            </p>
           </div>
-        ))}
+          <BookButton />
+        </div>
       </div>
     </div>
   );
-};
-
-export default Pricing;
+}
