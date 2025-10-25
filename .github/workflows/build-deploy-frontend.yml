@@ -1,93 +1,92 @@
-name: Deploy frontend to VPS
+name: Build & Deploy Frontend
 
 on:
   push:
     branches: [main]
-    paths:
-      - "frontend/**"
-      - ".github/workflows/deploy-frontend.yml"
   workflow_dispatch:
+
+# Prevent overlapping deploys
+concurrency:
+  group: deploy-frontend-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
 
-concurrency:
-  group: deploy-frontend
-  cancel-in-progress: false
-
 env:
-  # Pin Node major or a specific version (e.g. '20.12.2').
-  NODE_VERSION: "20"
+  SSH_HOST: ${{ secrets.SSH_HOST }}
+  SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
+  SSH_PORT: ${{ secrets.SSH_PORT }}
+  # Optional: if your host key is pinned; otherwise omit
+  SSH_FINGERPRINT: ${{ secrets.SSH_FINGERPRINT }}
 
 jobs:
   deploy:
+    name: Deploy to VPS
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    if: ${{ github.ref_name == 'main' }}
 
     steps:
-      - name: Checkout (for context only)
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
-      - name: SSH to server and deploy
+      - name: Validate workflow YAML (quick fail on syntax)
+        run: echo "YAML loaded OK"
+
+      - name: SSH Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          timeout: "40m"
-          command_timeout: "30m"
+          host: ${{ env.SSH_HOST }}
+          username: ${{ env.SSH_USERNAME }}
+          key: ${{ env.SSH_KEY }}
+          port: ${{ env.SSH_PORT || 22 }}
+          fingerprint: ${{ env.SSH_FINGERPRINT }}
           script_stop: true
-          debug: false
+          debug: true
+          command_timeout: 30m
           script: |
             set -euo pipefail
             set -x
 
             BRANCH="${GITHUB_REF_NAME:-main}"
-            NODE_VERSION="${NODE_VERSION:-20}"   # respects workflow env
             echo "Deploying branch: $BRANCH"
 
-            # --- Node via nvm (disable auto-use noise) ---
-            export NVM_AUTO_USE=false
+            # Ensure Node 20 via nvm
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
             . "$NVM_DIR/nvm.sh"
-
-            nvm install "$NODE_VERSION" --latest-npm
-            nvm use "$NODE_VERSION"
+            nvm install 20
+            nvm use 20
             echo "Using Node $(node -v) and npm $(npm -v)"
 
-            # --- Sync repo on server ---
+            # Repo sync
+            mkdir -p /var/www/jameswallace.tech
             cd /var/www/jameswallace.tech
+
             if [ ! -d ".git" ]; then
               git clone git@github.com:OpusLearning/JamesWallace.tech.git .
             fi
 
-            git config --global safe.directory /var/www/jameswallace.tech
+            git config --global --add safe.directory /var/www/jameswallace.tech
             git fetch origin "$BRANCH"
             git checkout "$BRANCH" || git checkout -b "$BRANCH" "origin/$BRANCH"
             git pull --ff-only origin "$BRANCH"
 
-            # --- Build frontend (keep lockfile) ---
+            # Build frontend
             cd frontend
-
-            # refresh node_modules only (do NOT delete package-lock.json)
             rm -rf node_modules
-
-            # isolated npm cache to avoid ENOTEMPTY on shared runners
             export npm_config_cache="/tmp/npm-cache-$RANDOM"
             rm -rf "$npm_config_cache" || true
 
             if [ -f package-lock.json ]; then
-              npm ci --no-audit --no-fund
+              npm ci --no-audit --no-fund || { echo "npm ci failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
             else
-              echo "WARNING: package-lock.json missing; falling back to npm install"
-              npm install --no-audit --no-fund
+              echo "No package-lock.json on server; using npm install"
+              npm install --no-audit --no-fund || { echo "npm install failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
             fi
 
-            npx vite build
+            npx vite build || { echo "vite build failed"; tail -n +1 "$npm_config_cache"/_logs/* 2>/dev/null || true; exit 1; }
 
-            # --- Reload web server (non-fatal) ---
+            # Reload nginx (non-fatal)
             sudo systemctl reload nginx || true
