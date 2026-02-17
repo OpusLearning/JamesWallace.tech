@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import {
   FaBrain,
@@ -7,32 +6,27 @@ import {
   FaHandsHelping,
   FaChalkboardTeacher,
 } from "react-icons/fa";
+import heroImage from "../assets/home.webp";
+import tutorImage from "../assets/tutor.webp";
 
-import heroImage from "../assets/home.webp"; // new calm hero image
-import backgroundImage from "../assets/homepage.webp"; // subtle background fallback
-import tutorImage from "../assets/tutor.webp"; // your tutor portrait
-
-// Shared card component
 function FeatureCard({ icon, title, description }) {
   return (
-    <div className="col-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
-      <div
-        className="card h-100 text-center border-0 shadow-lg"
-        style={{
-          background:
-            "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))",
-          backdropFilter: "blur(10px)",
-          borderRadius: "1rem",
-          border: "1px solid rgba(255,255,255,0.15)",
-        }}
-      >
-        <div className="card-body d-flex flex-column text-white">
-          <div className="mb-3">{icon}</div>
-          <h5 className="fw-bold mb-2">{title}</h5>
-          <p className="flex-grow-1" style={{ color: "rgba(255,255,255,0.9)" }}>
-            {description}
-          </p>
+    <div className="col-12 col-md-6 col-lg-4 mb-4 d-flex">
+      <div className="jw-card d-flex flex-column w-100">
+        <div style={{ color: "var(--brand)", marginBottom: "0.75rem" }}>
+          {icon}
         </div>
+        <h3
+          style={{
+            fontSize: "1rem",
+            fontWeight: 600,
+            marginBottom: "0.4rem",
+            color: "var(--text-primary)",
+          }}
+        >
+          {title}
+        </h3>
+        <p style={{ margin: 0, fontSize: "0.9rem" }}>{description}</p>
       </div>
     </div>
   );
@@ -40,136 +34,165 @@ function FeatureCard({ icon, title, description }) {
 
 export default function Home() {
   return (
-    <div
-      className="position-relative text-light"
-      style={{ minHeight: "100vh" }}
-    >
-      {/* Fallback background gradient */}
-      <div
-        className="position-absolute w-100 h-100"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "brightness(0.25)",
-          zIndex: -10,
-        }}
-      />
+    <>
+      {/* Hero */}
+      <section className="jw-section jw-section-warm">
+        <div className="jw-container">
+          <div className="row align-items-center g-4">
+            <div className="col-12 col-lg-6 text-center text-lg-start">
+              <div className="jw-status-pill">Accepting new clients</div>
+              <h1>Calm, Structured, Confident Learning</h1>
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
+                Specialist one-to-one tuition for{" "}
+                <strong>neurodiverse learners</strong> — supporting{" "}
+                <strong>ADHD, Autism, and Dyslexia</strong> with evidence-based
+                teaching. GCSE &amp; A-Level{" "}
+                <strong>Computer Science</strong> and{" "}
+                <strong>KS2–KS4 Maths</strong> taught with clarity and care.
+              </p>
+              <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
+                <Link to="/calendly" className="jw-btn-primary">
+                  Book a Free Consultation
+                </Link>
+                <Link to="/services" className="jw-btn-secondary">
+                  Explore Subjects
+                </Link>
+              </div>
+            </div>
 
-      {/* Hero section */}
-      <div className="container" style={{ paddingTop: "90px" }}>
-        <div className="row align-items-center mb-5 g-4">
-          <div className="col-12 col-lg-6 text-center text-lg-start">
-            <h1 className="display-5 fw-bold mb-3 text-white">
-              Calm, Structured, Confident Learning
-            </h1>
-            <p className="lead" style={{ color: "rgba(255,255,255,0.85)" }}>
-              Specialist one-to-one tuition for{" "}
-              <strong>neurodiverse learners</strong> — supporting{" "}
-              <strong>ADHD, Autism, and Dyslexia</strong> with evidence-based
-              teaching. GCSE & A-Level <strong>Computer Science</strong> and{" "}
-              <strong>KS2–KS4 Maths</strong> taught with clarity and care.
-            </p>
-            <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
-              <Link
-                to="/calendly"
-                className="btn btn-primary btn-lg fw-semibold pulse-glow"
-              >
-                Book a Free Consultation
-              </Link>
-              <Link
-                to="/services"
-                className="btn btn-outline-light btn-lg fw-semibold"
-              >
-                Explore Subjects
-              </Link>
+            <div className="col-12 col-lg-6 text-center">
+              <img
+                src={heroImage}
+                alt="Calm learning environment"
+                style={{
+                  width: "100%",
+                  maxWidth: "520px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  border: "1px solid var(--border)",
+                }}
+              />
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="col-12 col-lg-6 text-center">
-            <img
-              src={heroImage}
-              alt="Calm learning environment"
-              className="rounded-4 shadow-lg"
-              style={{
-                width: "100%",
-                maxWidth: "540px",
-                objectFit: "cover",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
+      {/* Features */}
+      <section className="jw-section jw-section-white">
+        <div className="jw-container">
+          <h2 className="text-center mb-2">How I Help Students Thrive</h2>
+          <p
+            className="text-center"
+            style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
+          >
+            Every session is structured, calm, and tailored to the way your
+            child actually learns.
+          </p>
+          <div className="row">
+            <FeatureCard
+              icon={<FaLaptopCode size={32} />}
+              title="Computer Science Mastery"
+              description="Step-by-step teaching of algorithms, logic, and Python projects for GCSE & A-Level success."
+            />
+            <FeatureCard
+              icon={<FaCalculator size={32} />}
+              title="Maths Confidence"
+              description="Visual and structured learning that builds fluency, problem-solving, and lasting understanding."
+            />
+            <FeatureCard
+              icon={<FaBrain size={32} />}
+              title="ADHD & ASD-Friendly Learning"
+              description="Low-pressure sessions using focus blocks, visual cues, and repetition to support memory and focus."
+            />
+            <FeatureCard
+              icon={<FaChalkboardTeacher size={32} />}
+              title="Exam Technique & Study Skills"
+              description="Predictable routines, scaffolding, and active recall strategies for confident performance."
+            />
+            <FeatureCard
+              icon={<FaHandsHelping size={32} />}
+              title="Parent Partnership"
+              description="Regular communication, progress tracking, and shared goals to reinforce success at home."
             />
           </div>
         </div>
+      </section>
 
-        {/* Divider line */}
-        <hr
-          style={{
-            borderColor: "rgba(255,255,255,0.15)",
-            margin: "3rem 0 2rem 0",
-          }}
-        />
-
-        {/* Tutor portrait */}
-        <div className="text-center mb-4">
-          <img
-            src={tutorImage}
-            alt="James Wallace — Specialist Tutor"
-            className="rounded-circle shadow-lg"
-            style={{
-              width: "160px",
-              height: "160px",
-              objectFit: "cover",
-              border: "3px solid rgba(255,255,255,0.85)",
-            }}
-          />
-          <p
-            className="mt-3 mb-0 text-white fw-semibold"
-            style={{ fontSize: "0.95rem", opacity: 0.9 }}
-          >
-            <small>
-              <strong>BSc Computing | MEd | QTS | Enhanced DBS</strong>
-            </small>
-          </p>
-          <p
-            className="text-white-50 mt-2"
-            style={{ fontSize: "1.05rem", fontStyle: "italic" }}
-          >
-            Helping neurodiverse learners unlock calm, confident understanding.
-          </p>
+      {/* About / tutor strip */}
+      <section className="jw-section jw-section-surface">
+        <div className="jw-container">
+          <div className="row align-items-center g-4">
+            <div className="col-12 col-md-3 text-center">
+              <img
+                src={tutorImage}
+                alt="James Wallace — Specialist Tutor"
+                style={{
+                  width: "160px",
+                  height: "160px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "3px solid var(--border)",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+                }}
+              />
+            </div>
+            <div className="col-12 col-md-9">
+              <h2 style={{ marginBottom: "0.75rem" }}>About James</h2>
+              <p>
+                I'm a specialist tutor with a BSc in Computing, MEd, QTS, and
+                Enhanced DBS. I work exclusively with neurodiverse learners —
+                supporting ADHD, Autism, and Dyslexia through calm, structured,
+                evidence-based sessions that build real confidence.
+              </p>
+              <div className="d-flex flex-wrap gap-2 mb-4">
+                {[
+                  "BSc Computing",
+                  "MEd",
+                  "QTS",
+                  "Enhanced DBS",
+                  "ASD Awareness",
+                ].map((badge) => (
+                  <span key={badge} className="jw-badge">
+                    {badge}
+                  </span>
+                ))}
+              </div>
+              <div className="d-flex flex-wrap gap-3">
+                <Link to="/about" className="jw-btn-secondary">
+                  Read More
+                </Link>
+                <a
+                  href="https://audit.jameswallace.tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="jw-btn-secondary"
+                >
+                  ND Audit Tool ↗
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Feature section */}
-        <h2 className="text-center fw-bold mb-5 text-white">
-          How I Help Students Thrive
-        </h2>
-        <div className="row">
-          <FeatureCard
-            icon={<FaLaptopCode size={36} />}
-            title="Computer Science Mastery"
-            description="Step-by-step teaching of algorithms, logic, and Python projects for GCSE & A-Level success."
-          />
-          <FeatureCard
-            icon={<FaCalculator size={36} />}
-            title="Maths Confidence"
-            description="Visual and structured learning that builds fluency, problem-solving, and lasting understanding."
-          />
-          <FeatureCard
-            icon={<FaBrain size={36} />}
-            title="ADHD & ASD-Friendly Learning"
-            description="Low-pressure sessions using focus blocks, visual cues, and repetition to support memory and focus."
-          />
-          <FeatureCard
-            icon={<FaChalkboardTeacher size={36} />}
-            title="Exam Technique & Study Skills"
-            description="Predictable routines, scaffolding, and active recall strategies for confident performance."
-          />
-          <FeatureCard
-            icon={<FaHandsHelping size={36} />}
-            title="Parent Partnership"
-            description="Regular communication, progress tracking, and shared goals to reinforce success at home."
-          />
+      {/* Final CTA */}
+      <section className="jw-section jw-section-warm">
+        <div className="jw-container text-center">
+          <h2>Ready to get started?</h2>
+          <p style={{ maxWidth: "500px", margin: "0 auto 2rem" }}>
+            Book a free 20-minute consultation call. We'll talk through your
+            child's needs and map out a clear plan — no obligation.
+          </p>
+          <Link
+            to="/calendly"
+            className="jw-btn-primary"
+            style={{ fontSize: "1rem", padding: "0.75rem 2rem" }}
+          >
+            Book Free Call
+          </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
