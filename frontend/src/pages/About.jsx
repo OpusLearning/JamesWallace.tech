@@ -10,7 +10,7 @@ import {
   FaRocket,
 } from "react-icons/fa";
 import tutorImage from "../assets/tutor.webp";
-import specialistHero from "../assets/specialist.png";
+import specialistHero from "../assets/specialist.webp";
 
 function FocusCard({ icon, title, description }) {
   return (
