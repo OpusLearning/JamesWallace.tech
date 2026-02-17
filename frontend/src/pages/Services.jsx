@@ -6,7 +6,7 @@ import {
   FaChalkboardTeacher,
   FaHandsHelping,
 } from "react-icons/fa";
-import servicesHero from "../assets/services_hero.png";
+import servicesHero from "../assets/services_hero.webp";
 
 function ServiceCard({ icon, title, points }) {
   return (
