@@ -1,217 +1,467 @@
+/* =====================================================
+   JamesWallace.tech — Design System
+   Tokens match audit.jameswallace.tech
+   ===================================================== */
+
+/* --- Design tokens --- */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --page-bg:      #fafaf9;
+  --card-bg:      #ffffff;
+  --surface:      #f5f5f4;
+  --text-primary: #1e293b;
+  --text-muted:   #64748b;
+  --border:       #e2e8f0;
+  --brand:        #2e7d9c;
+  --brand-light:  #f0f8fb;
+  --action:       #1a6640;
+  --action-hover: #155232;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color-scheme: light;
+  color: var(--text-primary);
 }
 
-/* Fix White Space Issue & Remove Scroll */
-html,
-body {
+/* --- Base reset --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* No horizontal scrolling */
-  background: linear-gradient(135deg, #0e1628, #16213e, #1a1a2e);
+  overflow-x: hidden;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
 }
 
-/* Apply Background to All Pages */
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Make sure root fills full viewport */
-  width: 100vw;
-  background: linear-gradient(
-      135deg,
-      rgba(14, 22, 40, 0.9),
-      rgba(22, 33, 62, 0.9)
-    ),
-    url("/topography.svg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  min-height: 100vh;
 }
 
-/* Reduce SVG Intensity but Ensure It’s Visible */
-#root::before {
-  content: "";
-  position: absolute;
+/* Override Bootstrap body defaults */
+body {
+  background-color: var(--page-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* --- Typography --- */
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+h3 { font-weight: 600; color: var(--text-primary); }
+h4, h5, h6 { font-weight: 600; color: var(--text-primary); }
+
+p { color: var(--text-muted); line-height: 1.65; }
+
+/* --- Nav --- */
+.jw-nav {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("/topography.svg") repeat;
-  background-size: cover;
-  opacity: 0.06; /* Balanced to be visible but not overpowering */
-  z-index: -1;
-}
-
-/* Navbar */
-.navbar {
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.95),
-    rgba(11, 19, 43, 0.9)
-  );
-  transition: all 0.3s ease-in-out;
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.875rem 0;
+  transition: box-shadow 0.2s;
 }
 
-/* Footer */
-footer {
-  width: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(11, 19, 43, 0.95),
-    rgba(0, 0, 0, 0.95)
-  );
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: auto;
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
+.jw-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.jw-nav-logo {
+  text-decoration: none;
   display: flex;
   flex-direction: column;
+  line-height: 1.2;
+}
+
+.jw-nav-logo-primary {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.jw-nav-logo-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.jw-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.jw-nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.jw-nav-link:hover {
+  color: var(--text-primary);
+  background: var(--surface);
+}
+
+.jw-nav-link.external {
+  color: var(--brand);
+}
+
+.jw-nav-link.external:hover {
+  background: var(--brand-light);
+  color: var(--brand);
+}
+
+.jw-nav-cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--action);
+  text-decoration: none;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.jw-nav-cta:hover {
+  background: var(--action-hover);
+  color: #fff;
+}
+
+.jw-a11y-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0.35rem;
+  border-radius: 6px;
+  line-height: 0;
+  transition: color 0.15s, background 0.15s;
+}
+
+.jw-a11y-btn:hover {
+  color: var(--brand);
+  background: var(--brand-light);
+}
+
+/* --- Sections --- */
+.jw-section {
+  padding: 80px 0;
+}
+
+.jw-section-white  { background-color: #ffffff; }
+.jw-section-warm   { background-color: var(--page-bg); }
+.jw-section-surface{ background-color: var(--surface); }
+
+.jw-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- Cards --- */
+.jw-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.jw-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.jw-card-number {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--brand-light);
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Navbar Links */
-.navbar .nav-link {
-  font-weight: 500;
-  text-transform: uppercase;
-  padding: 0.75rem 1.2rem;
-  transition: color 0.3s ease-in-out;
-}
-
-.navbar .nav-link:hover {
-  color: #00c2ff;
-}
-
-/* Title Enhancements */
-.hero h1 {
-  font-size: 3.8rem;
-  font-weight: bold;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, #ffffff, #d4d4d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Fix About & Get Started Page Text */
-.about-text,
-.get-started-text {
-  color: white !important;
-}
-
-/* CTA Button */
-.cta-btn {
-  background: linear-gradient(45deg, #009fff, #00c2ff);
-  color: white;
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 14px 28px;
+/* --- Buttons --- */
+.jw-btn-primary {
+  display: inline-block;
+  background: var(--action);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.625rem 1.375rem;
   border-radius: 8px;
-  transition: all 0.3s ease-in-out;
   text-decoration: none;
-  margin-top: 1rem;
-  box-shadow: 0 5px 15px rgba(0, 192, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
 }
 
-.cta-btn:hover {
-  background: linear-gradient(45deg, #0077cc, #0094dd);
-  transform: scale(1.1);
+.jw-btn-primary:hover {
+  background: var(--action-hover);
+  color: #fff;
 }
 
-/* Footer Links & Icons - Fully White */
-footer a {
-  color: white !important;
+.jw-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 0.625rem 1.375rem;
+  border-radius: 8px;
   text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
 
-footer a:hover {
-  text-decoration: underline;
+.jw-btn-secondary:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-color: #cbd5e1;
 }
 
-/* Social Media Icons */
-.footer-social {
+/* --- Badge / pill --- */
+.jw-badge {
+  display: inline-block;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+}
+
+.jw-badge-brand {
+  background: var(--brand-light);
+  color: var(--brand);
+  border-color: #b8dce8;
+}
+
+/* --- Status pill (e.g. "Accepting new clients") --- */
+.jw-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.jw-status-pill::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+/* --- Accessibility widget --- */
+.jw-a11y-panel {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 1.25rem;
+  width: 260px;
+}
+
+.jw-a11y-panel h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+}
+
+.jw-a11y-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  cursor: pointer;
   display: flex;
-  gap: 15px;
-  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(46,125,156,0.35);
+  transition: background 0.15s, transform 0.15s;
 }
 
-.footer-social a {
-  color: white !important;
-  font-size: 1.4rem;
-  transition: transform 0.3s ease;
+.jw-a11y-fab:hover {
+  background: #26698a;
+  transform: scale(1.05);
 }
 
-.footer-social a:hover {
-  transform: scale(1.2);
+/* --- a11y applied classes --- */
+html.a11y-text-lg  { font-size: 18px; }
+html.a11y-text-xl  { font-size: 20px; }
+html.a11y-contrast body,
+html.a11y-contrast { background-color: #000 !important; color: #fff !important; }
+html.a11y-contrast .jw-nav { background: rgba(0,0,0,0.95) !important; }
+html.a11y-contrast .jw-card, html.a11y-contrast .jw-section-white,
+html.a11y-contrast .jw-section-warm, html.a11y-contrast .jw-section-surface { background: #111 !important; }
+html.a11y-contrast p, html.a11y-contrast h1, html.a11y-contrast h2,
+html.a11y-contrast h3, html.a11y-contrast h4, html.a11y-contrast h5 { color: #fff !important; }
+html.a11y-dyslexic { font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif; letter-spacing: 0.05em; word-spacing: 0.15em; line-height: 1.8; }
+
+/* --- Footer --- */
+.jw-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  margin-top: auto;
 }
 
-/* Responsive Fixes */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 10px;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-  }
-
-  .cta-btn {
-    font-size: 1.1rem;
-    padding: 12px 20px;
-  }
-
-  .footer-social {
-    gap: 10px;
-  }
+.jw-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
 }
 
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(33, 150, 243, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
-  }
+.jw-footer-logo-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
 }
 
-.pulse-glow {
-  animation: pulseGlow 2s infinite;
-}
-/* --- NAV CONSISTENCY OVERRIDES --- */
-/* Base: all nav links are white, including visited */
-.navbar .nav-link,
-.navbar .nav-link:visited {
-  color: #ffffff !important;
+.jw-footer-logo-tagline {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
 }
 
-/* Hover: light blue accent (matches your style) */
-.navbar .nav-link:hover {
-  color: #00c2ff !important;
+.jw-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jw-footer-links a {
+  font-size: 0.875rem;
+  color: var(--text-muted);
   text-decoration: none;
+  transition: color 0.15s;
 }
 
-/* Active/focus states stay white (no odd blue or grey) */
-.navbar .nav-link:active,
-.navbar .nav-link:focus,
-.navbar .nav-link.active {
-  color: #ffffff !important;
+.jw-footer-links a:hover { color: var(--text-primary); }
+
+.jw-footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
-/* If Bootstrap adds .disabled or aria-disabled, keep it dim */
-.navbar .nav-link.disabled,
-.navbar .nav-link[aria-disabled="true"] {
-  color: rgba(255, 255, 255, 0.5) !important;
-  pointer-events: none;
+.jw-footer-social a {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: color 0.15s, transform 0.15s;
+  line-height: 0;
+}
+
+.jw-footer-social a:hover {
+  color: var(--brand);
+  transform: scale(1.15);
+}
+
+.jw-footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --- Cross-site link banner --- */
+.jw-site-link-bar {
+  background: var(--brand-light);
+  border-bottom: 1px solid #b8dce8;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--brand);
+  flex-wrap: wrap;
+}
+
+.jw-site-link-bar a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.jw-site-link-bar a:hover { opacity: 0.75; }
+
+/* --- Page wrapper offset for fixed nav --- */
+.jw-page {
+  padding-top: 72px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .jw-nav-links { gap: 0; }
+  .jw-nav-link { padding: 0.35rem 0.4rem; font-size: 0.8rem; }
+  .jw-section { padding: 56px 0; }
+  .jw-footer-grid { grid-template-columns: 1fr; }
 }

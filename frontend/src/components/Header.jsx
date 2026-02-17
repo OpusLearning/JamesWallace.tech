@@ -1,49 +1,94 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ onA11yClick }) {
+  const { pathname } = useLocation();
+  const isActive = (path) =>
+    path === "/" ? pathname === "/" : pathname.startsWith(path);
+
   return (
-    <header className="navbar navbar-dark bg-dark fixed-top w-100">
-      <div className="container-fluid d-flex justify-content-between align-items-center">
-        <h2 className="text-white fw-bold m-0">JamesWallace.tech</h2>
-        <nav>
-          <ul className="nav">
-            <li className="nav-item">
-              <Link to="/" className="nav-link text-white">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                href="https://blog.jameswallace.tech"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Blog
-              </a>
-            </li>
+    <header className="jw-nav">
+      <div className="jw-nav-inner">
+        {/* Logo */}
+        <Link to="/" className="jw-nav-logo">
+          <span className="jw-nav-logo-primary">James Wallace</span>
+          <span className="jw-nav-logo-sub">Specialist Tutor</span>
+        </Link>
 
-            <li className="nav-item">
-              <Link to="/pricing" className="nav-link text-white">
-                Pricing
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/services" className="nav-link text-white">
-                Services
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/about" className="nav-link text-white">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/contact" className="nav-link text-white">
-                Contact
-              </Link>
-            </li>
-          </ul>
+        {/* Nav links */}
+        <nav className="jw-nav-links">
+          <Link
+            to="/"
+            className={"jw-nav-link" + (isActive("/") ? " active" : "")}
+          >
+            Home
+          </Link>
+          <Link
+            to="/services"
+            className={"jw-nav-link" + (isActive("/services") ? " active" : "")}
+          >
+            Services
+          </Link>
+          <Link
+            to="/pricing"
+            className={"jw-nav-link" + (isActive("/pricing") ? " active" : "")}
+          >
+            Pricing
+          </Link>
+          <Link
+            to="/about"
+            className={"jw-nav-link" + (isActive("/about") ? " active" : "")}
+          >
+            About
+          </Link>
+          <Link
+            to="/contact"
+            className={"jw-nav-link" + (isActive("/contact") ? " active" : "")}
+          >
+            Contact
+          </Link>
+          <a
+            href="https://blog.jameswallace.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="jw-nav-link external"
+          >
+            Blog
+          </a>
+          <a
+            href="https://audit.jameswallace.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="jw-nav-link external"
+          >
+            ND Audit
+          </a>
+
+          {/* Accessibility toggle */}
+          <button
+            className="jw-a11y-btn"
+            aria-label="Accessibility options"
+            onClick={onA11yClick}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="5" r="1.5" />
+              <path d="M5 8h14M12 8v5m-4 3 4-3 4 3M8 21l2-5M16 21l-2-5" />
+            </svg>
+          </button>
+
+          {/* CTA */}
+          <Link to="/calendly" className="jw-nav-cta">
+            Book Free Call
+          </Link>
         </nav>
       </div>
     </header>
