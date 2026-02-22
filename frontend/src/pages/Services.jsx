@@ -63,13 +63,13 @@ export default function Services() {
               <h1>Subjects &amp; Specialist Services</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Specialist tutoring for{" "}
-                <strong>neurodiverse learners</strong> — ADHD, Autism and
+                <strong>neurodiverse learners</strong>  -  ADHD, Autism and
                 Dyslexia. Calm, predictable, confidence-building sessions.
               </p>
               <p>
                 Subjects: <strong>GCSE &amp; A-Level Computer Science</strong>{" "}
                 and <strong>Maths (KS2–KS3)</strong>. Methods are{" "}
-                <em>structured, visual, and supportive</em> — reducing cognitive
+                <em>structured, visual, and supportive</em>  -  reducing cognitive
                 load while building lasting understanding and self-belief.
               </p>
               <div className="mt-4 d-flex flex-wrap gap-3">

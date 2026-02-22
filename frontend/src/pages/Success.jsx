@@ -10,10 +10,10 @@ export default function Success() {
 
   useEffect(() => {
     if (!sessionId) {
-      setStatus("confirmed"); // direct visit — just show success
+      setStatus("confirmed"); // direct visit  -  just show success
       return;
     }
-    // Optionally verify with server — for now just show confirmed
+    // Optionally verify with server  -  for now just show confirmed
     setStatus("confirmed");
   }, [sessionId]);
 
@@ -35,7 +35,7 @@ export default function Success() {
                   />
                   <h1 style={{ fontSize: "1.75rem", marginBottom: "0.5rem" }}>Payment Confirmed</h1>
                   <p style={{ maxWidth: "420px", margin: "0 auto 2rem", color: "var(--text-muted)" }}>
-                    Thank you — your booking is confirmed. You'll receive a confirmation email shortly with everything you need.
+                    Thank you  -  your booking is confirmed. You'll receive a confirmation email shortly with everything you need.
                   </p>
 
                   <div className="d-flex flex-column gap-3 align-items-center mb-4">

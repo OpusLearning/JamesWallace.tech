@@ -60,7 +60,7 @@ export default function About() {
               <h1>Calm, Structured, Confident Learning</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Specialist tutoring for{" "}
-                <strong>neurodiverse learners</strong> — ADHD, Autism and
+                <strong>neurodiverse learners</strong>  -  ADHD, Autism and
                 Dyslexia. GCSE &amp; A-Level{" "}
                 <strong>Computer Science</strong> and{" "}
                 <strong>KS2–KS3 Maths</strong>, taught with clarity and care.
@@ -80,7 +80,7 @@ export default function About() {
               </div>
               <p>
                 Parents get clear communication and practical strategies that
-                work at home. Students feel seen, supported, and capable — and
+                work at home. Students feel seen, supported, and capable  -  and
                 the grades follow.
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function About() {
         >
           <img
             src={tutorImage}
-            alt="James Wallace — Specialist Tutor"
+            alt="James Wallace  -  Specialist Tutor"
             style={{
               width: "160px",
               height: "160px",
@@ -111,7 +111,7 @@ export default function About() {
           <p>
             I've spent years working alongside neurodiverse learners and their
             families. My approach combines evidence-based teaching strategies
-            with genuine empathy — creating a calm, predictable space where
+            with genuine empathy  -  creating a calm, predictable space where
             students can build real confidence and lasting skills.
           </p>
           <p>
@@ -130,7 +130,7 @@ export default function About() {
             <FocusCard
               icon={<FaLaptopCode size={36} />}
               title="Computer Science (GCSE & A-Level)"
-              description="Python, algorithms, logic, and NEA mentoring — clear, step-by-step teaching that builds mastery."
+              description="Python, algorithms, logic, and NEA mentoring  -  clear, step-by-step teaching that builds mastery."
             />
             <FocusCard
               icon={<FaChalkboardTeacher size={36} />}
@@ -140,12 +140,12 @@ export default function About() {
             <FocusCard
               icon={<FaBrain size={36} />}
               title="ADHD & ASD Support"
-              description="Short focus blocks, visual cues, and routine — supporting attention and working memory."
+              description="Short focus blocks, visual cues, and routine  -  supporting attention and working memory."
             />
             <FocusCard
               icon={<FaChild size={36} />}
               title="Individualised Learning"
-              description="Teaching adapted to each learner's pace, interests, and goals — with simple, actionable next steps."
+              description="Teaching adapted to each learner's pace, interests, and goals  -  with simple, actionable next steps."
             />
           </div>
         </div>

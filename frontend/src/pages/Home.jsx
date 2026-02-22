@@ -44,7 +44,7 @@ export default function Home() {
               <h1>Calm, Structured, Confident Learning</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Specialist one-to-one tuition for{" "}
-                <strong>neurodiverse learners</strong> — supporting{" "}
+                <strong>neurodiverse learners</strong>  -  supporting{" "}
                 <strong>ADHD, Autism, and Dyslexia</strong> with evidence-based
                 teaching. GCSE &amp; A-Level{" "}
                 <strong>Computer Science</strong> and{" "}
@@ -126,7 +126,7 @@ export default function Home() {
             <div className="col-12 col-md-3 text-center">
               <img
                 src={tutorImage}
-                alt="James Wallace — Specialist Tutor"
+                alt="James Wallace  -  Specialist Tutor"
                 style={{
                   width: "160px",
                   height: "160px",
@@ -141,7 +141,7 @@ export default function Home() {
               <h2 style={{ marginBottom: "0.75rem" }}>About James</h2>
               <p>
                 I'm a specialist tutor with a BSc in Computing, MEd, QTS, and
-                Enhanced DBS. I work exclusively with neurodiverse learners —
+                Enhanced DBS. I work exclusively with neurodiverse learners  - 
                 supporting ADHD, Autism, and Dyslexia through calm, structured,
                 evidence-based sessions that build real confidence.
               </p>
@@ -182,7 +182,7 @@ export default function Home() {
           <h2>Ready to get started?</h2>
           <p style={{ maxWidth: "500px", margin: "0 auto 2rem" }}>
             Book a free 20-minute consultation call. We'll talk through your
-            child's needs and map out a clear plan — no obligation.
+            child's needs and map out a clear plan  -  no obligation.
           </p>
           <Link
             to="/calendly"
