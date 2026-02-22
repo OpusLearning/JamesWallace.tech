@@ -15,6 +15,8 @@ import PrivacyPolicy from "./pages/Privacy";
 import CalendlyPage from "./pages/Calendly";
 import Pricing from "./pages/Pricing";
 import Services from "./pages/Services";
+import LAPartnership from "./pages/LAPartnership";
+import JoinAsTutor from "./pages/JoinAsTutor";
 
 const App = () => (
   <Router>
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/calendly" element={<CalendlyPage />} />
           <Route path="/chat" element={<VoiceChat />} />
           <Route path="/visualizer" element={<VisualizerDemo />} />
+          <Route path="/la-partnership" element={<LAPartnership />} />
+          <Route path="/join" element={<JoinAsTutor />} />
         </Routes>
       </main>
       <Footer />
