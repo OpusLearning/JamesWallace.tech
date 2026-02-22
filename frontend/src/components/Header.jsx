@@ -38,9 +38,25 @@ export default function Header() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/visualizer">
-                Visualizer
+              <Link to="/la-partnership" className="nav-link text-white">
+                LA Partnerships
               </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/join" className="nav-link text-white">
+                Join as Tutor
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a
+                href="https://portal.jameswallace.tech"
+                className="nav-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#00ffe5", fontWeight: 600 }}
+              >
+                Portal ↗
+              </a>
             </li>
           </ul>
         </nav>

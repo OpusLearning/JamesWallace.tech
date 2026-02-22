@@ -17,6 +17,7 @@ import fs from "fs";
 import path from "path";
 import { performance } from "perf_hooks";
 import { OpenAI } from "openai";
+import fetch from "node-fetch";
 
 const app = express();
 
@@ -358,6 +359,63 @@ app.post("/api/tts-stream", async (req, res) => {
     )} ms for ${segments.length} segments`
   );
   res.end();
+});
+
+/**
+ * 11. /api/contact — proxy ContactForm submissions to Google Forms
+ */
+app.post("/api/contact", async (req, res) => {
+  const t0 = performance.now();
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "Missing name, email or message" });
+  }
+
+  // The three "entry." field names from your form
+  const params = new URLSearchParams();
+  params.append("entry.1795528617", name);
+  params.append("entry.200897195", email);
+  params.append("entry.647383503", message);
+
+  // **All required hidden form fields** observed in the HTML:
+  params.append("fvv", "1");
+  params.append("pageHistory", "0");
+  params.append("draftResponse", "[]");
+  params.append("submissionTimestamp", "-1");
+  // A pseudo‑random ID
+  params.append("fbzx", Math.random().toString().slice(2));
+
+  try {
+    const googleRes = await fetch(
+      "https://docs.google.com/forms/u/0/d/e/1FAIpQLScAFWKTVZkNzBcfDWQA1DKUp6ahtjJJxMC51to7HdDuJP9_qQ/formResponse",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      }
+    );
+
+    if (!googleRes.ok) {
+      console.error("🚨 Google Forms error:", googleRes.status);
+      console.error("🚨 Payload:", params.toString());
+      return res
+        .status(502)
+        .json({ error: "Failed to submit to Google Forms" });
+    }
+
+    console.log(
+      `→ [perf] /api/contact completed in ${(performance.now() - t0).toFixed(
+        1
+      )}ms`
+    );
+    return res.json({ success: true });
+  } catch (err) {
+    console.error("Contact proxy error:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 /**
