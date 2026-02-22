@@ -28,6 +28,9 @@ export default function Header({ onA11yClick }) {
           <Link to="/about" className={"jw-nav-link" + (isActive("/about") ? " active" : "")}>
             About
           </Link>
+          <Link to="/credentials" className={"jw-nav-link" + (isActive("/credentials") ? " active" : "")}>
+            Credentials
+          </Link>
           <Link to="/contact" className={"jw-nav-link" + (isActive("/contact") ? " active" : "")}>
             Contact
           </Link>
