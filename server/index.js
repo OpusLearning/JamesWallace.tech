@@ -1,4 +1,8 @@
-// ── server/index.js ──
+// server/index.js
+
+// Force IPv4 for all outbound DNS lookups (MailerLite only allows our IPv4)
+import { setDefaultResultOrder } from "node:dns";
+setDefaultResultOrder("ipv4first");
 
 /**
  * 1. Load environment variables
@@ -17,51 +21,223 @@ import fs from "fs";
 import path from "path";
 import { performance } from "perf_hooks";
 import { OpenAI } from "openai";
-import fetch from "node-fetch";
+import { getStripe, TIERS } from "./stripe.js";
+import { createOrder } from "./db.js";
+import { sendPurchaseConfirmation, sendContactNotification, sendContactAcknowledgement } from "./email.js";
 
 const app = express();
 
-// Global request‑timing middleware
+// Global request-timing middleware
 app.use((req, res, next) => {
   const start = performance.now();
   res.once("finish", () => {
     const ms = (performance.now() - start).toFixed(1);
-    console.log(`→ [perf] ${req.method} ${req.path} completed in ${ms} ms`);
+    console.log(`[perf] ${req.method} ${req.path} completed in ${ms} ms`);
   });
   next();
 });
 
-app.use(cors({ origin: "http://localhost:5173" }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://jameswallace.tech",
+  "https://blog.jameswallace.tech",
+];
+app.use(cors({ origin: allowedOrigins }));
+
+/**
+ * Stripe webhook — must receive raw body BEFORE JSON middleware
+ */
+app.post(
+  "/api/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  async (req, res) => {
+    const sig = req.headers["stripe-signature"];
+    let event;
+    try {
+      event = getStripe().webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.error("Webhook signature verification failed:", err.message);
+      return res.status(400).json({ error: "Invalid signature" });
+    }
+
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+      const email = session.customer_details?.email || "";
+      const name = session.customer_details?.name || "";
+      const tier = session.metadata?.tier || "";
+      const tierData = TIERS[tier];
+
+      try {
+        createOrder({
+          email,
+          name,
+          tier,
+          amount: session.amount_total || 0,
+          stripeSessionId: session.id,
+          stripePaymentId: session.payment_intent || null,
+        });
+        console.log(`[webhook] Order created for ${email}, tier=${tier}`);
+      } catch (dbErr) {
+        console.error("[webhook] DB write failed:", dbErr.message);
+      }
+
+      try {
+        await sendPurchaseConfirmation(email, name, tier, tierData?.name || tier);
+        console.log(`[webhook] Confirmation email sent to ${email}`);
+      } catch (emailErr) {
+        console.error("[webhook] Email failed:", emailErr.message);
+      }
+    }
+
+    return res.json({ received: true });
+  }
+);
+
+// JSON body parser for all other routes
 app.use(bodyParser.json({ limit: "15mb" }));
 
 /**
- * 3. Initialise OpenAI client
+ * 3. Stripe checkout — create session, return redirect URL
+ */
+app.post("/api/checkout", async (req, res) => {
+  const { tier } = req.body;
+  if (!tier || !(tier in TIERS)) {
+    return res.status(400).json({ error: "Invalid tier" });
+  }
+
+  const tierData = TIERS[tier];
+  const baseUrl = process.env.SITE_URL || "https://jameswallace.tech";
+
+  try {
+    const session = await getStripe().checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "gbp",
+            product_data: {
+              name: tierData.name,
+              description: tierData.description,
+            },
+            unit_amount: tierData.price,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/pricing`,
+      metadata: { tier },
+    });
+    return res.json({ url: session.url });
+  } catch (err) {
+    console.error("[/api/checkout] error:", err.message);
+    return res.status(500).json({ error: "Failed to create checkout session" });
+  }
+});
+
+/**
+ * 4. Contact form
+ */
+app.post("/api/contact", async (req, res) => {
+  const { name, email, message, _hp } = req.body;
+  // Honeypot — bots fill this hidden field, humans don't
+  if (_hp) return res.json({ ok: true });
+
+  if (!name?.trim() || !email?.trim() || !message?.trim()) {
+    return res.status(400).json({ error: "Name, email and message are required." });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: "Please enter a valid email address." });
+  }
+
+  try {
+    await sendContactNotification(name.trim(), email.trim(), message.trim());
+    await sendContactAcknowledgement(name.trim(), email.trim());
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("[/api/contact] error:", err.message);
+    return res.status(500).json({ error: "Failed to send message. Please try emailing hello@jameswallace.tech directly." });
+  }
+});
+
+/**
+ * 5. MailerLite subscribe — blog lead magnet opt-in
+ */
+app.post("/api/subscribe", async (req, res) => {
+  const { name, email, _hp } = req.body;
+  if (_hp) return res.json({ ok: true }); // honeypot
+
+  if (!email?.trim()) {
+    return res.status(400).json({ error: "Email address is required." });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: "Please enter a valid email address." });
+  }
+
+  const ML_KEY = process.env.MAILERLITE_API_KEY;
+  const ML_GROUP = process.env.MAILERLITE_GROUP_ID;
+
+  try {
+    const mlRes = await fetch("https://connect.mailerlite.com/api/subscribers", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${ML_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim().toLowerCase(),
+        fields: { name: name?.trim() || "" },
+        groups: [ML_GROUP],
+      }),
+    });
+
+    if (!mlRes.ok && mlRes.status !== 409) {
+      const err = await mlRes.text();
+      console.error("[/api/subscribe] MailerLite error:", err);
+      return res.status(500).json({ error: "Could not add you to the list — please try again." });
+    }
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("[/api/subscribe] error:", err.message);
+    return res.status(500).json({ error: "Something went wrong — please try again." });
+  }
+});
+
+/**
+ * 6. Initialise OpenAI client
  */
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 /**
- * 4. Define function‑calling “tools”
+ * 5. Define function-calling "tools"
  */
 const functions = [
   {
     name: "cv_query",
-    description: "Answer questions about James Wallace’s CV",
+    description: "Answer questions about James Wallace's CV",
     parameters: {
       type: "object",
       properties: {
-        question: { type: "string", description: "The user’s CV question" },
+        question: { type: "string", description: "The user's CV question" },
       },
       required: ["question"],
     },
   },
   {
     name: "run_demo",
-    description: "Execute a demo with user‑provided input",
+    description: "Execute a demo with user-provided input",
     parameters: {
       type: "object",
       properties: {
         demo_name: { type: "string", description: "Name of the demo to run" },
-        input: { type: "string", description: "Base64‑encoded input file" },
+        input: { type: "string", description: "Base64-encoded input file" },
       },
       required: ["demo_name", "input"],
     },
@@ -90,12 +266,13 @@ const functions = [
     },
   },
 ];
+
 if (!functions.length) {
-  console.error("⚠️ functions array is empty—agent calls will fail.");
+  console.error("functions array is empty — agent calls will fail.");
 }
 
 /**
- * 5. Dispatch function‑call to business logic
+ * 6. Dispatch function-call to business logic
  */
 async function handleFunctionCall(name, args) {
   console.log(`[handleFunctionCall] name=${name}`, args);
@@ -114,7 +291,7 @@ async function handleFunctionCall(name, args) {
 }
 
 /**
- * 6. /api/agent — function‑calling LLM loop with metrics
+ * 7. /api/agent — function-calling LLM loop with metrics
  */
 app.post("/api/agent", async (req, res) => {
   const t0 = performance.now();
@@ -150,15 +327,13 @@ app.post("/api/agent", async (req, res) => {
         ],
       });
       reply = followUp.choices[0].message.content;
+      console.log("[api/agent] final reply=", reply);
     } else {
       reply = choice.message.content;
     }
 
-    console.log(
-      `→ [perf] /api/agent LLM loop completed in ${(
-        performance.now() - t0
-      ).toFixed(1)} ms`
-    );
+    const duration = (performance.now() - t0).toFixed(1);
+    console.log(`[perf] /api/agent LLM loop completed in ${duration} ms`);
     return res.json({ reply });
   } catch (err) {
     console.error("[/api/agent] error:", err.response?.data || err);
@@ -169,7 +344,7 @@ app.post("/api/agent", async (req, res) => {
 });
 
 /**
- * 7. /api/transcribe — Whisper transcription with metrics
+ * 8. /api/transcribe — Whisper transcription with metrics
  */
 app.post("/api/transcribe", async (req, res) => {
   console.log(
@@ -195,11 +370,8 @@ app.post("/api/transcribe", async (req, res) => {
     });
     console.log("[api/transcribe] transcription=", transcription);
 
-    console.log(
-      `→ [perf] /api/transcribe completed in ${(performance.now() - t0).toFixed(
-        1
-      )} ms`
-    );
+    const duration = (performance.now() - t0).toFixed(1);
+    console.log(`[perf] /api/transcribe completed in ${duration} ms`);
     return res.json({ transcript: transcription });
   } catch (err) {
     console.error("[/api/transcribe] error:", err.response?.data || err);
@@ -210,7 +382,7 @@ app.post("/api/transcribe", async (req, res) => {
 });
 
 /**
- * 8. /api/tts — Text‑to‑Speech (non‑streaming fallback, robust handler)
+ * 9. /api/tts — Text-to-Speech (non-streaming fallback)
  */
 app.post("/api/tts", async (req, res) => {
   console.log("[api/tts] body=", req.body);
@@ -221,31 +393,18 @@ app.post("/api/tts", async (req, res) => {
 
   const t0 = performance.now();
   try {
-    // SDK may return a Base64 string or a Response object
-    const ttsResult = await openai.audio.speech.create({
+    const base64 = await openai.audio.speech.create({
       model: "tts-1",
       input: text,
       voice,
       format,
       stream: false,
     });
-
-    let buffer;
-    if (typeof ttsResult === "string") {
-      console.log("[api/tts] received Base64 string");
-      buffer = Buffer.from(ttsResult, "base64");
-    } else {
-      console.log("[api/tts] received Response object, reading ArrayBuffer");
-      const arrayBuf = await ttsResult.arrayBuffer();
-      buffer = Buffer.from(arrayBuf);
-    }
-
+    const buffer = Buffer.from(base64, "base64");
     console.log("[api/tts] buffer length=", buffer.length);
-    console.log(
-      `→ [perf] /api/tts (non‑stream) completed in ${(
-        performance.now() - t0
-      ).toFixed(1)} ms`
-    );
+
+    const duration = (performance.now() - t0).toFixed(1);
+    console.log(`[perf] /api/tts (non-stream) completed in ${duration} ms`);
 
     res.writeHead(200, { "Content-Type": `audio/${format}` });
     return res.end(buffer);
@@ -256,8 +415,7 @@ app.post("/api/tts", async (req, res) => {
 });
 
 /**
- * 9. /api/tts-stream — Streaming TTS with fallback
- *     (unchanged)
+ * 10. /api/tts-stream — Streaming TTS with chunk-size logging & fallback
  */
 app.post("/api/tts-stream", async (req, res) => {
   console.log("[api/tts-stream] body=", req.body);
@@ -266,11 +424,9 @@ app.post("/api/tts-stream", async (req, res) => {
     return res.status(400).json({ error: 'Missing or invalid "text"' });
   }
 
-  // chunk into ~4k–5k slices
   const segments = [];
-  const CHUNK_SIZE = 4000;
   for (let i = 0; i < text.length; ) {
-    let slice = text.slice(i, i + CHUNK_SIZE);
+    let slice = text.slice(i, i + 1000);
     const lastDot = slice.lastIndexOf(". ");
     if (lastDot > 50) slice = slice.slice(0, lastDot + 1);
     segments.push(slice);
@@ -300,7 +456,7 @@ app.post("/api/tts-stream", async (req, res) => {
       });
     } catch (err) {
       if (attempts > 1 && err.status === 500) {
-        console.warn("[fetchStream] retrying segment due to server error");
+        console.warn("[fetchStream] retrying due to server error");
         await new Promise((r) => setTimeout(r, 500));
         return fetchStream(input, attempts - 1);
       }
@@ -313,7 +469,7 @@ app.post("/api/tts-stream", async (req, res) => {
     const tSeg = performance.now();
     try {
       const response = await fetchStream(seg);
-      const reader = response.body; // Node Readable
+      const reader = response.body;
       await new Promise((resolve, reject) => {
         reader.on("data", (chunk) => {
           console.log(`[tts-stream][${idx}] chunk size=`, chunk.length);
@@ -323,28 +479,28 @@ app.post("/api/tts-stream", async (req, res) => {
         reader.on("error", reject);
       });
       console.log(
-        `→ [perf] segment ${idx} streamed in ${(
+        `[perf] segment ${idx} streamed in ${(
           performance.now() - tSeg
-        ).toFixed(1)} ms`
+        ).toFixed(1)} ms`
       );
     } catch (err) {
       console.error(`[tts-stream][${idx}] streaming failed`, err);
-      // fallback to non‑streaming
       try {
-        const base64 = await openai.audio.speech.create({
+        const resp = await openai.audio.speech.create({
           model: "tts-1",
           input: seg,
           voice,
           format,
           stream: false,
         });
-        const buf = Buffer.from(base64, "base64");
+        const arrayBuffer = await resp.arrayBuffer();
+        const buf = Buffer.from(arrayBuffer);
         console.log(`[tts-stream][${idx}] fallback chunk size=`, buf.length);
         res.write(buf);
         console.log(
-          `→ [perf] segment ${idx} fallback in ${(
+          `[perf] segment ${idx} fallback in ${(
             performance.now() - tSeg
-          ).toFixed(1)} ms`
+          ).toFixed(1)} ms`
         );
       } catch (fb) {
         console.error(`[tts-stream][${idx}] fallback failed`, fb);
@@ -354,72 +510,15 @@ app.post("/api/tts-stream", async (req, res) => {
   }
 
   console.log(
-    `→ [perf] /api/tts-stream total time ${(performance.now() - t0).toFixed(
+    `[perf] /api/tts-stream total time ${(performance.now() - t0).toFixed(
       1
-    )} ms for ${segments.length} segments`
+    )} ms for ${segments.length} segments`
   );
   res.end();
 });
 
 /**
- * 11. /api/contact — proxy ContactForm submissions to Google Forms
- */
-app.post("/api/contact", async (req, res) => {
-  const t0 = performance.now();
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: "Missing name, email or message" });
-  }
-
-  // The three "entry." field names from your form
-  const params = new URLSearchParams();
-  params.append("entry.1795528617", name);
-  params.append("entry.200897195", email);
-  params.append("entry.647383503", message);
-
-  // **All required hidden form fields** observed in the HTML:
-  params.append("fvv", "1");
-  params.append("pageHistory", "0");
-  params.append("draftResponse", "[]");
-  params.append("submissionTimestamp", "-1");
-  // A pseudo‑random ID
-  params.append("fbzx", Math.random().toString().slice(2));
-
-  try {
-    const googleRes = await fetch(
-      "https://docs.google.com/forms/u/0/d/e/1FAIpQLScAFWKTVZkNzBcfDWQA1DKUp6ahtjJJxMC51to7HdDuJP9_qQ/formResponse",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: params.toString(),
-      }
-    );
-
-    if (!googleRes.ok) {
-      console.error("🚨 Google Forms error:", googleRes.status);
-      console.error("🚨 Payload:", params.toString());
-      return res
-        .status(502)
-        .json({ error: "Failed to submit to Google Forms" });
-    }
-
-    console.log(
-      `→ [perf] /api/contact completed in ${(performance.now() - t0).toFixed(
-        1
-      )}ms`
-    );
-    return res.json({ success: true });
-  } catch (err) {
-    console.error("Contact proxy error:", err);
-    return res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-/**
- * 10. Start the server
+ * 11. Start the server
  */
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Agent server running on port ${PORT}`));
