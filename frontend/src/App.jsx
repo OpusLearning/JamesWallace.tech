@@ -17,6 +17,8 @@ import Pricing from "./pages/Pricing";
 import Services from "./pages/Services";
 import LAPartnership from "./pages/LAPartnership";
 import JoinAsTutor from "./pages/JoinAsTutor";
+import Credentials from "./pages/Credentials";
+import Success from "./pages/Success";
 
 const App = () => {
   const [a11yOpen, setA11yOpen] = useState(false);
@@ -39,6 +41,8 @@ const App = () => {
             <Route path="/visualizer" element={<VisualizerDemo />} />
             <Route path="/la-partnership" element={<LAPartnership />} />
             <Route path="/join" element={<JoinAsTutor />} />
+            <Route path="/credentials" element={<Credentials />} />
+            <Route path="/success" element={<Success />} />
             <Route
               path="*"
               element={<div className="text-center py-5"><h2>Page Not Found</h2></div>}

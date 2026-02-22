@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,15 +17,51 @@ function BookButton() {
   return (
     <button
       onClick={() => navigate("/calendly")}
-      className="jw-btn-primary"
+      className="jw-btn-secondary"
       style={{ border: "none", cursor: "pointer" }}
     >
-      Book a Free 20-Minute Call
+      Book a Free Call
     </button>
   );
 }
 
-function OfferCard({ icon, title, price, subtitle, bullets, blurb }) {
+function BuyButton({ tier, label = "Buy Now" }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleBuy = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tier }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Something went wrong. Please try again or contact us.");
+        setLoading(false);
+      }
+    } catch {
+      alert("Something went wrong. Please try again or contact us.");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleBuy}
+      disabled={loading}
+      className="jw-btn-primary"
+      style={{ border: "none", cursor: loading ? "wait" : "pointer", opacity: loading ? 0.7 : 1 }}
+    >
+      {loading ? "Redirecting…" : label}
+    </button>
+  );
+}
+
+function OfferCard({ icon, title, price, subtitle, bullets, blurb, tier }) {
   return (
     <div className="jw-card h-100 d-flex flex-column">
       <div className="text-center mb-3" style={{ color: "var(--brand)" }}>
@@ -55,7 +92,8 @@ function OfferCard({ icon, title, price, subtitle, bullets, blurb }) {
           </li>
         ))}
       </ul>
-      <div className="mt-auto d-flex justify-content-center">
+      <div className="mt-auto d-flex flex-column gap-2 align-items-center">
+        {tier && <BuyButton tier={tier} label={`Buy Now — £${price}`} />}
         <BookButton />
       </div>
     </div>
@@ -116,6 +154,7 @@ export default function Pricing() {
       price: "45",
       subtitle: "60 mins",
       icon: faClipboardList,
+      tier: "starter",
       blurb: "A first working session to see what's going on and what will actually help.",
       bullets: [
         "Diagnostic chat with parent (10–15 mins)",
@@ -129,6 +168,7 @@ export default function Pricing() {
       price: "38",
       subtitle: "per 60-min session",
       icon: faBrain,
+      tier: null,
       blurb: "Ongoing 1:1 support to build calm routines, confidence and steady progress.",
       bullets: [
         "Same weekly slot, online",
@@ -142,6 +182,7 @@ export default function Pricing() {
       price: "199",
       subtitle: "2-week intensive",
       icon: faClock,
+      tier: "sprint",
       blurb: "Rapid setup of a working homework routine so evenings stop being a fight.",
       bullets: [
         "Two 60-min sessions",
@@ -156,6 +197,7 @@ export default function Pricing() {
       price: "349",
       subtitle: "6 × 60-min sessions",
       icon: faGraduationCap,
+      tier: "exam",
       blurb: "Focused GCSE / A-level prep with structure, timing practice and calm exam habits.",
       bullets: [
         "Six 60-min sessions over 3–6 weeks",
