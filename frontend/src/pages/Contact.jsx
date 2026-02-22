@@ -95,7 +95,7 @@ export default function ContactForm() {
               {status === "sending" ? "Sending…" : status === "sent" ? "Sent ✓" : "Send Message"}
             </button>
             {status === "sent" && (
-              <small style={{ color: "var(--action)" }}>Thanks — I'll be in touch soon!</small>
+              <small style={{ color: "var(--action)" }}>Thanks  -  I'll be in touch soon!</small>
             )}
             {status === "error" && (
               <small style={{ color: "#dc2626" }}>Something went wrong. Please try again.</small>

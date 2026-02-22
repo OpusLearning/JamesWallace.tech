@@ -31,7 +31,7 @@ const features = [
   {
     icon: faChartBar,
     title: "Daily Reporting",
-    desc: "Automated daily session reports capturing attendance, engagement, progress against targets, and any welfare notes — sent directly to your nominated coordinator.",
+    desc: "Automated daily session reports capturing attendance, engagement, progress against targets, and any welfare notes  -  sent directly to your nominated coordinator.",
   },
   {
     icon: faUserCheck,
@@ -41,14 +41,14 @@ const features = [
   {
     icon: faClipboardList,
     title: "Evidence & Outcomes",
-    desc: "Termly progress reports, session logs, and outcome data compiled for SEND reviews, panel meetings, and statutory reporting — ready when you need them.",
+    desc: "Termly progress reports, session logs, and outcome data compiled for SEND reviews, panel meetings, and statutory reporting  -  ready when you need them.",
   },
 ];
 
 const youngPeopleTypes = [
   "Young people with EHCPs in alternative provision",
   "Students with SEMH (Social, Emotional & Mental Health) needs",
-  "Persistent school absence — emotionally based (EBSA)",
+  "Persistent school absence  -  emotionally based (EBSA)",
   "Post-exclusion reintegration support",
   "Young people in care (LAC/CLA)",
   "SEND learners awaiting school placement",
@@ -60,7 +60,7 @@ const howItWorks = [
   { step: "1", title: "Initial Referral", desc: "Submit a referral via the portal or contact us directly. We'll respond within 2 working days to confirm capacity and suitability." },
   { step: "2", title: "Needs Assessment", desc: "We review the young person's profile, EHCP (if applicable), and any existing reports to identify the right tutor and approach." },
   { step: "3", title: "PLP Development", desc: "A Personal Learning Plan is drafted in collaboration with you, the school (if applicable), and the family within the first two sessions." },
-  { step: "4", title: "Ongoing Delivery & Reporting", desc: "Sessions begin with daily reports, weekly plans, and termly reviews all managed through the portal — keeping your team fully informed." },
+  { step: "4", title: "Ongoing Delivery & Reporting", desc: "Sessions begin with daily reports, weekly plans, and termly reviews all managed through the portal  -  keeping your team fully informed." },
 ];
 
 export default function LAPartnership() {
@@ -77,7 +77,7 @@ export default function LAPartnership() {
             <span style={{ color: "var(--action)" }}>LA Compliance</span>
           </h1>
           <p style={{ maxWidth: "640px", margin: "0 auto 2rem", fontSize: "1.05rem" }}>
-            A fully managed, evidenced tutoring service for LA-referred young people — with
+            A fully managed, evidenced tutoring service for LA-referred young people  -  with
             compliance, safeguarding, planning, and reporting built into every placement
             through our dedicated portal.
           </p>
@@ -130,8 +130,8 @@ export default function LAPartnership() {
               <h2>Extensive Experience with<br /><span style={{ color: "var(--action)" }}>Complex Young People</span></h2>
               <p>
                 We work with young people whose needs go beyond what a standard classroom setting
-                can provide. Our tutors are specialist practitioners — not generalist supply staff
-                — with direct experience of the profiles, pressures, and protections that LA
+                can provide. Our tutors are specialist practitioners  -  not generalist supply staff
+                 -  with direct experience of the profiles, pressures, and protections that LA
                 placements require.
               </p>
               <p style={{ marginBottom: 0 }}>
@@ -196,7 +196,7 @@ export default function LAPartnership() {
               <FontAwesomeIcon icon={faHandshake} style={{ color: "var(--action)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
               <h2 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>Ready to Meet Your Compliance Requirements</h2>
               <p style={{ margin: 0 }}>
-                The portal is designed specifically for LA procurement — with audit trails,
+                The portal is designed specifically for LA procurement  -  with audit trails,
                 safeguarding logs, signed-off PLPs, and reporting that satisfies OFSTED, SEND
                 review panels, and internal QA. Documentation packages available on request.
               </p>

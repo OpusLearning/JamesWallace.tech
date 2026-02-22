@@ -15,7 +15,7 @@ const benefits = [
   {
     icon: faCalendarAlt,
     title: "Structured Allocation",
-    desc: "We match students to you based on your expertise and availability. No cold calling, no chasing parents — students come to you.",
+    desc: "We match students to you based on your expertise and availability. No cold calling, no chasing parents  -  students come to you.",
   },
   {
     icon: faClipboardCheck,
@@ -25,22 +25,22 @@ const benefits = [
   {
     icon: faChartLine,
     title: "Daily & Weekly Planning Tools",
-    desc: "Built-in session planning, daily reporting, and progress tracking — so your work is evidenced without the paperwork burden.",
+    desc: "Built-in session planning, daily reporting, and progress tracking  -  so your work is evidenced without the paperwork burden.",
   },
   {
     icon: faHandshake,
     title: "LA Contract Work",
-    desc: "Access Local Authority-referred young people — often complex needs, but well-supported. Consistent, contracted hours rather than one-off sessions.",
+    desc: "Access Local Authority-referred young people  -  often complex needs, but well-supported. Consistent, contracted hours rather than one-off sessions.",
   },
   {
     icon: faUserGraduate,
     title: "Specialist Community",
-    desc: "Join a network of specialist practitioners. Peer support, CPD opportunities, and shared resources — not just a job list.",
+    desc: "Join a network of specialist practitioners. Peer support, CPD opportunities, and shared resources  -  not just a job list.",
   },
   {
     icon: faChartLine,
     title: "Fair Pay, On Time",
-    desc: "Competitive rates for specialist work. Payments processed promptly — no chasing invoices.",
+    desc: "Competitive rates for specialist work. Payments processed promptly  -  no chasing invoices.",
   },
 ];
 
@@ -85,13 +85,13 @@ export default function JoinAsTutor() {
             Join the Network
           </span>
           <h1 style={{ marginBottom: "1rem" }}>
-            Specialist Tutors —<br />
+            Specialist Tutors  - <br />
             <span style={{ color: "var(--action)" }}>We Want to Work With You</span>
           </h1>
           <p style={{ maxWidth: "600px", margin: "0 auto 2rem", fontSize: "1.05rem" }}>
             We're building a network of specialist tutors to support Local Authority-referred
             young people. If you have experience with complex needs and want consistent,
-            meaningful work — read on.
+            meaningful work  -  read on.
           </p>
           <a href="#apply" className="jw-btn-primary">Express Interest ↓</a>
         </div>
@@ -103,7 +103,7 @@ export default function JoinAsTutor() {
           <div className="text-center mb-5">
             <h2>What You Get</h2>
             <p style={{ maxWidth: "480px", margin: "0 auto" }}>
-              We built the platform to make specialist tutoring sustainable — for the young people and for you.
+              We built the platform to make specialist tutoring sustainable  -  for the young people and for you.
             </p>
           </div>
           <div className="row g-4">
@@ -131,7 +131,7 @@ export default function JoinAsTutor() {
               <p>
                 We're not looking for generalist tutors. The young people we support have often
                 had difficult experiences with education. They need practitioners who understand
-                them — not people reading from a textbook.
+                them  -  not people reading from a textbook.
               </p>
               <p style={{ marginBottom: 0 }}>
                 If you have real experience with complex needs and a genuine commitment to this
@@ -192,13 +192,13 @@ export default function JoinAsTutor() {
                 <div className="text-center mb-4">
                   <FontAwesomeIcon icon={faEnvelope} style={{ color: "var(--brand)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
                   <h2 style={{ fontSize: "1.35rem" }}>Express Your Interest</h2>
-                  <p style={{ margin: 0 }}>No commitment — just a starting point for a conversation.</p>
+                  <p style={{ margin: 0 }}>No commitment  -  just a starting point for a conversation.</p>
                 </div>
 
                 {submitted ? (
                   <div className="text-center py-3">
                     <FontAwesomeIcon icon={faCheckCircle} style={{ color: "var(--action)", fontSize: "2rem", marginBottom: "0.75rem" }} />
-                    <p style={{ margin: 0 }}>Thanks — your email client should have opened. We'll be in touch soon.</p>
+                    <p style={{ margin: 0 }}>Thanks  -  your email client should have opened. We'll be in touch soon.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>

@@ -93,14 +93,14 @@ function OfferCard({ icon, title, price, subtitle, bullets, blurb, tier }) {
         ))}
       </ul>
       <div className="mt-auto d-flex flex-column gap-2 align-items-center">
-        {tier && <BuyButton tier={tier} label={`Buy Now — £${price}`} />}
+        {tier && <BuyButton tier={tier} label={`Buy Now  -  £${price}`} />}
         <BookButton />
       </div>
     </div>
   );
 }
 
-/* Audit tier card — links to audit.jameswallace.tech */
+/* Audit tier card  -  links to audit.jameswallace.tech */
 function AuditCard({ icon, title, price, subtitle, bullets, badge, href }) {
   return (
     <div className="jw-card h-100 d-flex flex-column" style={{ border: badge ? "2px solid var(--brand)" : undefined }}>
@@ -328,12 +328,12 @@ export default function Pricing() {
         <div className="jw-container">
           <div className="text-center mb-5">
             <span className="jw-badge-brand jw-badge mb-3" style={{ display: "inline-block" }}>
-              Sister service — audit.jameswallace.tech
+              Sister service  -  audit.jameswallace.tech
             </span>
             <h2>ND Learning Systems Audit</h2>
             <p style={{ maxWidth: "580px", margin: "0 auto" }}>
               Not sure where to start? Before or alongside tutoring, a full ND audit gives you a
-              personalised, evidence-based plan — mapping your child's learning profile, tools,
+              personalised, evidence-based plan  -  mapping your child's learning profile, tools,
               environment, and school interface into clear, actionable steps.
             </p>
           </div>
@@ -387,7 +387,7 @@ export default function Pricing() {
               <h2 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>Next step</h2>
               <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>
                 We'll talk calmly about what's going on, map next steps, and you'll leave with a
-                plan — even if you don't book.
+                plan  -  even if you don't book.
               </p>
             </div>
             <BookButton />
