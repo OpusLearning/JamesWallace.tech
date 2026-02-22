@@ -1,10 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AccessibilityWidget from "./components/AccessibilityWidget";
 import VoiceChat from "./components/VoiceChat";
 import VisualizerDemo from "./pages/VisualizerDemo";
 import Portfolio from "./components/Portfolio";
@@ -18,29 +18,41 @@ import Services from "./pages/Services";
 import LAPartnership from "./pages/LAPartnership";
 import JoinAsTutor from "./pages/JoinAsTutor";
 
-const App = () => (
-  <Router>
-    <div className="d-flex flex-column min-vh-100">
-      <Header />
-      <main className="flex-grow-1" style={{ paddingTop: "120px" }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/calendly" element={<CalendlyPage />} />
-          <Route path="/chat" element={<VoiceChat />} />
-          <Route path="/visualizer" element={<VisualizerDemo />} />
-          <Route path="/la-partnership" element={<LAPartnership />} />
-          <Route path="/join" element={<JoinAsTutor />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
-  </Router>
-);
+const App = () => {
+  const [a11yOpen, setA11yOpen] = useState(false);
+
+  return (
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
+        <Header onA11yClick={() => setA11yOpen(true)} />
+        <main className="flex-grow-1 jw-page">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/calendly" element={<CalendlyPage />} />
+            <Route path="/chat" element={<VoiceChat />} />
+            <Route path="/visualizer" element={<VisualizerDemo />} />
+            <Route path="/la-partnership" element={<LAPartnership />} />
+            <Route path="/join" element={<JoinAsTutor />} />
+            <Route
+              path="*"
+              element={<div className="text-center py-5"><h2>Page Not Found</h2></div>}
+            />
+          </Routes>
+        </main>
+        <Footer />
+        <AccessibilityWidget
+          open={a11yOpen}
+          onClose={() => setA11yOpen(false)}
+        />
+      </div>
+    </Router>
+  );
+};
 
 export default App;

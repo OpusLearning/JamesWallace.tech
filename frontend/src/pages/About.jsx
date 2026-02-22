@@ -1,188 +1,198 @@
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
-  FaCode,
-  FaPaintBrush,
-  FaDraftingCompass,
+  FaBrain,
+  FaChalkboardTeacher,
+  FaChild,
+  FaGraduationCap,
+  FaHandsHelping,
+  FaLaptopCode,
   FaCogs,
   FaRocket,
-  FaHandshake,
 } from "react-icons/fa";
-import profileImage from "../assets/profile.webp"; // Replace with your actual image
-import backgroundImage from "../assets/homepage.webp"; // Reusing Home page background
+import tutorImage from "../assets/tutor.webp";
+import specialistHero from "../assets/specialist.webp";
 
-export default function About() {
+function FocusCard({ icon, title, description }) {
   return (
-    <div
-      className="position-relative text-light"
-      style={{ minHeight: "100vh" }}
-    >
-      {/* Background Image with Dark Overlay */}
-      <div
-        className="position-absolute w-100 h-100"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "brightness(0.5)",
-          zIndex: -1,
-        }}
-      ></div>
-
-      <div
-        className="container"
-        style={{ paddingTop: "120px", paddingBottom: "120px" }}
-      >
-        {/* Heading Section */}
-        <div className="text-center mb-5">
-          <motion.h1
-            className="display-4 mb-3"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            About James Wallace: Driving Local Business Success
-          </motion.h1>
-          <p className="lead">
-            With over a decade of experience in{" "}
-            <strong>
-              web development, AI automation, and digital strategy
-            </strong>
-            , I specialise in empowering <strong>local businesses</strong> with
-            bespoke, high-performance solutions. My mission? To bridge the gap
-            between{" "}
-            <strong>
-              cutting-edge technology and real-world business growth
-            </strong>
-            .
-          </p>
+    <div className="col-12 col-md-6 col-lg-3 mb-4 d-flex">
+      <div className="jw-card text-center w-100">
+        <div style={{ color: "var(--brand)", marginBottom: "0.75rem" }}>
+          {icon}
         </div>
-
-        {/* Profile Section */}
-        <motion.div
-          className="card mx-auto mb-5"
+        <h3
           style={{
-            maxWidth: "400px",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            border: "none",
-            backdropFilter: "blur(10px)",
+            fontSize: "1rem",
+            fontWeight: 600,
+            marginBottom: "0.4rem",
+            color: "var(--text-primary)",
           }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
         >
-          <div className="card-body text-center">
-            <img
-              src={profileImage}
-              alt="James Wallace"
-              className="rounded-circle mb-3"
-              style={{ width: "128px", height: "128px", objectFit: "cover" }}
-            />
-            <h3 className="card-title text-white">James Wallace</h3>
-            <p className="card-subtitle mb-2 text-white">
-              Your trusted local partner for innovative websites &amp; AI
-              solutions
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Process Section */}
-        <div className="text-center mb-4">
-          <h2 className="h3 text-white">My Process</h2>
-        </div>
-        <div className="row">
-          <ProcessCard
-            icon={<FaDraftingCompass size={40} />}
-            title="Custom Wireframing"
-            description="Every project starts with a deep understanding of your business. I design tailored wireframes to map out a user-centric digital experience."
-          />
-          <ProcessCard
-            icon={<FaCode size={40} />}
-            title="Tailored Development"
-            description="Using industry best practices, I build high-performance websites with AI-enhanced features to boost usability, engagement, and accessibility."
-          />
-          <ProcessCard
-            icon={<FaCogs size={40} />}
-            title="Rigorous Testing"
-            description="From performance optimization to accessibility compliance, every project undergoes extensive testing to ensure a seamless user experience."
-          />
-          <ProcessCard
-            icon={<FaRocket size={40} />}
-            title="Launch & Growth"
-            description="Once live, I provide continuous support, AI-driven optimizations, and data-driven strategies to keep your business growing."
-          />
-        </div>
-
-        {/* Core Values Section */}
-        <div className="text-center my-4">
-          <h2 className="h3 text-white">My Core Values</h2>
-        </div>
-        <div className="row">
-          <CoreValueCard
-            icon={<FaCode size={40} />}
-            title="Technical Excellence"
-            description="I use the latest technologies to build robust, scalable, and secure digital solutions for local businesses."
-          />
-          <CoreValueCard
-            icon={<FaPaintBrush size={40} />}
-            title="Creative Design"
-            description="A great website isn’t just functional – it should be visually engaging and intuitive to use. I ensure a seamless UX/UI."
-          />
-          <CoreValueCard
-            icon={<FaCogs size={40} />}
-            title="Innovation"
-            description="By integrating AI and automation, I create solutions that streamline business operations and maximize efficiency."
-          />
-          <CoreValueCard
-            icon={<FaHandshake size={40} />}
-            title="Client Partnership"
-            description="I work closely with local businesses, forming strong partnerships that deliver measurable results."
-          />
-        </div>
+          {title}
+        </h3>
+        <p style={{ margin: 0, fontSize: "0.875rem" }}>{description}</p>
       </div>
     </div>
   );
 }
 
-function ProcessCard({ icon, title, description }) {
+export default function About() {
   return (
-    <div className="col-12 col-md-6 col-lg-3 mb-4">
-      <motion.div
-        className="card h-100 text-center"
-        whileHover={{ scale: 1.05 }}
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          backdropFilter: "blur(10px)",
-          border: "none",
-        }}
-      >
-        <div className="card-body">
-          <div className="mb-3 text-white">{icon}</div>
-          <h5 className="card-title text-white">{title}</h5>
-          <p className="card-text text-white">{description}</p>
+    <>
+      {/* Hero */}
+      <section className="jw-section jw-section-warm">
+        <div className="jw-container">
+          <div className="row align-items-center g-4">
+            <div className="col-12 col-lg-6">
+              <img
+                src={specialistHero}
+                alt="Calm tutoring environment with student at a laptop"
+                style={{
+                  width: "100%",
+                  maxHeight: "420px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  border: "1px solid var(--border)",
+                }}
+              />
+            </div>
+            <div className="col-12 col-lg-6 text-center text-lg-start">
+              <h1>Calm, Structured, Confident Learning</h1>
+              <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
+                Specialist tutoring for{" "}
+                <strong>neurodiverse learners</strong> — ADHD, Autism and
+                Dyslexia. GCSE &amp; A-Level{" "}
+                <strong>Computer Science</strong> and{" "}
+                <strong>KS2–KS3 Maths</strong>, taught with clarity and care.
+              </p>
+              <div className="d-flex flex-wrap gap-2 mt-3 mb-4">
+                {[
+                  "BSc Computing",
+                  "MEd",
+                  "QTS",
+                  "Enhanced DBS",
+                  "ASD Awareness",
+                ].map((t) => (
+                  <span key={t} className="jw-badge">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <p>
+                Parents get clear communication and practical strategies that
+                work at home. Students feel seen, supported, and capable — and
+                the grades follow.
+              </p>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  );
-}
+      </section>
 
-function CoreValueCard({ icon, title, description }) {
-  return (
-    <div className="col-12 col-md-6 col-lg-3 mb-4">
-      <motion.div
-        className="card h-100 text-center"
-        whileHover={{ scale: 1.05 }}
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          backdropFilter: "blur(10px)",
-          border: "none",
-        }}
-      >
-        <div className="card-body">
-          <div className="mb-3 text-white">{icon}</div>
-          <h5 className="card-title text-white">{title}</h5>
-          <p className="card-text text-white">{description}</p>
+      {/* Portrait + bio */}
+      <section className="jw-section jw-section-white">
+        <div
+          className="jw-container text-center"
+          style={{ maxWidth: "680px" }}
+        >
+          <img
+            src={tutorImage}
+            alt="James Wallace — Specialist Tutor"
+            style={{
+              width: "160px",
+              height: "160px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "3px solid var(--border)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+              marginBottom: "1.5rem",
+            }}
+          />
+          <h2>James Wallace</h2>
+          <p>
+            I've spent years working alongside neurodiverse learners and their
+            families. My approach combines evidence-based teaching strategies
+            with genuine empathy — creating a calm, predictable space where
+            students can build real confidence and lasting skills.
+          </p>
+          <p>
+            Whether it's untangling a tricky algorithm, building number fluency,
+            or simply finding a homework routine that doesn't cause meltdowns, I
+            work with you and your child to find what actually works.
+          </p>
         </div>
-      </motion.div>
-    </div>
+      </section>
+
+      {/* Teaching Focus */}
+      <section className="jw-section jw-section-surface">
+        <div className="jw-container">
+          <h2 className="text-center mb-5">My Teaching Focus</h2>
+          <div className="row">
+            <FocusCard
+              icon={<FaLaptopCode size={36} />}
+              title="Computer Science (GCSE & A-Level)"
+              description="Python, algorithms, logic, and NEA mentoring — clear, step-by-step teaching that builds mastery."
+            />
+            <FocusCard
+              icon={<FaChalkboardTeacher size={36} />}
+              title="Maths (KS2–KS3)"
+              description="Concrete → visual → abstract progression for secure number facts and method fluency."
+            />
+            <FocusCard
+              icon={<FaBrain size={36} />}
+              title="ADHD & ASD Support"
+              description="Short focus blocks, visual cues, and routine — supporting attention and working memory."
+            />
+            <FocusCard
+              icon={<FaChild size={36} />}
+              title="Individualised Learning"
+              description="Teaching adapted to each learner's pace, interests, and goals — with simple, actionable next steps."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="jw-section jw-section-white">
+        <div className="jw-container">
+          <h2 className="text-center mb-5">Core Values</h2>
+          <div className="row">
+            <FocusCard
+              icon={<FaHandsHelping size={36} />}
+              title="Empathy & Partnership"
+              description="Regular parent updates; alignment with school targets and EHCP where relevant."
+            />
+            <FocusCard
+              icon={<FaGraduationCap size={36} />}
+              title="Evidence-Based Practice"
+              description="Grounded in cognitive science and proven SEN strategies that actually stick."
+            />
+            <FocusCard
+              icon={<FaCogs size={36} />}
+              title="Structure & Clarity"
+              description="Predictable lesson flow and visual frameworks to reduce overwhelm."
+            />
+            <FocusCard
+              icon={<FaRocket size={36} />}
+              title="Growth & Confidence"
+              description="Small wins compound into momentum; students learn to trust their process."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="jw-section jw-section-warm">
+        <div className="jw-container text-center">
+          <h2>Start the conversation</h2>
+          <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
+            Book a free 20-minute call to talk through how I can support your
+            child.
+          </p>
+          <Link to="/calendly" className="jw-btn-primary">
+            Book Free Consultation
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }

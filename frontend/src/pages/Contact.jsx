@@ -1,6 +1,4 @@
-// src/components/ContactForm.jsx
-
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -40,73 +38,71 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="container py-5">
-      <h1 className="text-center futuristic-text mb-4">Contact Us</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="futuristic-card mx-auto"
-        style={{ maxWidth: 600 }}
-      >
-        {/* Name */}
-        <div className="mb-3">
-          <label className="form-label text-white">Name *</label>
-          <input
-            name="name"
-            className="form-control"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+    <section className="jw-section jw-section-warm">
+      <div className="jw-container">
+        <div className="text-center mb-5">
+          <h1>Get in Touch</h1>
+          <p style={{ maxWidth: "480px", margin: "0 auto" }}>
+            Fill out the form below and I'll get back to you as soon as possible.
+          </p>
         </div>
-        {/* Email */}
-        <div className="mb-3">
-          <label className="form-label text-white">Email *</label>
-          <input
-            name="email"
-            type="email"
-            className="form-control"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {/* Message */}
-        <div className="mb-3">
-          <label className="form-label text-white">Message *</label>
-          <textarea
-            name="message"
-            className="form-control"
-            rows={4}
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {/* Submit */}
-        <div className="d-flex justify-content-between align-items-center">
-          <button
-            type="submit"
-            className="futuristic-button"
-            disabled={status === "sending"}
-          >
-            {status === "sending"
-              ? "Sending…"
-              : status === "sent"
-              ? "Sent ✅"
-              : status === "error"
-              ? "Error ❌"
-              : "Submit"}
-          </button>
-          {status === "sent" && (
-            <small className="text-muted">
-              Thanks, we’ve received your message!
-            </small>
-          )}
-          {status === "error" && (
-            <small className="text-danger">Oops! Something went wrong.</small>
-          )}
-        </div>
-      </form>
-    </div>
+        <form
+          onSubmit={handleSubmit}
+          className="jw-card mx-auto"
+          style={{ maxWidth: "600px" }}
+        >
+          <div className="mb-4">
+            <label className="form-label fw-semibold">Name *</label>
+            <input
+              name="name"
+              className="form-control"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Your name"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="form-label fw-semibold">Email *</label>
+            <input
+              name="email"
+              type="email"
+              className="form-control"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="you@example.com"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="form-label fw-semibold">Message *</label>
+            <textarea
+              name="message"
+              className="form-control"
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              required
+              placeholder="How can I help?"
+            />
+          </div>
+          <div className="d-flex align-items-center gap-3 flex-wrap">
+            <button
+              type="submit"
+              className="jw-btn-primary"
+              disabled={status === "sending"}
+            >
+              {status === "sending" ? "Sending…" : status === "sent" ? "Sent ✓" : "Send Message"}
+            </button>
+            {status === "sent" && (
+              <small style={{ color: "var(--action)" }}>Thanks — I'll be in touch soon!</small>
+            )}
+            {status === "error" && (
+              <small style={{ color: "#dc2626" }}>Something went wrong. Please try again.</small>
+            )}
+          </div>
+        </form>
+      </div>
+    </section>
   );
 }
