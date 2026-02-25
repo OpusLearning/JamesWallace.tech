@@ -19,6 +19,10 @@ import LAPartnership from "./pages/LAPartnership";
 import JoinAsTutor from "./pages/JoinAsTutor";
 import Credentials from "./pages/Credentials";
 import Success from "./pages/Success";
+import Provision from "./pages/Provision";
+import Platform from "./pages/Platform";
+import Compliance from "./pages/Compliance";
+import ForLAs from "./pages/ForLAs";
 
 const App = () => {
   const [a11yOpen, setA11yOpen] = useState(false);
@@ -30,6 +34,10 @@ const App = () => {
         <main className="flex-grow-1 jw-page">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/provision" element={<Provision />} />
+            <Route path="/platform" element={<Platform />} />
+            <Route path="/compliance" element={<Compliance />} />
+            <Route path="/for-las" element={<ForLAs />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

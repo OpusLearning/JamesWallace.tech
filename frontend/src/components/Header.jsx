@@ -10,8 +10,8 @@ export default function Header({ onA11yClick }) {
       <div className="jw-nav-inner">
         {/* Logo */}
         <Link to="/" className="jw-nav-logo">
-          <span className="jw-nav-logo-primary">James Wallace</span>
-          <span className="jw-nav-logo-sub">Specialist Tutor</span>
+          <span className="jw-nav-logo-primary">ND Services</span>
+          <span className="jw-nav-logo-sub">EOTAS &amp; Alternative Provision</span>
         </Link>
 
         {/* Nav links */}
@@ -19,26 +19,20 @@ export default function Header({ onA11yClick }) {
           <Link to="/" className={"jw-nav-link" + (isActive("/") ? " active" : "")}>
             Home
           </Link>
-          <Link to="/services" className={"jw-nav-link" + (isActive("/services") ? " active" : "")}>
-            Services
+          <Link to="/provision" className={"jw-nav-link" + (isActive("/provision") ? " active" : "")}>
+            Provision
           </Link>
-          <Link to="/pricing" className={"jw-nav-link" + (isActive("/pricing") ? " active" : "")}>
-            Pricing
+          <Link to="/for-las" className={"jw-nav-link" + (isActive("/for-las") ? " active" : "")}>
+            For LAs
+          </Link>
+          <Link to="/platform" className={"jw-nav-link" + (isActive("/platform") ? " active" : "")}>
+            Platform
+          </Link>
+          <Link to="/compliance" className={"jw-nav-link" + (isActive("/compliance") ? " active" : "")}>
+            Compliance
           </Link>
           <Link to="/about" className={"jw-nav-link" + (isActive("/about") ? " active" : "")}>
             About
-          </Link>
-          <Link to="/credentials" className={"jw-nav-link" + (isActive("/credentials") ? " active" : "")}>
-            Credentials
-          </Link>
-          <Link to="/contact" className={"jw-nav-link" + (isActive("/contact") ? " active" : "")}>
-            Contact
-          </Link>
-          <Link to="/la-partnership" className={"jw-nav-link" + (isActive("/la-partnership") ? " active" : "")}>
-            LA Partnerships
-          </Link>
-          <Link to="/join" className={"jw-nav-link" + (isActive("/join") ? " active" : "")}>
-            Join as Tutor
           </Link>
           <a
             href="https://blog.jameswallace.tech"
@@ -46,15 +40,7 @@ export default function Header({ onA11yClick }) {
             rel="noopener noreferrer"
             className="jw-nav-link external"
           >
-            Blog
-          </a>
-          <a
-            href="https://audit.jameswallace.tech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="jw-nav-link external"
-          >
-            ND Audit
+            Blog ↗
           </a>
           <a
             href="https://portal.jameswallace.tech"
@@ -89,8 +75,8 @@ export default function Header({ onA11yClick }) {
           </button>
 
           {/* CTA */}
-          <Link to="/calendly" className="jw-nav-cta">
-            Book Free Call
+          <Link to="/contact" className="jw-nav-cta">
+            Make a Referral
           </Link>
         </nav>
       </div>
