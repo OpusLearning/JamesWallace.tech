@@ -2,12 +2,16 @@ name: CI Smoke
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "GitHub Actions is working. Commit: $GITHUB_SHA"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Smoke check
+        run: echo "GitHub Actions is working. Commit $GITHUB_SHA"
