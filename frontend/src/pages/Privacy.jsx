@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
             <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>3. How We Use Your Data</h2>
             <p>We only process your personal data where we have a lawful basis:</p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>Contract performance</strong> - to arrange, deliver, and follow up on tutoring sessions.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Contract performance</strong> - to arrange, deliver, and follow up on commissioned provision.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Legitimate interests</strong> - to respond to enquiries and improve our service, where this doesn't override your rights.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Legal obligation</strong> - where required by law (e.g. safeguarding duties).</li>
             </ul>
@@ -71,7 +71,7 @@ export default function PrivacyPolicy() {
             </p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
               <li><strong style={{ color: "var(--text-primary)" }}>Google Forms</strong> - contact form submissions.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Calendly</strong> - booking consultations.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Calendly</strong> - scheduling consultations.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Google Fonts</strong> - font loading (IP address may be logged by Google).</li>
             </ul>
             <p>

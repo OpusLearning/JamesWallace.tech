@@ -68,7 +68,7 @@ const cpdCerts = [
     provider: "Northcoders",
     issued: "14 July 2024",
     detail: "Full-stack JavaScript bootcamp, certified completion.",
-    desc: "Full-stack JavaScript development. Informs direct use of technology tools and platform development in specialist tutoring work.",
+    desc: "Full-stack JavaScript development. Informs direct use of technology tools and platform development in specialist provision.",
     badge: null,
   },
 ];
@@ -87,10 +87,10 @@ const experience = [
     desc: "Supported commissioning and quality assurance for LAC and complex-needs young people. Involved in Care, Education and Treatment Reviews (CETRs), SEND panel processes, safeguarding reviews, and public health initiatives including Small Steps, Healthy Families, and Community Paediatric Reviews.",
   },
   {
-    role: "Specialist Tutor (Independent)",
-    org: "James Wallace Education",
+    role: "Founder & Education Specialist",
+    org: "ND Services",
     dates: "Mar 2025 to present",
-    desc: "1:1 specialist tutoring for neurodiverse young people (ADHD, ASD, dyslexia, PDA profiles). Online and in-person delivery. Clients include LA-referred young people and privately commissioned families.",
+    desc: "Specialist EOTAS and alternative provision for neurodiverse young people (ADHD, ASD, dyslexia, PDA profiles). Online and in-person delivery. LA-commissioned placements with daily evidence, real-time safeguarding, and inspection-ready reporting.",
   },
 ];
 
@@ -387,11 +387,11 @@ export default function Credentials() {
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "0.75rem" }}>Ready to get started?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem", color: "var(--text-muted)" }}>
-            Book a free 20-minute call to discuss your child's needs or a potential placement.
+            Get in touch to discuss a potential placement or request our credentials pack.
           </p>
           <div className="d-flex flex-wrap gap-3 justify-content-center">
-            <Link to="/calendly" className="jw-btn-primary">Book Free Call</Link>
-            <Link to="/contact" className="jw-btn-secondary">Ask a Question</Link>
+            <Link to="/contact" className="jw-btn-primary">Make a Referral</Link>
+            <Link to="/for-las" className="jw-btn-secondary">For Local Authorities</Link>
           </div>
         </div>
       </section>

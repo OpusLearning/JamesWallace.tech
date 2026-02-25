@@ -81,7 +81,7 @@ export default function Portfolio() {
     },
     {
       title: "Learning Legends",
-      shortDescription: "Tutoring & Wellbeing Support Platform.",
+      shortDescription: "Education & Wellbeing Support Platform.",
       fullDescription: (
         <>
           <div className="row">
@@ -139,7 +139,7 @@ export default function Portfolio() {
           <ul>
             <li>
               <strong>Comprehensive Service Overview:</strong> Clear
-              presentation of tutoring and wellbeing services.
+              presentation of education and wellbeing services.
             </li>
             <li>
               <strong>Pricing Structure:</strong> Accessible pricing with group
