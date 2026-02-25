@@ -399,9 +399,9 @@ export default function Home() {
               Make a Referral
             </Link>
             <Link
-              to="/calendly"
+              to="/contact"
               className="jw-btn-secondary"
-              style={{ fontSize: "1rem", padding: "0.75rem 2rem" }}
+              style={{ fontSize: "1rem", padding: "0.75rem 2rem", color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}
             >
               Book a Call
             </Link>
