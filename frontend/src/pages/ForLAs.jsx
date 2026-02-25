@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const commissionerQA = [
   {
     q: "How do I know sessions are actually happening?",
-    a: "Every session has a timestamped daily report submitted within 24 hours — with engagement score, activity notes, and criteria progress. Supervisors can see the full picture in real time.",
+    a: "Every session has a timestamped daily report submitted within 24 hours - with engagement score, activity notes, and criteria progress. Supervisors can see the full picture in real time.",
   },
   {
     q: "What happens if an Education Specialist goes off sick?",
@@ -48,8 +48,8 @@ export default function ForLAs() {
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Commissioning EOTAS provision should be simple. ND Services
                 gives commissioners and referrers real-time visibility of every
-                active placement — from session evidence to safeguarding nil
-                returns — with structured monthly deliverables and
+                active placement - from session evidence to safeguarding nil
+                returns - with structured monthly deliverables and
                 inspection-ready exports on demand.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
@@ -207,7 +207,7 @@ export default function ForLAs() {
               <h2>Policies &amp; Procedures</h2>
               <p>
                 ND Services maintains a full suite of 28 EOTAS-aligned policies
-                — covering Safeguarding, Lone Working, Data Protection, Health
+                - covering Safeguarding, Lone Working, Data Protection, Health
                 &amp; Safety, Behaviour Support, and more. Each policy is
                 version-controlled, review-dated, and available as a branded
                 PDF.
@@ -249,7 +249,7 @@ export default function ForLAs() {
             className="text-center"
             style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
           >
-            The questions commissioners most commonly ask — answered directly.
+            The questions commissioners most commonly ask - answered directly.
           </p>
           <div className="row g-4">
             {commissionerQA.map((item, i) => (

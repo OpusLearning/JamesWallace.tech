@@ -1,5 +1,5 @@
 /* =====================================================
-   JamesWallace.tech — Design System
+   JamesWallace.tech - Design System
    Tokens match audit.jameswallace.tech
    ===================================================== */
 
@@ -351,7 +351,7 @@ p { color: var(--text-muted); line-height: 1.65; }
 html.a11y-text-lg  { font-size: 18px; }
 html.a11y-text-xl  { font-size: 20px; }
 
-/* High contrast — light mode (pure black on white) */
+/* High contrast - light mode (pure black on white) */
 html.a11y-contrast-light body,
 html.a11y-contrast-light { background-color: #fff !important; color: #000 !important; }
 html.a11y-contrast-light .jw-nav { background: rgba(255,255,255,0.99) !important; border-bottom: 2px solid #000 !important; }
@@ -367,7 +367,7 @@ html.a11y-contrast-light a { color: #00008b !important; }
 html.a11y-contrast-light .jw-nav-link { color: #000 !important; }
 html.a11y-contrast-light .jw-nav-cta { background: #000 !important; color: #fff !important; }
 
-/* High contrast — dark mode (pure white on black) */
+/* High contrast - dark mode (pure white on black) */
 html.a11y-contrast-dark body,
 html.a11y-contrast-dark { background-color: #000 !important; color: #fff !important; }
 html.a11y-contrast-dark .jw-nav { background: rgba(0,0,0,0.99) !important; border-bottom: 2px solid #fff !important; }

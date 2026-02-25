@@ -4,7 +4,7 @@ const serviceItems = [
   {
     title: "EOTAS Placements",
     description:
-      "Education Other Than At School — 1:1 and small group sessions for learners who cannot access a mainstream or special school setting.",
+      "Education Other Than At School - 1:1 and small group sessions for learners who cannot access a mainstream or special school setting.",
   },
   {
     title: "EBSA Reintegration",
@@ -27,12 +27,12 @@ const differentiators = [
   {
     title: "Transparent, Inspection-Ready Provision",
     description:
-      "Every session is planned, delivered, and evidenced in our case management portal. Commissioners receive real-time engagement data, attendance tracking, and safeguarding oversight — not a monthly PDF.",
+      "Every session is planned, delivered, and evidenced in our case management portal. Commissioners receive real-time engagement data, attendance tracking, and safeguarding oversight - not a monthly PDF.",
   },
   {
     title: "Built Around the Individual",
     description:
-      "Every learner gets a bespoke PLP written to their EHCP outcomes. Our Education Specialists work with the learner's interests, pace, and preferred environment — not a one-size curriculum.",
+      "Every learner gets a bespoke PLP written to their EHCP outcomes. Our Education Specialists work with the learner's interests, pace, and preferred environment - not a one-size curriculum.",
   },
   {
     title: "Compliance You Can Rely On",
@@ -44,7 +44,7 @@ const differentiators = [
 const commissionerQA = [
   {
     q: "How do I know sessions are actually happening?",
-    a: "Every session has a timestamped daily report submitted within 24 hours — with engagement score, activity notes, and criteria progress. Supervisors can see the full picture in real time.",
+    a: "Every session has a timestamped daily report submitted within 24 hours - with engagement score, activity notes, and criteria progress. Supervisors can see the full picture in real time.",
   },
   {
     q: "How do you handle safeguarding?",
@@ -66,14 +66,14 @@ export default function Home() {
             <div className="col-12 col-lg-7 text-center text-lg-start">
               <div className="jw-status-pill">Accepting referrals</div>
               <h1>
-                Specialist EOTAS Provision — Built for the Learners the System
+                Specialist EOTAS Provision - Built for the Learners the System
                 Has Left Behind
               </h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 ND Services delivers expert, personalised education for young
                 people unable to access mainstream or special school settings. We
                 support learners across a growing portfolio of EOTAS, EBSA, and
-                AP placements — backed by a purpose-built case management
+                AP placements - backed by a purpose-built case management
                 platform that gives commissioners real-time visibility at every
                 stage.
               </p>
@@ -113,7 +113,7 @@ export default function Home() {
                     marginBottom: 0,
                   }}
                 >
-                  ND Portal — live case management dashboard
+                  ND Portal - live case management dashboard
                 </p>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function Home() {
           </div>
           <p className="text-center mt-4" style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
             Every learner has a Personal Learning Plan, weekly planned sessions,
-            and a submitted daily session report — so commissioners and parents
+            and a submitted daily session report - so commissioners and parents
             always have an accurate, up-to-date picture of progress.
           </p>
         </div>
@@ -267,9 +267,9 @@ export default function Home() {
                 <li>Live supervisor dashboard across the full portfolio</li>
                 <li>Automated safeguarding concern tracking and escalation</li>
                 <li>Lone working check-in, overdue alerts, and panic button</li>
-                <li>Weekly plans linked to PLP criteria — evidence chain intact</li>
+                <li>Weekly plans linked to PLP criteria - evidence chain intact</li>
                 <li>
-                  Inspection bundle PDF export — available on demand
+                  Inspection bundle PDF export - available on demand
                 </li>
               </ul>
               <Link to="/platform" className="jw-btn-secondary mt-3 d-inline-block">
@@ -288,7 +288,7 @@ export default function Home() {
             className="text-center"
             style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
           >
-            What commissioners typically ask — and how ND Services answers.
+            What commissioners typically ask - and how ND Services answers.
           </p>
           <div className="row g-4">
             {commissionerQA.map((item, i) => (
@@ -326,7 +326,7 @@ export default function Home() {
             <div className="col-12 col-md-3 text-center">
               <img
                 src="/james-wallace.webp"
-                alt="James Wallace — Education Specialist"
+                alt="James Wallace - Education Specialist"
                 style={{
                   width: "160px",
                   height: "160px",

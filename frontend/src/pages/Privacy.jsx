@@ -27,11 +27,11 @@ export default function PrivacyPolicy() {
             <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>2. Information We Collect</h2>
             <p>We may collect the following types of personal data:</p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>Identity Data</strong> — your name and any identifiers you provide.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Contact Data</strong> — email address, telephone number.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Technical Data</strong> — IP address, browser type, device information collected automatically when you visit.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Usage Data</strong> — pages visited, time on site, referral source.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Communications Data</strong> — messages sent via our contact form or email.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Identity Data</strong> - your name and any identifiers you provide.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Contact Data</strong> - email address, telephone number.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Technical Data</strong> - IP address, browser type, device information collected automatically when you visit.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Usage Data</strong> - pages visited, time on site, referral source.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Communications Data</strong> - messages sent via our contact form or email.</li>
             </ul>
           </div>
 
@@ -39,9 +39,9 @@ export default function PrivacyPolicy() {
             <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>3. How We Use Your Data</h2>
             <p>We only process your personal data where we have a lawful basis:</p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>Contract performance</strong> — to arrange, deliver, and follow up on tutoring sessions.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Legitimate interests</strong> — to respond to enquiries and improve our service, where this doesn't override your rights.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Legal obligation</strong> — where required by law (e.g. safeguarding duties).</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Contract performance</strong> - to arrange, deliver, and follow up on tutoring sessions.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Legitimate interests</strong> - to respond to enquiries and improve our service, where this doesn't override your rights.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Legal obligation</strong> - where required by law (e.g. safeguarding duties).</li>
             </ul>
             <p>We do not sell your personal data or use it for automated decision-making.</p>
           </div>
@@ -70,9 +70,9 @@ export default function PrivacyPolicy() {
               We use the following third-party services which may process data on our behalf:
             </p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>Google Forms</strong> — contact form submissions.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Calendly</strong> — booking consultations.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Google Fonts</strong> — font loading (IP address may be logged by Google).</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Google Forms</strong> - contact form submissions.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Calendly</strong> - booking consultations.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Google Fonts</strong> - font loading (IP address may be logged by Google).</li>
             </ul>
             <p>
               Each of these services has its own privacy policy and we encourage you to review them.
@@ -101,7 +101,7 @@ export default function PrivacyPolicy() {
             <p>
               This site uses only essential functionality (no advertising or analytics cookies).
               The accessibility widget stores your preferences in <code>localStorage</code> on
-              your own device — no data is transmitted to us.
+              your own device - no data is transmitted to us.
             </p>
           </div>
 
