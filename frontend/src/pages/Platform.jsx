@@ -8,7 +8,7 @@ const screenshots = [
       "Live overview of the full active portfolio",
       "Active case count, weekly session activity, engagement scores",
       "Outstanding actions and automated alerts for safeguarding, compliance, and policy health",
-      "No chasing, no manual reports — the system flags what needs attention",
+      "No chasing, no manual reports - the system flags what needs attention",
     ],
   },
   {
@@ -36,8 +36,8 @@ const screenshots = [
     file: "03b-weekly-plan-tab",
     title: "Weekly Plan Workflow",
     bullets: [
-      "Structured weekly plan — PLP criteria to target, planned activities per subject, session logistics",
-      "Supervisor approval before delivery begins — creates the evidence baseline for the week",
+      "Structured weekly plan - PLP criteria to target, planned activities per subject, session logistics",
+      "Supervisor approval before delivery begins - creates the evidence baseline for the week",
       "Plan locked once approved; amendments require supervisor sign-off",
       "Plans linked directly to daily reports and PLP progress",
     ],
@@ -59,7 +59,7 @@ const screenshots = [
     bullets: [
       "Portfolio-wide view of PLP engagement and criterion completion rates",
       "Individual PLP with EHCP-aligned targets, teaching strategies, and measurable success criteria",
-      "Progress tracked across the full placement — visible to supervisors and commissioners",
+      "Progress tracked across the full placement - visible to supervisors and commissioners",
       "Stale or overdue plans flagged automatically",
     ],
   },
@@ -71,7 +71,7 @@ const screenshots = [
       "Queued → In Progress → Resolved / Escalated workflow",
       "Age badges flag concerns open for 7 or 14+ days without action",
       "Automated daily alerts to supervisor and DSL for stale concerns",
-      "PIRFs auto-created when a practitioner flags a physical intervention — cannot be bypassed",
+      "PIRFs auto-created when a practitioner flags a physical intervention - cannot be bypassed",
     ],
   },
   {
@@ -81,7 +81,7 @@ const screenshots = [
       "Check-in at session start; check-out at session end",
       "Live supervisor feed showing all active sessions, time elapsed, and check-in location",
       "Automatic alert and email to supervisory team if a session goes overdue",
-      "Panic button in practitioner's session view — immediate supervisor notification",
+      "Panic button in practitioner's session view - immediate supervisor notification",
       "Lone working audit reports available for inspection",
     ],
   },
@@ -121,10 +121,10 @@ const screenshots = [
     file: "11-policies",
     title: "Policies & Procedures",
     bullets: [
-      "28 EOTAS-aligned policies — Safeguarding, Lone Working, Data Protection, and more",
+      "28 EOTAS-aligned policies - Safeguarding, Lone Working, Data Protection, and more",
       "Each policy is version-controlled, review-dated, and available as a branded PDF",
       "Download Pack exports all active policies as a single ZIP",
-      "Policy health — overdue for review, due within 30 days, still in draft — monitored on dashboard",
+      "Policy health - overdue for review, due within 30 days, still in draft - monitored on dashboard",
     ],
   },
   {
@@ -133,7 +133,7 @@ const screenshots = [
     bullets: [
       "Full Inspection Bundle PDF for any case: PLP, weekly plans, daily evidence, safeguarding timeline, lone working log",
       "Case chronologies, supervision records, compliance audit logs, and policy packs",
-      "Available on demand — no preparation required for monitoring visits or Ofsted inspections",
+      "Available on demand - no preparation required for monitoring visits or Ofsted inspections",
       "Generated in minutes, not hours",
     ],
   },
@@ -172,7 +172,7 @@ export default function Platform() {
             ND Services operates on a bespoke case management platform built
             specifically for EOTAS and alternative provision delivery. Every
             aspect of a learner's placement is tracked from first referral
-            through to case closure — giving commissioners confidence and
+            through to case closure - giving commissioners confidence and
             keeping practitioners focused on what matters.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
@@ -241,10 +241,10 @@ export default function Platform() {
           <h2 className="text-center mb-4">Security & Data Protection</h2>
           <div className="row g-4 justify-content-center">
             {[
-              { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest — learner names, diagnoses, carer contacts, session notes" },
+              { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest - learner names, diagnoses, carer contacts, session notes" },
               { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
               { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
-              { label: "EU hosting", desc: "Neon PostgreSQL on Frankfurt infrastructure — UK GDPR compliant" },
+              { label: "EU hosting", desc: "Neon PostgreSQL on Frankfurt infrastructure - UK GDPR compliant" },
             ].map((item) => (
               <div key={item.label} className="col-12 col-md-6 col-lg-3">
                 <div className="jw-card h-100 text-center">

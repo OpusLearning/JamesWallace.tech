@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 const learnerProfiles = [
-  { label: "EOTAS", description: "Education Other Than At School — full-time or part-time alternative to school placement" },
-  { label: "EBSA", description: "Emotionally-Based School Avoidance — graduated reintegration or maintained AP" },
+  { label: "EOTAS", description: "Education Other Than At School - full-time or part-time alternative to school placement" },
+  { label: "EBSA", description: "Emotionally-Based School Avoidance - graduated reintegration or maintained AP" },
   { label: "AP", description: "Alternative Provision alongside or instead of a specialist school placement" },
   { label: "EHCP", description: "Learners with an Education, Health and Care Plan requiring specialist delivery" },
   { label: "LAC", description: "Looked After Children with SEND or SEMH needs, including virtual school commissioned placements" },
-  { label: "PDA Profile", description: "Pathological Demand Avoidance — sessions adapted to demand avoidance and autonomy" },
+  { label: "PDA Profile", description: "Pathological Demand Avoidance - sessions adapted to demand avoidance and autonomy" },
 ];
 
 export default function Provision() {
@@ -22,7 +22,7 @@ export default function Provision() {
                 ND Services delivers structured, specialist provision for young
                 people who cannot access mainstream or special school settings.
                 We support learners across EOTAS, EBSA, AP, and EHCP
-                placements — with daily evidence, real-time safeguarding, and
+                placements - with daily evidence, real-time safeguarding, and
                 an unbroken chain from referral to case closure.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
@@ -46,7 +46,7 @@ export default function Provision() {
                 }}
               />
               <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                Weekly plan workflow — ND Portal
+                Weekly plan workflow - ND Portal
               </p>
             </div>
           </div>
@@ -192,9 +192,9 @@ export default function Provision() {
               </p>
               <div className="d-flex flex-column gap-3 mt-4">
                 {[
-                  { step: "Plan", desc: "Weekly session plan submitted in ND Portal — PLP criteria, planned activities, session logistics. Approved by supervisor before delivery begins." },
+                  { step: "Plan", desc: "Weekly session plan submitted in ND Portal - PLP criteria, planned activities, session logistics. Approved by supervisor before delivery begins." },
                   { step: "Deliver", desc: "Education Specialist delivers the session. Lone working check-in at start. Panic button available throughout." },
-                  { step: "Evidence", desc: "Daily report submitted within 24 hours — attendance, engagement (0-10), per-subject activity notes, PLP criterion progress, safeguarding observations." },
+                  { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0-10), per-subject activity notes, PLP criterion progress, safeguarding observations." },
                 ].map((item) => (
                   <div key={item.step} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
                     <div
@@ -241,7 +241,7 @@ export default function Provision() {
             <div className="col-12 col-lg-8">
               <h2>Safeguarding</h2>
               <p>
-                Safeguarding is built into every stage of delivery — not added
+                Safeguarding is built into every stage of delivery - not added
                 after the fact. ND Services operates in full compliance with
                 KCSIE 2024 and Working Together 2023.
               </p>

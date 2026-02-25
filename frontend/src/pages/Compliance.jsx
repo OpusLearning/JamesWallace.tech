@@ -27,7 +27,7 @@ export default function Compliance() {
             }}
           >
             Built in, not bolted on. Every safeguard, compliance check, and
-            policy is embedded in our day-to-day delivery workflow — not
+            policy is embedded in our day-to-day delivery workflow - not
             reviewed once a year and filed away.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
@@ -111,7 +111,7 @@ export default function Compliance() {
                   goes overdue
                 </li>
                 <li>
-                  Panic button in the practitioner's session view — triggers
+                  Panic button in the practitioner's session view - triggers
                   immediate supervisor notification
                 </li>
                 <li>
@@ -229,11 +229,11 @@ export default function Compliance() {
             {[
               {
                 title: "AES-256-GCM encryption",
-                desc: "All personally identifiable data — learner names, diagnoses, carer contacts, medical information, session notes — encrypted at rest.",
+                desc: "All personally identifiable data - learner names, diagnoses, carer contacts, medical information, session notes - encrypted at rest.",
               },
               {
                 title: "Full audit trail",
-                desc: "Every access and change to learner data is logged and timestamped — available for inspection or SAR response.",
+                desc: "Every access and change to learner data is logged and timestamped - available for inspection or SAR response.",
               },
               {
                 title: "EU-region infrastructure",
@@ -271,15 +271,15 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <h2>Policies &amp; Procedures</h2>
               <p>
-                ND Services maintains 28 EOTAS-aligned policies — Safeguarding,
+                ND Services maintains 28 EOTAS-aligned policies - Safeguarding,
                 Lone Working, Data Protection, Health &amp; Safety, Behaviour
                 Support, and more. Each is version-controlled, review-dated, and
                 available as a branded PDF.
               </p>
               <p>
                 A Download Pack exports all active policies as a single ZIP.
-                Policy health — overdue for review, due within 30 days, still in
-                draft — is monitored on the supervisor dashboard.
+                Policy health - overdue for review, due within 30 days, still in
+                draft - is monitored on the supervisor dashboard.
               </p>
               <Link
                 to="/contact"
@@ -314,7 +314,7 @@ export default function Compliance() {
                 For LA monitoring visits or Ofsted inspections, the platform
                 generates a full Inspection Bundle PDF for any case: PLP with
                 criteria, weekly plans, daily evidence, safeguarding timeline,
-                and lone working log — all in one branded document, on demand.
+                and lone working log - all in one branded document, on demand.
               </p>
               <p>
                 Supervisors can also export case chronologies, supervision

@@ -43,7 +43,7 @@ export default function About() {
             <div className="col-12 col-lg-5 text-center">
               <img
                 src="/james-wallace.webp"
-                alt="James Wallace — Education Specialist and EOTAS Provider"
+                alt="James Wallace - Education Specialist and EOTAS Provider"
                 style={{
                   width: "260px",
                   maxWidth: "100%",
@@ -106,7 +106,7 @@ export default function About() {
         <div className="jw-container" style={{ maxWidth: "760px" }}>
           <h2 className="mb-4">About the Provider</h2>
           <p>
-            ND Services is founded and led by James Wallace — an Education
+            ND Services was founded by James Wallace, an Education
             Specialist with over a decade of experience working with
             neurodiverse learners and their families. James holds a BSc in
             Computing, a Master of Education (MEd), Qualified Teacher Status
@@ -123,7 +123,7 @@ export default function About() {
           <p>
             James is the Designated Safeguarding Lead (DSL) for all active
             cases, and holds current Safeguarding Level 2, Prevent Awareness,
-            Lone Working, and First Aid at Work qualifications — all tracked and
+            Lone Working, and First Aid at Work qualifications - all tracked and
             verified in the ND Portal compliance system.
           </p>
         </div>
@@ -137,7 +137,7 @@ export default function About() {
             <FocusCard
               icon={<FaBrain size={36} />}
               title="Neurodivergent Learners"
-              description="ADHD, Autism, PDA profile, Dyslexia, and co-occurring presentations — structured sessions adapted to each learner's profile."
+              description="ADHD, Autism, PDA profile, Dyslexia, and co-occurring presentations - structured sessions adapted to each learner's profile."
             />
             <FocusCard
               icon={<FaShieldAlt size={36} />}
@@ -166,7 +166,7 @@ export default function About() {
             <FocusCard
               icon={<FaHandsHelping size={36} />}
               title="Learner-Centred"
-              description="Every placement is built around the individual — their interests, communication style, and learning environment."
+              description="Every placement is built around the individual - their interests, communication style, and learning environment."
             />
             <FocusCard
               icon={<FaGraduationCap size={36} />}
@@ -181,7 +181,7 @@ export default function About() {
             <FocusCard
               icon={<FaRocket size={36} />}
               title="Commissioner Confidence"
-              description="Real-time portal access, automated safeguarding alerts, and on-demand inspection exports — built in, not bolted on."
+              description="Real-time portal access, automated safeguarding alerts, and on-demand inspection exports - built in, not bolted on."
             />
           </div>
         </div>

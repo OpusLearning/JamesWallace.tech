@@ -116,7 +116,7 @@ export default function AccessibilityWidget({ open, onClose }) {
         </button>
       </div>
 
-      {/* FAB — X to close */}
+      {/* FAB - X to close */}
       <button
         className="jw-a11y-fab"
         aria-label="Close accessibility panel"
