@@ -64,57 +64,109 @@ export default function Home() {
         <div className="jw-container">
           <div className="row align-items-center g-4">
             <div className="col-12 col-lg-7 text-center text-lg-start">
-              <div className="jw-status-pill">Accepting referrals</div>
+              <p
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "var(--brand)",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Built for Local Authority and SEND commissioning teams
+              </p>
               <h1>
-                Specialist EOTAS Provision - Built for the Learners the System
-                Has Left Behind
+                Inspection-Ready EOTAS Provision &ndash; Delivered with Full
+                Evidence
               </h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                ND Services delivers expert, personalised education for young
-                people unable to access mainstream or special school settings. We
-                support learners across a growing portfolio of EOTAS, EBSA, and
-                AP placements - backed by a purpose-built case management
-                platform that gives commissioners real-time visibility at every
-                stage.
+                We place learners within 48 hours, assign a named Education
+                Specialist, and give your team a live dashboard from day one.
+                Every session is planned, evidenced, and exportable.
               </p>
-              <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
+              <div
+                className="d-flex flex-wrap gap-3 mt-3 mb-4 justify-content-center justify-content-lg-start"
+                style={{ fontSize: "0.88rem" }}
+              >
+                {[
+                  "Enhanced DBS + QTS staff",
+                  "Live safeguarding log",
+                  "Inspection-bundle export",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="d-flex align-items-center gap-1"
+                  >
+                    <span style={{ color: "var(--brand)", fontWeight: 700 }}>
+                      &#10003;
+                    </span>{" "}
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <div className="d-flex flex-column flex-sm-row gap-3">
                 <Link to="/contact" className="jw-btn-primary">
                   Make a Referral &rarr;
                 </Link>
-                <Link to="/platform" className="jw-btn-secondary">
-                  View the Platform &rarr;
+                <Link to="/contact" className="jw-btn-secondary">
+                  Discuss a Placement &rarr;
                 </Link>
               </div>
+              <p
+                className="mt-3 d-flex align-items-center gap-2 justify-content-center justify-content-lg-start"
+                style={{
+                  fontSize: "0.8rem",
+                  color: "var(--text-muted)",
+                  marginBottom: 0,
+                }}
+              >
+                <span
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    background: "var(--brand)",
+                    display: "inline-block",
+                  }}
+                />
+                Accepting referrals for Spring/Summer 2026
+              </p>
             </div>
             <div className="col-12 col-lg-5 text-center">
               <div
                 style={{
+                  position: "relative",
                   background: "var(--surface)",
                   border: "1px solid var(--border)",
                   borderRadius: "12px",
-                  padding: "2rem",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  overflow: "hidden",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                 }}
               >
                 <img
-                  src="/portal/01-dashboard.webp"
-                  alt="ND Portal supervisor dashboard"
+                  src="/portal/06-safeguarding.webp"
+                  alt="ND Portal safeguarding management dashboard"
                   style={{
                     width: "100%",
-                    borderRadius: "8px",
-                    border: "1px solid var(--border)",
+                    display: "block",
                   }}
                 />
-                <p
+                <span
                   style={{
-                    fontSize: "0.8rem",
-                    color: "var(--text-muted)",
-                    marginTop: "0.75rem",
-                    marginBottom: 0,
+                    position: "absolute",
+                    bottom: "0.75rem",
+                    left: "0.75rem",
+                    background: "rgba(0,0,0,0.7)",
+                    color: "#fff",
+                    fontSize: "0.7rem",
+                    fontWeight: 500,
+                    padding: "0.3rem 0.6rem",
+                    borderRadius: "6px",
                   }}
                 >
-                  ND Portal - live case management dashboard
-                </p>
+                  Live ND Portal Dashboard
+                </span>
               </div>
             </div>
           </div>
