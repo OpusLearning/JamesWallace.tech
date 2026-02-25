@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
 import {
   FaBrain,
-  FaChalkboardTeacher,
-  FaChild,
   FaGraduationCap,
   FaHandsHelping,
-  FaLaptopCode,
   FaCogs,
   FaRocket,
+  FaShieldAlt,
+  FaClipboardCheck,
+  FaUsers,
 } from "react-icons/fa";
-import tutorImage from "../assets/tutor.webp";
-import specialistHero from "../assets/specialist.webp";
 
 function FocusCard({ icon, title, description }) {
   return (
@@ -42,28 +40,39 @@ export default function About() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
           <div className="row align-items-center g-4">
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-lg-5 text-center">
               <img
-                src={specialistHero}
-                alt="Calm tutoring environment with student at a laptop"
+                src="/james-wallace.webp"
+                alt="James Wallace — Education Specialist and EOTAS Provider"
                 style={{
-                  width: "100%",
-                  maxHeight: "420px",
-                  objectFit: "cover",
+                  width: "260px",
+                  maxWidth: "100%",
                   borderRadius: "12px",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  objectFit: "cover",
+                  objectPosition: "top",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
                   border: "1px solid var(--border)",
                 }}
               />
             </div>
-            <div className="col-12 col-lg-6 text-center text-lg-start">
-              <h1>Calm, Structured, Confident Learning</h1>
+            <div className="col-12 col-lg-7 text-center text-lg-start">
+              <h1>James Wallace</h1>
+              <p
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: 500,
+                  color: "var(--brand)",
+                  marginBottom: "1rem",
+                }}
+              >
+                Education Specialist &amp; EOTAS Provider
+              </p>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                Specialist tutoring for{" "}
-                <strong>neurodiverse learners</strong>  -  ADHD, Autism and
-                Dyslexia. GCSE &amp; A-Level{" "}
-                <strong>Computer Science</strong> and{" "}
-                <strong>KS2–KS3 Maths</strong>, taught with clarity and care.
+                ND Services is a specialist micro-provider delivering structured
+                alternative provision for neurodiverse learners who cannot access
+                mainstream or special school settings. Every placement is
+                underpinned by a purpose-built case management platform and
+                inspection-ready evidence framework.
               </p>
               <div className="d-flex flex-wrap gap-2 mt-3 mb-4">
                 {[
@@ -71,6 +80,7 @@ export default function About() {
                   "MEd",
                   "QTS",
                   "Enhanced DBS",
+                  "DSL",
                   "ASD Awareness",
                 ].map((t) => (
                   <span key={t} className="jw-badge">
@@ -78,103 +88,100 @@ export default function About() {
                   </span>
                 ))}
               </div>
-              <p>
-                Parents get clear communication and practical strategies that
-                work at home. Students feel seen, supported, and capable  -  and
-                the grades follow.
-              </p>
+              <div className="d-flex flex-wrap gap-3">
+                <Link to="/contact" className="jw-btn-primary">
+                  Make a Referral
+                </Link>
+                <Link to="/credentials" className="jw-btn-secondary">
+                  Full Credentials
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Portrait + bio */}
+      {/* Bio */}
       <section className="jw-section jw-section-white">
-        <div
-          className="jw-container text-center"
-          style={{ maxWidth: "680px" }}
-        >
-          <img
-            src={tutorImage}
-            alt="James Wallace  -  Specialist Tutor"
-            style={{
-              width: "160px",
-              height: "160px",
-              borderRadius: "50%",
-              objectFit: "cover",
-              border: "3px solid var(--border)",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
-              marginBottom: "1.5rem",
-            }}
-          />
-          <h2>James Wallace</h2>
+        <div className="jw-container" style={{ maxWidth: "760px" }}>
+          <h2 className="mb-4">About the Provider</h2>
           <p>
-            I've spent years working alongside neurodiverse learners and their
-            families. My approach combines evidence-based teaching strategies
-            with genuine empathy  -  creating a calm, predictable space where
-            students can build real confidence and lasting skills.
+            ND Services is founded and led by James Wallace — an Education
+            Specialist with over a decade of experience working with
+            neurodiverse learners and their families. James holds a BSc in
+            Computing, a Master of Education (MEd), Qualified Teacher Status
+            (QTS), and an Enhanced DBS on the Update Service.
           </p>
           <p>
-            Whether it's untangling a tricky algorithm, building number fluency,
-            or simply finding a homework routine that doesn't cause meltdowns, I
-            work with you and your child to find what actually works.
+            The provision operates as a commissioner-grade micro-provider with
+            structured delivery, real-time safeguarding, and a purpose-built
+            case management portal. We work directly with Local Authority SEND
+            teams, EOTAS coordinators, and EHCP caseworkers to deliver placement
+            programmes that are evidence-based, inspection-ready, and genuinely
+            built around each learner.
+          </p>
+          <p>
+            James is the Designated Safeguarding Lead (DSL) for all active
+            cases, and holds current Safeguarding Level 2, Prevent Awareness,
+            Lone Working, and First Aid at Work qualifications — all tracked and
+            verified in the ND Portal compliance system.
           </p>
         </div>
       </section>
 
-      {/* Teaching Focus */}
+      {/* Provision specialisms */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-5">My Teaching Focus</h2>
+          <h2 className="text-center mb-5">Provision Specialisms</h2>
           <div className="row">
             <FocusCard
-              icon={<FaLaptopCode size={36} />}
-              title="Computer Science (GCSE & A-Level)"
-              description="Python, algorithms, logic, and NEA mentoring  -  clear, step-by-step teaching that builds mastery."
-            />
-            <FocusCard
-              icon={<FaChalkboardTeacher size={36} />}
-              title="Maths (KS2–KS3)"
-              description="Concrete → visual → abstract progression for secure number facts and method fluency."
-            />
-            <FocusCard
               icon={<FaBrain size={36} />}
-              title="ADHD & ASD Support"
-              description="Short focus blocks, visual cues, and routine  -  supporting attention and working memory."
+              title="Neurodivergent Learners"
+              description="ADHD, Autism, PDA profile, Dyslexia, and co-occurring presentations — structured sessions adapted to each learner's profile."
             />
             <FocusCard
-              icon={<FaChild size={36} />}
-              title="Individualised Learning"
-              description="Teaching adapted to each learner's pace, interests, and goals  -  with simple, actionable next steps."
+              icon={<FaShieldAlt size={36} />}
+              title="SEMH & Complex Needs"
+              description="Social, emotional, and mental health needs; EBSA; LAC; and learners with trauma-informed requirements."
+            />
+            <FocusCard
+              icon={<FaClipboardCheck size={36} />}
+              title="EHCP Delivery"
+              description="Provision aligned to EHCP outcomes with PLP criterion tracking updated after every session."
+            />
+            <FocusCard
+              icon={<FaUsers size={36} />}
+              title="LA Partnership"
+              description="Direct commissioning from Local Authorities, SEND teams, and virtual school heads with transparent monthly reporting."
             />
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* Provider Values */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-5">Core Values</h2>
+          <h2 className="text-center mb-5">Provider Values</h2>
           <div className="row">
             <FocusCard
               icon={<FaHandsHelping size={36} />}
-              title="Empathy & Partnership"
-              description="Regular parent updates; alignment with school targets and EHCP where relevant."
+              title="Learner-Centred"
+              description="Every placement is built around the individual — their interests, communication style, and learning environment."
             />
             <FocusCard
               icon={<FaGraduationCap size={36} />}
               title="Evidence-Based Practice"
-              description="Grounded in cognitive science and proven SEN strategies that actually stick."
+              description="Grounded in cognitive science and proven SEN strategies, with daily session evidence as standard."
             />
             <FocusCard
               icon={<FaCogs size={36} />}
-              title="Structure & Clarity"
-              description="Predictable lesson flow and visual frameworks to reduce overwhelm."
+              title="Structured Provision"
+              description="Predictable session structure, weekly planning, and an unbroken evidence chain from referral to case closure."
             />
             <FocusCard
               icon={<FaRocket size={36} />}
-              title="Growth & Confidence"
-              description="Small wins compound into momentum; students learn to trust their process."
+              title="Commissioner Confidence"
+              description="Real-time portal access, automated safeguarding alerts, and on-demand inspection exports — built in, not bolted on."
             />
           </div>
         </div>
@@ -183,14 +190,20 @@ export default function About() {
       {/* CTA */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
-          <h2>Start the conversation</h2>
+          <h2>Commission specialist provision</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
-            Book a free 20-minute call to talk through how I can support your
-            child.
+            If you have a young person who needs structured, specialist
+            alternative provision, get in touch. We respond to all referral
+            enquiries within 2 working days.
           </p>
-          <Link to="/calendly" className="jw-btn-primary">
-            Book Free Consultation
-          </Link>
+          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <Link to="/contact" className="jw-btn-primary">
+              Make a Referral
+            </Link>
+            <Link to="/for-las" className="jw-btn-secondary">
+              For Local Authorities
+            </Link>
+          </div>
         </div>
       </section>
     </>
