@@ -12,13 +12,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/Privacy";
-import CalendlyPage from "./pages/Calendly";
-import Pricing from "./pages/Pricing";
-import Services from "./pages/Services";
-import LAPartnership from "./pages/LAPartnership";
-import JoinAsTutor from "./pages/JoinAsTutor";
 import Credentials from "./pages/Credentials";
-import Success from "./pages/Success";
 import Provision from "./pages/Provision";
 import Platform from "./pages/Platform";
 import Compliance from "./pages/Compliance";
@@ -41,16 +35,10 @@ const App = () => {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/calendly" element={<CalendlyPage />} />
             <Route path="/chat" element={<VoiceChat />} />
             <Route path="/visualizer" element={<VisualizerDemo />} />
-            <Route path="/la-partnership" element={<LAPartnership />} />
-            <Route path="/join" element={<JoinAsTutor />} />
             <Route path="/credentials" element={<Credentials />} />
-            <Route path="/success" element={<Success />} />
             <Route
               path="*"
               element={<div className="text-center py-5"><h2>Page Not Found</h2></div>}
