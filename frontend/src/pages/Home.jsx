@@ -77,7 +77,7 @@ export default function Home() {
                 Built for Local Authority and SEND commissioning teams
               </p>
               <h1>
-                Inspection-Ready EOTAS Provision &ndash; Delivered with Full
+                Inspection-Ready EOTAS Provision - Delivered with Full
                 Evidence
               </h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
