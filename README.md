@@ -30,11 +30,10 @@ Welcome to **JamesWallace.tech** – a cutting-edge portfolio and trading platfo
 
 - **Visit:** [https://jameswallace.tech](https://jameswallace.tech)
 
-### Test Account Credentials
+### Account access
 
-To get started quickly, use the following test credentials:
-- **Username:** `testuser@example.com`
-- **Password:** `REMOVED_SHARED_CREDENTIAL`
+No shared credentials are published. Development and test accounts must be
+created locally using non-production data.
 
 ### Local Setup
 

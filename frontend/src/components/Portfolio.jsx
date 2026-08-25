@@ -240,10 +240,10 @@ export default function Portfolio() {
             If you are interested in testing the Google Calendar event creation
             feature, please email your request to{" "}
             <a
-              href="mailto:james.william.wallace@gmail.com"
+              href="mailto:hello@jameswallace.tech"
               className="text-white"
             >
-              james.william.wallace@gmail.com
+              hello@jameswallace.tech
             </a>{" "}
             with a brief description of your interest. Access is granted on a
             case-by-case basis.
