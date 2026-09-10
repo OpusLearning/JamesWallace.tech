@@ -59,9 +59,9 @@ const commissionerQA = [
 
 export default function Home() {
   usePageMeta({
-    title: 'ND Services | Specialist EOTAS & Alternative Provision, East Midlands',
+    title: 'James Wallace | One-to-one teaching for children who cannot manage school',
     description:
-      'LA-commissioned EOTAS and alternative provision for neurodiverse learners. Full safeguarding, daily evidence and inspection-ready reporting. East Midlands and remote.',
+      'Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.',
     path: '/',
   });
 
@@ -82,25 +82,26 @@ export default function Home() {
                   marginBottom: "0.75rem",
                 }}
               >
-                Built for Local Authority and SEND commissioning teams
+                Derbyshire, Nottinghamshire and online
               </p>
               <h1>
-                Inspection-Ready EOTAS Provision - Delivered with Full
-                Evidence
+                One-to-one teaching for children
+                who cannot manage school
               </h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                We place learners within 48 hours, assign a named Education
-                Specialist, and give your team a live dashboard from day one.
-                Every session is planned, evidenced, and exportable.
+                I am James Wallace. I taught for twelve years in a specialist school for young people with social, emotional
+                and mental health needs, then spent five years inside Nottinghamshire County Council's children's commissioning
+                team. I now teach children who cannot access school &mdash; privately for families, through agencies and
+                schools, and on placements commissioned by local authorities.
               </p>
               <div
                 className="d-flex flex-wrap gap-3 mt-3 mb-4 justify-content-center justify-content-lg-start"
                 style={{ fontSize: "0.88rem" }}
               >
                 {[
-                  "Enhanced DBS + QTS staff",
-                  "Live safeguarding log",
-                  "Inspection-bundle export",
+                  "QTS since 2004, MEd",
+                  "Enhanced DBS on the Update Service",
+                  "Every session evidenced",
                 ].map((item) => (
                   <span
                     key={item}
@@ -113,12 +114,16 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+              {/* Three doors. Ordered by how quickly each one pays, which is also the order most visitors arrive in. */}
               <div className="d-flex flex-column flex-sm-row gap-3">
-                <Link to="/contact" className="jw-btn-primary">
-                  Make a Referral &rarr;
+                <Link to="/tuition" className="jw-btn-primary">
+                  For families &rarr;
                 </Link>
-                <Link to="/contact" className="jw-btn-secondary">
-                  Discuss a Placement &rarr;
+                <Link to="/agencies" className="jw-btn-secondary">
+                  For agencies &amp; schools &rarr;
+                </Link>
+                <Link to="/for-las" className="jw-btn-secondary">
+                  For local authorities &rarr;
                 </Link>
               </div>
               <p
@@ -138,7 +143,7 @@ export default function Home() {
                     display: "inline-block",
                   }}
                 />
-                Accepting referrals for Spring/Summer 2026
+                Taking new students and placements now
               </p>
             </div>
             <div className="col-12 col-lg-5 text-center">
