@@ -32,10 +32,22 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
           port: ${{ secrets.SERVER_PORT }}
+          # Without this, only the LAST command decides the result. `git pull` was failing on the server with "Need to
+          # specify how to reconcile divergent branches" while `systemctl reload nginx` succeeded, so every deploy since the
+          # history was rewritten reported success and quietly rebuilt stale code.
+          script_stop: true
           script: |
+            set -euo pipefail
             cd /var/www/jameswallace.tech
-            git pull origin main
+            # A deploy target mirrors the remote; it never merges. `git pull` needs a reconcile strategy and dies without one,
+            # and any local edit here would block it forever. fetch + reset --hard is the honest idiom for a build-from-source
+            # checkout, and it survives a rewritten history.
+            git fetch --prune origin main
+            git reset --hard FETCH_HEAD
+            echo "deploying $(git rev-parse --short HEAD) — $(git log -1 --format=%s)"
             cd frontend
-            npm install
+            npm ci || npm install
             npm run build
+            # Prove the build is the one we just pulled, rather than trusting that it must be.
+            test -f dist/sitemap.xml || { echo 'dist/sitemap.xml missing — build did not include public/'; exit 1; }
             sudo systemctl reload nginx
