@@ -8,10 +8,13 @@ frontend.zip
 
 # Secrets — server/.env holds a live OpenAI key and the Calendly signing secret.
 # The repo had no .gitignore, so a single `git add .` would have published them.
+# Any .env variant, with no wildcard escape hatch. `!.env.example.*` used to sit here and it un-ignored
+# server/.env.example.vps — a file named "example" that actually holds live OpenAI, Stripe, Postmark and
+# MailerLite keys. GitHub push protection caught it on 10 Sep 2026. Only an exact .env.example is allowed,
+# and that file must contain placeholders and nothing else.
 .env
 .env.*
 !.env.example
-!.env.example.*
 
 # Local tooling
 .DS_Store

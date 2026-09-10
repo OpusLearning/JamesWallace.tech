@@ -10,8 +10,8 @@ export default function Header({ onA11yClick }) {
       <div className="jw-nav-inner">
         {/* Logo */}
         <Link to="/" className="jw-nav-logo">
-          <span className="jw-nav-logo-primary">ND Services</span>
-          <span className="jw-nav-logo-sub">EOTAS &amp; Alternative Provision</span>
+          <span className="jw-nav-logo-primary">James Wallace</span>
+          <span className="jw-nav-logo-sub">Specialist SEND &amp; EOTAS Tutor</span>
         </Link>
 
         {/* Nav links */}
@@ -19,17 +19,14 @@ export default function Header({ onA11yClick }) {
           <Link to="/" className={"jw-nav-link" + (isActive("/") ? " active" : "")}>
             Home
           </Link>
-          <Link to="/provision" className={"jw-nav-link" + (isActive("/provision") ? " active" : "")}>
-            Provision
-          </Link>
-          <Link to="/for-las" className={"jw-nav-link" + (isActive("/for-las") ? " active" : "")}>
-            For LAs
-          </Link>
           <Link to="/tuition" className={"jw-nav-link" + (isActive("/tuition") ? " active" : "")}>
             For Families
           </Link>
-          <Link to="/platform" className={"jw-nav-link" + (isActive("/platform") ? " active" : "")}>
-            Platform
+          <Link to="/agencies" className={"jw-nav-link" + (isActive("/agencies") ? " active" : "")}>
+            For Agencies
+          </Link>
+          <Link to="/for-las" className={"jw-nav-link" + (isActive("/for-las") ? " active" : "")}>
+            For LAs
           </Link>
           <Link to="/compliance" className={"jw-nav-link" + (isActive("/compliance") ? " active" : "")}>
             Compliance
@@ -79,7 +76,7 @@ export default function Header({ onA11yClick }) {
 
           {/* CTA */}
           <Link to="/contact" className="jw-nav-cta">
-            Make a Referral
+            Get in touch
           </Link>
         </nav>
       </div>

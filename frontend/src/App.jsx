@@ -18,6 +18,7 @@ import Platform from "./pages/Platform";
 import Compliance from "./pages/Compliance";
 import ForLAs from "./pages/ForLAs";
 import Tuition from "./pages/Tuition";
+import Agencies from "./pages/Agencies";
 
 const App = () => {
   const [a11yOpen, setA11yOpen] = useState(false);
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/compliance" element={<Compliance />} />
             <Route path="/for-las" element={<ForLAs />} />
             <Route path="/tuition" element={<Tuition />} />
+            <Route path="/agencies" element={<Agencies />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

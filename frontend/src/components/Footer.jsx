@@ -15,9 +15,9 @@ export default function Footer() {
         <div className="jw-footer-grid">
           {/* Branding + social */}
           <div>
-            <div className="jw-footer-logo-name">ND Services</div>
+            <div className="jw-footer-logo-name">James Wallace</div>
             <div className="jw-footer-logo-tagline">
-              EOTAS &amp; Alternative Provision
+              Specialist SEND &amp; EOTAS Tutor · provision delivered as ND Services
             </div>
 
             <div className="jw-footer-social">
@@ -83,6 +83,9 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/tuition">Private Tuition (Families)</Link>
+              </li>
+              <li>
+                <Link to="/agencies">For Agencies &amp; Schools</Link>
               </li>
               <li>
                 <Link to="/platform">Platform</Link>
