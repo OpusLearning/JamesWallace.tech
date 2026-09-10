@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 
 const serviceItems = [
@@ -57,6 +58,13 @@ const commissionerQA = [
 ];
 
 export default function Home() {
+  usePageMeta({
+    title: 'ND Services | Specialist EOTAS & Alternative Provision, East Midlands',
+    description:
+      'LA-commissioned EOTAS and alternative provision for neurodiverse learners. Full safeguarding, daily evidence and inspection-ready reporting. East Midlands and remote.',
+    path: '/',
+  });
+
   return (
     <>
       {/* Hero */}

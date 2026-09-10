@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { useState } from "react";
 
 function LAForm() {
@@ -378,6 +379,13 @@ function ParentForm() {
 }
 
 export default function Contact() {
+  usePageMeta({
+    title: 'Contact & Referrals | ND Services',
+    description:
+      'Make a referral or ask a question about EOTAS placements, private tuition and availability across Derbyshire, Nottinghamshire and online.',
+    path: '/contact',
+  });
+
   const [activeTab, setActiveTab] = useState("la");
 
   return (

@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 
 const learnerProfiles = [
@@ -10,6 +11,13 @@ const learnerProfiles = [
 ];
 
 export default function Provision() {
+  usePageMeta({
+    title: 'Our Provision | EOTAS, EBSA and Alternative Provision | ND Services',
+    description:
+      'One-to-one and small-group provision for learners with autism, ADHD, PDA and anxiety-based school avoidance. Personal learning plans, daily evidence, termly review.',
+    path: '/provision',
+  });
+
   return (
     <>
       {/* Hero */}

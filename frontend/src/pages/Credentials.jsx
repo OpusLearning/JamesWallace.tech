@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -152,6 +153,13 @@ function RatingRow({ label, score }) {
 }
 
 export default function Credentials() {
+  usePageMeta({
+    title: 'Qualifications & Experience | James Wallace, QTS MEd | ND Services',
+    description:
+      'QTS, MEd, BSc Computer Science, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.',
+    path: '/credentials',
+  });
+
   return (
     <>
       {/* Hero */}

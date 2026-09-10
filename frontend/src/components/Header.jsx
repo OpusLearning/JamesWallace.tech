@@ -25,6 +25,9 @@ export default function Header({ onA11yClick }) {
           <Link to="/for-las" className={"jw-nav-link" + (isActive("/for-las") ? " active" : "")}>
             For LAs
           </Link>
+          <Link to="/tuition" className={"jw-nav-link" + (isActive("/tuition") ? " active" : "")}>
+            For Families
+          </Link>
           <Link to="/platform" className={"jw-nav-link" + (isActive("/platform") ? " active" : "")}>
             Platform
           </Link>

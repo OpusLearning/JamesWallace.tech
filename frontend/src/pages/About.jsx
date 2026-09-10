@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import {
   FaBrain,
@@ -34,6 +35,13 @@ function FocusCard({ icon, title, description }) {
 }
 
 export default function About() {
+  usePageMeta({
+    title: 'About James Wallace | Specialist SEND Educator | ND Services',
+    description:
+      'Twelve years teaching in specialist SEMH provision, five years inside a local authority commissioning team, now delivering EOTAS for neurodiverse young people.',
+    path: '/about',
+  });
+
   return (
     <>
       {/* Hero */}

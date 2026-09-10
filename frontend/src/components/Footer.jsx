@@ -82,6 +82,9 @@ export default function Footer() {
                 <Link to="/for-las">For Local Authorities</Link>
               </li>
               <li>
+                <Link to="/tuition">Private Tuition (Families)</Link>
+              </li>
+              <li>
                 <Link to="/platform">Platform</Link>
               </li>
               <li>

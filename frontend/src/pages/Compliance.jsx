@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 
 const staffComplianceRows = [
@@ -12,6 +13,13 @@ const staffComplianceRows = [
 ];
 
 export default function Compliance() {
+  usePageMeta({
+    title: 'Safeguarding & Compliance | KCSIE-aligned EOTAS Provision | ND Services',
+    description:
+      'Safeguarding framework aligned to KCSIE and Working Together to Safeguard Children, with 28 EOTAS policies, DBS and training tracked in real time.',
+    path: '/compliance',
+  });
+
   return (
     <>
       {/* Hero */}

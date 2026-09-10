@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+frontend.zip
+
+# Secrets — server/.env holds a live OpenAI key and the Calendly signing secret.
+# The repo had no .gitignore, so a single `git add .` would have published them.
+.env
+.env.*
+!.env.example
+!.env.example.*
+
+# Local tooling
+.DS_Store
+*.log
+.vite/

@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 
 const commissionerQA = [
@@ -37,6 +38,13 @@ const monthlyDeliverables = [
 ];
 
 export default function ForLAs() {
+  usePageMeta({
+    title: 'For Local Authorities | Commissioning EOTAS Placements | ND Services',
+    description:
+      'How commissioning works: referral to first session, weekly plans, daily reports, safeguarding nil returns and inspection-ready exports for SEND panels.',
+    path: '/for-las',
+  });
+
   return (
     <>
       {/* Hero */}
