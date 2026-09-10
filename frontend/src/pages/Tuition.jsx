@@ -251,7 +251,6 @@ export default function Tuition() {
                   ["Ages", "KS2 to KS4 and post-16, including Functional Skills."],
                   ["Subjects", "English, maths, science, computing and ICT."],
                   ["Funding", "Privately, or through an EHCP personal budget where your local authority agrees it."],
-                  ["Fees", "Agreed after our first conversation, once I know what your child needs."],
                 ].map(([k, v]) => (
                   <p key={k} style={{ marginBottom: "0.65rem", color: "var(--text-muted)" }}>
                     <strong style={{ color: "var(--text, inherit)" }}>{k}:</strong> {v}
@@ -263,6 +262,55 @@ export default function Tuition() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Fees */}
+      <section className="jw-section jw-section-warm">
+        <div className="jw-container">
+          <h2 style={{ marginBottom: "0.5rem" }}>What it costs</h2>
+          <p style={{ color: "var(--text-muted)", maxWidth: "640px", marginBottom: "2rem" }}>
+            Stated plainly, because you should not have to email to find out whether you can afford it. No registration fee, no
+            minimum term, and the first conversation is free.
+          </p>
+          <div className="row g-4">
+            {[
+              {
+                rate: "£45",
+                unit: "per hour",
+                title: "One-to-one tuition",
+                body: "Online or in your home, KS2 to KS4 and post-16. Session notes after every session. This is the rate most families pay.",
+              },
+              {
+                rate: "£50",
+                unit: "per hour",
+                title: "EHCP-aligned work",
+                body: "Where the tuition is written to the outcomes in a plan and you need the evidence for reviews: a personal learning plan, progress against criteria, and reports you can hand to school or the local authority.",
+              },
+              {
+                rate: "£250",
+                unit: "per day",
+                title: "EOTAS packages",
+                body: "Commissioned by a local authority or paid from a personal budget, typically 5 to 25 hours a week. Includes planning, daily evidence, safeguarding records and attendance at reviews.",
+              },
+            ].map((f) => (
+              <div key={f.title} className="col-12 col-md-4">
+                <div className="jw-card h-100">
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.5rem" }}>
+                    <span style={{ fontSize: "2rem", fontWeight: 700, color: "var(--action)", lineHeight: 1 }}>{f.rate}</span>
+                    <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>{f.unit}</span>
+                  </div>
+                  <h3 style={{ fontSize: "1.05rem", marginBottom: "0.5rem" }}>{f.title}</h3>
+                  <p style={{ marginBottom: 0, color: "var(--text-muted)", fontSize: "0.95rem" }}>{f.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1.25rem", marginBottom: 0 }}>
+            Travel is included within about 30 minutes of Derby. Further than that, let us talk about it rather than assume.
+            If money is the obstacle and your child needs the help, say so when we speak — I would rather have that conversation
+            than lose a child who needs teaching.
+          </p>
         </div>
       </section>
 
