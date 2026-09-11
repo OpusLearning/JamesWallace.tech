@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const commissionerQA = [
   {
     q: "How do I know sessions are actually happening?",
-    a: "Every session has a timestamped daily report submitted within 24 hours - with engagement score, activity notes, and criteria progress. Supervisors can see the full picture in real time.",
+    a: "Every session has a timestamped daily report submitted within 24 hours - with engagement score, activity notes, and criteria progress. You can see the full picture in real time, not a summary written for you at the end of term.",
   },
   {
-    q: "What happens if an Education Specialist goes off sick?",
-    a: "Case coverage is monitored continuously. Gaps trigger flags within 14 days. Allocation and planning tools show coverage vs. entitlement for every case.",
+    q: "You are one person. What happens if you are ill?",
+    a: "I tell you the same day and we agree a catch-up plan, in writing. Missed hours are logged against entitlement and made up, not quietly lost, and the running total is visible to you throughout. A single specialist is the trade: one consistent adult for a child who has usually had far too many, and no cover pool to fall back on. Most of the young people I take on could not tolerate a rotating staff team anyway.",
   },
   {
     q: "How do you handle safeguarding?",

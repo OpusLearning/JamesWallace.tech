@@ -229,6 +229,18 @@ export default function Compliance() {
       {/* Data protection */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
+          {/* Scope boundary. Nothing on the site said what this provision is not, and on pages that touch EHCPs,
+              diagnosis and mental health that omission is a risk to James as much as to a reader. */}
+          <div className="jw-card" style={{ marginBottom: "2.5rem", borderLeft: "3px solid var(--brand)" }}>
+            <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.5rem" }}>Scope of this provision</h3>
+            <p style={{ margin: 0, fontSize: "0.92rem", color: "var(--text-muted)" }}>
+              This is specialist teaching. It does not replace clinical assessment, medical advice, psychological
+              therapy or legal advice, and nothing here should be read as any of those. Where a learner needs a
+              diagnosis, therapeutic input or representation at tribunal, I will say so and point you to the right
+              service rather than work outside what a qualified teacher should be doing.
+            </p>
+          </div>
+
           <h2 className="text-center mb-4">Data Protection</h2>
           <div className="row g-4 justify-content-center">
             {[
@@ -322,7 +334,7 @@ export default function Compliance() {
                 and lone working log - all in one branded document, on demand.
               </p>
               <p>
-                Supervisors can also export case chronologies, supervision
+                You can also export case chronologies, supervision
                 records, compliance audit logs, and policy packs. Everything
                 needed to walk into an inspection with confidence.
               </p>
