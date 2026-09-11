@@ -37,6 +37,28 @@ db.exec(`
   )
 `)
 
+// Every exchange with the site assistant. James wanted to see what people actually ask, and an enquiry that starts in the
+// chat should reach him by the same route as one from the form — so the chat writes into `enquiries` too, via /api/contact.
+db.exec(`
+  CREATE TABLE IF NOT EXISTS helper_chats (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sessionId TEXT NOT NULL,
+    page TEXT,
+    question TEXT NOT NULL,
+    reply TEXT NOT NULL,
+    degraded INTEGER NOT NULL DEFAULT 0,
+    seenByAgent INTEGER NOT NULL DEFAULT 0,
+    createdAt TEXT NOT NULL DEFAULT (datetime('now'))
+  )
+`)
+
+export function saveHelperChat({ sessionId, page, question, reply, degraded }) {
+  return db.prepare(`
+    INSERT INTO helper_chats (sessionId, page, question, reply, degraded)
+    VALUES (@sessionId, @page, @question, @reply, @degraded)
+  `).run({ sessionId, page: page || null, question, reply, degraded: degraded ? 1 : 0 }).lastInsertRowid
+}
+
 export function saveEnquiry({ name, email, message, page }) {
   const stmt = db.prepare(`
     INSERT INTO enquiries (name, email, message, page) VALUES (@name, @email, @message, @page)

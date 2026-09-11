@@ -9,7 +9,7 @@ setDefaultResultOrder("ipv4first");
  */
 import dotenv from "dotenv";
 dotenv.config();
-console.log("OPENAI_API_KEY=", process.env.OPENAI_API_KEY);
+console.log("OPENAI_API_KEY", process.env.OPENAI_API_KEY ? "loaded" : "MISSING");  // never print the key itself
 
 /**
  * 2. Imports & setup
@@ -22,7 +22,8 @@ import path from "path";
 import { performance } from "perf_hooks";
 import { OpenAI } from "openai";
 import { getStripe, TIERS } from "./stripe.js";
-import { createOrder, saveEnquiry, markEnquiryEmailed } from "./db.js";
+import { createOrder, saveEnquiry, markEnquiryEmailed, saveHelperChat } from "./db.js";
+import { answer as helperAnswer, rateLimit as helperRateLimit, MAX_CHARS as HELPER_MAX_CHARS } from "./helper.js";
 import { sendPurchaseConfirmation, sendContactNotification, sendContactAcknowledgement } from "./email.js";
 
 const app = express();
@@ -223,136 +224,74 @@ app.post("/api/subscribe", async (req, res) => {
 });
 
 /**
- * 6. Initialise OpenAI client
+ * 6. Initialise OpenAI client (transcription and speech; the assistant builds its own — see helper.js)
  */
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 /**
- * 5. Define function-calling "tools"
+ * 7. /api/helper — the assistant in the corner of the site.
+ *
+ * Deliberately narrow: no tools, no lookups, a hard per-IP rate limit and a fixed body of published facts (helper.js).
+ * Every exchange is stored so James can see what people ask; anything that needs him goes through /api/contact, which
+ * stores an enquiry and puts it on his board.
  */
-const functions = [
-  {
-    name: "cv_query",
-    description: "Answer questions about James Wallace's CV",
-    parameters: {
-      type: "object",
-      properties: {
-        question: { type: "string", description: "The user's CV question" },
-      },
-      required: ["question"],
-    },
-  },
-  {
-    name: "run_demo",
-    description: "Execute a demo with user-provided input",
-    parameters: {
-      type: "object",
-      properties: {
-        demo_name: { type: "string", description: "Name of the demo to run" },
-        input: { type: "string", description: "Base64-encoded input file" },
-      },
-      required: ["demo_name", "input"],
-    },
-  },
-  {
-    name: "search_blog",
-    description: "Retrieve blog posts by keyword",
-    parameters: {
-      type: "object",
-      properties: {
-        keyword: { type: "string", description: "Search term for blog posts" },
-      },
-      required: ["keyword"],
-    },
-  },
-  {
-    name: "schedule_call",
-    description: "Schedule a Calendly call",
-    parameters: {
-      type: "object",
-      properties: {
-        datetime: { type: "string", description: "ISO date for the call" },
-        duration: { type: "number", description: "Duration in minutes" },
-      },
-      required: ["datetime", "duration"],
-    },
-  },
-];
-
-if (!functions.length) {
-  console.error("functions array is empty — agent calls will fail.");
-}
-
-/**
- * 6. Dispatch function-call to business logic
- */
-async function handleFunctionCall(name, args) {
-  console.log(`[handleFunctionCall] name=${name}`, args);
-  switch (name) {
-    case "cv_query":
-      return { answer: `(stub) You asked: ${args.question}` };
-    case "run_demo":
-      return { result: `Ran demo ${args.demo_name}` };
-    case "search_blog":
-      return { posts: [{ title: "Sample", url: "/blog/sample" }] };
-    case "schedule_call":
-      return { link: "https://calendly.com/your-link" };
-    default:
-      throw new Error(`Unknown function: ${name}`);
+app.post("/api/helper", async (req, res) => {
+  const { message, history, page, sessionId } = req.body || {};
+  if (typeof message !== "string" || !message.trim()) {
+    return res.status(400).json({ error: "Say something and I will try to help." });
   }
-}
+  if (message.length > HELPER_MAX_CHARS) {
+    return res.json({
+      reply: "That is a lot to take in at once. Could you give me the short version, or use the form below so James reads the whole thing himself?",
+      offerForm: true,
+    });
+  }
+
+  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip || "unknown";
+  const limited = helperRateLimit(ip);
+  if (limited) {
+    return res.json({
+      reply:
+        limited === "day"
+          ? "That is as much as I can answer today. Leave your name and email below and James will pick it up himself."
+          : "Give me a few minutes to catch up. If it is urgent, leave your details below or ring James on 07809 735887.",
+      offerForm: true,
+    });
+  }
+
+  const out = await helperAnswer({ message, history, page });
+  try {
+    saveHelperChat({
+      sessionId: String(sessionId || "").slice(0, 40) || "anon",
+      page: page || null,
+      question: message.slice(0, 2000),
+      reply: out.reply.slice(0, 4000),
+      degraded: out.degraded,
+    });
+  } catch (err) {
+    console.error("[/api/helper] could not store chat:", err.message);
+  }
+  return res.json({ reply: out.reply, offerForm: out.offerForm });
+});
 
 /**
- * 7. /api/agent — function-calling LLM loop with metrics
+ * 7b. /api/agent — the older voice-chat endpoint at /chat, now answered by the same assistant.
+ *
+ * It used to run an unconstrained function-calling loop with no system prompt and no rate limit, over four tools that
+ * all returned invented data — including a placeholder Calendly link a visitor could have been handed as if it were
+ * James's diary. Anyone who found the endpoint could have run their own chatbot on his OpenAI bill.
  */
 app.post("/api/agent", async (req, res) => {
-  const t0 = performance.now();
-  console.log("[api/agent] body=", req.body);
-  const { message } = req.body;
+  const { message, history, page } = req.body || {};
   if (typeof message !== "string" || !message.trim()) {
     return res.status(400).json({ error: 'Missing or invalid "message"' });
   }
-
-  try {
-    const chatResp = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: message }],
-      functions,
-      function_call: "auto",
-    });
-    const choice = chatResp.choices[0];
-    console.log("[api/agent] choice=", choice);
-
-    let reply;
-    if (choice.finish_reason === "function_call") {
-      const { name, arguments: jsonArgs } = choice.message.function_call;
-      const args = JSON.parse(jsonArgs);
-      const fnResult = await handleFunctionCall(name, args);
-      console.log("[api/agent] fnResult=", fnResult);
-
-      const followUp = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "user", content: message },
-          { role: "assistant", function_call: choice.message.function_call },
-          { role: "function", name, content: JSON.stringify(fnResult) },
-        ],
-      });
-      reply = followUp.choices[0].message.content;
-      console.log("[api/agent] final reply=", reply);
-    } else {
-      reply = choice.message.content;
-    }
-
-    const duration = (performance.now() - t0).toFixed(1);
-    console.log(`[perf] /api/agent LLM loop completed in ${duration} ms`);
-    return res.json({ reply });
-  } catch (err) {
-    console.error("[/api/agent] error:", err.response?.data || err);
-    return res
-      .status(500)
-      .json({ error: "Agent call failed", details: err.message });
+  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip || "unknown";
+  if (helperRateLimit(ip)) {
+    return res.json({ reply: "That is as much as I can answer for now. James is on 07809 735887." });
   }
+  const out = await helperAnswer({ message, history, page });
+  return res.json({ reply: out.reply });
 });
 
 /**

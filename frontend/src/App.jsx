@@ -5,6 +5,7 @@ import "./index.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AccessibilityWidget from "./components/AccessibilityWidget";
+import SiteHelper from "./components/SiteHelper";
 import VoiceChat from "./components/VoiceChat";
 import VisualizerDemo from "./pages/VisualizerDemo";
 import Portfolio from "./components/Portfolio";
@@ -54,6 +55,7 @@ const App = () => {
           open={a11yOpen}
           onClose={() => setA11yOpen(false)}
         />
+        <SiteHelper />
       </div>
     </Router>
   );

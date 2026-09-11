@@ -103,7 +103,7 @@ export default function Tuition() {
   usePageMeta({
     title: "Private SEND & EOTAS Tuition, Derbyshire and Notts | James Wallace",
     description:
-      "One-to-one tuition for children who cannot manage school. QTS, MEd, 12 years in specialist SEMH provision and 5 years inside a local authority. Derbyshire, Nottinghamshire and online.",
+      "One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. Derbyshire, Nottinghamshire and online.",
     path: "/tuition",
     jsonLd,
   });
