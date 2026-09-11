@@ -15,6 +15,7 @@ const academicQuals = [
   {
     title: "BSc (Hons) Computer Science",
     institution: "Manchester Metropolitan University",
+    logo: "/badges/manchester-met.png",
     awarded: null,
     detail: "Undergraduate degree in Computer Science, providing the technical foundation underpinning specialist ICT and digital literacy teaching.",
     modules: null,
@@ -22,6 +23,7 @@ const academicQuals = [
   {
     title: "PGCE: Secondary Education (Vocational: Applied ICT)",
     institution: "University of Derby",
+    logo: "/badges/derby.png",
     awarded: "July 2004",
     detail: "Postgraduate Certificate in Education with Qualified Teacher Status (QTS). Secondary specialist in applied and vocational ICT.",
     modules: null,
@@ -29,6 +31,7 @@ const academicQuals = [
   {
     title: "Master of Education (MEd)",
     institution: "The Open University",
+    logo: "/badges/open-university.png",
     awarded: "31 December 2012",
     detail: "Level 7 postgraduate qualification, distance learning. 180 credits across three modules, all passed.",
     modules: [
@@ -121,12 +124,14 @@ const experience = [
   {
     role: "Public Health Support Officer",
     org: "Nottinghamshire County Council, Children's and Young People's Commissioning Hub",
+    logo: "/badges/nottinghamshire-cc.png",
     dates: "Oct 2018 to Apr 2024",
     desc: "Supported commissioning and quality assurance for LAC and complex-needs young people. Involved in Care, Education and Treatment Reviews (CETRs), SEND panel processes, safeguarding reviews, and public health initiatives including Small Steps, Healthy Families, and Community Paediatric Reviews.",
   },
   {
     role: "Education Specialist (EOTAS)",
     org: "Fresh Start Education",
+    logo: "/badges/fresh-start.png",
     dates: "April 2025 to present",
     desc: "One-to-one EOTAS provision commissioned by local authorities, for pupils with ASD, ADHD, PDA, SEMH needs and anxiety-based school avoidance, delivered at home, in the community and online. Re-engaging learners with long gaps in attendance, writing personalised programmes to EHCP outcomes, and producing the session reports, attendance evidence and progress updates commissioners and annual reviews need.",
   },
@@ -268,6 +273,13 @@ export default function Credentials() {
             {academicQuals.map((q, i) => (
               <div key={i} className="col-12 col-md-6 col-lg-4">
                 <div className="jw-card h-100">
+                  {q.logo && (
+                    <img
+                      src={q.logo}
+                      alt={`${q.institution} logo`}
+                      style={{ height: "44px", width: "auto", maxWidth: "160px", objectFit: "contain", objectPosition: "left", marginBottom: "0.7rem", display: "block" }}
+                    />
+                  )}
                   <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.25rem", color: "var(--text-primary)" }}>{q.title}</h3>
                   <p style={{ fontSize: "0.85rem", color: "var(--brand)", fontWeight: 600, marginBottom: "0.25rem" }}>{q.institution}</p>
                   {q.awarded && (
@@ -351,6 +363,13 @@ export default function Credentials() {
             {experience.map((e, i) => (
               <div key={i} className="col-12 col-lg-10">
                 <div className="jw-card">
+                  {e.logo && (
+                    <img
+                      src={e.logo}
+                      alt={`${e.org} logo`}
+                      style={{ height: "48px", width: "auto", maxWidth: "180px", objectFit: "contain", objectPosition: "left", marginBottom: "0.6rem", display: "block" }}
+                    />
+                  )}
                   <div className="d-flex flex-wrap align-items-start justify-content-between gap-2 mb-1">
                     <h3 style={{ fontSize: "1rem", fontWeight: 700, margin: 0, color: "var(--text-primary)" }}>{e.role}</h3>
                     <span className="jw-badge" style={{ fontSize: "0.75rem", whiteSpace: "nowrap" }}>{e.dates}</span>
