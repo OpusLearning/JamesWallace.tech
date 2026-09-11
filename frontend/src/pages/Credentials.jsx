@@ -118,6 +118,7 @@ const experience = [
   {
     role: "Specialist SEMH Teacher",
     org: "Foxwood Academy, Nottinghamshire",
+    logo: "/badges/foxwood.png",
     dates: "Jan 2006 to Oct 2018",
     desc: "12 years delivering specialist teaching for young people with Social, Emotional and Mental Health needs. Developed inclusive curricula, wrote and implemented PLPs, and collaborated closely with SENCOs, educational psychologists, and family teams.",
   },
