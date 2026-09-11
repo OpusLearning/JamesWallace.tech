@@ -14,7 +14,7 @@ const staffComplianceRows = [
 
 export default function Compliance() {
   usePageMeta({
-    title: 'Safeguarding & Compliance | KCSIE-aligned EOTAS Provision | ND Services',
+    title: 'Safeguarding & Compliance | James Wallace, Specialist SEND & EOTAS Tutor',
     description:
       'Safeguarding framework aligned to KCSIE and Working Together to Safeguard Children, with 28 EOTAS policies, DBS and training tracked in real time.',
     path: '/compliance',
@@ -35,7 +35,7 @@ export default function Compliance() {
             }}
           >
             Built in, not bolted on. Every safeguard, compliance check, and
-            policy is embedded in our day-to-day delivery workflow - not
+            policy is part of how I work day to day, not something
             reviewed once a year and filed away.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
@@ -56,11 +56,11 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <h2>Safeguarding Framework</h2>
               <p>
-                ND Services operates in full compliance with{" "}
-                <em>Keeping Children Safe in Education</em> (KCSIE 2024) and{" "}
-                <em>Working Together to Safeguard Children</em> (2023). All
-                staff complete safeguarding training annually and are subject to
-                enhanced DBS checks renewed on a rolling basis.
+                I work in line with{" "}
+                <em>Keeping Children Safe in Education</em> (KCSIE 2025) and{" "}
+                <em>Working Together to Safeguard Children</em> (2023). I complete
+                safeguarding training annually and hold an enhanced DBS on the
+                Update Service, so it can be verified the same day you ask.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>
@@ -148,12 +148,11 @@ export default function Compliance() {
         <div className="jw-container">
           <div className="row align-items-start g-5">
             <div className="col-12 col-lg-6">
-              <h2>Staff Compliance</h2>
+              <h2>Compliance record</h2>
               <p>
-                All Education Specialists must maintain current status across
-                the following before being allocated to a learner. Compliance
-                is tracked in ND Portal with RAG status and automated expiry
-                alerts.
+                Everything below is current before I take a placement, and
+                renewal dates are tracked with expiry alerts rather than left
+                to lapse.
               </p>
               <div style={{ overflowX: "auto" }}>
                 <table
@@ -355,11 +354,11 @@ export default function Compliance() {
       {/* CTA */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
-          <h2>Need to verify our compliance?</h2>
+          <h2>Need to verify any of this?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
-            Request a policy pack, an example inspection bundle, or get in
-            touch to discuss any specific compliance requirements before
-            commissioning.
+            Ask for the policy pack, an example evidence bundle, or my DBS
+            details. Parents, agencies and local authorities all get the same
+            answer, the same day.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact" className="jw-btn-primary">

@@ -12,7 +12,7 @@ const learnerProfiles = [
 
 export default function Provision() {
   usePageMeta({
-    title: 'Our Provision | EOTAS, EBSA and Alternative Provision | ND Services',
+    title: 'Provision | EOTAS, EBSA and Alternative Provision | James Wallace',
     description:
       'One-to-one and small-group provision for learners with autism, ADHD, PDA and anxiety-based school avoidance. Personal learning plans, daily evidence, termly review.',
     path: '/provision',
@@ -27,11 +27,11 @@ export default function Provision() {
             <div className="col-12 col-lg-7 text-center text-lg-start">
               <h1>EOTAS &amp; Alternative Provision</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                ND Services delivers structured, specialist provision for young
-                people who cannot access mainstream or special school settings.
-                We support learners across EOTAS, EBSA, AP, and EHCP
-                placements - with daily evidence, real-time safeguarding, and
-                an unbroken chain from referral to case closure.
+                Structured, specialist teaching for young people who cannot
+                access a mainstream or special school. I work across EOTAS,
+                EBSA, alternative provision and EHCP placements, with evidence
+                filed after every session and an unbroken record from first
+                contact to case closure.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
                 <Link to="/contact" className="jw-btn-primary">
@@ -129,7 +129,7 @@ export default function Provision() {
                 </h3>
                 <p style={{ fontSize: "0.9rem", margin: 0 }}>
                   East Midlands for in-person delivery. Remote delivery
-                  available UK-wide. Contact us to discuss specific areas.
+                  available UK-wide. Ask me about anywhere else.
                 </p>
               </div>
             </div>
@@ -152,13 +152,13 @@ export default function Provision() {
       {/* Learner Profiles */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Who We Support</h2>
+          <h2 className="text-center mb-2">Who I work with</h2>
           <p
             className="text-center"
             style={{ maxWidth: "560px", margin: "0 auto 3rem" }}
           >
-            We accept referrals for learners across a range of SEND, SEMH, and
-            placement categories.
+            Referrals come from families, agencies and local authorities,
+            across a range of SEND, SEMH and placement categories.
           </p>
           <div className="row g-4">
             {learnerProfiles.map((profile) => (
@@ -285,8 +285,7 @@ export default function Provision() {
           <h2>Make a referral</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
             If you have a young person who needs structured, specialist
-            alternative provision, get in touch. We respond to all referral
-            enquiries within 2 working days.
+            provision, get in touch. I come back within two working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact" className="jw-btn-primary">
