@@ -163,6 +163,9 @@ export default function Home() {
                     maxWidth: "340px",
                     aspectRatio: "1 / 1",
                     objectFit: "cover",
+                    // A 2:3 portrait cropped square from the centre cuts the top of his head off. The About photo
+                    // further down already uses "top" for the same image, so use what is known to work.
+                    objectPosition: "top",
                     borderRadius: "50%",
                     display: "block",
                     margin: "0 auto",
