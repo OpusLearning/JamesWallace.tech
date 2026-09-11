@@ -20,3 +20,7 @@ frontend.zip
 .DS_Store
 *.log
 .vite/
+
+# The live orders and enquiries database. Committing it once overwrote the production copy on deploy.
+server/orders.db
+server/orders.db-*
