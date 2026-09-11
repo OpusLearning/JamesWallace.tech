@@ -46,7 +46,8 @@ const cpdCerts = [
     issued: "11 September 2026",
     detail: "The top tier of the national Whole School SEND CPD framework. Bronze, Silver and Gold earned on the way to it.",
     desc: "Twenty units covering resilience, memory for learning, reading and comprehension, mathematics, person-centred working, promoting independence and transitions.",
-    badge: null,
+    badge: "/badges/whole-school-send.png",
+    wide: true,
   },
   {
     title: "Understanding ADHD",
@@ -54,7 +55,8 @@ const cpdCerts = [
     issued: "11 September 2026",
     detail: "Statement of Participation achieved.",
     desc: "ADHD across the lifespan: attention, executive function, emotional regulation and the practical adjustments that help a learner rather than label them.",
-    badge: null,
+    badge: "/badges/openlearn.png",
+    wide: true,
   },
   {
     title: "Foundations of Trauma-Informed, Relationship-Based Practice",
@@ -62,7 +64,7 @@ const cpdCerts = [
     issued: "11 September 2026",
     detail: "Digital badge awarded.",
     desc: "Trauma-informed and relationship-based approaches for young people whose behaviour is a response to what has happened to them, rather than a discipline problem.",
-    badge: null,
+    badge: "/badges/trauma-informed-badge.png",
   },
   {
     title: "Suicide Awareness Training",
@@ -70,7 +72,7 @@ const cpdCerts = [
     issued: "11 September 2026",
     detail: "Completed.",
     desc: "Recognising and responding to suicidal distress. Directly relevant to work with young people in crisis and out of education.",
-    badge: null,
+    badge: "/badges/zsa.png",
   },
   {
     title: "Understanding Autism",
@@ -300,11 +302,21 @@ export default function Credentials() {
             {cpdCerts.map((c, i) => (
               <div key={i} className="col-12 col-md-6">
                 <div className="jw-card h-100 d-flex gap-3">
+                  {/* Some of these are round badges and some are wide provider wordmarks. A fixed 72px square
+                      squeezed the wordmarks down to an illegible smudge, so wide marks get the width they need. */}
                   {c.badge && (
                     <img
                       src={c.badge}
-                      alt={`${c.title} badge`}
-                      style={{ width: "72px", height: "72px", objectFit: "contain", flexShrink: 0 }}
+                      alt={c.wide ? `${c.provider} logo` : `${c.title} badge`}
+                      style={{
+                        width: c.wide ? "116px" : "72px",
+                        height: c.wide ? "auto" : "72px",
+                        maxHeight: "72px",
+                        objectFit: "contain",
+                        objectPosition: "top left",
+                        flexShrink: 0,
+                        alignSelf: "flex-start",
+                      }}
                     />
                   )}
                   <div>
