@@ -203,8 +203,8 @@ export default function About() {
           <h2>Commission specialist provision</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
             If you have a young person who needs structured, specialist
-            alternative provision, get in touch. We respond to all referral
-            enquiries within 2 working days.
+            alternative provision, get in touch. I respond to referral enquiries
+            within 2 working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact" className="jw-btn-primary">

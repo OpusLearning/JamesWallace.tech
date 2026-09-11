@@ -299,8 +299,8 @@ export default function Platform() {
           <h2>Request a demo</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
             If you are commissioning EOTAS provision and want to see the
-            platform, get in touch. We can walk through the portal and answer
-            any questions.
+            platform, get in touch. I will walk you through the portal and answer any
+            questions.
           </p>
           <Link to="/contact" className="jw-btn-primary">
             Request a Demo

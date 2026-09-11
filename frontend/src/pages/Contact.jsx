@@ -72,8 +72,7 @@ function LAForm() {
         </div>
         <h3>Referral received</h3>
         <p>
-          Thank you. We aim to respond to all referral enquiries within 2
-          working days.
+          Thank you. I respond to referral enquiries within 2 working days.
         </p>
       </div>
     );
@@ -427,9 +426,8 @@ export default function Contact() {
             <div className="text-center mb-4">
               <h2 style={{ fontSize: "1.4rem" }}>LA / School Referral</h2>
               <p style={{ maxWidth: "500px", margin: "0 auto", fontSize: "0.9rem", color: "var(--text-muted)" }}>
-                We aim to respond to all referral enquiries within 2 working
-                days and begin placement assessments within 5 working days of
-                receiving a commission.
+                I respond to referral enquiries within 2 working days and begin
+              placement assessments within 5 working days of receiving a commission.
               </p>
             </div>
             <LAForm />

@@ -105,9 +105,8 @@ export default function ForLAs() {
             className="text-center"
             style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
           >
-            We aim to respond to all referral enquiries within 2 working days
-            and begin placement assessments within 5 working days of receiving
-            a commission.
+            I respond to referral enquiries within 2 working days and begin
+              placement assessments within 5 working days of receiving a commission.
           </p>
           <div className="row g-4">
             {[
@@ -124,7 +123,7 @@ export default function ForLAs() {
               {
                 step: "3",
                 title: "Placement Assessment",
-                desc: "We review the documentation and confirm a placement start date, Education Specialist allocation, and PLP scope.",
+                desc: "I review the documentation and confirm a placement start date, available hours, and PLP scope.",
               },
               {
                 step: "4",
@@ -288,8 +287,8 @@ export default function ForLAs() {
         <div className="jw-container text-center">
           <h2>Ready to commission?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
-            Submit a referral or request an evidence pack. We respond within 2
-            working days.
+            Submit a referral or request an evidence pack. I respond within 2 working
+            days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact" className="jw-btn-primary">
