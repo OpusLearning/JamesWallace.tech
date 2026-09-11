@@ -39,6 +39,23 @@ export default function SiteHelper() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [formState, setFormState] = useState("idle"); // idle | sending | sent | error
 
+  // Kept off the first screen on phones: the three hero doors are the point of the homepage and the
+  // launcher was sitting on top of two of them.
+  const [belowHero, setBelowHero] = useState(true);
+  useEffect(() => {
+    const update = () => {
+      const narrow = window.matchMedia("(max-width: 700px)").matches;
+      setBelowHero(!narrow || window.scrollY > 260);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   const launcherRef = useRef(null);
   const inputRef = useRef(null);
   const logRef = useRef(null);
@@ -206,6 +223,9 @@ export default function SiteHelper() {
           fontWeight: 600,
           cursor: "pointer",
           boxShadow: "0 6px 20px rgba(15,23,42,0.18)",
+          opacity: belowHero || open ? 1 : 0,
+          pointerEvents: belowHero || open ? "auto" : "none",
+          transition: "opacity 0.2s ease",
         }}
       >
         <span aria-hidden="true" style={{ fontSize: "1.05rem", lineHeight: 1 }}>{open ? "✕" : "💬"}</span>
