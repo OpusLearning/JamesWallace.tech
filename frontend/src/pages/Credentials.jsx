@@ -17,7 +17,7 @@ const academicQuals = [
     institution: "Manchester Metropolitan University",
     logo: "/badges/manchester-met.png",
     awarded: null,
-    detail: "Undergraduate degree in Computer Science, providing the technical foundation underpinning specialist ICT and digital literacy teaching.",
+    detail: "The computing degree behind the Computer Science and ICT teaching, up to A level.",
     modules: null,
   },
   {
@@ -25,7 +25,7 @@ const academicQuals = [
     institution: "University of Derby",
     logo: "/badges/derby.png",
     awarded: "July 2004",
-    detail: "Postgraduate Certificate in Education with Qualified Teacher Status (QTS). Secondary specialist in applied and vocational ICT.",
+    detail: "The teaching qualification itself, and the route to Qualified Teacher Status. Secondary specialist in applied and vocational ICT.",
     modules: null,
   },
   {
@@ -33,7 +33,7 @@ const academicQuals = [
     institution: "The Open University",
     logo: "/badges/open-university.png",
     awarded: "31 December 2012",
-    detail: "Level 7 postgraduate qualification, distance learning. 180 credits across three modules, all passed.",
+    detail: "A master\u2019s degree in education: advanced study of how learning works and how provision should be designed. 180 credits at Level 7, all passed.",
     modules: [
       "Educational enquiry (E891)",
       "Researching inclusive education (E848)",
@@ -45,6 +45,7 @@ const academicQuals = [
 const cpdCerts = [
   {
     title: "Qualified Teacher Status",
+    group: "qualification",
     provider: "Department for Education",
     issued: "1 August 2004",
     detail: "Teacher reference number redacted on the published copy. Any employer can confirm the award at gov.uk/guidance/check-a-teachers-record.",
@@ -55,6 +56,7 @@ const cpdCerts = [
   },
   {
     title: "Whole School SEND — Platinum",
+    group: "send",
     provider: "Whole School SEND (nasen)",
     issued: "11 September 2026",
     detail: "The top tier of the national Whole School SEND CPD framework. Bronze, Silver and Gold earned on the way to it.",
@@ -65,6 +67,7 @@ const cpdCerts = [
   },
   {
     title: "Understanding ADHD",
+    group: "send",
     provider: "The Open University / OpenLearn",
     issued: "11 September 2026",
     detail: "Statement of Participation achieved.",
@@ -75,6 +78,7 @@ const cpdCerts = [
   },
   {
     title: "Supporting Children's Mental Health and Wellbeing",
+    group: "send",
     provider: "The Open University / OpenLearn",
     issued: "11 September 2026",
     detail: "Statement of Participation and digital badge achieved.",
@@ -84,6 +88,7 @@ const cpdCerts = [
   },
   {
     title: "Foundations of Trauma-Informed, Relationship-Based Practice",
+    group: "send",
     provider: "The Open University / OpenLearn Create",
     issued: "11 September 2026",
     detail: "Digital badge awarded. The provider issues no certificate for this course.",
@@ -92,6 +97,7 @@ const cpdCerts = [
   },
   {
     title: "Suicide Awareness Training",
+    group: "send",
     provider: "Zero Suicide Alliance",
     issued: "11 September 2026",
     detail: "Completed.",
@@ -101,6 +107,7 @@ const cpdCerts = [
   },
   {
     title: "Suicide Awareness Training: Supporting Autistic People",
+    group: "send",
     provider: "Zero Suicide Alliance",
     issued: "11 September 2026",
     detail: "Completed.",
@@ -110,6 +117,7 @@ const cpdCerts = [
   },
   {
     title: "Understanding Autism",
+    group: "send",
     provider: "The Open University / OpenLearn",
     issued: "17 June 2025",
     detail: "24 CPD hours. Badge quiz scores: 93% and 95%. Accredited by the CPD Standards Office.",
@@ -119,6 +127,7 @@ const cpdCerts = [
   },
   {
     title: "Language and Communication in Autism",
+    group: "send",
     provider: "Clearly Education",
     issued: "12 June 2025",
     detail: "CPD Certified, The CPD Certification Service. 1 CPD hour.",
@@ -128,6 +137,7 @@ const cpdCerts = [
   },
   {
     title: "Sensory Processing Aware with GriffinOT, Level 1",
+    group: "send",
     provider: "GriffinOT (Kim Griffin, Occupational Therapist)",
     issued: "13 June 2025",
     detail: "Introduction to the eight senses and sensory processing, foundation for Levels 2 and 3.",
@@ -137,6 +147,7 @@ const cpdCerts = [
   },
   {
     title: "Safeguarding Young People (Level 2)",
+    group: "safeguarding",
     provider: "Fresh Start in Education",
     issued: "9 September 2026",
     detail: "CPD Certified, The CPD Certification Service.",
@@ -146,6 +157,7 @@ const cpdCerts = [
   },
   {
     title: "Safe and Supported",
+    group: "safeguarding",
     provider: "Fresh Start in Education",
     issued: "22 August 2026",
     detail: "CPD Certified, The CPD Certification Service.",
@@ -155,6 +167,7 @@ const cpdCerts = [
   },
   {
     title: "Safeguarding Training for Teachers and School Staff, KCSIE 2026 Update",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -165,6 +178,7 @@ const cpdCerts = [
   },
   {
     title: "Prevent Duty Training for Educators",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -175,6 +189,7 @@ const cpdCerts = [
   },
   {
     title: "Benedict's Law: Allergy and Anaphylaxis Safety",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -185,6 +200,7 @@ const cpdCerts = [
   },
   {
     title: "Recognising and Responding to FGM",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -195,6 +211,7 @@ const cpdCerts = [
   },
   {
     title: "Pastoral Roles in Schools",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -205,6 +222,7 @@ const cpdCerts = [
   },
   {
     title: "Social Media Guidance for Educators",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -215,6 +233,7 @@ const cpdCerts = [
   },
   {
     title: "Teaching Reading as a Behaviour, Not a Subject",
+    group: "safeguarding",
     provider: "My-Progression",
     issued: "9 September 2026",
     detail: "Module passed.",
@@ -225,6 +244,7 @@ const cpdCerts = [
   },
   {
     title: "Safeguarding Young People",
+    group: "safeguarding",
     provider: "Tes",
     issued: "28 March 2025",
     detail: "4 CPD credits. CPD Certified.",
@@ -235,6 +255,7 @@ const cpdCerts = [
   },
   {
     title: "The Prevent Duty",
+    group: "safeguarding",
     provider: "Tes",
     issued: "28 March 2025",
     detail: "2 CPD credits. CPD Certified.",
@@ -245,6 +266,7 @@ const cpdCerts = [
   },
   {
     title: "Advanced Safeguarding, Child Protection and Prevent",
+    group: "safeguarding",
     provider: "Connex Education Academy",
     issued: "16 April 2025",
     detail: "2 credits. CPD Accredited, The CPD Standards Office.",
@@ -255,6 +277,7 @@ const cpdCerts = [
   },
   {
     title: "SEND Code of Practice",
+    group: "safeguarding",
     provider: "Connex Education Academy",
     issued: "16 April 2025",
     detail: "2 credits. CPD Accredited, The CPD Standards Office.",
@@ -265,6 +288,7 @@ const cpdCerts = [
   },
   {
     title: "Effective Cover Supervision",
+    group: "safeguarding",
     provider: "Connex Education Academy",
     issued: "16 April 2025",
     detail: "1 credit. CPD Accredited, The CPD Standards Office.",
@@ -275,6 +299,7 @@ const cpdCerts = [
   },
   {
     title: "Advanced Safeguarding, Child Protection and Prevent 2026/27",
+    group: "safeguarding",
     provider: "Academize",
     issued: "9 September 2026",
     detail: "2 credits. CPD Accredited.",
@@ -285,6 +310,7 @@ const cpdCerts = [
   },
   {
     title: "Allergy Awareness and Anaphylaxis",
+    group: "safeguarding",
     provider: "Academize",
     issued: "24 August 2026",
     detail: "CPD Accredited.",
@@ -295,6 +321,7 @@ const cpdCerts = [
   },
   {
     title: "Professional Standards in Education",
+    group: "safeguarding",
     provider: "Academize",
     issued: "25 August 2026",
     detail: "CPD Accredited.",
@@ -305,6 +332,7 @@ const cpdCerts = [
   },
   {
     title: "Pre-Deployment Briefing",
+    group: "safeguarding",
     provider: "Academize",
     issued: "10 September 2026",
     detail: "CPD Accredited.",
@@ -315,6 +343,7 @@ const cpdCerts = [
   },
   {
     title: "Tuition Educator Onboarding 2025-26",
+    group: "safeguarding",
     provider: "CPD Academy, for TP Tutors",
     issued: "22 August 2026",
     detail: "Valid to 22 August 2027.",
@@ -325,6 +354,7 @@ const cpdCerts = [
   },
   {
     title: "Allergy Awareness 2026",
+    group: "safeguarding",
     provider: "CPD Academy / SEG, for TP Tutors",
     issued: "22 August 2026",
     detail: "Valid to 22 August 2027.",
@@ -334,7 +364,19 @@ const cpdCerts = [
     cert: "/certificates/cert_tp-tutors_allergy-awareness_2026-08-22_expires-2027-08-22.pdf",
   },
   {
+    title: "PRINCE2 Foundation in Project Management",
+    provider: "PeopleCert",
+    group: "tech",
+    issued: "12 March 2023",
+    detail: "PRINCE2 6th edition. Renewal lapsed March 2026, so this is held rather than current.",
+    desc: "The structured project management method, which is what running a commissioned package to plan, budget and review actually is.",
+    badge: "/badges/peoplecert.png",
+    wide: true,
+    cert: "/certificates/cert_peoplecert_prince2-foundation_2023-03-12.pdf",
+  },
+  {
     title: "Software Development Bootcamp: JavaScript",
+    group: "tech",
     provider: "Northcoders",
     issued: "15 July 2024",
     detail: "Full-stack JavaScript bootcamp, certified completion.",
@@ -345,6 +387,7 @@ const cpdCerts = [
   },
   {
     title: "Google Cybersecurity Professional Certificate",
+    group: "tech",
     provider: "Google, via Coursera",
     issued: "25 December 2023",
     detail: "Eight courses. Badge issued through Credly.",
@@ -434,6 +477,68 @@ function RatingRow({ label, score }) {
   );
 }
 
+
+// One certificate card, shared by every band.
+function Cert({ c }) {
+  return (
+    <div className="col-12 col-md-6">
+          <div className="jw-card h-100 d-flex gap-3">
+            {/* Some of these are round badges and some are wide provider wordmarks. A fixed 72px square
+                squeezed the wordmarks down to an illegible smudge, so wide marks get the width they need. */}
+            {c.badge && (
+              <img
+                src={c.badge}
+                alt={c.wide ? `${c.provider} logo` : `${c.title} badge`}
+                style={{
+                  width: c.wide ? "116px" : "72px",
+                  height: c.wide ? "auto" : "72px",
+                  maxHeight: "72px",
+                  objectFit: "contain",
+                  objectPosition: "top left",
+                  flexShrink: 0,
+                  alignSelf: "flex-start",
+                }}
+              />
+            )}
+            <div>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.25rem", color: "var(--text-primary)" }}>{c.title}</h3>
+              <p style={{ fontSize: "0.82rem", color: "var(--brand)", fontWeight: 600, marginBottom: "0.2rem" }}>{c.provider}</p>
+              {c.issued && (
+                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>Completed {c.issued}</p>
+              )}
+              {c.detail && (
+                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.5rem", fontStyle: "italic" }}>{c.detail}</p>
+              )}
+              <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-muted)" }}>{c.desc}</p>
+              {/* The certificate itself, so an agency or a parent can check it rather than take my word for it. */}
+              {c.cert && (
+                <p style={{ margin: "0.6rem 0 0" }}>
+                  <a
+                    href={c.cert}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--brand)", textDecoration: "none" }}
+                  >
+                    View certificate (PDF) &rarr;
+                  </a>
+                </p>
+              )}
+            </div>
+          </div>
+    </div>
+  );
+}
+
+// 12 Sep 2026. A parent on a phone was scrolling fifteen screens of compliance certificates before reaching anything
+// about James as a teacher. Everything an agency needs is still here and still one tap away; it just no longer stands
+// between a worried parent and the human part of the page.
+const BANDS = [
+  { key: "qualification", label: "Qualified teacher", note: "The award everything else sits on top of.", fold: false },
+  { key: "send", label: "SEND, autism, ADHD and mental health", note: "The training that decides whether I can actually help your child.", fold: false },
+  { key: "safeguarding", label: "Safeguarding, statutory and agency training", note: "Current safeguarding, Prevent and KCSIE, plus the agency compliance a commissioner checks.", fold: true },
+  { key: "tech", label: "Technology and project management", note: "Where the software side of the work comes from.", fold: true },
+];
+
 export default function Credentials() {
   usePageMeta({
     title: 'Qualifications & Experience | James Wallace, QTS MEd',
@@ -477,6 +582,32 @@ export default function Credentials() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Trust strip */}
+      <section className="jw-section jw-section-white" style={{ paddingTop: "1.5rem", paddingBottom: "1.5rem" }}>
+        <div className="jw-container">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "center" }}>
+            {[
+              ["Qualified teacher", "QTS since 2004"],
+              ["Enhanced DBS", "Update Service registered"],
+              ["Safeguarding current", "updated September 2026"],
+              ["KCSIE 2026", "refresher completed"],
+              ["Prevent", "current"],
+              ["Thirteen years teaching", "specialist provision"],
+            ].map(([label, sub]) => (
+              <span key={label} style={{ display: "inline-flex", alignItems: "baseline", gap: "0.4rem", border: "1px solid var(--border)", borderRadius: "999px", padding: "0.4rem 0.85rem", background: "var(--card-bg)", fontSize: "0.85rem" }}>
+                <FontAwesomeIcon icon={faCheckCircle} style={{ color: "var(--action)", fontSize: "0.8rem" }} />
+                <strong style={{ color: "var(--text-primary)" }}>{label}</strong>
+                <span style={{ color: "var(--text-muted)" }}>{sub}</span>
+              </span>
+            ))}
+          </div>
+          <p style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "0.82rem", margin: "1rem auto 0", maxWidth: "640px" }}>
+            Teacher, then local authority children&rsquo;s commissioning, then software engineering, now specialist SEND and
+            EOTAS teaching. The middle two are why I can write to an EHCP outcome and build the tools that evidence it.
+          </p>
         </div>
       </section>
 
@@ -543,68 +674,6 @@ export default function Credentials() {
         </div>
       </section>
 
-      {/* CPD */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="text-center mb-5">
-            <FontAwesomeIcon icon={faCertificate} style={{ color: "var(--brand)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
-            <h2>CPD &amp; Specialist Certifications</h2>
-            <p style={{ maxWidth: "480px", margin: "0 auto" }}>
-              Ongoing professional development focused on the specific needs of the young people I work with.
-            </p>
-          </div>
-          <div className="row g-4">
-            {cpdCerts.map((c, i) => (
-              <div key={i} className="col-12 col-md-6">
-                <div className="jw-card h-100 d-flex gap-3">
-                  {/* Some of these are round badges and some are wide provider wordmarks. A fixed 72px square
-                      squeezed the wordmarks down to an illegible smudge, so wide marks get the width they need. */}
-                  {c.badge && (
-                    <img
-                      src={c.badge}
-                      alt={c.wide ? `${c.provider} logo` : `${c.title} badge`}
-                      style={{
-                        width: c.wide ? "116px" : "72px",
-                        height: c.wide ? "auto" : "72px",
-                        maxHeight: "72px",
-                        objectFit: "contain",
-                        objectPosition: "top left",
-                        flexShrink: 0,
-                        alignSelf: "flex-start",
-                      }}
-                    />
-                  )}
-                  <div>
-                    <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.25rem", color: "var(--text-primary)" }}>{c.title}</h3>
-                    <p style={{ fontSize: "0.82rem", color: "var(--brand)", fontWeight: 600, marginBottom: "0.2rem" }}>{c.provider}</p>
-                    {c.issued && (
-                      <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>Completed {c.issued}</p>
-                    )}
-                    {c.detail && (
-                      <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.5rem", fontStyle: "italic" }}>{c.detail}</p>
-                    )}
-                    <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-muted)" }}>{c.desc}</p>
-                    {/* The certificate itself, so an agency or a parent can check it rather than take my word for it. */}
-                    {c.cert && (
-                      <p style={{ margin: "0.6rem 0 0" }}>
-                        <a
-                          href={c.cert}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--brand)", textDecoration: "none" }}
-                        >
-                          View certificate (PDF) &rarr;
-                        </a>
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Professional Experience */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
@@ -633,6 +702,54 @@ export default function Credentials() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CPD */}
+      <section className="jw-section jw-section-white">
+        <div className="jw-container">
+          <div className="text-center mb-5">
+            <FontAwesomeIcon icon={faCertificate} style={{ color: "var(--brand)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
+            <h2>Training &amp; Certification</h2>
+            <p style={{ maxWidth: "560px", margin: "0 auto" }}>
+              Every certificate below is the provider's original and opens as a PDF. Dates are completion dates, not
+              enrolment dates.
+            </p>
+          </div>
+          {BANDS.map((band) => {
+            const items = cpdCerts.filter((c) => c.group === band.key);
+            if (!items.length) return null;
+            const grid = (
+              <div className="row g-4">
+                {items.map((c, i) => (
+                  <Cert key={i} c={c} />
+                ))}
+              </div>
+            );
+            if (!band.fold) {
+              return (
+                <div key={band.key} style={{ marginBottom: "2.5rem" }}>
+                  <h3 style={{ fontSize: "1.05rem", fontWeight: 700, marginBottom: "0.35rem" }}>{band.label}</h3>
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>{band.note}</p>
+                  {grid}
+                </div>
+              );
+            }
+            return (
+              <details key={band.key} style={{ marginBottom: "1.25rem", border: "1px solid var(--border)", borderRadius: "12px", background: "var(--page-bg)" }}>
+                <summary style={{ cursor: "pointer", padding: "1rem 1.25rem", fontWeight: 700, fontSize: "1.02rem", listStyle: "revert" }}>
+                  {band.label}
+                  <span style={{ fontWeight: 400, color: "var(--text-muted)", fontSize: "0.88rem" }}>
+                    {" — "}{items.length} certificates, all dated and downloadable
+                  </span>
+                </summary>
+                <div style={{ padding: "0 1.25rem 1.25rem" }}>
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>{band.note}</p>
+                  {grid}
+                </div>
+              </details>
+            );
+          })}
         </div>
       </section>
 
@@ -712,7 +829,7 @@ export default function Credentials() {
       {/* CTA */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
-          <h2 style={{ marginBottom: "0.75rem" }}>Ready to get started?</h2>
+          <h2 style={{ marginBottom: "0.75rem" }}>Discuss a learner</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem", color: "var(--text-muted)" }}>
             Certificates, DBS details and references go over the same day you ask.
           </p>
