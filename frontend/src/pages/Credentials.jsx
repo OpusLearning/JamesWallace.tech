@@ -51,6 +51,7 @@ const cpdCerts = [
     desc: "Twenty units covering resilience, memory for learning, reading and comprehension, mathematics, person-centred working, promoting independence and transitions.",
     badge: "/badges/whole-school-send.png",
     wide: true,
+    cert: "/certificates/cert_whole-school-send_platinum_2026-09-11.pdf",
   },
   {
     title: "Understanding ADHD",
@@ -60,6 +61,7 @@ const cpdCerts = [
     desc: "ADHD across the lifespan: attention, executive function, emotional regulation and the practical adjustments that help a learner rather than label them.",
     badge: "/badges/openlearn.png",
     wide: true,
+    cert: "/certificates/cert_openlearn_understanding-adhd_statement_2026-09-11.pdf",
   },
   {
     title: "Supporting Children's Mental Health and Wellbeing",
@@ -68,12 +70,13 @@ const cpdCerts = [
     detail: "Statement of Participation and digital badge achieved.",
     desc: "How mental health develops in childhood, what protects it, and how the adults around a child respond when it is under strain.",
     badge: "/badges/openlearn-childrens-mental-health.png",
+    cert: "/certificates/cert_openlearn_childrens-mental-health_statement_2026-09-11.pdf",
   },
   {
     title: "Foundations of Trauma-Informed, Relationship-Based Practice",
     provider: "The Open University / OpenLearn Create",
     issued: "11 September 2026",
-    detail: "Digital badge awarded.",
+    detail: "Digital badge awarded. The provider issues no certificate for this course.",
     desc: "Trauma-informed and relationship-based approaches for young people whose behaviour is a response to what has happened to them, rather than a discipline problem.",
     badge: "/badges/trauma-informed-badge.png",
   },
@@ -84,6 +87,7 @@ const cpdCerts = [
     detail: "Completed.",
     desc: "Recognising and responding to suicidal distress. Directly relevant to work with young people in crisis and out of education.",
     badge: "/badges/zsa.png",
+    cert: "/certificates/cert_zsa_suicide-awareness_2026-09-11.pdf",
   },
   {
     title: "Understanding Autism",
@@ -92,6 +96,7 @@ const cpdCerts = [
     detail: "24 CPD hours. Badge quiz scores: 93% and 95%. Accredited by the CPD Standards Office.",
     desc: "8-week course covering autism spectrum conditions, diagnosis, communication, sensory differences, intervention approaches, and neurodiversity perspectives.",
     badge: "/badges/openlearn-understanding-autism.png",
+    cert: "/certificates/cert_openlearn_understanding-autism_statement_2025-06-17.pdf",
   },
   {
     title: "Language and Communication in Autism",
@@ -118,6 +123,7 @@ const cpdCerts = [
     detail: "CPD Certified, The CPD Certification Service.",
     desc: "Level 2 safeguarding for staff working directly with young people in alternative provision.",
     badge: "/badges/fresh-start.png",
+    cert: "/certificates/cert_freshstart_safeguarding-young-people-l2_2026-09-09.pdf",
   },
   {
     title: "Safe and Supported",
@@ -126,6 +132,77 @@ const cpdCerts = [
     detail: "CPD Certified, The CPD Certification Service.",
     desc: "Safe working practice for one-to-one and small-group teaching away from a school site.",
     badge: "/badges/fresh-start.png",
+    cert: "/certificates/cert_freshstart_safe-and-supported_2026-08-22.pdf",
+  },
+  {
+    title: "Safeguarding Training for Teachers and School Staff, KCSIE 2026 Update",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "The 2026 update to Keeping Children Safe in Education, and what changed for staff working with children.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_safeguarding-kcsie-2026_2026-09-09.pdf",
+  },
+  {
+    title: "Prevent Duty Training for Educators",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "The statutory Prevent duty in practice, and the referral route when a concern arises.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_prevent-duty_2026-09-09.pdf",
+  },
+  {
+    title: "Benedict's Law: Allergy and Anaphylaxis Safety",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "Allergy safety in schools, including recognising anaphylaxis and responding to it.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_benedicts-law-allergy_2026-09-09.pdf",
+  },
+  {
+    title: "Recognising and Responding to FGM",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "Female genital mutilation: the indicators, the mandatory reporting duty, and how to respond.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_fgm-recognise-respond_2026-09-09.pdf",
+  },
+  {
+    title: "Pastoral Roles in Schools",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "How pastoral support is structured across the phases of education, and where each role sits.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_pastoral-roles_2026-09-09.pdf",
+  },
+  {
+    title: "Social Media Guidance for Educators",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "Professional boundaries online when working with children and young people.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_social-media-for-educators_2026-09-09.pdf",
+  },
+  {
+    title: "Teaching Reading as a Behaviour, Not a Subject",
+    provider: "My-Progression",
+    issued: "9 September 2026",
+    detail: "Module passed.",
+    desc: "Reading as something a learner does rather than a subject taught, and what that changes in practice.",
+    badge: "/badges/my-progression.png",
+    wide: true,
+    cert: "/certificates/cert_my-progression_teaching-reading-as-behaviour_2026-09-09.pdf",
   },
   {
     title: "Safeguarding Young People",
@@ -135,6 +212,7 @@ const cpdCerts = [
     desc: "Recognising and acting on safeguarding concerns, and the referral routes that follow.",
     badge: "/badges/tes.png",
     wide: true,
+    cert: "/certificates/cert_tes_safeguarding-young-people_2025-03-28.pdf",
   },
   {
     title: "The Prevent Duty",
@@ -144,6 +222,7 @@ const cpdCerts = [
     desc: "The statutory Prevent duty and what it asks of anyone teaching children and young people.",
     badge: "/badges/tes.png",
     wide: true,
+    cert: "/certificates/cert_tes_prevent-duty_2025-03-28.pdf",
   },
   {
     title: "Advanced Safeguarding, Child Protection and Prevent",
@@ -153,6 +232,7 @@ const cpdCerts = [
     desc: "Advanced safeguarding and child protection, including the Prevent duty, at the level expected of staff in specialist settings.",
     badge: "/badges/connex-education.png",
     wide: true,
+    cert: "/certificates/cert_connex_advanced-safeguarding-cp-prevent_2025-04-16.pdf",
   },
   {
     title: "SEND Code of Practice",
@@ -162,6 +242,7 @@ const cpdCerts = [
     desc: "The statutory framework behind EHCPs, SEN support and the duties a local authority and a setting each carry.",
     badge: "/badges/connex-education.png",
     wide: true,
+    cert: "/certificates/cert_connex_send-code-of-practice_2025-04-16.pdf",
   },
   {
     title: "Effective Cover Supervision",
@@ -171,6 +252,21 @@ const cpdCerts = [
     desc: "Managing learning and behaviour with a class you do not normally teach.",
     badge: "/badges/connex-education.png",
     wide: true,
+    cert: "/certificates/cert_connex_effective-cover-supervision_2025-04-16.pdf",
+  },
+  {
+    title: "Professional Standards in Education",
+    provider: "Academize",
+    issued: "25 August 2026",
+    detail: "Completed.",
+    desc: "The professional standards expected of staff placed in schools through an agency.",
+  },
+  {
+    title: "Pre-Deployment Briefing",
+    provider: "Academize",
+    issued: "10 September 2026",
+    detail: "Completed.",
+    desc: "Pre-placement briefing covering conduct, safeguarding expectations and reporting lines before going into a setting.",
   },
   {
     title: "Tuition Educator Onboarding 2025-26",
@@ -178,6 +274,7 @@ const cpdCerts = [
     issued: "22 August 2026",
     detail: "Valid to 22 August 2027.",
     desc: "Child-on-child abuse, mandatory reading, the Prevent duty and KCSIE 2025 Part One. Renewed annually for agency work.",
+    cert: "/certificates/cert_tp-tutors_educator-onboarding_2026-08-22_expires-2027-08-22.pdf",
   },
   {
     title: "Allergy Awareness 2026",
@@ -185,6 +282,7 @@ const cpdCerts = [
     issued: "22 August 2026",
     detail: "Valid to 22 August 2027.",
     desc: "Recognising and responding to allergic reactions, including anaphylaxis, when teaching in a family home.",
+    cert: "/certificates/cert_tp-tutors_allergy-awareness_2026-08-22_expires-2027-08-22.pdf",
   },
   {
     title: "Software Development Bootcamp: JavaScript",
@@ -194,6 +292,7 @@ const cpdCerts = [
     desc: "Full-stack JavaScript development. Informs direct use of technology tools and platform development in specialist provision.",
     badge: "/badges/northcoders.png",
     wide: true,
+    cert: "/certificates/cert_northcoders_js-bootcamp_2024-07-15.pdf",
   },
   {
     title: "Google Cybersecurity Certificate",
@@ -435,6 +534,19 @@ export default function Credentials() {
                       <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.5rem", fontStyle: "italic" }}>{c.detail}</p>
                     )}
                     <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-muted)" }}>{c.desc}</p>
+                    {/* The certificate itself, so an agency or a parent can check it rather than take my word for it. */}
+                    {c.cert && (
+                      <p style={{ margin: "0.6rem 0 0" }}>
+                        <a
+                          href={c.cert}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--brand)", textDecoration: "none" }}
+                        >
+                          View certificate (PDF) &rarr;
+                        </a>
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
