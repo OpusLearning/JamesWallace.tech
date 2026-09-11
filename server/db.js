@@ -52,6 +52,25 @@ db.exec(`
   )
 `)
 
+/**
+ * Can the site still record an enquiry?
+ *
+ * On 11 Sep 2026 orders.db ended up owned by root, and better-sqlite3 had already opened its handle read-only, so every
+ * contact form submission failed with a 500 and no one would have known until somebody complained they had heard
+ * nothing back. This gives the agent something to check that does not involve posting a fake enquiry.
+ */
+export function storageHealth() {
+  try {
+    db.prepare("CREATE TABLE IF NOT EXISTS write_probe (id INTEGER PRIMARY KEY, at TEXT)").run()
+    db.prepare("INSERT INTO write_probe (id, at) VALUES (1, datetime('now')) ON CONFLICT(id) DO UPDATE SET at = excluded.at").run()
+    const n = db.prepare("SELECT COUNT(*) AS n FROM enquiries").get().n
+    const unseen = db.prepare("SELECT COUNT(*) AS n FROM enquiries WHERE seenByAgent = 0").get().n
+    return { writable: true, enquiries: n, unseen }
+  } catch (err) {
+    return { writable: false, error: err.message }
+  }
+}
+
 export function saveHelperChat({ sessionId, page, question, reply, degraded }) {
   return db.prepare(`
     INSERT INTO helper_chats (sessionId, page, question, reply, degraded)

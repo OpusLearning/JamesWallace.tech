@@ -22,7 +22,7 @@ import path from "path";
 import { performance } from "perf_hooks";
 import { OpenAI } from "openai";
 import { getStripe, TIERS } from "./stripe.js";
-import { createOrder, saveEnquiry, markEnquiryEmailed, saveHelperChat } from "./db.js";
+import { createOrder, saveEnquiry, markEnquiryEmailed, saveHelperChat, storageHealth } from "./db.js";
 import { answer as helperAnswer, rateLimit as helperRateLimit, MAX_CHARS as HELPER_MAX_CHARS } from "./helper.js";
 import { sendPurchaseConfirmation, sendContactNotification, sendContactAcknowledgement } from "./email.js";
 
@@ -227,6 +227,14 @@ app.post("/api/subscribe", async (req, res) => {
  * 6. Initialise OpenAI client (transcription and speech; the assistant builds its own — see helper.js)
  */
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+/**
+ * /api/health — is the site still able to record an enquiry?
+ */
+app.get("/api/health", (req, res) => {
+  const storage = storageHealth();
+  res.status(storage.writable ? 200 : 503).json({ ok: storage.writable, storage, postmark: Boolean(process.env.POSTMARK_API_KEY) });
+});
 
 /**
  * 7. /api/helper — the assistant in the corner of the site.
