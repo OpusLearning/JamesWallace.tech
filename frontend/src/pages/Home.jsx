@@ -93,7 +93,8 @@ export default function Home() {
                 who cannot manage school
               </h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                I am James Wallace. I taught for twelve years in a specialist school for young people with social, emotional
+                I am James Wallace. I taught for thirteen years in specialist provision for young
+                  people with social, emotional
                 and mental health needs, then spent five years inside Nottinghamshire County Council's children's commissioning
                 team. I now teach children who cannot access school &mdash; privately for families, through agencies and
                 schools, and on placements commissioned by local authorities.

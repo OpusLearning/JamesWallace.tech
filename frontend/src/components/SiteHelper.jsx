@@ -189,8 +189,11 @@ export default function SiteHelper() {
         style={{
           position: "fixed",
           right: "1.25rem",
-          bottom: "1.25rem",
+          // Sat on top of the hero's "For agencies & schools" button on a 390px screen. The doors are the
+          // point of the homepage, so the launcher gets out of their way on small screens.
+          bottom: "max(1.25rem, env(safe-area-inset-bottom, 0px))",
           zIndex: 9990,
+          maxWidth: "calc(100vw - 2.5rem)",
           display: "inline-flex",
           alignItems: "center",
           gap: "0.5rem",
