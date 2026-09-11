@@ -88,7 +88,8 @@ const cpdCerts = [
     issued: "12 June 2025",
     detail: "CPD Certified, The CPD Certification Service. 1 CPD hour.",
     desc: "Specialist focus on language development and communication strategies for autistic learners in educational settings.",
-    badge: null,
+    badge: "/badges/clearly-education.png",
+    wide: true,
   },
   {
     title: "Sensory Processing Aware with GriffinOT, Level 1",
@@ -96,7 +97,8 @@ const cpdCerts = [
     issued: "13 June 2025",
     detail: "Introduction to the eight senses and sensory processing, foundation for Levels 2 and 3.",
     desc: "Practical frameworks for identifying and supporting sensory processing differences in young people.",
-    badge: null,
+    badge: "/badges/griffinot.png",
+    wide: true,
   },
   {
     title: "Software Development Bootcamp: JavaScript",
@@ -104,7 +106,8 @@ const cpdCerts = [
     issued: "14 July 2024",
     detail: "Full-stack JavaScript bootcamp, certified completion.",
     desc: "Full-stack JavaScript development. Informs direct use of technology tools and platform development in specialist provision.",
-    badge: null,
+    badge: "/badges/northcoders.png",
+    wide: true,
   },
 ];
 
