@@ -49,6 +49,14 @@ const cpdCerts = [
     badge: null,
   },
   {
+    title: "Understanding ADHD",
+    provider: "The Open University / OpenLearn",
+    issued: "11 September 2026",
+    detail: "Statement of Participation achieved.",
+    desc: "ADHD across the lifespan: attention, executive function, emotional regulation and the practical adjustments that help a learner rather than label them.",
+    badge: null,
+  },
+  {
     title: "Foundations of Trauma-Informed, Relationship-Based Practice",
     provider: "The Open University / OpenLearn Create",
     issued: "11 September 2026",
