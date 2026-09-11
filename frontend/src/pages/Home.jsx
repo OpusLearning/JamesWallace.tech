@@ -182,7 +182,7 @@ export default function Home() {
                 >
                   <strong style={{ color: "var(--text)" }}>James Wallace</strong>
                   <br />
-                  QTS, MEd. Twenty two years in education.
+                  QTS, MEd. Thirteen years teaching, five commissioning.
                 </figcaption>
               </figure>
             </div>
