@@ -207,9 +207,9 @@ export default function Credentials() {
             <span style={{ color: "var(--action)" }}>Working With</span>
           </h1>
           <p style={{ maxWidth: "580px", margin: "0 auto 2rem", fontSize: "1.05rem" }}>
-            James Wallace, specialist educator with QTS, a Master of Education, and direct
-            experience working inside Local Authority commissioning teams alongside complex and
-            vulnerable young people.
+            QTS since 2004 and a Master of Education. Thirteen years teaching in specialist
+            provision, and five inside a county council's children's commissioning team, which is
+            the part most tutors cannot offer.
           </p>
 
           <div className="d-flex flex-wrap gap-3 justify-content-center">
@@ -367,7 +367,7 @@ export default function Credentials() {
           <div className="text-center mb-5">
             <h2>Why This Matters</h2>
             <p style={{ maxWidth: "480px", margin: "0 auto" }}>
-              For families and LAs choosing specialist provision, this is what you're getting.
+              Whether you are a parent, an agency or a local authority, this is what you are getting.
             </p>
           </div>
           <div className="row g-4">
@@ -425,7 +425,7 @@ export default function Credentials() {
                   <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-muted)" }}>
                     Enhanced DBS registered with the Update Service, checked annually and verifiable on request.
                     All placements are covered by safeguarding policies aligned to KCSIE. Documentation packages
-                    available for LA procurement teams.
+                    available to parents, agencies and local authority teams alike.
                   </p>
                 </div>
               </div>
@@ -439,11 +439,13 @@ export default function Credentials() {
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "0.75rem" }}>Ready to get started?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem", color: "var(--text-muted)" }}>
-            Get in touch to discuss a potential placement or request our credentials pack.
+            Certificates, DBS details and references go over the same day you ask.
           </p>
           <div className="d-flex flex-wrap gap-3 justify-content-center">
-            <Link to="/contact" className="jw-btn-primary">Make a Referral</Link>
-            <Link to="/for-las" className="jw-btn-secondary">For Local Authorities</Link>
+            <Link to="/contact" className="jw-btn-primary">Get in touch</Link>
+            <Link to="/tuition" className="jw-btn-secondary">For families</Link>
+            <Link to="/agencies" className="jw-btn-secondary">For agencies</Link>
+            <Link to="/for-las" className="jw-btn-secondary">For local authorities</Link>
           </div>
         </div>
       </section>
