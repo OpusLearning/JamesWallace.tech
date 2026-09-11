@@ -26,34 +26,38 @@ const serviceItems = [
 
 const differentiators = [
   {
-    title: "Transparent, Inspection-Ready Provision",
+    title: "You can see what happened",
     description:
-      "Every session is planned, delivered, and evidenced in our case management portal. Commissioners receive real-time engagement data, attendance tracking, and safeguarding oversight - not a monthly PDF.",
+      "Every session is planned, delivered and evidenced in a portal I built myself. Parents can see what actually happened; commissioners get engagement, attendance and safeguarding in real time rather than a monthly PDF.",
   },
   {
-    title: "Built Around the Individual",
+    title: "Built around your child",
     description:
-      "Every learner gets a bespoke PLP written to their EHCP outcomes. Our Education Specialists work with the learner's interests, pace, and preferred environment - not a one-size curriculum.",
+      "Every learner gets a plan written to their own outcomes. I work around their interests, their pace and the setting they can actually cope with, rather than a one-size curriculum.",
   },
   {
-    title: "Compliance You Can Rely On",
+    title: "Checks you can verify",
     description:
-      "All staff hold enhanced DBS, First Aid qualifications, and role-specific mandatory training tracked in our compliance system. Lone working is monitored in real time. Safeguarding concerns are logged, actioned, and auditable.",
+      "Enhanced DBS on the Update Service, safeguarding and Prevent current, and the Whole School SEND Platinum award. Renewal dates are tracked rather than left to lapse, lone working is logged, and every safeguarding concern is actioned and auditable.",
   },
 ];
 
-const commissionerQA = [
+// One question from each of the three people who land here, rather than three from the commissioner.
+const questions = [
   {
+    who: "A parent asks",
+    q: "How do I know this will be different?",
+    a: "I will not promise you it will. What I can tell you is that we start where your child actually is rather than where a timetable says they should be, that the first conversation is free, and that if I am not the right person I will say so and tell you who might be.",
+  },
+  {
+    who: "An agency asks",
+    q: "How quickly can you be placed?",
+    a: "Enhanced DBS on the Update Service, so it verifies the same day, and safeguarding, Prevent and allergy training all current to August 2027. Certificates and my policy pack go over the same day you ask.",
+  },
+  {
+    who: "A commissioner asks",
     q: "How do I know sessions are actually happening?",
-    a: "Every session has a timestamped daily report submitted within 24 hours - with engagement score, activity notes, and criteria progress. Supervisors can see the full picture in real time.",
-  },
-  {
-    q: "How do you handle safeguarding?",
-    a: "Every concern is logged, tracked, and escalated through a structured workflow. DSL is notified of any stale concerns automatically. PIRFs cannot be bypassed. Inspection bundles are available on demand.",
-  },
-  {
-    q: "Are you inspection-ready?",
-    a: "Yes. Case chronologies, PLP evidence, safeguarding logs, compliance records, and policy packs can be exported as PDFs for any monitoring visit.",
+    a: "Every session has a timestamped report filed within 24 hours, with engagement, activity notes and progress against the criteria. Case chronologies, safeguarding logs and policy packs export as PDFs for any monitoring visit.",
   },
 ];
 
@@ -189,15 +193,15 @@ export default function Home() {
       {/* What We Do */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-2">What We Do</h2>
+          <h2 className="text-center mb-2">What I do</h2>
           <p
             className="text-center"
             style={{ maxWidth: "600px", margin: "0 auto 3rem" }}
           >
-            ND Services provides education and support for young people whose
-            needs cannot be met in a traditional school environment. We work
-            directly with Local Authorities, SEND teams, and commissioning
-            bodies.
+            I teach young people whose needs cannot be met in an ordinary school.
+            I work privately with families, through agencies and schools, and on
+            placements commissioned by local authorities. The teaching is the same
+            in every case; only who pays for it changes.
           </p>
           <div className="row g-4">
             {serviceItems.map((item) => (
@@ -231,12 +235,12 @@ export default function Home() {
       {/* Three Differentiators */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Why ND Services</h2>
+          <h2 className="text-center mb-2">Why me</h2>
           <p
             className="text-center"
             style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
           >
-            Three things that set our provision apart.
+            Three things that are genuinely hard to find elsewhere.
           </p>
           <div className="row g-4">
             {differentiators.map((item, i) => (
@@ -319,9 +323,9 @@ export default function Home() {
                   marginBottom: "0.5rem",
                 }}
               >
-                Managed through ND Portal
+                How you see the work
               </p>
-              <h2>Purpose-built for EOTAS delivery</h2>
+              <h2>Every session, written down</h2>
               <ul
                 style={{
                   paddingLeft: "1.25rem",
@@ -329,12 +333,12 @@ export default function Home() {
                   lineHeight: 1.8,
                 }}
               >
-                <li>Live supervisor dashboard across the full portfolio</li>
-                <li>Automated safeguarding concern tracking and escalation</li>
-                <li>Lone working check-in, overdue alerts, and panic button</li>
-                <li>Weekly plans linked to PLP criteria - evidence chain intact</li>
+                <li>A plan before the week starts, and a report within 24 hours of each session</li>
+                <li>Safeguarding concerns logged, actioned and escalated, never left in a notebook</li>
+                <li>Lone-working check-in and overdue alerts, because I work in homes</li>
+                <li>Progress tied to the outcomes in the plan, not to a tick sheet</li>
                 <li>
-                  Inspection bundle PDF export - available on demand
+                  Everything exportable as a PDF for a review, a panel or a monitoring visit
                 </li>
               </ul>
               <Link to="/platform" className="jw-btn-secondary mt-3 d-inline-block">
@@ -348,15 +352,15 @@ export default function Home() {
       {/* Commissioner Q&A */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Commissioner Questions</h2>
+          <h2 className="text-center mb-2">Questions I get asked</h2>
           <p
             className="text-center"
             style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
           >
-            What commissioners typically ask - and how ND Services answers.
+            One from each of the three people who usually land on this page.
           </p>
           <div className="row g-4">
-            {commissionerQA.map((item, i) => (
+            {questions.map((item, i) => (
               <div key={i} className="col-12 col-lg-4">
                 <div className="jw-card h-100">
                   <p
@@ -378,7 +382,7 @@ export default function Home() {
           </div>
           <div className="text-center mt-4">
             <Link to="/for-las" className="jw-btn-secondary">
-              All commissioner information &rarr;
+              For local authorities &rarr;
             </Link>
           </div>
         </div>
@@ -443,7 +447,7 @@ export default function Home() {
         }}
       >
         <div className="jw-container text-center">
-          <h2 style={{ color: "#fff" }}>Ready to make a referral?</h2>
+          <h2 style={{ color: "#fff" }}>Start with a conversation</h2>
           <p
             style={{
               maxWidth: "520px",
@@ -451,9 +455,9 @@ export default function Home() {
               color: "rgba(255,255,255,0.8)",
             }}
           >
-            We work with Local Authority SEND teams, EOTAS coordinators, EHCP
-            caseworkers, and independent referrers. We aim to respond within 2
-            working days.
+            Whether you are a parent, an agency or a local authority, the first
+            step is the same: tell me about the young person and what has happened
+            so far. I come back within two working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link
@@ -461,7 +465,7 @@ export default function Home() {
               className="jw-btn-primary"
               style={{ fontSize: "1rem", padding: "0.75rem 2rem" }}
             >
-              Make a Referral
+              Get in touch
             </Link>
             <Link
               to="/contact"

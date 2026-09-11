@@ -111,15 +111,6 @@ export default function Footer() {
                   Blog ↗
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://audit.jameswallace.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  ND Audit Tool ↗
-                </a>
-              </li>
             </ul>
           </div>
         </div>
