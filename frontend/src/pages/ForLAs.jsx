@@ -54,7 +54,7 @@ export default function ForLAs() {
             <div className="col-12 col-lg-7 text-center text-lg-start">
               <h1>For Local Authorities &amp; Schools</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                Commissioning EOTAS provision should be simple. ND Services
+                Commissioning EOTAS provision should be simple. ND Services, the provision operated by James Wallace,
                 gives commissioners and referrers real-time visibility of every
                 active placement - from session evidence to safeguarding nil
                 returns - with structured monthly deliverables and

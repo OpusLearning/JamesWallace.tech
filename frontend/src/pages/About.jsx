@@ -76,15 +76,15 @@ export default function About() {
                 Education Specialist &amp; EOTAS Provider
               </p>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                ND Services is a specialist micro-provider delivering structured
-                alternative provision for neurodiverse learners who cannot access
-                mainstream or special school settings. Every placement is
+                ND Services is the specialist educational provision operated by James
+                Wallace, delivering structured alternative provision for neurodiverse
+                learners who cannot access mainstream or special school settings. Every placement is
                 underpinned by a purpose-built case management platform and
                 inspection-ready evidence framework.
               </p>
               <div className="d-flex flex-wrap gap-2 mt-3 mb-4">
                 {[
-                  "BSc Computing",
+                  "BSc Computer Science",
                   "MEd",
                   "QTS",
                   "Enhanced DBS",
@@ -114,11 +114,12 @@ export default function About() {
         <div className="jw-container" style={{ maxWidth: "760px" }}>
           <h2 className="mb-4">About the Provider</h2>
           <p>
-            ND Services was founded by James Wallace, an Education
-            Specialist with over a decade of experience working with
-            neurodiverse learners and their families. James holds a BSc in
-            Computing, a Master of Education (MEd), Qualified Teacher Status
-            (QTS), and an Enhanced DBS on the Update Service.
+            ND Services is operated by James Wallace, and in practice is James
+            Wallace: one qualified teacher rather than a staffed agency, which is
+            deliberate. Thirteen years teaching in specialist provision and five
+            inside a county council's children's commissioning team. James holds
+            a BSc (Hons) Computer Science, a Master of Education (MEd), Qualified
+            Teacher Status since 2004, and an Enhanced DBS on the Update Service.
           </p>
           <p>
             The provision operates as a commissioner-grade micro-provider with

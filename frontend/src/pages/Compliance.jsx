@@ -276,7 +276,7 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <h2>Policies &amp; Procedures</h2>
               <p>
-                ND Services maintains 28 EOTAS-aligned policies - Safeguarding,
+                ND Services, the provision operated by James Wallace, maintains 28 EOTAS-aligned policies - Safeguarding,
                 Lone Working, Data Protection, Health &amp; Safety, Behaviour
                 Support, and more. Each is version-controlled, review-dated, and
                 available as a branded PDF.
