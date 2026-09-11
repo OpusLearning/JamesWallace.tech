@@ -41,6 +41,30 @@ const academicQuals = [
 
 const cpdCerts = [
   {
+    title: "Whole School SEND — Platinum",
+    provider: "Whole School SEND (nasen)",
+    issued: "11 September 2026",
+    detail: "The top tier of the national Whole School SEND CPD framework. Bronze, Silver and Gold earned on the way to it.",
+    desc: "Twenty units covering resilience, memory for learning, reading and comprehension, mathematics, person-centred working, promoting independence and transitions.",
+    badge: null,
+  },
+  {
+    title: "Foundations of Trauma-Informed, Relationship-Based Practice",
+    provider: "The Open University / OpenLearn Create",
+    issued: "11 September 2026",
+    detail: "Digital badge awarded.",
+    desc: "Trauma-informed and relationship-based approaches for young people whose behaviour is a response to what has happened to them, rather than a discipline problem.",
+    badge: null,
+  },
+  {
+    title: "Suicide Awareness Training",
+    provider: "Zero Suicide Alliance",
+    issued: "11 September 2026",
+    detail: "Completed.",
+    desc: "Recognising and responding to suicidal distress. Directly relevant to work with young people in crisis and out of education.",
+    badge: null,
+  },
+  {
     title: "Understanding Autism",
     provider: "The Open University / OpenLearn",
     issued: "17 June 2025",
@@ -88,17 +112,17 @@ const experience = [
     desc: "Supported commissioning and quality assurance for LAC and complex-needs young people. Involved in Care, Education and Treatment Reviews (CETRs), SEND panel processes, safeguarding reviews, and public health initiatives including Small Steps, Healthy Families, and Community Paediatric Reviews.",
   },
   {
-    role: "Founder & Education Specialist",
-    org: "ND Services",
-    dates: "Mar 2025 to present",
-    desc: "Specialist EOTAS and alternative provision for neurodiverse young people (ADHD, ASD, dyslexia, PDA profiles). Online and in-person delivery. LA-commissioned placements with daily evidence, real-time safeguarding, and inspection-ready reporting.",
+    role: "Education Specialist (EOTAS)",
+    org: "Fresh Start Education",
+    dates: "April 2025 to present",
+    desc: "One-to-one EOTAS provision commissioned by local authorities, for pupils with ASD, ADHD, PDA, SEMH needs and anxiety-based school avoidance, delivered at home, in the community and online. Re-engaging learners with long gaps in attendance, writing personalised programmes to EHCP outcomes, and producing the session reports, attendance evidence and progress updates commissioners and annual reviews need.",
   },
 ];
 
 const whyItMatters = [
   {
     title: "Specialist, not generalist",
-    desc: "QTS, MEd, and 13+ years specialist SEND experience. Not a gap-year graduate or mainstream supply teacher.",
+    desc: "QTS since 2004, an MEd, thirteen years teaching in specialist provision and five inside a county council's commissioning team. Not a gap-year graduate or a mainstream supply teacher.",
   },
   {
     title: "LA-fluent",
@@ -154,7 +178,7 @@ function RatingRow({ label, score }) {
 
 export default function Credentials() {
   usePageMeta({
-    title: 'Qualifications & Experience | James Wallace, QTS MEd | ND Services',
+    title: 'Qualifications & Experience | James Wallace, QTS MEd',
     description:
       'QTS, MEd, BSc Computer Science, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.',
     path: '/credentials',
