@@ -1,4 +1,12 @@
+import usePageMeta from "../hooks/usePageMeta";
 export default function PrivacyPolicy() {
+  usePageMeta({
+    title: "Privacy Notice | James Wallace, SEND & EOTAS Provision",
+    description:
+      "How James Wallace handles enquiries, learner information and safeguarding records, and what parents, schools and local authorities can expect.",
+    path: "/privacy",
+  });
+
   return (
     <>
       <section className="jw-section jw-section-warm">

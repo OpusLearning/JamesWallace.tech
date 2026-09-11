@@ -1,3 +1,4 @@
+import usePageMeta from "../hooks/usePageMeta";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -25,6 +26,13 @@ import EPDash from "../assets/portfolio/EP_dash.webp";
 import EPMobile from "../assets/portfolio/EP_mobile.webp";
 
 export default function Portfolio() {
+  usePageMeta({
+    title: "Work & Projects | James Wallace, SEND & EOTAS Specialist",
+    description:
+      "Selected work from James Wallace: specialist SEND and EOTAS teaching alongside the reporting and evidence tools built to support it.",
+    path: "/portfolio",
+  });
+
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const toggleExpand = (index) => {
