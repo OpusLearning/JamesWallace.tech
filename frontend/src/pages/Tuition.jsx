@@ -64,6 +64,8 @@ const training = [
   { name: "Safeguarding and child protection, KCSIE 2025 Part One", when: "current, renews Aug 2027" },
   { name: "Prevent duty and child-on-child abuse", when: "current, renews Aug 2027" },
   { name: "Allergy awareness", when: "current, renews Aug 2027" },
+  { name: "Whole School SEND, Platinum award", when: "September 2026" },
+  { name: "Suicide awareness, Zero Suicide Alliance", when: "September 2026" },
   { name: "SEND Code of Practice", when: "certified" },
   { name: "Understanding Autism, Open University", when: "24 CPD hours, 2025" },
   { name: "Language and communication in autism", when: "CPD certified, 2025" },

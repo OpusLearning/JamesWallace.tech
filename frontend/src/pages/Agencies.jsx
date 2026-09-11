@@ -17,6 +17,8 @@ const compliance = [
   { item: "Prevent duty", detail: "Completed 22 Aug 2026", state: "held" },
   { item: "Child-on-child abuse", detail: "Completed 22 Aug 2026", state: "held" },
   { item: "Allergy awareness", detail: "CPD Academy, completed 22 Aug 2026", state: "held" },
+  { item: "Whole School SEND, Platinum", detail: "The top tier of the national SEND CPD framework, September 2026", state: "held" },
+  { item: "Suicide awareness", detail: "Zero Suicide Alliance, September 2026", state: "held" },
   { item: "SEND Code of Practice", detail: "Certified", state: "held" },
   { item: "Understanding Autism", detail: "Open University, 24 CPD hours, 2025", state: "held" },
   { item: "Right to work", detail: "British passport, in person or certified copy", state: "held" },
