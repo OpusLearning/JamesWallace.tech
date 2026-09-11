@@ -22,7 +22,7 @@ import path from "path";
 import { performance } from "perf_hooks";
 import { OpenAI } from "openai";
 import { getStripe, TIERS } from "./stripe.js";
-import { createOrder } from "./db.js";
+import { createOrder, saveEnquiry, markEnquiryEmailed } from "./db.js";
 import { sendPurchaseConfirmation, sendContactNotification, sendContactAcknowledgement } from "./email.js";
 
 const app = express();
@@ -156,12 +156,24 @@ app.post("/api/contact", async (req, res) => {
     return res.status(400).json({ error: "Please enter a valid email address." });
   }
 
+  // Store first. An enquiry must survive the notification failing, which is exactly what was happening.
+  let id = null;
+  try {
+    id = saveEnquiry({ name: name.trim(), email: email.trim(), message: message.trim(), page: req.body.page || req.get("referer") || null });
+  } catch (err) {
+    console.error("[/api/contact] could not store enquiry:", err.message);
+  }
+
   try {
     await sendContactNotification(name.trim(), email.trim(), message.trim());
     await sendContactAcknowledgement(name.trim(), email.trim());
+    if (id) markEnquiryEmailed(id, true, null);
     return res.json({ ok: true });
   } catch (err) {
-    console.error("[/api/contact] error:", err.message);
+    console.error("[/api/contact] email failed:", err.message);
+    if (id) markEnquiryEmailed(id, false, err.message);
+    // The enquiry is saved and the agent will pick it up, so do not tell a worried parent it failed.
+    if (id) return res.json({ ok: true });
     return res.status(500).json({ error: "Failed to send message. Please try emailing hello@jameswallace.tech directly." });
   }
 });
