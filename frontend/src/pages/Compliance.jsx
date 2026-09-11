@@ -63,8 +63,7 @@ export default function Compliance() {
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>
-                  Designated Safeguarding Lead (DSL) accessible to all
-                  practitioners
+                  A named Designated Safeguarding Lead for every placement
                 </li>
                 <li>
                   All concerns logged immediately in an encrypted,
