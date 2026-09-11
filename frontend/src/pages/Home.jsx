@@ -150,41 +150,38 @@ export default function Home() {
                 Taking new students and placements now
               </p>
             </div>
+            {/* The hero image was a screenshot of the supervisor dashboard, badged "Live ND Portal Dashboard" — the most
+                commissioner-facing thing on the site, and the first picture a parent saw. Someone deciding whether to trust
+                you with their child wants to see the person, not the software. */}
             <div className="col-12 col-lg-5 text-center">
-              <div
-                style={{
-                  position: "relative",
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-                }}
-              >
+              <figure style={{ margin: 0 }}>
                 <img
-                  src="/portal/06-safeguarding.webp"
-                  alt="ND Portal safeguarding management dashboard"
+                  src="/james-wallace.webp"
+                  alt="James Wallace"
                   style={{
                     width: "100%",
+                    maxWidth: "340px",
+                    aspectRatio: "1 / 1",
+                    objectFit: "cover",
+                    borderRadius: "50%",
                     display: "block",
+                    margin: "0 auto",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                   }}
                 />
-                <span
+                <figcaption
                   style={{
-                    position: "absolute",
-                    bottom: "0.75rem",
-                    left: "0.75rem",
-                    background: "rgba(0,0,0,0.7)",
-                    color: "#fff",
-                    fontSize: "0.7rem",
-                    fontWeight: 500,
-                    padding: "0.3rem 0.6rem",
-                    borderRadius: "6px",
+                    marginTop: "1rem",
+                    fontSize: "0.85rem",
+                    color: "var(--text-muted)",
+                    lineHeight: 1.5,
                   }}
                 >
-                  Live ND Portal Dashboard
-                </span>
-              </div>
+                  <strong style={{ color: "var(--text)" }}>James Wallace</strong>
+                  <br />
+                  QTS, MEd. Twenty two years in education.
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
@@ -290,8 +287,8 @@ export default function Home() {
               <div className="row g-3">
                 <div className="col-6">
                   <img
-                    src="/portal/01-dashboard.webp"
-                    alt="ND Portal dashboard"
+                    src="/portal/03b-weekly-plan-tab.webp"
+                    alt="A week's plan, written before the week starts"
                     style={{
                       width: "100%",
                       borderRadius: "8px",
@@ -301,8 +298,8 @@ export default function Home() {
                 </div>
                 <div className="col-6">
                   <img
-                    src="/portal/07-lone-working.webp"
-                    alt="ND Portal lone working"
+                    src="/portal/04-daily-reports.webp"
+                    alt="A session report, filed within 24 hours"
                     style={{
                       width: "100%",
                       borderRadius: "8px",
