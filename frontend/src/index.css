@@ -348,6 +348,28 @@ p { color: var(--text-muted); line-height: 1.65; }
 }
 
 /* --- a11y applied classes --- */
+/* Reduce motion: for vestibular sensitivity, and for anyone who finds movement on a page hard to read past.
+   Honours the OS setting too, so it applies before anyone finds the widget. */
+html.a11y-reduced-motion *,
+html.a11y-reduced-motion *::before,
+html.a11y-reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Wider spacing: helps dyslexic and ADHD readers track a line without losing their place. */
+html.a11y-spacious body { line-height: 1.9 !important; letter-spacing: 0.02em !important; word-spacing: 0.08em !important; }
+html.a11y-spacious p, html.a11y-spacious li { margin-bottom: 1.15em !important; }
+
 html.a11y-text-lg  { font-size: 18px; }
 html.a11y-text-xl  { font-size: 20px; }
 

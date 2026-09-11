@@ -6,6 +6,8 @@ const defaults = {
   fontSize: "normal",   // normal | lg | xl
   contrast: "none",     // none | light | dark
   dyslexic: false,
+  reducedMotion: false,
+  spacious: false,
 };
 
 function loadPrefs() {
@@ -22,13 +24,16 @@ function applyPrefs(prefs) {
   html.classList.remove(
     "a11y-text-lg", "a11y-text-xl",
     "a11y-contrast-light", "a11y-contrast-dark",
-    "a11y-dyslexic"
+    "a11y-dyslexic",
+    "a11y-reduced-motion", "a11y-spacious"
   );
   if (prefs.fontSize === "lg") html.classList.add("a11y-text-lg");
   if (prefs.fontSize === "xl") html.classList.add("a11y-text-xl");
   if (prefs.contrast === "light") html.classList.add("a11y-contrast-light");
   if (prefs.contrast === "dark")  html.classList.add("a11y-contrast-dark");
   if (prefs.dyslexic) html.classList.add("a11y-dyslexic");
+  if (prefs.reducedMotion) html.classList.add("a11y-reduced-motion");
+  if (prefs.spacious) html.classList.add("a11y-spacious");
 }
 
 export default function AccessibilityWidget({ open, onClose }) {
@@ -95,6 +100,20 @@ export default function AccessibilityWidget({ open, onClose }) {
           label="Dyslexia-friendly font"
           checked={prefs.dyslexic}
           onChange={() => setPrefs((p) => ({ ...p, dyslexic: !p.dyslexic }))}
+        />
+
+        {/* The blog already offered these two and the main site did not, which is the wrong way round for a site
+            selling neurodiversity expertise. */}
+        <A11yToggle
+          label="Reduce motion"
+          checked={prefs.reducedMotion}
+          onChange={() => setPrefs((p) => ({ ...p, reducedMotion: !p.reducedMotion }))}
+        />
+
+        <A11yToggle
+          label="More line spacing"
+          checked={prefs.spacious}
+          onChange={() => setPrefs((p) => ({ ...p, spacious: !p.spacious }))}
         />
 
         {/* Reset */}
