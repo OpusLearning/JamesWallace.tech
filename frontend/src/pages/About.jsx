@@ -129,10 +129,11 @@ export default function About() {
             built around each learner.
           </p>
           <p>
-            James is the Designated Safeguarding Lead (DSL) for all active
-            cases, and holds current Safeguarding Level 2, Prevent Awareness,
-            Lone Working, and First Aid at Work qualifications - all tracked and
-            verified in the ND Portal compliance system.
+            I am the Designated Safeguarding Lead for every placement I take,
+            and hold current safeguarding and KCSIE 2025 Part One, Prevent duty,
+            child-on-child abuse, allergy awareness and lone working training,
+            with the Whole School SEND Platinum award. Renewal dates are tracked
+            with expiry alerts rather than left to lapse.
           </p>
         </div>
       </section>

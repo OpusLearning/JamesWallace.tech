@@ -20,7 +20,7 @@ const commissionerQA = [
   },
   {
     q: "What does your compliance look like?",
-    a: "DBS, training, first aid, and right-to-work verification are tracked in real time with RAG status. All staff are checked before allocation to any learner.",
+    a: "Enhanced DBS on the Update Service, so it verifies the same day. Safeguarding, Prevent and allergy training current to August 2027, right to work evidenced, and renewal dates tracked rather than left to lapse. Everything is in place before I take a placement."
   },
   {
     q: "Are you inspection-ready?",

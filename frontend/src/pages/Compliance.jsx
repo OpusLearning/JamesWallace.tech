@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
-  { requirement: "Safeguarding Level 2 (annual)", tracked: "Renewal tracked" },
-  { requirement: "Prevent Awareness", tracked: "Completion date recorded" },
+  { requirement: "Safeguarding / KCSIE 2025 Part One (annual)", tracked: "Renews August 2027" },
+  { requirement: "Prevent duty and child-on-child abuse", tracked: "Renews August 2027" },
   { requirement: "Lone Working Safety", tracked: "Completion date recorded" },
-  { requirement: "First Aid at Work", tracked: "3-year renewal alert" },
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },
   { requirement: "Data Protection / UK GDPR", tracked: "Completion date recorded" },
   { requirement: "Right to Work verification", tracked: "Provider + reference date" },

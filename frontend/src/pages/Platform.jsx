@@ -90,7 +90,7 @@ const screenshots = [
     file: "08-compliance",
     title: "Compliance Dashboard",
     bullets: [
-      "DBS, training, right-to-work, first aid, and mandatory training tracked with RAG status",
+      "DBS, safeguarding, right-to-work and mandatory training tracked with RAG status and expiry alerts",
       "Team-wide compliance summary highlighting expiring or expired records",
       "Automated email reminders 60 days before DBS or training expiry",
       "Mandatory training requirements configured at organisation level and checked per member",
@@ -177,7 +177,7 @@ export default function Platform() {
               fontSize: "0.95rem",
             }}
           >
-            ND Services operates on a bespoke case management platform built
+            The provision runs on a case management platform I built
             specifically for EOTAS and alternative provision delivery. Every
             aspect of a learner's placement is tracked from first referral
             through to case closure - giving commissioners confidence and

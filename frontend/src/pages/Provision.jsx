@@ -250,11 +250,11 @@ export default function Provision() {
               <h2>Safeguarding</h2>
               <p>
                 Safeguarding is built into every stage of delivery - not added
-                after the fact. ND Services operates in full compliance with
-                KCSIE 2024 and Working Together 2023.
+                after the fact. I work in line with KCSIE 2025 and Working
+                Together to Safeguard Children 2023.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
-                <li>Designated Safeguarding Lead (DSL) accessible to all practitioners</li>
+                <li>A named Designated Safeguarding Lead for every placement</li>
                 <li>All concerns logged immediately in an encrypted, audit-trailed system</li>
                 <li>Physical Intervention Recording Forms (PIRFs) completed before caseload can proceed</li>
                 <li>Lone working check-in/check-out with overdue escalation and panic alert</li>
