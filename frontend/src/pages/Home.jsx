@@ -1,5 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
+import { BIO, AVAILABILITY, REFERENCES } from "../data/facts";
 
 const serviceItems = [
   {
@@ -93,11 +94,11 @@ export default function Home() {
                 who cannot manage school
               </h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                I am James Wallace. I taught for thirteen years in specialist provision for young
-                  people with social, emotional
-                and mental health needs, then spent five years inside Nottinghamshire County Council's children's commissioning
-                team. I now teach children who cannot access school &mdash; privately for families, through agencies and
-                schools, and on placements commissioned by local authorities.
+                I am James Wallace. I have taught for thirteen years in specialist provision &mdash; twelve of them in a
+                specialist school for young people with social, emotional and mental health needs &mdash; and spent five
+                years inside Nottinghamshire County Council's children's commissioning team. I now teach children who
+                cannot access school: privately for families, through agencies and schools, and on placements
+                commissioned by local authorities.
               </p>
               <div
                 className="d-flex flex-wrap gap-3 mt-3 mb-4 justify-content-center justify-content-lg-start"
@@ -131,8 +132,11 @@ export default function Home() {
                   For local authorities &rarr;
                 </Link>
               </div>
+              {/* A commissioner reading "taking new placements now" has no way of knowing whether that was written this
+                  week or last spring. The date is what makes it worth anything. It lives in facts.js so checking
+                  availability and dating the claim are the same action. */}
               <p
-                className="mt-3 d-flex align-items-center gap-2 justify-content-center justify-content-lg-start"
+                className="mt-3 d-flex align-items-center gap-2 justify-content-center justify-content-lg-start flex-wrap"
                 style={{
                   fontSize: "0.8rem",
                   color: "var(--text-muted)",
@@ -148,7 +152,10 @@ export default function Home() {
                     display: "inline-block",
                   }}
                 />
-                Taking new students and placements now
+                {AVAILABILITY.status}
+                <span style={{ opacity: 0.75 }}>
+                  &middot; reviewed {AVAILABILITY.reviewed}
+                </span>
               </p>
             </div>
             {/* The hero image was a screenshot of the supervisor dashboard, badged "Live ND Portal Dashboard" — the most
@@ -230,6 +237,41 @@ export default function Home() {
             and a submitted daily session report - so commissioners and parents
             always have an accurate, up-to-date picture of progress.
           </p>
+        </div>
+      </section>
+
+      {/* One reference, high up. The full set with ratings is on /credentials, but a visitor could previously read this
+          whole page and the family page without ever meeting a voice other than mine. One quotation, not a wall of
+          testimonials. */}
+      <section className="jw-section jw-section-warm">
+        <div className="jw-container">
+          <figure
+            style={{
+              maxWidth: "720px",
+              margin: "0 auto",
+              textAlign: "center",
+            }}
+          >
+            <blockquote
+              style={{
+                fontSize: "1.15rem",
+                lineHeight: 1.6,
+                fontStyle: "italic",
+                margin: "0 0 1rem",
+              }}
+            >
+              &ldquo;{REFERENCES[0].quote}&rdquo;
+            </blockquote>
+            <figcaption style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
+              <strong style={{ color: "var(--text)" }}>{REFERENCES[0].name}</strong>
+              {" — "}
+              {REFERENCES[0].role}
+              <br />
+              <Link to="/credentials" style={{ fontSize: "0.85rem" }}>
+                References and certificates &rarr;
+              </Link>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -411,14 +453,14 @@ export default function Home() {
             <div className="col-12 col-md-9">
               <h2 style={{ marginBottom: "0.75rem" }}>About James</h2>
               <p>
-                James Wallace is an Education Specialist with a BSc in
-                Computing, MEd, QTS, and Enhanced DBS. He works exclusively with
+                James Wallace is an Education Specialist with a {BIO.degree},
+                MEd, QTS, and Enhanced DBS. He works exclusively with
                 neurodiverse learners, delivering specialist provision for young
                 people with ADHD, Autism, SEMH, and complex needs through
                 evidence-based, structured sessions.
               </p>
               <div className="d-flex flex-wrap gap-2 mb-4">
-                {["BSc Computing", "MEd", "QTS", "Enhanced DBS", "DSL"].map(
+                {[BIO.degreeShort, "MEd", "QTS", "Enhanced DBS", "DSL"].map(
                   (badge) => (
                     <span key={badge} className="jw-badge">
                       {badge}

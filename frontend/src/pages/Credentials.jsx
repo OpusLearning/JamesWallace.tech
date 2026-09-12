@@ -10,10 +10,11 @@ import {
   faCheckCircle,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import { BIO, REFERENCES as references } from "../data/facts";
 
 const academicQuals = [
   {
-    title: "BSc (Hons) Computer Science",
+    title: BIO.degree,
     institution: "Manchester Metropolitan University",
     logo: "/badges/manchester-met.png",
     awarded: null,
@@ -439,20 +440,8 @@ const whyItMatters = [
   },
 ];
 
-const references = [
-  {
-    quote: "James is a gifted and effective teacher. He has a high degree of professionalism and is wholly committed to supporting young people to develop their skills and interests in order to reach their potential.",
-    name: "Chris Humphreys",
-    role: "Previous Manager, Foxwood Academy",
-    ratings: { timekeeping: 5, flexibility: 4, honesty: 5, safeguarding: 5, communication: 5 },
-  },
-  {
-    quote: "James brings a wealth of qualities that make him highly effective in working with children and young people. His patience, empathy, and dedication to fostering both academic and personal growth allowed him to build strong relationships with students, families, and colleagues.",
-    name: "James Sinclair",
-    role: "Public Health Analyst, Nottinghamshire County Council",
-    ratings: { timekeeping: 5, flexibility: 5, honesty: 5, safeguarding: 5, communication: 5 },
-  },
-];
+/* The references now live in data/facts.js, because the homepage shows the first one and two copies of a quotation
+   is two things to keep in step. Imported above as `references`. */
 
 function Stars({ count }) {
   return (
@@ -543,7 +532,7 @@ export default function Credentials() {
   usePageMeta({
     title: 'Qualifications & Experience | James Wallace, QTS MEd',
     description:
-      'QTS, MEd, BSc Computer Science, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.',
+      `QTS, MEd, ${BIO.degreeShort}, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.`,
     path: '/credentials',
   });
 

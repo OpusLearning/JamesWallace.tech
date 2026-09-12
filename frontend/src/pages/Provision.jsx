@@ -1,5 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
+import { STATUTORY, DELIVERY } from "../data/facts";
 
 const learnerProfiles = [
   { label: "EOTAS", description: "Education Other Than At School - full-time or part-time alternative to school placement" },
@@ -116,9 +117,9 @@ export default function Provision() {
                   Session Cadence
                 </h3>
                 <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  Typically 3-15 hours per week depending on the commission.
-                  Sessions are planned weekly, with individual daily reports
-                  submitted within 24 hours.
+                  Typically {DELIVERY.hoursPerWeek} of taught sessions,
+                  depending on the commission. Sessions are planned weekly,
+                  with individual daily reports submitted within 24 hours.
                 </p>
               </div>
             </div>
@@ -199,9 +200,12 @@ export default function Provision() {
                 workflow from first session to case closure.
               </p>
               <div className="d-flex flex-column gap-3 mt-4">
+                {/* These two steps used to read "approved by supervisor" and "panic button available throughout". Both are
+                    real ND Portal features, but they are multi-practitioner features, and I am a sole practitioner. The
+                    platform and compliance pages already say so; this page now says the same thing. */}
                 {[
-                  { step: "Plan", desc: "Weekly session plan submitted in ND Portal - PLP criteria, planned activities, session logistics. Approved by supervisor before delivery begins." },
-                  { step: "Deliver", desc: "Education Specialist delivers the session. Lone working check-in at start. Panic button available throughout." },
+                  { step: "Plan", desc: "Weekly session plan submitted in ND Portal - PLP criteria, planned activities, session logistics. The plan is locked before delivery begins, so the week has an evidence baseline. Where a commissioner wants sight of it first, approval is recorded against the plan." },
+                  { step: "Deliver", desc: "I deliver the session, with a lone working check-in at the start and check-out at the end, timestamped. The portal's panic alert and live supervisor feed are built for providers with a supervisory team; as a sole practitioner, my escalation route is agreed in writing with the commissioner before teaching begins." },
                   { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0-10), per-subject activity notes, PLP criterion progress, safeguarding observations." },
                 ].map((item) => (
                   <div key={item.step} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
@@ -250,14 +254,14 @@ export default function Provision() {
               <h2>Safeguarding</h2>
               <p>
                 Safeguarding is built into every stage of delivery - not added
-                after the fact. I work in line with KCSIE 2026 and Working
-                Together to Safeguard Children 2023.
+                after the fact. I work in line with {STATUTORY.kcsie} and{" "}
+                {STATUTORY.workingTogether}.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>I am the Designated Safeguarding Lead for every placement I take</li>
                 <li>All concerns logged immediately in an encrypted, audit-trailed system</li>
                 <li>Physical Intervention Recording Forms (PIRFs) completed before caseload can proceed</li>
-                <li>Lone working check-in/check-out with overdue escalation and panic alert</li>
+                <li>Timestamped lone working check-in and check-out for every solo session, with the escalation route agreed in writing with the commissioner</li>
                 <li>Automated daily alerts for stale or unactioned safeguarding concerns</li>
               </ul>
               <Link to="/compliance" className="jw-btn-secondary mt-3 d-inline-block">

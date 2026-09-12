@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
+import { BIO, DELIVERY } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -72,6 +73,32 @@ const training = [
   { name: "Sensory processing, GriffinOT Level 1", when: "2025" },
 ];
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   ONE ANONYMISED OUTCOME EXAMPLE — NOT YET FILLED IN, SO NOTHING RENDERS.
+
+   A parent can currently read this whole page without seeing what the work
+   actually did for anyone. One real, anonymised example is worth more than any
+   amount of description — but it has to be real, and it has to be yours.
+
+   To publish one, replace `null` with an object and the section appears:
+
+     const caseExample = {
+       heading: "What this looked like for one family",
+       body:
+         "A Year 9 girl, autistic and out of school for fourteen months ... " +
+         "Six months in, she was doing four sessions a week and sat two GCSEs.",
+       footnote: "Details changed to protect the family's privacy. Shared with their permission.",
+     };
+
+   Before you publish it, check three things:
+     1. No detail, or combination of details, could identify the young person.
+        Age band rather than age, no school name, no town smaller than the county.
+     2. The family (or the commissioner, if it was a commissioned placement) has
+        agreed to it. Get that in writing and keep it.
+     3. Every number in it is one you could evidence if a commissioner asked.
+   ───────────────────────────────────────────────────────────────────────────── */
+const caseExample = null;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -85,7 +112,7 @@ const jsonLd = {
     hasCredential: [
       "Qualified Teacher Status (QTS)",
       "Master of Education (MEd)",
-      "BSc (Hons) Computer Science",
+      BIO.degree,
       "Enhanced DBS on the Update Service",
     ],
   },
@@ -124,10 +151,10 @@ export default function Tuition() {
                 <span style={{ color: "var(--action)" }}>who cannot manage school</span>
               </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
-                I am James Wallace. I taught for twelve years in a specialist school for young people with social, emotional and
-                mental health needs, then spent five years inside Nottinghamshire County Council's children's commissioning team.
-                Since 2025 I have delivered education otherwise than at school for autistic, ADHD and PDA learners, commissioned by
-                local authorities.
+                I am James Wallace. I have taught for thirteen years in specialist provision: twelve of them in a specialist school
+                for young people with social, emotional and mental health needs, and since 2025 delivering education otherwise than
+                at school for autistic, ADHD and PDA learners, commissioned by local authorities. In between I spent five years
+                inside Nottinghamshire County Council's children's commissioning team.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
                 I now take a small number of private students alongside that work. In person across Derbyshire and Nottinghamshire,
@@ -177,6 +204,25 @@ export default function Tuition() {
           </div>
         </div>
       </section>
+
+      {/* One anonymised outcome. Renders only once `caseExample` above is filled in. */}
+      {caseExample && (
+        <section className="jw-section jw-section-surface">
+          <div className="jw-container">
+            <div className="row">
+              <div className="col-12 col-lg-8">
+                <h2 style={{ marginBottom: "1rem" }}>{caseExample.heading}</h2>
+                <p style={{ fontSize: "1.05rem", lineHeight: 1.7, marginBottom: "1rem" }}>
+                  {caseExample.body}
+                </p>
+                <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", marginBottom: 0 }}>
+                  {caseExample.footnote}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* How it starts — numbered rail, not another card grid */}
       <section className="jw-section jw-section-warm">
@@ -293,7 +339,7 @@ export default function Tuition() {
                 rate: "£250",
                 unit: "per day",
                 title: "EOTAS packages",
-                body: "Commissioned by a local authority or paid from a personal budget, typically 5 to 25 hours a week. Includes planning, daily evidence, safeguarding records and attendance at reviews.",
+                body: `Commissioned by a local authority or paid from a personal budget, typically ${DELIVERY.hoursPerWeek}. Includes planning, daily evidence, safeguarding records and attendance at reviews.`,
               },
             ].map((f) => (
               <div key={f.title} className="col-12 col-md-4">
