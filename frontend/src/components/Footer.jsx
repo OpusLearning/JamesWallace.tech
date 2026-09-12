@@ -120,7 +120,7 @@ export default function Footer() {
           &ensp;·&ensp;
           <a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a>
           &ensp;·&ensp;
-          <a href="tel:05603683408">056 0368 3408</a>
+          <a href="tel:07897021077">07897 021077</a>
         </div>
       </div>
     </footer>

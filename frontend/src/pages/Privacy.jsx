@@ -139,8 +139,8 @@ export default function PrivacyPolicy() {
               </p>
               <p style={{ margin: 0 }}>
                 Phone:{" "}
-                <a href="tel:05603683408" style={{ color: "var(--brand)" }}>
-                  056 0368 3408
+                <a href="tel:07897021077" style={{ color: "var(--brand)" }}>
+                  07897 021077
                 </a>
               </p>
             </div>
