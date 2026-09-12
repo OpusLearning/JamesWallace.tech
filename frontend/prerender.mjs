@@ -12,10 +12,18 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { createRequire } from 'node:module';
-// puppeteer lives in the global prefix on this machine, and ESM import does not honour NODE_PATH.
-// Resolved this way so the site's own package.json stays untouched.
-const require = createRequire('/home/james/.npm-global/lib/node_modules/');
-const puppeteer = require('puppeteer');
+// puppeteer is a devDependency, so normal resolution works in CI, on the deploy target, and here.
+// It used to be resolved only out of one machine's global npm prefix, which meant every deploy since
+// this file was added failed on the GitHub runner ("Cannot find module 'puppeteer'") and would have
+// failed on the server too — the live prerendered HTML had to be pushed by hand. The global prefix is
+// kept as a fallback so a working copy that has not reinstalled still builds.
+let puppeteer;
+try {
+  puppeteer = (await import('puppeteer')).default;
+} catch {
+  const require = createRequire('/home/james/.npm-global/lib/node_modules/');
+  puppeteer = require('puppeteer');
+}
 
 const DIST = new URL('./dist/', import.meta.url).pathname;
 const ROUTES = ['/', '/provision', '/platform', '/compliance', '/for-las', '/tuition', '/agencies',
