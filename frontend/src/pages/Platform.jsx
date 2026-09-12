@@ -42,6 +42,7 @@ const screenshots = [
       "Plan locked once approved; amendments require supervisor sign-off",
       "Plans linked directly to daily reports and PLP progress",
     ],
+    note: "Portal capability. The approval step is built for providers with a supervisory team; as a sole practitioner James locks the plan before delivery begins, and where a commissioner wants sight of it first, their approval is recorded against the plan.",
   },
   {
     file: "04-daily-reports",

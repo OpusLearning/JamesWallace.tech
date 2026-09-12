@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
+import { BIO, AVAILABILITY } from "../data/facts";
 
 /**
  * For agencies and schools — the fastest-paying door, and the one the site never had.
@@ -61,7 +62,7 @@ const jsonLd = {
   hasCredential: [
     "Qualified Teacher Status (QTS), 2004",
     "MEd Education, The Open University, 2012",
-    "BSc (Hons) Computer Science",
+    BIO.degree,
     "Enhanced DBS on the Update Service",
     "Safeguarding and child protection, KCSIE 2026 update",
   ],
@@ -94,8 +95,9 @@ export default function Agencies() {
                 <span style={{ color: "var(--action)" }}>without the onboarding headache</span>
               </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
-                QTS since 2004, a Master of Education, twelve years teaching in a specialist SEMH school and five years inside
-                Nottinghamshire County Council's children's commissioning team. Enhanced DBS on the Update Service, safeguarding
+                QTS since 2004, a Master of Education, thirteen years teaching in specialist provision — twelve of them in a
+                specialist SEMH school — and five years inside Nottinghamshire County Council's children's commissioning team.
+                Enhanced DBS on the Update Service, safeguarding
                 and Prevent current, and every certificate ready to send today.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
@@ -112,9 +114,13 @@ export default function Agencies() {
             </div>
             <div className="col-12 col-lg-5">
               <div className="jw-card">
-                <h3 style={{ fontSize: "1rem", marginBottom: "0.75rem" }}>Availability</h3>
+                <h3 style={{ fontSize: "1rem", marginBottom: "0.25rem" }}>Availability</h3>
+                {/* Dated, so a booker can tell this is live rather than something written last term. */}
+                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.75rem" }}>
+                  Reviewed {AVAILABILITY.reviewed}
+                </p>
                 <p style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>
-                  Taking new placements now, in person across Derbyshire and Nottinghamshire or online anywhere in the UK.
+                  {AVAILABILITY.statusPlacements}, in person across Derbyshire and Nottinghamshire or online anywhere in the UK.
                 </p>
                 <p style={{ color: "var(--text-muted)", marginBottom: 0 }}>
                   Tell me the learner, the key stage and the hours, and I will confirm days by return.

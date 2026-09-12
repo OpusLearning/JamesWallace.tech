@@ -38,7 +38,7 @@ export default function About() {
   usePageMeta({
     title: 'About James Wallace | Specialist SEND Educator | ND Services',
     description:
-      'Twelve years teaching in specialist SEMH provision, five years inside a local authority commissioning team, now delivering EOTAS for neurodiverse young people.',
+      'Thirteen years teaching in specialist provision, twelve of them in a specialist SEMH school, five years inside a local authority commissioning team, now delivering EOTAS for neurodiverse young people.',
     path: '/about',
   });
 
@@ -116,8 +116,9 @@ export default function About() {
           <p>
             ND Services is operated by James Wallace, and in practice is James
             Wallace: one qualified teacher rather than a staffed agency, which is
-            deliberate. Thirteen years teaching in specialist provision and five
-            inside a county council's children's commissioning team. James holds
+            deliberate. Thirteen years teaching in specialist provision, twelve
+            of them in a specialist SEMH school, and five inside a county
+            council's children's commissioning team. James holds
             a BSc (Hons) Computer Science, a Master of Education (MEd), Qualified
             Teacher Status since 2004, and an Enhanced DBS on the Update Service.
           </p>
