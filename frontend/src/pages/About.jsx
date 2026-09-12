@@ -97,7 +97,7 @@ export default function About() {
                 ))}
               </div>
               <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact" className="jw-btn-primary">
+                <Link to="/contact?for=commissioner" className="jw-btn-primary">
                   Make a Referral
                 </Link>
                 <Link to="/credentials" className="jw-btn-secondary">
@@ -131,7 +131,7 @@ export default function About() {
           </p>
           <p>
             I am the Designated Safeguarding Lead for every placement I take,
-            and hold current safeguarding and KCSIE 2025 Part One, Prevent duty,
+            and hold current safeguarding and KCSIE 2026, Prevent duty,
             child-on-child abuse, allergy awareness and lone working training,
             with the Whole School SEND Platinum award. Renewal dates are tracked
             with expiry alerts rather than left to lapse.
@@ -207,7 +207,7 @@ export default function About() {
             within 2 working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner" className="jw-btn-primary">
               Make a Referral
             </Link>
             <Link to="/for-las" className="jw-btn-secondary">

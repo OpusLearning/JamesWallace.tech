@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
         <div className="jw-container" style={{ maxWidth: "780px" }}>
           <h1>Privacy Policy</h1>
           <p style={{ color: "var(--text-muted)", marginBottom: 0 }}>
-            Last updated: 17 February 2026
+            Last updated: 12 September 2026
           </p>
         </div>
       </section>
@@ -78,8 +78,9 @@ export default function PrivacyPolicy() {
               We use the following third-party services which may process data on our behalf:
             </p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>Google Forms</strong> - contact form submissions.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Calendly</strong> - scheduling consultations.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>This website's own server</strong> - enquiry forms post directly to jameswallace.tech and are stored in a database on that server. Enquiries are not sent through Google Forms.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>OpenAI</strong> - the "Ask a question" assistant on this site sends what you type to OpenAI to generate a reply. Those messages and replies are stored so James can see what people ask. Please do not type a child's name, diagnosis or any safeguarding detail into it.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Postmark</strong> - delivers enquiry notification emails.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Google Fonts</strong> - font loading (IP address may be logged by Google).</li>
             </ul>
             <p>
@@ -88,6 +89,15 @@ export default function PrivacyPolicy() {
           </div>
 
           <div style={{ marginBottom: "2.5rem" }}>
+            <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>6b. Website enquiries and learner records are separate</h2>
+            <p>
+              This notice covers this website: enquiry forms, the assistant, and the technical data above. Records kept
+              about a young person during commissioned provision are a separate processing activity, governed by the
+              agreement with the commissioning school or local authority and covered by the provision's own privacy
+              information, which is available on request. Please do not send clinical or safeguarding detail about a
+              child through a web form; a secure route is arranged once a referral is under way.
+            </p>
+
             <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>7. Your Rights</h2>
             <p>Under UK GDPR you have the right to:</p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>

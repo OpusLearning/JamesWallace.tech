@@ -78,6 +78,7 @@ const screenshots = [
   {
     file: "07-lone-working",
     title: "Lone Working Safety",
+    note: "Portal capability. Built for multi-practitioner providers; as a sole practitioner James uses the check-in, check-out and audit trail, and the escalation route is agreed with the commissioner before teaching starts.",
     bullets: [
       "Check-in at session start; check-out at session end",
       "Live supervisor feed showing all active sessions, time elapsed, and check-in location",
@@ -184,7 +185,7 @@ export default function Platform() {
             can see what happened without having to ask.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
-            <Link to="/contact" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner" className="jw-btn-primary">
               Request a Demo
             </Link>
             <a
@@ -225,6 +226,11 @@ export default function Platform() {
               </div>
               <div className="col-12 col-lg-6">
                 <h2>{s.title}</h2>
+                {s.note && (
+                  <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontStyle: "italic", marginBottom: "0.75rem" }}>
+                    {s.note}
+                  </p>
+                )}
                 <ul
                   style={{
                     paddingLeft: "1.25rem",
@@ -302,7 +308,7 @@ export default function Platform() {
             platform, get in touch. I will walk you through the portal and answer any
             questions.
           </p>
-          <Link to="/contact" className="jw-btn-primary">
+          <Link to="/contact?for=commissioner" className="jw-btn-primary">
             Request a Demo
           </Link>
         </div>

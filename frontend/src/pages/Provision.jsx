@@ -34,7 +34,7 @@ export default function Provision() {
                 contact to case closure.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
-                <Link to="/contact" className="jw-btn-primary">
+                <Link to="/contact?for=commissioner" className="jw-btn-primary">
                   Make a Referral &rarr;
                 </Link>
                 <Link to="/platform" className="jw-btn-secondary">
@@ -250,11 +250,11 @@ export default function Provision() {
               <h2>Safeguarding</h2>
               <p>
                 Safeguarding is built into every stage of delivery - not added
-                after the fact. I work in line with KCSIE 2025 and Working
+                after the fact. I work in line with KCSIE 2026 and Working
                 Together to Safeguard Children 2023.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
-                <li>A named Designated Safeguarding Lead for every placement</li>
+                <li>I am the Designated Safeguarding Lead for every placement I take</li>
                 <li>All concerns logged immediately in an encrypted, audit-trailed system</li>
                 <li>Physical Intervention Recording Forms (PIRFs) completed before caseload can proceed</li>
                 <li>Lone working check-in/check-out with overdue escalation and panic alert</li>
@@ -288,11 +288,11 @@ export default function Provision() {
             provision, get in touch. I come back within two working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner" className="jw-btn-primary">
               Make a Referral
             </Link>
-            <Link to="/contact" className="jw-btn-secondary">
-              Download Example Evidence Pack
+            <Link to="/contact?for=commissioner" className="jw-btn-secondary">
+              Request an example evidence pack
             </Link>
           </div>
         </div>

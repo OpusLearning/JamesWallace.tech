@@ -423,7 +423,7 @@ const experience = [
 const whyItMatters = [
   {
     title: "Specialist, not generalist",
-    desc: "QTS since 2004, an MEd, thirteen years teaching in specialist provision and five inside a county council's commissioning team. Not a gap-year graduate or a mainstream supply teacher.",
+    desc: "QTS since 2004, an MEd, thirteen years teaching in specialist provision and five inside a county council's commissioning team, so the plan, the evidence and the teaching come from the same person.",
   },
   {
     title: "LA-fluent",

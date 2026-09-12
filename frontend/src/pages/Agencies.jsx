@@ -13,7 +13,7 @@ import usePageMeta from "../hooks/usePageMeta";
 const compliance = [
   { item: "Enhanced DBS", detail: "On the Update Service — verifiable the same day, no wait", state: "held" },
   { item: "Qualified Teacher Status", detail: "PGCE Secondary, University of Derby, July 2004", state: "held" },
-  { item: "Safeguarding & child protection", detail: "KCSIE 2025 Part One, completed 22 Aug 2026", state: "held" },
+  { item: "Safeguarding & child protection", detail: "KCSIE 2026 update, completed 9 Sep 2026", state: "held" },
   { item: "Prevent duty", detail: "Completed 22 Aug 2026", state: "held" },
   { item: "Child-on-child abuse", detail: "Completed 22 Aug 2026", state: "held" },
   { item: "Allergy awareness", detail: "CPD Academy, completed 22 Aug 2026", state: "held" },
@@ -63,7 +63,7 @@ const jsonLd = {
     "MEd Education, The Open University, 2012",
     "BSc (Hons) Computer Science",
     "Enhanced DBS on the Update Service",
-    "Safeguarding and child protection, KCSIE 2025 Part One",
+    "Safeguarding and child protection, KCSIE 2026 update",
   ],
   knowsAbout: ["SEMH", "Autism", "ADHD", "PDA", "EBSA", "EHCP", "Alternative provision", "EOTAS"],
   areaServed: ["Derbyshire", "Nottinghamshire", "East Midlands"],
@@ -102,7 +102,7 @@ export default function Agencies() {
                 I am already registered and compliant with four UK education agencies. Names on request.
               </p>
               <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact" className="jw-btn-primary">
+                <Link to="/contact?for=agency" className="jw-btn-primary">
                   Request my compliance pack
                 </Link>
                 <Link to="/credentials" className="jw-btn-secondary">
@@ -206,7 +206,7 @@ export default function Agencies() {
             Certificates, DBS details, references and my policy pack, sent the same day. Tell me what your onboarding needs and I
             will send it in the format you use.
           </p>
-          <Link to="/contact" className="jw-btn-primary">
+          <Link to="/contact?for=agency" className="jw-btn-primary">
             Get in touch
           </Link>
         </div>

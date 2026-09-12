@@ -61,7 +61,7 @@ export default function ForLAs() {
                 inspection-ready exports on demand.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
-                <Link to="/contact" className="jw-btn-primary">
+                <Link to="/contact?for=commissioner" className="jw-btn-primary">
                   Make a Referral &rarr;
                 </Link>
                 <Link to="/compliance" className="jw-btn-secondary">
@@ -227,7 +227,7 @@ export default function ForLAs() {
                 <Link to="/compliance" className="jw-btn-secondary">
                   Compliance details
                 </Link>
-                <Link to="/contact" className="jw-btn-secondary">
+                <Link to="/contact?for=commissioner" className="jw-btn-secondary">
                   Request policy pack
                 </Link>
               </div>
@@ -291,10 +291,10 @@ export default function ForLAs() {
             days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner" className="jw-btn-primary">
               Make a Referral
             </Link>
-            <Link to="/contact" className="jw-btn-secondary">
+            <Link to="/contact?for=commissioner" className="jw-btn-secondary">
               Request Evidence Pack
             </Link>
           </div>

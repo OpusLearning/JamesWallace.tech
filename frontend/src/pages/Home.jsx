@@ -47,7 +47,7 @@ const questions = [
   {
     who: "A parent asks",
     q: "How do I know this will be different?",
-    a: "I will not promise you it will. What I can tell you is that we start where your child actually is rather than where a timetable says they should be, that the first conversation is free, and that if I am not the right person I will say so and tell you who might be.",
+    a: "We start from what your child can actually manage right now, agree one small goal, and review honestly whether the approach is helping. The first conversation is free, and if I am not the right person I will say so and tell you who might be.",
   },
   {
     who: "An agency asks",
@@ -462,18 +462,18 @@ export default function Home() {
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link
-              to="/contact"
+              to="/contact?for=parent"
               className="jw-btn-primary"
               style={{ fontSize: "1rem", padding: "0.75rem 2rem" }}
             >
               Get in touch
             </Link>
             <Link
-              to="/contact"
+              to="/contact?for=parent"
               className="jw-btn-secondary"
               style={{ fontSize: "1rem", padding: "0.75rem 2rem", color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}
             >
-              Book a Call
+              Request a call
             </Link>
           </div>
         </div>

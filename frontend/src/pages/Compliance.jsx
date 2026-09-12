@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
-  { requirement: "Safeguarding / KCSIE 2025 Part One (annual)", tracked: "Renews August 2027" },
+  { requirement: "Safeguarding / KCSIE 2026 update (annual)", tracked: "Renews August 2027" },
   { requirement: "Prevent duty and child-on-child abuse", tracked: "Renews August 2027" },
   { requirement: "Lone Working Safety", tracked: "Completion date recorded" },
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },
@@ -38,7 +38,7 @@ export default function Compliance() {
             reviewed once a year and filed away.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
-            <Link to="/contact" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner" className="jw-btn-primary">
               Request Policy Pack
             </Link>
             <Link to="/platform" className="jw-btn-secondary">
@@ -56,15 +56,12 @@ export default function Compliance() {
               <h2>Safeguarding Framework</h2>
               <p>
                 I work in line with{" "}
-                <em>Keeping Children Safe in Education</em> (KCSIE 2025) and{" "}
-                <em>Working Together to Safeguard Children</em> (2023). I complete
+                <em>Keeping Children Safe in Education</em> (KCSIE 2026) and{" "}
+                <em>Working Together to Safeguard Children</em> (2026). I complete
                 safeguarding training annually and hold an enhanced DBS on the
                 Update Service, so it can be verified the same day you ask.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
-                <li>
-                  A named Designated Safeguarding Lead for every placement
-                </li>
                 <li>
                   All concerns logged immediately in an encrypted,
                   audit-trailed system
@@ -72,10 +69,6 @@ export default function Compliance() {
                 <li>
                   PIRFs completed for every physical intervention before
                   caseload can proceed
-                </li>
-                <li>
-                  Safeguarding lead notified automatically of concerns
-                  unactioned for 7+ days
                 </li>
                 <li>
                   Concern lifecycle: Queued &rarr; In Progress &rarr; Resolved
@@ -106,20 +99,14 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <h2>Lone Working</h2>
               <p>
-                Every Education Specialist delivering a solo session checks in
-                via the portal at the start of the session and checks out at
-                the end. The supervisor live feed shows all active sessions,
-                time elapsed, and check-in location.
+                I check in through the portal at the start of every solo session
+                and check out at the end, so there is a timestamped record of where
+                I was and for how long. The portal supports a live supervisor feed
+                and overdue-session alerting for multi-practitioner providers; as a
+                sole practitioner the escalation route is agreed in writing with the
+                commissioning school or local authority before teaching begins.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
-                <li>
-                  Automatic alert and email to supervisory team if a session
-                  goes overdue
-                </li>
-                <li>
-                  Panic button in the practitioner's session view - triggers
-                  immediate supervisor notification
-                </li>
                 <li>
                   Lone working audit reports available for inspection
                 </li>
@@ -299,7 +286,7 @@ export default function Compliance() {
                 draft - is monitored on the supervisor dashboard.
               </p>
               <Link
-                to="/contact"
+                to="/contact?for=commissioner"
                 className="jw-btn-secondary mt-2 d-inline-block"
               >
                 Request policy pack
@@ -339,7 +326,7 @@ export default function Compliance() {
                 needed to walk into an inspection with confidence.
               </p>
               <Link
-                to="/contact"
+                to="/contact?for=commissioner"
                 className="jw-btn-secondary mt-2 d-inline-block"
               >
                 Request inspection bundle example
@@ -371,10 +358,10 @@ export default function Compliance() {
             answer, the same day.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner" className="jw-btn-primary">
               Request Policy Pack
             </Link>
-            <Link to="/contact" className="jw-btn-secondary">
+            <Link to="/contact?for=commissioner" className="jw-btn-secondary">
               Request Inspection Bundle Example
             </Link>
           </div>

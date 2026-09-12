@@ -61,7 +61,7 @@ const quals = [
 
 /* Held certificates, checked 9 September 2026. Renewal dates are tracked; nothing here is expired. */
 const training = [
-  { name: "Safeguarding and child protection, KCSIE 2025 Part One", when: "current, renews Aug 2027" },
+  { name: "Safeguarding and child protection, KCSIE 2026 update", when: "current, renews Aug 2027" },
   { name: "Prevent duty and child-on-child abuse", when: "current, renews Aug 2027" },
   { name: "Allergy awareness", when: "current, renews Aug 2027" },
   { name: "Whole School SEND, Platinum award", when: "September 2026" },
@@ -134,7 +134,7 @@ export default function Tuition() {
                 or online anywhere.
               </p>
               <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact" className="jw-btn-primary">
+                <Link to="/contact?for=parent" className="jw-btn-primary">
                   Arrange a conversation
                 </Link>
                 <Link to="/credentials" className="jw-btn-secondary">
@@ -258,7 +258,7 @@ export default function Tuition() {
                     <strong style={{ color: "var(--text, inherit)" }}>{k}:</strong> {v}
                   </p>
                 ))}
-                <Link to="/contact" className="jw-btn-primary" style={{ marginTop: "0.5rem", display: "inline-block" }}>
+                <Link to="/contact?for=parent" className="jw-btn-primary" style={{ marginTop: "0.5rem", display: "inline-block" }}>
                   Get in touch
                 </Link>
               </div>
@@ -323,7 +323,7 @@ export default function Tuition() {
           <p style={{ maxWidth: "560px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
             Tell me about your child and what has happened so far. No commitment, and no pressure to book anything at the end of it.
           </p>
-          <Link to="/contact" className="jw-btn-primary">
+          <Link to="/contact?for=parent" className="jw-btn-primary">
             Contact James
           </Link>
         </div>

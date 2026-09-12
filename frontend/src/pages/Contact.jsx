@@ -385,7 +385,15 @@ export default function Contact() {
     path: '/contact',
   });
 
-  const [activeTab, setActiveTab] = useState("la");
+  // Which form opens is set by the link that got you here: /contact?for=parent | agency | commissioner.
+  const [activeTab, setActiveTab] = useState(() => {
+    try {
+      const who = new URLSearchParams(window.location.search).get("for");
+      return who === "parent" ? "parent" : "la";
+    } catch {
+      return "la";
+    }
+  });
 
   return (
     <section className="jw-section jw-section-warm">
@@ -429,6 +437,10 @@ export default function Contact() {
                 I respond to referral enquiries within 2 working days and begin
               placement assessments within 5 working days of receiving a commission.
               </p>
+                <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", maxWidth: "500px", margin: "0.75rem auto 0" }}>
+                  Please keep this first message general. Do not include a child&rsquo;s diagnosis, clinical detail or
+                  safeguarding information here; once a referral is under way I will arrange a secure route for that.
+                </p>
             </div>
             <LAForm />
           </>
@@ -440,6 +452,10 @@ export default function Contact() {
                 If your child is not in school and you're looking for specialist
                 provision, we'd love to hear from you.
               </p>
+                <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", maxWidth: "500px", margin: "0.75rem auto 0" }}>
+                  Please keep this first message general. Do not include a child&rsquo;s diagnosis, clinical detail or
+                  safeguarding information here; once a referral is under way I will arrange a secure route for that.
+                </p>
             </div>
             <ParentForm />
           </>
