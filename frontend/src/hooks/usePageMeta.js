@@ -38,6 +38,13 @@ export default function usePageMeta({ title, description, path, jsonLd }) {
       m.setAttribute("property", "og:description");
       return m;
     });
+    for (const [name, content] of [["twitter:title", title], ["twitter:description", description]]) {
+      setMeta(`meta[name="${name}"]`, "content", content, () => {
+        const meta = document.createElement("meta");
+        meta.setAttribute("name", name);
+        return meta;
+      });
+    }
 
     let canonical = null;
     if (path) {
@@ -48,6 +55,11 @@ export default function usePageMeta({ title, description, path, jsonLd }) {
         document.head.appendChild(canonical);
       }
       canonical.setAttribute("href", `https://jameswallace.tech${path}`);
+      setMeta('meta[property="og:url"]', "content", `https://jameswallace.tech${path}`, () => {
+        const meta = document.createElement("meta");
+        meta.setAttribute("property", "og:url");
+        return meta;
+      });
     }
 
     let script = null;

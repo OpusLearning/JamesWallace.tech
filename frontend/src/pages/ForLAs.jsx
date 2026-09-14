@@ -1,5 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
+import { TRAINING } from "../data/facts";
 
 const commissionerQA = [
   {
@@ -20,7 +21,7 @@ const commissionerQA = [
   },
   {
     q: "What does your compliance look like?",
-    a: "Enhanced DBS on the Update Service, so it verifies the same day. Safeguarding, Prevent and allergy training current to August 2027, right to work evidenced, and renewal dates tracked rather than left to lapse. Everything is in place before I take a placement."
+    a: `Enhanced DBS on the Update Service. Safeguarding training completed ${TRAINING.safeguarding.completed}; Prevent duty completed ${TRAINING.prevent.completed}; allergy awareness and anaphylaxis training completed ${TRAINING.allergy.completed}. Right to work evidence and course-specific renewal dates are available for review before a placement.`,
   },
   {
     q: "Are you inspection-ready?",
@@ -54,7 +55,7 @@ export default function ForLAs() {
             <div className="col-12 col-lg-7 text-center text-lg-start">
               <h1>For Local Authorities &amp; Schools</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                Commissioning EOTAS provision should be simple. ND Services, the provision operated by James Wallace,
+                Commissioning EOTAS provision should be clear. ND Services, the provision operated by James Wallace,
                 gives commissioners and referrers real-time visibility of every
                 active placement - from session evidence to safeguarding nil
                 returns - with structured monthly deliverables and
@@ -100,7 +101,7 @@ export default function ForLAs() {
       {/* Referral process */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Referral Process</h2>
+          <h2 className="text-center mb-2">A clear route from referral to review</h2>
           <p
             className="text-center"
             style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
@@ -262,7 +263,7 @@ export default function ForLAs() {
             {commissionerQA.map((item, i) => (
               <div key={i} className="col-12 col-md-6">
                 <div className="jw-card h-100">
-                  <p
+                  <h3
                     style={{
                       fontWeight: 600,
                       fontSize: "0.95rem",
@@ -270,8 +271,8 @@ export default function ForLAs() {
                       color: "var(--text-primary)",
                     }}
                   >
-                    "{item.q}"
-                  </p>
+                    &quot;{item.q}&quot;
+                  </h3>
                   <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-muted)" }}>
                     {item.a}
                   </p>

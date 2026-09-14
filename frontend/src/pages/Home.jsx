@@ -1,525 +1,175 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { BIO, AVAILABILITY, REFERENCES } from "../data/facts";
+import { AVAILABILITY, REFERENCES, REVIEWED } from "../data/facts";
 
-const serviceItems = [
-  {
-    title: "EOTAS Placements",
-    description:
-      "Education Other Than At School - 1:1 and small group sessions for learners who cannot access a mainstream or special school setting.",
-  },
-  {
-    title: "EBSA Reintegration",
-    description:
-      "Graduated return-to-school planning for learners with emotionally-based school avoidance, with structured evidence at every stage.",
-  },
-  {
-    title: "Alternative Provision",
-    description:
-      "AP packages for learners awaiting or alongside specialist placements, with daily session reports and PLP progress tracking.",
-  },
-  {
-    title: "EHCP Top-Up Support",
-    description:
-      "Intensive targeted input aligned to Education, Health and Care Plan outcomes, with criterion-level progress visible in real time.",
-  },
-];
-
-const differentiators = [
-  {
-    title: "You can see what happened",
-    description:
-      "Every session is planned, delivered and evidenced in a portal I built myself. Parents can see what actually happened; commissioners get engagement, attendance and safeguarding in real time rather than a monthly PDF.",
-  },
-  {
-    title: "Built around your child",
-    description:
-      "Every learner gets a plan written to their own outcomes. I work around their interests, their pace and the setting they can actually cope with, rather than a one-size curriculum.",
-  },
-  {
-    title: "Checks you can verify",
-    description:
-      "Enhanced DBS on the Update Service, safeguarding and Prevent current, and the Whole School SEND Platinum award. Renewal dates are tracked rather than left to lapse, lone working is logged, and every safeguarding concern is actioned and auditable.",
-  },
-];
-
-// One question from each of the three people who land here, rather than three from the commissioner.
 const questions = [
   {
-    who: "A parent asks",
-    q: "How do I know this will be different?",
-    a: "We start from what your child can actually manage right now, agree one small goal, and review honestly whether the approach is helping. The first conversation is free, and if I am not the right person I will say so and tell you who might be.",
+    question: "My child cannot manage school. Where do we start?",
+    answer: "With a conversation about what life is like for your child now. We talk about what they enjoy, what feels difficult and what you hope might change. There is no need to have a plan worked out before you get in touch.",
+    to: "/tuition",
+    link: "How tuition starts",
   },
   {
-    who: "An agency asks",
-    q: "How quickly can you be placed?",
-    a: "Enhanced DBS on the Update Service, so it verifies the same day, and safeguarding, Prevent and allergy training all current to August 2027. Certificates and my policy pack go over the same day you ask.",
+    question: "Does my child need a diagnosis or an EHCP?",
+    answer: "You can enquire about private tuition without a diagnosis or an Education, Health and Care Plan (EHCP). If an EHCP is in place, teaching can be shaped around its outcomes. We will discuss the support your child needs and whether I am the right person to provide it.",
+    to: "/contact?for=parent",
+    link: "Discuss your situation",
   },
   {
-    who: "A commissioner asks",
-    q: "How do I know sessions are actually happening?",
-    a: "Every session has a timestamped report filed within 24 hours, with engagement, activity notes and progress against the criteria. Case chronologies, safeguarding logs and policy packs export as PDFs for any monitoring visit.",
+    question: "Where does teaching take place?",
+    answer: "In person across Derbyshire and Nottinghamshire, or online. Sessions can take place at home or in an agreed community setting, depending on what your child can manage and what is appropriate for the placement.",
+    to: "/tuition",
+    link: "Explore the options",
+  },
+  {
+    question: "Can an agency, school or local authority arrange a placement?",
+    answer: "Yes. I work with private families, agencies, schools and local authorities. Qualifications, professional references and compliance information are available to support your checks. Scope, availability and reporting arrangements are agreed before a placement begins.",
+    to: "/for-las",
+    link: "Information for commissioners",
   },
 ];
+
+const steps = [
+  {
+    number: "01",
+    title: "First, we listen.",
+    text: "A free conversation about your child, what has happened so far and what you need. We decide together whether the fit is right.",
+  },
+  {
+    number: "02",
+    title: "Find a starting point.",
+    text: "A first session built around their interests and what feels manageable. Time to get to know each other before expecting too much.",
+  },
+  {
+    number: "03",
+    title: "Make the next step clear.",
+    text: "An agreed personal learning plan, thoughtful teaching and session notes. We review what is helping and adjust what is not.",
+  },
+];
+
+function Arrow() {
+  return <svg className="jw-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>;
+}
 
 export default function Home() {
   usePageMeta({
-    title: 'James Wallace | One-to-one teaching for children who cannot manage school',
-    description:
-      'Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.',
-    path: '/',
+    title: "James Wallace | One-to-one teaching for children who cannot manage school",
+    description: "Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.",
+    path: "/",
   });
 
   return (
-    <>
-      {/* Hero */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container">
-          <div className="row align-items-center g-4">
-            <div className="col-12 col-lg-7 text-center text-lg-start">
-              <p
-                style={{
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "var(--brand)",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Derbyshire, Nottinghamshire and online
-              </p>
-              <h1>
-                One-to-one teaching for children
-                who cannot manage school
-              </h1>
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                I am James Wallace. I have taught for thirteen years in specialist provision &mdash; twelve of them in a
-                specialist school for young people with social, emotional and mental health needs &mdash; and spent five
-                years inside Nottinghamshire County Council's children's commissioning team. I now teach children who
-                cannot access school: privately for families, through agencies and schools, and on placements
-                commissioned by local authorities.
-              </p>
-              <div
-                className="d-flex flex-wrap gap-3 mt-3 mb-4 justify-content-center justify-content-lg-start"
-                style={{ fontSize: "0.88rem" }}
-              >
-                {[
-                  "QTS since 2004, MEd",
-                  "Enhanced DBS on the Update Service",
-                  "Every session evidenced",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="d-flex align-items-center gap-1"
-                  >
-                    <span style={{ color: "var(--brand)", fontWeight: 700 }}>
-                      &#10003;
-                    </span>{" "}
-                    {item}
-                  </span>
-                ))}
-              </div>
-              {/* Three doors. Ordered by how quickly each one pays, which is also the order most visitors arrive in. */}
-              <div className="d-flex flex-column flex-sm-row gap-3">
-                <Link to="/tuition" className="jw-btn-primary">
-                  For families &rarr;
-                </Link>
-                <Link to="/agencies" className="jw-btn-secondary">
-                  For agencies &amp; schools &rarr;
-                </Link>
-                <Link to="/for-las" className="jw-btn-secondary">
-                  For local authorities &rarr;
-                </Link>
-              </div>
-              {/* A commissioner reading "taking new placements now" has no way of knowing whether that was written this
-                  week or last spring. The date is what makes it worth anything. It lives in facts.js so checking
-                  availability and dating the claim are the same action. */}
-              <p
-                className="mt-3 d-flex align-items-center gap-2 justify-content-center justify-content-lg-start flex-wrap"
-                style={{
-                  fontSize: "0.8rem",
-                  color: "var(--text-muted)",
-                  marginBottom: 0,
-                }}
-              >
-                <span
-                  style={{
-                    width: "8px",
-                    height: "8px",
-                    borderRadius: "50%",
-                    background: "var(--brand)",
-                    display: "inline-block",
-                  }}
-                />
-                {AVAILABILITY.status}
-                <span style={{ opacity: 0.75 }}>
-                  &middot; reviewed {AVAILABILITY.reviewed}
-                </span>
-              </p>
+    <div className="jw-home">
+      <section className="jw-home-hero" aria-labelledby="home-heading">
+        <div className="jw-container jw-hero-grid">
+          <div className="jw-hero-copy">
+            <p className="jw-eyebrow jw-hero-eyebrow"><span aria-hidden="true" /> Specialist one-to-one teaching</p>
+            <h1 id="home-heading">A way back<br />to <em>learning.</em></h1>
+            <p className="jw-hero-intro">For children who find school difficult.<br />Teaching that starts with who they are.</p>
+            <p className="jw-hero-description">I’m James Wallace. I help young people find a starting point, build trust and take their next step in education.</p>
+            <div className="jw-hero-actions">
+              <Link to="/contact?for=parent" className="jw-btn-primary">Talk about your child <Arrow /></Link>
+              <a href="#how-it-starts" className="jw-text-link">How it starts <span aria-hidden="true">↓</span></a>
             </div>
-            {/* The hero image was a screenshot of the supervisor dashboard, badged "Live ND Portal Dashboard" — the most
-                commissioner-facing thing on the site, and the first picture a parent saw. Someone deciding whether to trust
-                you with their child wants to see the person, not the software. */}
-            <div className="col-12 col-lg-5 text-center">
-              <figure style={{ margin: 0 }}>
-                <img
-                  src="/james-wallace.webp"
-                  alt="James Wallace"
-                  style={{
-                    width: "100%",
-                    maxWidth: "340px",
-                    aspectRatio: "1 / 1",
-                    objectFit: "cover",
-                    // A 2:3 portrait cropped square from the centre cuts the top of his head off. The About photo
-                    // further down already uses "top" for the same image, so use what is known to work.
-                    objectPosition: "top",
-                    borderRadius: "50%",
-                    display: "block",
-                    margin: "0 auto",
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-                  }}
-                />
-                <figcaption
-                  style={{
-                    marginTop: "1rem",
-                    fontSize: "0.85rem",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  <strong style={{ color: "var(--text)" }}>James Wallace</strong>
-                  <br />
-                  QTS, MEd. Thirteen years teaching, five commissioning.
-                </figcaption>
-              </figure>
-            </div>
+            <p className="jw-hero-location">Derbyshire, Nottinghamshire &amp; online</p>
           </div>
+          <figure className="jw-hero-portrait">
+            <div className="jw-portrait-frame">
+              <img src="/james-wallace.webp" alt="James Wallace, specialist teacher" width="1024" height="1536" fetchPriority="high" />
+              <span className="jw-portrait-edge" aria-hidden="true">A personal approach to education</span>
+            </div>
+            <figcaption><span>James Wallace</span><span>Specialist teacher · QTS, MEd</span></figcaption>
+          </figure>
+        </div>
+        <div className="jw-container">
+          <div className="jw-hero-footnote"><p>One young person. Their own way forward.</p><a href="#find-your-route">Find the right support <span aria-hidden="true">↓</span></a></div>
         </div>
       </section>
 
-      {/* What We Do */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <h2 className="text-center mb-2">What I do</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "600px", margin: "0 auto 3rem" }}
-          >
-            I teach young people whose needs cannot be met in an ordinary school.
-            I work privately with families, through agencies and schools, and on
-            placements commissioned by local authorities. The teaching is the same
-            in every case; only who pays for it changes.
-          </p>
-          <div className="row g-4">
-            {serviceItems.map((item) => (
-              <div key={item.title} className="col-12 col-md-6">
-                <div className="jw-card h-100">
-                  <h3
-                    style={{
-                      fontSize: "1rem",
-                      fontWeight: 600,
-                      marginBottom: "0.5rem",
-                      color: "var(--brand)",
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "0.9rem" }}>
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-center mt-4" style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
-            Every learner has a Personal Learning Plan, weekly planned sessions,
-            and a submitted daily session report - so commissioners and parents
-            always have an accurate, up-to-date picture of progress.
-          </p>
+      <section className="jw-proof-rail" aria-label="Qualifications and professional checks">
+        <div className="jw-container jw-proof-grid">
+          <p className="jw-proof-intro">Experience you can<br /><em>look into.</em></p>
+          <Link to="/credentials"><strong>Qualified teacher</strong><span>QTS since 2004 · MEd</span></Link>
+          <Link to="/about"><strong>13 years in specialist teaching</strong><span>Including 12 at Foxwood Academy</span></Link>
+          <Link to="/compliance"><strong>Enhanced DBS</strong><span>On the Update Service</span></Link>
+          <Link to="/credentials" className="jw-proof-arrow" aria-label="View credentials and professional references"><Arrow /></Link>
         </div>
       </section>
 
-      {/* One reference, high up. The full set with ratings is on /credentials, but a visitor could previously read this
-          whole page and the family page without ever meeting a voice other than mine. One quotation, not a wall of
-          testimonials. */}
-      <section className="jw-section jw-section-warm">
+      <section id="find-your-route" className="jw-section jw-pathways" aria-labelledby="pathways-heading">
         <div className="jw-container">
-          <figure
-            style={{
-              maxWidth: "720px",
-              margin: "0 auto",
-              textAlign: "center",
-            }}
-          >
-            <blockquote
-              style={{
-                fontSize: "1.15rem",
-                lineHeight: 1.6,
-                fontStyle: "italic",
-                margin: "0 0 1rem",
-              }}
-            >
-              &ldquo;{REFERENCES[0].quote}&rdquo;
-            </blockquote>
-            <figcaption style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
-              <strong style={{ color: "var(--text)" }}>{REFERENCES[0].name}</strong>
-              {" — "}
-              {REFERENCES[0].role}
-              <br />
-              <Link to="/credentials" style={{ fontSize: "0.85rem" }}>
-                References and certificates &rarr;
+          <div className="jw-section-heading"><p className="jw-eyebrow">A different route through education</p><h2 id="pathways-heading">The right support starts<br />with <em>understanding.</em></h2></div>
+          <div className="jw-pathways-grid">
+            <Link to="/tuition" className="jw-family-path">
+              <span className="jw-eyebrow">For parents &amp; carers</span>
+              <h3>You know your child.<br />Let’s start there.</h3>
+              <p>When school has become difficult, finding help can feel like another thing to get right. One-to-one teaching offers space to begin with your child’s needs, interests and pace.</p>
+              <span className="jw-path-link">Explore tuition for your child <Arrow /></span>
+              <span className="jw-family-path-line" aria-hidden="true" />
+            </Link>
+            <div className="jw-professional-paths">
+              <Link to="/agencies" className="jw-professional-path">
+                <span className="jw-eyebrow">For agencies &amp; schools</span>
+                <h3>A specialist you can place<br className="jw-desktop-break" /> with a clear brief.</h3>
+                <p>Experienced SEND teaching, professional checks and session evidence to support your placement.</p>
+                <span className="jw-path-link">Work with James <Arrow /></span>
               </Link>
-            </figcaption>
+              <Link to="/for-las" className="jw-professional-path">
+                <span className="jw-eyebrow">For local authorities</span>
+                <h3>Individual provision.<br />Accountable delivery.</h3>
+                <p>Teaching informed by five years in Nottinghamshire County Council’s children’s commissioning team.</p>
+                <span className="jw-path-link">Explore commissioned provision <Arrow /></span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="jw-reference-section" aria-label="Professional reference">
+        <div className="jw-container jw-reference-layout">
+          <div className="jw-reference-label"><p className="jw-eyebrow">A colleague’s perspective</p><span aria-hidden="true">“</span></div>
+          <figure className="jw-reference">
+            <blockquote>“{REFERENCES[0].quote}”</blockquote>
+            <figcaption><div><strong>{REFERENCES[0].name}</strong><span>{REFERENCES[0].role}</span></div><Link to="/credentials" className="jw-text-link">Read professional references <Arrow /></Link></figcaption>
           </figure>
         </div>
       </section>
 
-      {/* Three Differentiators */}
-      <section className="jw-section jw-section-surface">
+      <section id="how-it-starts" className="jw-section jw-approach" aria-labelledby="approach-heading">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Why me</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
-          >
-            Three things that are genuinely hard to find elsewhere.
-          </p>
-          <div className="row g-4">
-            {differentiators.map((item, i) => (
-              <div key={i} className="col-12 col-lg-4">
-                <div className="jw-card h-100">
-                  <div
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "50%",
-                      background: "var(--brand)",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 700,
-                      fontSize: "0.9rem",
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    {i + 1}
-                  </div>
-                  <h3
-                    style={{
-                      fontSize: "1rem",
-                      fontWeight: 600,
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "0.9rem" }}>
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <div className="jw-section-heading jw-heading-split"><div><p className="jw-eyebrow">How it starts</p><h2 id="approach-heading">Small steps.<br /><em>A considered approach.</em></h2></div><p>We do not need all the answers on day one. We need a place to begin, and a way to notice what helps.</p></div>
+          <ol className="jw-steps">{steps.map((step) => <li key={step.number}><span className="jw-step-number" aria-hidden="true">{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
+          <Link to="/tuition" className="jw-text-link">More about working together <Arrow /></Link>
         </div>
       </section>
 
-      {/* Platform teaser */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="row align-items-center g-5">
-            <div className="col-12 col-lg-6">
-              <div className="row g-3">
-                <div className="col-6">
-                  <img
-                    src="/portal/03b-weekly-plan-tab.webp"
-                    alt="A week's plan, written before the week starts"
-                    style={{
-                      width: "100%",
-                      borderRadius: "8px",
-                      border: "1px solid var(--border)",
-                    }}
-                  />
-                </div>
-                <div className="col-6">
-                  <img
-                    src="/portal/04-daily-reports.webp"
-                    alt="A session report, filed within 24 hours"
-                    style={{
-                      width: "100%",
-                      borderRadius: "8px",
-                      border: "1px solid var(--border)",
-                    }}
-                  />
-                </div>
-              </div>
+      <section className="jw-evidence-section" aria-labelledby="evidence-heading">
+        <div className="jw-container jw-evidence-grid">
+          <div className="jw-evidence-copy"><p className="jw-eyebrow">Thoughtful teaching. Visible work.</p><h2 id="evidence-heading">You should never<br />have to wonder<br /><em>what happened.</em></h2><p>A personal learning plan gives the teaching direction. Session reports record the activities, engagement and work towards agreed outcomes.</p><p>For families, it is a clearer picture. For commissioners, it is evidence you can use in reviews.</p><Link to="/platform" className="jw-text-link">See how the work is recorded <Arrow /></Link></div>
+          <figure className="jw-plan-figure">
+            <div className="jw-plan-paper">
+              <div className="jw-plan-topline"><span>James Wallace</span><span>Teaching &amp; learning</span></div>
+              <p className="jw-plan-label">Illustrative teaching plan</p>
+              <h3>A starting point.<br />A next step.</h3>
+              <dl className="jw-plan-entries">
+                <div><dt><span aria-hidden="true">01</span> Start with</dt><dd>A familiar interest.<small>Something the young person wants to explore.</small></dd></div>
+                <div><dt><span aria-hidden="true">02</span> Make space for</dt><dd>A manageable activity.<small>The pace and setting that feel possible.</small></dd></div>
+                <div><dt><span aria-hidden="true">03</span> Reflect on</dt><dd>What helped today.<small>What to keep, what to change, what comes next.</small></dd></div>
+              </dl>
+              <div className="jw-plan-bottom"><span>Agreed together. Reviewed regularly.</span><span aria-hidden="true">↗</span></div>
             </div>
-            <div className="col-12 col-lg-6">
-              <p
-                style={{
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  color: "var(--brand)",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                How you see the work
-              </p>
-              <h2>Every session, written down</h2>
-              <ul
-                style={{
-                  paddingLeft: "1.25rem",
-                  fontSize: "0.95rem",
-                  lineHeight: 1.8,
-                }}
-              >
-                <li>A plan before the week starts, and a report within 24 hours of each session</li>
-                <li>Safeguarding concerns logged, actioned and escalated, never left in a notebook</li>
-                <li>Lone-working check-in and overdue alerts, because I work in homes</li>
-                <li>Progress tied to the outcomes in the plan, not to a tick sheet</li>
-                <li>
-                  Everything exportable as a PDF for a review, a panel or a monitoring visit
-                </li>
-              </ul>
-              <Link to="/platform" className="jw-btn-secondary mt-3 d-inline-block">
-                See the platform &rarr;
-              </Link>
-            </div>
-          </div>
+            <figcaption>A simplified illustration of the approach, not a learner’s record or a report of results.</figcaption>
+          </figure>
         </div>
       </section>
 
-      {/* Commissioner Q&A */}
-      <section className="jw-section jw-section-surface">
-        <div className="jw-container">
-          <h2 className="text-center mb-2">Questions I get asked</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
-          >
-            One from each of the three people who usually land on this page.
-          </p>
-          <div className="row g-4">
-            {questions.map((item, i) => (
-              <div key={i} className="col-12 col-lg-4">
-                <div className="jw-card h-100">
-                  <p
-                    style={{
-                      fontWeight: 600,
-                      fontSize: "0.95rem",
-                      marginBottom: "0.75rem",
-                      color: "var(--text-primary)",
-                    }}
-                  >
-                    "{item.q}"
-                  </p>
-                  <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-muted)" }}>
-                    {item.a}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-4">
-            <Link to="/for-las" className="jw-btn-secondary">
-              For local authorities &rarr;
-            </Link>
-          </div>
-        </div>
+      <section className="jw-section jw-faq-section" aria-labelledby="faq-heading">
+        <div className="jw-container jw-faq-grid"><div><p className="jw-eyebrow">Before you get in touch</p><h2 id="faq-heading">A few things<br />you may be<br /><em>wondering.</em></h2><Link to="/about" className="jw-text-link">Get to know James <Arrow /></Link></div><div className="jw-faq-list">{questions.map((item) => <details key={item.question} className="jw-faq"><summary>{item.question}<span aria-hidden="true" className="jw-faq-indicator" /></summary><div className="jw-faq-answer"><p>{item.answer}</p><Link to={item.to} className="jw-text-link">{item.link} <Arrow /></Link></div></details>)}</div></div>
       </section>
 
-      {/* About strip */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="row align-items-center g-4">
-            <div className="col-12 col-md-3 text-center">
-              <img
-                src="/james-wallace.webp"
-                alt="James Wallace - Education Specialist"
-                style={{
-                  width: "160px",
-                  height: "160px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  border: "3px solid var(--border)",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
-                }}
-              />
-            </div>
-            <div className="col-12 col-md-9">
-              <h2 style={{ marginBottom: "0.75rem" }}>About James</h2>
-              <p>
-                James Wallace is an Education Specialist with a {BIO.degree},
-                MEd, QTS, and Enhanced DBS. He works exclusively with
-                neurodiverse learners, delivering specialist provision for young
-                people with ADHD, Autism, SEMH, and complex needs through
-                evidence-based, structured sessions.
-              </p>
-              <div className="d-flex flex-wrap gap-2 mb-4">
-                {[BIO.degreeShort, "MEd", "QTS", "Enhanced DBS", "DSL"].map(
-                  (badge) => (
-                    <span key={badge} className="jw-badge">
-                      {badge}
-                    </span>
-                  )
-                )}
-              </div>
-              <div className="d-flex flex-wrap gap-3">
-                <Link to="/about" className="jw-btn-secondary">
-                  About James
-                </Link>
-                <Link to="/credentials" className="jw-btn-secondary">
-                  Credentials
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="jw-invitation" aria-labelledby="invitation-heading">
+        <div className="jw-container jw-invitation-inner"><p className="jw-eyebrow">There is a place to begin</p><h2 id="invitation-heading">Let’s talk about<br /><em>what’s possible.</em></h2><p>A free first conversation. Space to explain.<br />An honest view of whether I can help.</p><Link to="/contact?for=parent" className="jw-btn-primary">Start a conversation <Arrow /></Link><div className="jw-availability"><span className="jw-availability-dot" aria-hidden="true" /><span>{AVAILABILITY.status}<small>Availability reviewed {AVAILABILITY.reviewed}</small></span></div><p className="jw-invitation-note">Qualifications and compliance information reviewed {REVIEWED}. <Link to="/compliance">View details</Link></p></div>
       </section>
-
-      {/* Referral CTA */}
-      <section
-        className="jw-section"
-        style={{
-          background: "var(--surface-dark, #1a1a2e)",
-          color: "#fff",
-        }}
-      >
-        <div className="jw-container text-center">
-          <h2 style={{ color: "#fff" }}>Start with a conversation</h2>
-          <p
-            style={{
-              maxWidth: "520px",
-              margin: "0 auto 2rem",
-              color: "rgba(255,255,255,0.8)",
-            }}
-          >
-            Whether you are a parent, an agency or a local authority, the first
-            step is the same: tell me about the young person and what has happened
-            so far. I come back within two working days.
-          </p>
-          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link
-              to="/contact?for=parent"
-              className="jw-btn-primary"
-              style={{ fontSize: "1rem", padding: "0.75rem 2rem" }}
-            >
-              Get in touch
-            </Link>
-            <Link
-              to="/contact?for=parent"
-              className="jw-btn-secondary"
-              style={{ fontSize: "1rem", padding: "0.75rem 2rem", color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}
-            >
-              Request a call
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

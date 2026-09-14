@@ -1,14 +1,4 @@
 import usePageMeta from "../hooks/usePageMeta";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  FaReact,
-  FaNodeJs,
-  FaCss3Alt,
-  FaPalette,
-  FaMobileAlt,
-} from "react-icons/fa";
-
 // Purple Pixel Images
 import PPHomepage from "../assets/portfolio/PP_homepage.webp";
 import PPLogo from "../assets/portfolio/pp_logo.webp";
@@ -32,12 +22,6 @@ export default function Portfolio() {
       "Selected work from James Wallace: specialist SEND and EOTAS teaching alongside the reporting and evidence tools built to support it.",
     path: "/portfolio",
   });
-
-  const [expandedIndex, setExpandedIndex] = useState(null);
-
-  const toggleExpand = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
 
   const portfolioItems = [
     {
@@ -130,20 +114,20 @@ export default function Portfolio() {
               <p className="mt-2 text-center">Wireframe</p>
             </div>
           </div>
-          <h5>Wireframing Process</h5>
+          <h3>Wireframing Process</h3>
           <p>
             Detailed wireframes were created before development to plan the
             layout and user flow, ensuring a user-friendly experience from the
             start.
           </p>
-          <h5>About the Educator</h5>
+          <h3>About the Educator</h3>
           <p>
-            The site highlights the educator's expertise with over 11 years of
-            teaching experience across the US and UK, emphasising a Master's
+            The site highlights the educator’s teaching experience across the
+            US and UK, emphasising a Master’s
             degree in Education and a specialisation in Trauma-Informed
             Practices.
           </p>
-          <h5>Key Features</h5>
+          <h3>Key Features</h3>
           <ul>
             <li>
               <strong>Comprehensive Service Overview:</strong> Clear
@@ -213,7 +197,7 @@ export default function Portfolio() {
             events with their personal calendars. Administrative tools further
             enable staff to manage event details efficiently.
           </p>
-          <h5>Features</h5>
+          <h3>Features</h3>
           <ul>
             <li>
               <strong>Event Browsing:</strong> Discover upcoming community
@@ -235,7 +219,7 @@ export default function Portfolio() {
               and cancellations.
             </li>
           </ul>
-          <h5>Technical Stack</h5>
+          <h3>Technical Stack</h3>
           <p className="mb-3">
             The platform employs modern technologies to deliver a responsive and
             scalable solution. The frontend is built using React Native and
@@ -243,23 +227,23 @@ export default function Portfolio() {
             Calendar integration is achieved through the Google Calendar API,
             with secure authentication managed via Google OAuth.
           </p>
-          <h5>How to Become a Tester</h5>
+          <h3>How to Become a Tester</h3>
           <p className="mb-3">
             If you are interested in testing the Google Calendar event creation
             feature, please email your request to{" "}
             <a
               href="mailto:hello@jameswallace.tech"
-              className="text-white"
+              className="jw-project-link"
             >
               hello@jameswallace.tech
             </a>{" "}
             with a brief description of your interest. Access is granted on a
             case-by-case basis.
           </p>
-          <h5>Authentication Process</h5>
+          <h3>Authentication Process</h3>
           <p>
             Begin authentication by visiting{" "}
-            <a href="https://eventsplatform.online" className="text-white">
+            <a href="https://eventsplatform.online" className="jw-project-link">
               https://eventsplatform.online
             </a>{" "}
             and following the on-screen instructions to complete the Google
@@ -277,62 +261,29 @@ export default function Portfolio() {
   ];
 
   return (
-    <section className="py-5" style={{ background: "none" }}>
-      <div className="container">
-        <h1 className="text-center text-white mb-5">Portfolio</h1>
-        <div className="row">
-          {portfolioItems.map((item, index) => (
-            <div key={item.title} className="col-12 col-md-6 col-lg-4 mb-4">
-              <motion.div
-                className="card h-100"
-                style={{
-                  cursor: "pointer",
-                  backgroundColor: "rgba(128,128,128,0.15)",
-                  backdropFilter: "blur(10px)",
-                  border: "none",
-                  color: "#fff",
-                }}
-                whileHover={{ scale: 1.02 }}
-                onClick={() => toggleExpand(index)}
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="card-img-top img-fluid"
-                  style={{
-                    maxHeight: "200px",
-                    objectFit: "cover",
-                  }}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{item.title}</h5>
-                  <p className="card-text">{item.shortDescription}</p>
-                  <a
-                    href={item.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline-light"
-                  >
-                    Visit Live Website
-                  </a>
-                </div>
-                {expandedIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="card-footer"
-                    style={{
-                      backgroundColor: "transparent",
-                      borderTop: "1px solid rgba(255,255,255,0.2)",
-                    }}
-                  >
-                    {item.fullDescription}
-                  </motion.div>
-                )}
-              </motion.div>
-            </div>
+    <section className="jw-section jw-portfolio">
+      <div className="jw-container">
+        <div className="jw-portfolio-intro">
+          <span className="jw-eyebrow">Selected digital projects</span>
+          <h1>Thoughtful tools.<br />Practical purposes.</h1>
+          <p>A selection of websites and applications, from education and wellbeing to community events.</p>
+        </div>
+        <div className="jw-project-grid">
+          {portfolioItems.map((item) => (
+            <article className="jw-project" key={item.title}>
+              <img src={item.image} alt={`${item.title} website preview`} className="jw-project-cover" loading="lazy" />
+              <div className="jw-project-body">
+                <h2>{item.title}</h2>
+                <p>{item.shortDescription}</p>
+                <a href={item.liveLink} target="_blank" rel="noopener noreferrer" className="jw-text-link">
+                  Visit project <span aria-hidden="true">↗</span><span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+                <details className="jw-project-details">
+                  <summary>Explore the project</summary>
+                  <div>{item.fullDescription}</div>
+                </details>
+              </div>
+            </article>
           ))}
         </div>
       </div>

@@ -1,85 +1,52 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
+
+const links = [
+  { to: "/tuition", label: "Families / Tuition" },
+  { to: "/agencies", label: "Agencies" },
+  { to: "/for-las", label: "Local authorities" },
+  { to: "/about", label: "About" },
+];
 
 export default function Header({ onA11yClick }) {
   const { pathname } = useLocation();
-  const isActive = (path) =>
-    path === "/" ? pathname === "/" : pathname.startsWith(path);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuToggle = useRef(null);
+  const isActive = (path) => path === "/" ? pathname === "/" : pathname.startsWith(path);
+  useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key !== "Escape" || event.target.closest("dialog[open]")) return;
+      setMenuOpen(false);
+      menuToggle.current?.focus();
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
   return (
-    <header className="jw-nav">
-      <div className="jw-nav-inner">
-        {/* Logo */}
-        <Link to="/" className="jw-nav-logo">
-          <span className="jw-nav-logo-primary">James Wallace</span>
-          <span className="jw-nav-logo-sub">Specialist SEND &amp; EOTAS Tutor</span>
-        </Link>
-
-        {/* Nav links */}
-        <nav className="jw-nav-links">
-          <Link to="/" className={"jw-nav-link" + (isActive("/") ? " active" : "")}>
-            Home
-          </Link>
-          <Link to="/tuition" className={"jw-nav-link" + (isActive("/tuition") ? " active" : "")}>
-            For Families
-          </Link>
-          <Link to="/agencies" className={"jw-nav-link" + (isActive("/agencies") ? " active" : "")}>
-            For Agencies
-          </Link>
-          <Link to="/for-las" className={"jw-nav-link" + (isActive("/for-las") ? " active" : "")}>
-            For LAs
-          </Link>
-          <Link to="/compliance" className={"jw-nav-link" + (isActive("/compliance") ? " active" : "")}>
-            Compliance
-          </Link>
-          <Link to="/about" className={"jw-nav-link" + (isActive("/about") ? " active" : "")}>
-            About
-          </Link>
-          <a
-            href="https://blog.jameswallace.tech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="jw-nav-link external"
-          >
-            Blog ↗
-          </a>
-          <a
-            href="https://portal.jameswallace.tech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="jw-nav-link external"
-            style={{ color: "var(--action)", fontWeight: 600 }}
-          >
-            Portal ↗
-          </a>
-
-          {/* Accessibility toggle */}
-          <button
-            className="jw-a11y-btn"
-            aria-label="Accessibility options"
-            onClick={onA11yClick}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="5" r="1.5" />
-              <path d="M5 8h14M12 8v5m-4 3 4-3 4 3M8 21l2-5M16 21l-2-5" />
-            </svg>
+    <>
+      <a className="jw-skip-link" href="#main-content">Skip to main content</a>
+      <header className="jw-header">
+        <div className="jw-header-inner">
+          <Link to="/" className="jw-brand" aria-label="James Wallace, home"><span className="jw-brand-name">James Wallace</span><span className="jw-brand-subtitle">Specialist teaching</span></Link>
+          <button ref={menuToggle} type="button" className="jw-menu-toggle" aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
+            <span className="jw-menu-toggle-label">{menuOpen ? "Close" : "Menu"}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{menuOpen ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}</svg>
           </button>
-
-          {/* CTA */}
-          <Link to="/contact" className="jw-nav-cta">
-            Get in touch
-          </Link>
-        </nav>
-      </div>
-    </header>
+          <nav id="primary-navigation" className={`jw-nav${menuOpen ? " is-open" : ""}`} aria-label="Primary navigation">
+            <ul className="jw-nav-list">
+              {links.map(({ to, label }) => <li key={to}><Link to={to} className={`jw-nav-link${isActive(to) ? " is-active" : ""}`} aria-current={isActive(to) ? "page" : undefined}>{label}</Link></li>)}
+              <li><Link to="/contact" className="jw-nav-link jw-nav-action">Start a conversation</Link></li>
+              <li><a href="https://portal.jameswallace.tech" target="_blank" rel="noopener noreferrer" className="jw-nav-link jw-nav-portal">Portal<span aria-hidden="true"> ↗</span></a></li>
+              {onA11yClick && <li><button type="button" className="jw-nav-link jw-nav-a11y" onClick={onA11yClick}>Accessibility</button></li>}
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }
+
+Header.propTypes = { onA11yClick: PropTypes.func };

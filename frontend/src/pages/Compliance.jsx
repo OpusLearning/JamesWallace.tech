@@ -1,10 +1,12 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
+import { STATUTORY, TRAINING } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
-  { requirement: "Safeguarding / KCSIE 2026 update (annual)", tracked: "Renews August 2027" },
-  { requirement: "Prevent duty and child-on-child abuse", tracked: "Renews August 2027" },
+  { requirement: `Safeguarding / ${STATUTORY.kcsie} update`, tracked: `Completed ${TRAINING.safeguarding.completed}` },
+  { requirement: TRAINING.prevent.name, tracked: `Completed ${TRAINING.prevent.completed}` },
+  { requirement: "Child-on-child abuse (agency onboarding)", tracked: "Valid to 22 August 2027" },
   { requirement: "Lone Working Safety", tracked: "Completion date recorded" },
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },
   { requirement: "Data Protection / UK GDPR", tracked: "Completion date recorded" },
@@ -24,7 +26,7 @@ export default function Compliance() {
       {/* Hero */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
-          <h1>Safeguarding &amp; Compliance</h1>
+          <h1>Safeguarding you can inspect</h1>
           <p
             style={{
               fontSize: "1.05rem",
@@ -33,9 +35,8 @@ export default function Compliance() {
               lineHeight: 1.7,
             }}
           >
-            Built in, not bolted on. Every safeguard, compliance check, and
-            policy is part of how I work day to day, not something
-            reviewed once a year and filed away.
+            Every safeguard, compliance check and policy is part of day-to-day
+            delivery, with records available for the commissioner to review.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">
@@ -56,10 +57,10 @@ export default function Compliance() {
               <h2>Safeguarding Framework</h2>
               <p>
                 I work in line with{" "}
-                <em>Keeping Children Safe in Education</em> (KCSIE 2026) and{" "}
-                <em>Working Together to Safeguard Children</em> (2026). I complete
+                <em>{STATUTORY.kcsieLong}</em> and{" "}
+                <em>{STATUTORY.workingTogether}</em>. I complete
                 safeguarding training annually and hold an enhanced DBS on the
-                Update Service, so it can be verified the same day you ask.
+                Update Service, with details available for the checks required before a placement.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>
@@ -241,7 +242,7 @@ export default function Compliance() {
               },
               {
                 title: "EU-region infrastructure",
-                desc: "Data hosted on Neon PostgreSQL, Frankfurt (EU). UK GDPR compliant. Data processor agreement available on request.",
+                desc: "Data hosted on Neon PostgreSQL, Frankfurt (EU). Data processor agreement available on request.",
               },
               {
                 title: "SAR process",
@@ -318,12 +319,12 @@ export default function Compliance() {
                 For LA monitoring visits or Ofsted inspections, the platform
                 generates a full Inspection Bundle PDF for any case: PLP with
                 criteria, weekly plans, daily evidence, safeguarding timeline,
-                and lone working log - all in one branded document, on demand.
+                and lone working log - all in one document, on demand.
               </p>
               <p>
                 You can also export case chronologies, supervision
-                records, compliance audit logs, and policy packs. Everything
-                needed to walk into an inspection with confidence.
+                records, compliance audit logs, and policy packs to support
+                the commissioner&#39;s review.
               </p>
               <Link
                 to="/contact?for=commissioner"
@@ -355,7 +356,7 @@ export default function Compliance() {
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
             Ask for the policy pack, an example evidence bundle, or my DBS
             details. Parents, agencies and local authorities all get the same
-            answer, the same day.
+            answer.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">

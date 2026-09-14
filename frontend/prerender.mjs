@@ -51,7 +51,13 @@ for (const route of ROUTES) {
   const page = await browser.newPage();
   try {
     await page.goto(`http://127.0.0.1:${port}${route}`, { waitUntil: 'networkidle0', timeout: 45000 });
-    await page.evaluate(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+    // Closed training disclosures contain lazy images that are not requested
+    // until opened. Their URLs remain in the HTML; they must not block a build.
+    await page.evaluate(() => Promise.all([...document.images].map(i =>
+      i.complete || i.loading === 'lazy' || !i.getClientRects().length
+        ? 1
+        : new Promise(r => { i.onload = i.onerror = r; })
+    )));
     // strip the dev-only helper so it is not baked into the static HTML
     const html = await page.evaluate(() => '<!doctype html>\n' + document.documentElement.outerHTML);
     const words = await page.evaluate(() => document.body.innerText.trim().split(/\s+/).length);

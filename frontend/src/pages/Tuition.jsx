@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY } from "../data/facts";
+import { BIO, DELIVERY, TRAINING } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -62,9 +62,10 @@ const quals = [
 
 /* Held certificates, checked 9 September 2026. Renewal dates are tracked; nothing here is expired. */
 const training = [
-  { name: "Safeguarding and child protection, KCSIE 2026 update", when: "current, renews Aug 2027" },
-  { name: "Prevent duty and child-on-child abuse", when: "current, renews Aug 2027" },
-  { name: "Allergy awareness", when: "current, renews Aug 2027" },
+  { name: TRAINING.safeguarding.name, when: `completed ${TRAINING.safeguarding.completed}` },
+  { name: TRAINING.prevent.name, when: `completed ${TRAINING.prevent.completed}` },
+  { name: "Child-on-child abuse", when: "agency onboarding, 22 August 2026" },
+  { name: TRAINING.allergy.name, when: `completed ${TRAINING.allergy.completed}` },
   { name: "Whole School SEND, Platinum award", when: "September 2026" },
   { name: "Suicide awareness, Zero Suicide Alliance", when: "September 2026" },
   { name: "SEND Code of Practice", when: "certified" },
@@ -152,9 +153,11 @@ export default function Tuition() {
               </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
                 I am James Wallace. I have taught for thirteen years in specialist provision: twelve of them in a specialist school
-                for young people with social, emotional and mental health needs, and since 2025 delivering education otherwise than
-                at school for autistic, ADHD and PDA learners, commissioned by local authorities. In between I spent five years
-                inside Nottinghamshire County Council's children's commissioning team.
+                for young people with social, emotional and mental health needs.
+              </p>
+              <p style={{ marginBottom: "1rem" }}>
+                Since 2025 I have delivered education otherwise than at school for autistic, ADHD and PDA learners, commissioned
+                by local authorities. In between I spent five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
                 I now take a small number of private students alongside that work. In person across Derbyshire and Nottinghamshire,
@@ -188,7 +191,7 @@ export default function Tuition() {
       {/* Who I work with */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 style={{ marginBottom: "0.5rem" }}>Who I work with</h2>
+          <h2 style={{ marginBottom: "0.5rem" }}>Is this the right kind of support?</h2>
           <p style={{ color: "var(--text-muted)", maxWidth: "620px", marginBottom: "2rem" }}>
             Most of the young people I teach have been out of school for months, not weeks. That is the situation I know best.
           </p>
@@ -227,7 +230,7 @@ export default function Tuition() {
       {/* How it starts — numbered rail, not another card grid */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
-          <h2 style={{ marginBottom: "2rem" }}>How it starts</h2>
+          <h2 style={{ marginBottom: "2rem" }}>A low pressure way to begin</h2>
           <div className="row">
             <div className="col-12 col-lg-9">
               {howItStarts.map((h, i) => (
@@ -281,7 +284,7 @@ export default function Tuition() {
                     style={{ padding: "0.55rem 0", borderBottom: "1px solid var(--border, #e5e0d8)" }}
                   >
                     <span>{t.name}</span>
-                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", whiteSpace: "nowrap" }}>{t.when}</span>
+                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", whiteSpace: "normal" }}>{t.when}</span>
                   </li>
                 ))}
               </ul>
@@ -365,7 +368,7 @@ export default function Tuition() {
       {/* Close */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
-          <h2 style={{ marginBottom: "1rem" }}>Start with a conversation</h2>
+          <h2 style={{ marginBottom: "1rem" }}>Talk through what would help</h2>
           <p style={{ maxWidth: "560px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
             Tell me about your child and what has happened so far. No commitment, and no pressure to book anything at the end of it.
           </p>

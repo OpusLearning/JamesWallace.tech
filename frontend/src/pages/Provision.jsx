@@ -26,7 +26,7 @@ export default function Provision() {
         <div className="jw-container">
           <div className="row align-items-center g-4">
             <div className="col-12 col-lg-7 text-center text-lg-start">
-              <h1>EOTAS &amp; Alternative Provision</h1>
+              <h1>Teaching that makes the next step possible</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Structured, specialist teaching for young people who cannot
                 access a mainstream or special school. I work across EOTAS,
@@ -70,7 +70,7 @@ export default function Provision() {
             className="text-center"
             style={{ maxWidth: "560px", margin: "0 auto 3rem" }}
           >
-            Flexible, structured provision built around each learner's needs,
+            Flexible, structured provision built around each learner&#39;s needs,
             location, and commissioning arrangement.
           </p>
           <div className="row g-4">
@@ -80,7 +80,7 @@ export default function Provision() {
                   In-Person
                 </h3>
                 <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  Sessions delivered at a community venue, learner's home (with
+                  Sessions delivered at a community venue, learner&#39;s home (with
                   appropriate risk assessment), or agreed location. East
                   Midlands-based with wider coverage by arrangement.
                 </p>

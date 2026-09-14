@@ -84,7 +84,7 @@ const screenshots = [
       "Check-in at session start; check-out at session end",
       "Live supervisor feed showing all active sessions, time elapsed, and check-in location",
       "Automatic alert and email to supervisory team if a session goes overdue",
-      "Panic button in practitioner's session view - immediate supervisor notification",
+      "Panic button in practitioner’s session view - immediate supervisor notification",
       "Lone working audit reports available for inspection",
     ],
   },
@@ -181,7 +181,7 @@ export default function Platform() {
           >
             The provision runs on a case management platform I built
             specifically for EOTAS and alternative provision delivery. Every
-            aspect of a learner's placement is tracked from first referral
+            aspect of a learner’s placement is tracked from first referral
             through to case closure, so a parent, an agency or a commissioner
             can see what happened without having to ask.
           </p>
@@ -259,7 +259,7 @@ export default function Platform() {
               { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest - learner names, diagnoses, carer contacts, session notes" },
               { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
               { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
-              { label: "EU hosting", desc: "Neon PostgreSQL on Frankfurt infrastructure - UK GDPR compliant" },
+              { label: "EU hosting", desc: "Neon PostgreSQL on Frankfurt infrastructure. Data protection information available on request." },
             ].map((item) => (
               <div key={item.label} className="col-12 col-md-6 col-lg-3">
                 <div className="jw-card h-100 text-center">

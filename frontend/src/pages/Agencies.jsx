@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, AVAILABILITY } from "../data/facts";
+import { BIO, AVAILABILITY, STATUTORY, TRAINING } from "../data/facts";
 
 /**
  * For agencies and schools — the fastest-paying door, and the one the site never had.
@@ -12,12 +12,12 @@ import { BIO, AVAILABILITY } from "../data/facts";
  */
 
 const compliance = [
-  { item: "Enhanced DBS", detail: "On the Update Service — verifiable the same day, no wait", state: "held" },
+  { item: "Enhanced DBS", detail: "On the Update Service — details available for employer checks", state: "held" },
   { item: "Qualified Teacher Status", detail: "PGCE Secondary, University of Derby, July 2004", state: "held" },
-  { item: "Safeguarding & child protection", detail: "KCSIE 2026 update, completed 9 Sep 2026", state: "held" },
-  { item: "Prevent duty", detail: "Completed 22 Aug 2026", state: "held" },
+  { item: "Safeguarding & child protection", detail: `${STATUTORY.kcsie} update, completed ${TRAINING.safeguarding.completed}`, state: "held" },
+  { item: "Prevent duty", detail: `Completed ${TRAINING.prevent.completed}`, state: "held" },
   { item: "Child-on-child abuse", detail: "Completed 22 Aug 2026", state: "held" },
-  { item: "Allergy awareness", detail: "CPD Academy, completed 22 Aug 2026", state: "held" },
+  { item: TRAINING.allergy.name, detail: `Academize, completed ${TRAINING.allergy.completed}`, state: "held" },
   { item: "Whole School SEND, Platinum", detail: "The top tier of the national SEND CPD framework, September 2026", state: "held" },
   { item: "Suicide awareness", detail: "Zero Suicide Alliance, September 2026", state: "held" },
   { item: "SEND Code of Practice", detail: "Certified", state: "held" },
@@ -40,15 +40,15 @@ const placement = [
     body: "Timestamped daily reports with engagement, activity notes and next steps — the paperwork your contract manager needs, filed without being chased.",
   },
   {
-    title: "A personal learning plan, not a worksheet",
+    title: "A personal learning plan",
     body: "Written to the EHCP outcomes or the school's targets, with criterion-level progress you can put in front of a panel or an annual review.",
   },
   {
-    title: "Safeguarding handled properly",
+    title: "Safeguarding records and escalation",
     body: "Concerns logged and escalated the same day, through your route and mine. Lone-working procedure in place before the first session.",
   },
   {
-    title: "No hand-holding needed",
+    title: "Commissioning experience",
     body: "Five years inside a county council's children's commissioning team. I know what a monitoring visit asks for, because I used to be the one asking.",
   },
 ];
@@ -64,7 +64,7 @@ const jsonLd = {
     "MEd Education, The Open University, 2012",
     BIO.degree,
     "Enhanced DBS on the Update Service",
-    "Safeguarding and child protection, KCSIE 2026 update",
+    TRAINING.safeguarding.name,
   ],
   knowsAbout: ["SEMH", "Autism", "ADHD", "PDA", "EBSA", "EHCP", "Alternative provision", "EOTAS"],
   areaServed: ["Derbyshire", "Nottinghamshire", "East Midlands"],
@@ -90,18 +90,19 @@ export default function Agencies() {
                 For agencies &amp; schools
               </span>
               <h1 style={{ marginBottom: "1.25rem" }}>
-                A specialist you can place
+                Specialist SEND teaching
                 <br />
-                <span style={{ color: "var(--action)" }}>without the onboarding headache</span>
+                <span style={{ color: "var(--action)" }}>with evidence ready to review</span>
               </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
                 QTS since 2004, a Master of Education, thirteen years teaching in specialist provision — twelve of them in a
-                specialist SEMH school — and five years inside Nottinghamshire County Council's children's commissioning team.
-                Enhanced DBS on the Update Service, safeguarding
-                and Prevent current, and every certificate ready to send today.
+                specialist SEMH school — and five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
+              </p>
+              <p style={{ marginBottom: "1rem" }}>
+                Enhanced DBS on the Update Service, with safeguarding and Prevent training records available to review.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                I am already registered and compliant with four UK education agencies. Names on request.
+                I am already registered with four UK education agencies. Names and compliance evidence are available on request.
               </p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/contact?for=agency" className="jw-btn-primary">
@@ -114,7 +115,7 @@ export default function Agencies() {
             </div>
             <div className="col-12 col-lg-5">
               <div className="jw-card">
-                <h3 style={{ fontSize: "1rem", marginBottom: "0.25rem" }}>Availability</h3>
+                <h2 style={{ fontSize: "1rem", marginBottom: "0.25rem" }}>Availability</h2>
                 {/* Dated, so a booker can tell this is live rather than something written last term. */}
                 <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.75rem" }}>
                   Reviewed {AVAILABILITY.reviewed}
@@ -136,8 +137,8 @@ export default function Agencies() {
         <div className="jw-container">
           <h2 style={{ marginBottom: "0.5rem" }}>Compliance, at a glance</h2>
           <p style={{ color: "var(--text-muted)", maxWidth: "640px", marginBottom: "1.75rem" }}>
-            Everything below is held now and can be evidenced the day you ask. Renewal dates are tracked rather than left to
-            lapse — the current safeguarding, Prevent and allergy certificates run to August 2027.
+            Completion dates are listed below, with certificates available for review. Renewal dates are tracked for each
+            course; the August 2027 expiry applies to the separate agency onboarding and allergy certificates shown on the credentials page.
           </p>
           <div className="jw-card" style={{ padding: 0, overflow: "hidden" }}>
             {compliance.map((c, i) => (
@@ -209,7 +210,7 @@ export default function Agencies() {
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "1rem" }}>Compliance pack on request</h2>
           <p style={{ maxWidth: "580px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
-            Certificates, DBS details, references and my policy pack, sent the same day. Tell me what your onboarding needs and I
+            Certificates, DBS details, references and my policy pack are available on request. Tell me what your onboarding needs and I
             will send it in the format you use.
           </p>
           <Link to="/contact?for=agency" className="jw-btn-primary">

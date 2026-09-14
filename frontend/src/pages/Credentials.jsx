@@ -1,16 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGraduationCap,
-  faCertificate,
-  faBriefcase,
-  faQuoteLeft,
-  faShieldAlt,
-  faCheckCircle,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
-import { BIO, REFERENCES as references } from "../data/facts";
+import { BIO, STATUTORY, REVIEWED, REFERENCES as references } from "../data/facts";
+import "./Credentials.css";
 
 const academicQuals = [
   {
@@ -440,87 +431,6 @@ const whyItMatters = [
   },
 ];
 
-/* The references now live in data/facts.js, because the homepage shows the first one and two copies of a quotation
-   is two things to keep in step. Imported above as `references`. */
-
-function Stars({ count }) {
-  return (
-    <div style={{ color: "#f59e0b", display: "inline-flex", gap: "2px" }}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <FontAwesomeIcon
-          key={i}
-          icon={faStar}
-          style={{ opacity: i < count ? 1 : 0.2 }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function RatingRow({ label, score }) {
-  return (
-    <div className="d-flex align-items-center justify-content-between gap-2 mb-1">
-      <span style={{ fontSize: "0.78rem", color: "var(--text-muted)", minWidth: "100px" }}>{label}</span>
-      <Stars count={score} />
-    </div>
-  );
-}
-
-
-// One certificate card, shared by every band.
-function Cert({ c }) {
-  return (
-    <div className="col-12 col-md-6">
-          <div className="jw-card h-100 d-flex gap-3">
-            {/* Some of these are round badges and some are wide provider wordmarks. A fixed 72px square
-                squeezed the wordmarks down to an illegible smudge, so wide marks get the width they need. */}
-            {c.badge && (
-              <img
-                src={c.badge}
-                alt={c.wide ? `${c.provider} logo` : `${c.title} badge`}
-                style={{
-                  width: c.wide ? "116px" : "72px",
-                  height: c.wide ? "auto" : "72px",
-                  maxHeight: "72px",
-                  objectFit: "contain",
-                  objectPosition: "top left",
-                  flexShrink: 0,
-                  alignSelf: "flex-start",
-                }}
-              />
-            )}
-            <div>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.25rem", color: "var(--text-primary)" }}>{c.title}</h3>
-              <p style={{ fontSize: "0.82rem", color: "var(--brand)", fontWeight: 600, marginBottom: "0.2rem" }}>{c.provider}</p>
-              {c.issued && (
-                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>Completed {c.issued}</p>
-              )}
-              {c.detail && (
-                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.5rem", fontStyle: "italic" }}>{c.detail}</p>
-              )}
-              <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-muted)" }}>{c.desc}</p>
-              {/* The certificate itself, so an agency or a parent can check it rather than take my word for it. */}
-              {c.cert && (
-                <p style={{ margin: "0.6rem 0 0" }}>
-                  <a
-                    href={c.cert}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--brand)", textDecoration: "none" }}
-                  >
-                    View certificate (PDF) &rarr;
-                  </a>
-                </p>
-              )}
-            </div>
-          </div>
-    </div>
-  );
-}
-
-// 12 Sep 2026. A parent on a phone was scrolling fifteen screens of compliance certificates before reaching anything
-// about James as a teacher. Everything an agency needs is still here and still one tap away; it just no longer stands
-// between a worried parent and the human part of the page.
 const BANDS = [
   { key: "qualification", label: "Qualified teacher", note: "The award everything else sits on top of.", fold: false },
   { key: "send", label: "SEND, autism, ADHD and mental health", note: "The training that decides whether I can actually help your child.", fold: false },
@@ -528,308 +438,120 @@ const BANDS = [
   { key: "tech", label: "Technology and project management", note: "Where the software side of the work comes from.", fold: true },
 ];
 
+const ratingLabels = [
+  ["timekeeping", "Time keeping"],
+  ["flexibility", "Flexibility"],
+  ["honesty", "Honesty & integrity"],
+  ["safeguarding", "Safeguarding"],
+  ["communication", "Communication"],
+];
+
+function renderCertificate(certificate) {
+  return (
+    <article key={`${certificate.title}-${certificate.issued}`} className="credential-record">
+      <div className="credential-record-content">
+        <h3>{certificate.title}</h3>
+        <p className="credential-provider">{certificate.provider}</p>
+        {certificate.issued && <p className="credential-date">Completed {certificate.issued}</p>}
+        {certificate.detail && <p className="credential-detail">{certificate.detail}</p>}
+        {certificate.desc && <p>{certificate.desc}</p>}
+        {certificate.cert && <a className="jw-text-link" href={certificate.cert} target="_blank" rel="noopener noreferrer">View certificate <span className="credential-filetype">PDF <span aria-hidden="true">↗</span></span></a>}
+      </div>
+      {certificate.badge && <img className={`credential-provider-mark${certificate.wide ? " is-wide" : ""}`} src={certificate.badge} alt={certificate.wide ? `${certificate.provider} logo` : `${certificate.title} badge`} loading="lazy" />}
+    </article>
+  );
+}
+
 export default function Credentials() {
   usePageMeta({
-    title: 'Qualifications & Experience | James Wallace, QTS MEd',
-    description:
-      `QTS, MEd, ${BIO.degreeShort}, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.`,
-    path: '/credentials',
+    title: "Qualifications & Experience | James Wallace, QTS MEd",
+    description: `QTS, MEd, ${BIO.degreeShort}, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.`,
+    path: "/credentials",
   });
 
   return (
-    <>
-      {/* Hero */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container text-center">
-          <span className="jw-badge jw-badge-brand mb-3" style={{ display: "inline-block" }}>
-            Qualifications &amp; Experience
-          </span>
-          <h1 style={{ marginBottom: "1rem" }}>
-            Who You're<br />
-            <span style={{ color: "var(--action)" }}>Working With</span>
-          </h1>
-          <p style={{ maxWidth: "580px", margin: "0 auto 2rem", fontSize: "1.05rem" }}>
-            QTS since 2004 and a Master of Education. Thirteen years teaching in specialist
-            provision, and five inside a county council's children's commissioning team, which is
-            the part most tutors cannot offer.
-          </p>
+    <div className="credentials-page">
+      <section className="credentials-hero jw-section" aria-labelledby="credentials-heading">
+        <div className="jw-container credentials-hero-grid">
+          <div>
+            <p className="jw-eyebrow">Qualifications &amp; experience</p>
+            <h1 id="credentials-heading">The experience <br /><em>behind the teaching.</em></h1>
+            <p className="credentials-lead">A qualified teacher, a specialist background, and a clear record of the work behind both.</p>
+            <p className="credentials-introduction">Here you can read my qualifications and experience, hear from previous colleagues, and inspect the training certificates. The detail is here for families and professionals alike.</p>
+            <a href="#qualifications" className="jw-text-link">Explore the evidence <span aria-hidden="true">↓</span></a>
+          </div>
+          <aside className="credentials-summary" aria-label="Professional background at a glance">
+            <p className="jw-eyebrow">James Wallace · QTS, MEd</p>
+            <dl>
+              <div><dt>Teaching</dt><dd>Thirteen years in specialist provision.<span>Twelve of them at Foxwood Academy.</span></dd></div>
+              <div><dt>Commissioning</dt><dd>Five years in a local authority.<span>Nottinghamshire County Council’s children’s commissioning team.</span></dd></div>
+              <div><dt>Professional checks</dt><dd>Enhanced DBS.<span>Registered with the Update Service.</span></dd></div>
+            </dl>
+            <Link to="/compliance" className="jw-text-link">Compliance and safeguarding <span aria-hidden="true">↗</span></Link>
+          </aside>
+        </div>
+      </section>
 
-          <div className="d-flex flex-wrap gap-3 justify-content-center">
-            {[
-              { label: "MEd", sub: "Master of Education" },
-              { label: "BSc", sub: "Computer Science" },
-              { label: "PGCE", sub: "Qualified Teacher" },
-              { label: "DBS", sub: "Enhanced, Updated" },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className="jw-card text-center"
-                style={{ minWidth: "110px", padding: "1rem 1.25rem" }}
-              >
-                <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--action)" }}>{s.label}</div>
-                <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.25rem" }}>{s.sub}</div>
-              </div>
-            ))}
+      <nav className="credentials-index" aria-label="On this credentials page">
+        <div className="jw-container"><span>On this page</span><ul><li><a href="#qualifications">Qualifications</a></li><li><a href="#experience">Experience</a></li><li><a href="#references">References</a></li><li><a href="#training">Training &amp; certificates</a></li><li><a href="#professional-checks">Professional checks</a></li></ul></div>
+      </nav>
+
+      <section id="qualifications" className="jw-section credentials-academics" aria-labelledby="qualifications-heading">
+        <div className="jw-container credentials-section-grid">
+          <div className="credentials-section-intro"><p className="jw-eyebrow">01 / Qualifications</p><h2 id="qualifications-heading">A foundation<br />in <em>education.</em></h2><p>Qualified Teacher Status since 2004, alongside a teaching qualification, a computing degree and a Master of Education.</p><a className="jw-text-link" href={cpdCerts[0].cert} target="_blank" rel="noopener noreferrer">View QTS certificate <span className="credential-filetype">PDF ↗</span></a></div>
+          <div className="credentials-academic-list">
+            {academicQuals.map((qualification) => <article key={qualification.title} className="credential-academic">
+              <div className="credential-academic-heading"><h3>{qualification.title}</h3>{qualification.logo && <img src={qualification.logo} alt={`${qualification.institution} logo`} loading="lazy" />}</div>
+              <p className="credential-provider">{qualification.institution}</p>
+              {qualification.awarded && <p className="credential-date">Awarded {qualification.awarded}</p>}
+              <p>{qualification.detail}</p>
+              {qualification.modules && <details className="credential-modules"><summary>Master’s degree modules <span aria-hidden="true">+</span></summary><ul>{qualification.modules.map((module) => <li key={module}>{module}</li>)}</ul></details>}
+            </article>)}
           </div>
         </div>
       </section>
 
-      {/* Trust strip */}
-      <section className="jw-section jw-section-white" style={{ paddingTop: "1.5rem", paddingBottom: "1.5rem" }}>
+      <section id="experience" className="jw-section credentials-experience" aria-labelledby="experience-heading">
+        <div className="jw-container credentials-section-grid">
+          <div className="credentials-section-intro"><p className="jw-eyebrow">02 / Experience</p><h2 id="experience-heading">Teaching.<br />Commissioning.<br /><em>Perspective.</em></h2><p>Specialist classroom practice, local authority work and one-to-one provision inform the teaching I offer today.</p><Link to="/about" className="jw-text-link">More about James <span aria-hidden="true">→</span></Link></div>
+          <div>
+            <ol className="credentials-timeline">{experience.map((position) => <li key={position.role}>
+              <p className="credential-date">{position.dates}</p><h3>{position.role}</h3><p className="credential-provider">{position.org}</p><p>{position.desc}</p>{position.logo && <img src={position.logo} alt={`${position.org} logo`} loading="lazy" />}
+            </li>)}</ol>
+            <details className="credentials-context"><summary>How this experience informs the work <span aria-hidden="true">+</span></summary><div>{whyItMatters.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.desc}</p></article>)}</div></details>
+          </div>
+        </div>
+      </section>
+
+      <section id="references" className="jw-section credentials-references" aria-labelledby="references-heading">
         <div className="jw-container">
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "center" }}>
-            {[
-              ["Qualified teacher", "QTS since 2004"],
-              ["Enhanced DBS", "Update Service registered"],
-              ["Safeguarding current", "updated September 2026"],
-              ["KCSIE 2026", "refresher completed"],
-              ["Prevent", "current"],
-              ["Thirteen years teaching", "specialist provision"],
-            ].map(([label, sub]) => (
-              <span key={label} style={{ display: "inline-flex", alignItems: "baseline", gap: "0.4rem", border: "1px solid var(--border)", borderRadius: "999px", padding: "0.4rem 0.85rem", background: "var(--card-bg)", fontSize: "0.85rem" }}>
-                <FontAwesomeIcon icon={faCheckCircle} style={{ color: "var(--action)", fontSize: "0.8rem" }} />
-                <strong style={{ color: "var(--text-primary)" }}>{label}</strong>
-                <span style={{ color: "var(--text-muted)" }}>{sub}</span>
-              </span>
-            ))}
-          </div>
-          <p style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "0.82rem", margin: "1rem auto 0", maxWidth: "640px" }}>
-            Teacher, then local authority children&rsquo;s commissioning, then software engineering, now specialist SEND and
-            EOTAS teaching. The middle two are why I can write to an EHCP outcome and build the tools that evidence it.
-          </p>
+          <div className="credentials-reference-heading"><div><p className="jw-eyebrow">03 / Professional references</p><h2 id="references-heading">In colleagues’<br /><em>own words.</em></h2></div><p>Written references from previous employers, held on file. Full documentation is available on request.</p></div>
+          <div className="credentials-reference-list">{references.map((reference) => <article key={reference.name} className="credential-reference">
+            <div className="credential-referee"><h3>{reference.name}</h3><p>{reference.role}</p><span className="credential-reference-type">Professional reference</span></div>
+            <div><blockquote>“{reference.quote}”</blockquote><details className="credential-ratings"><summary>View scores from this reference form <span aria-hidden="true">+</span></summary><table><caption>Scores recorded by {reference.name} on the professional reference form. Each score is out of 5.</caption><thead><tr><th scope="col">Area</th><th scope="col">Recorded score</th></tr></thead><tbody>{ratingLabels.map(([key, label]) => <tr key={key}><th scope="row">{label}</th><td>{reference.ratings[key]} / 5</td></tr>)}</tbody></table></details></div>
+          </article>)}</div>
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="row justify-content-center">
-            <div className="col-12 col-lg-8">
-              <div
-                className="jw-card"
-                style={{ borderLeft: "4px solid var(--action)", paddingLeft: "1.75rem" }}
-              >
-                <FontAwesomeIcon icon={faQuoteLeft} style={{ color: "var(--action)", fontSize: "1.5rem", marginBottom: "0.75rem" }} />
-                <p style={{ fontSize: "1.05rem", fontStyle: "italic", marginBottom: "0.75rem" }}>
-                  "I am a specialist educator with genuine commitment to the young people I work with,
-                  bringing deep knowledge of SEND, SEMH, and neurodiverse learners together with
-                  the professional rigour that LA placements require."
-                </p>
-                <p style={{ margin: 0, fontWeight: 600, fontSize: "0.9rem" }}>James Wallace, MEd, BSc, PGCE</p>
-              </div>
-            </div>
+      <section id="training" className="jw-section credentials-training" aria-labelledby="training-heading">
+        <div className="jw-container credentials-section-grid">
+          <div className="credentials-section-intro"><p className="jw-eyebrow">04 / Training &amp; certificates</p><h2 id="training-heading">The records,<br /><em>open to view.</em></h2><p>Choose an area to see the training, provider and completion date. Certificate links open a PDF; other evidence can be requested.</p><p className="credentials-training-note">Completion dates and any recorded renewal status appear with each course. A certificate records the training completed at that time.</p></div>
+          <div className="credentials-training-bands">
+            {BANDS.map((band) => {
+              const records = cpdCerts.filter((certificate) => certificate.group === band.key);
+              if (!records.length) return null;
+              return <details className="credential-band" key={band.key} open={band.key === "qualification"}>
+                <summary><span><span className="credential-band-title">{band.label}</span><span className="credential-band-count">{records.length} {records.length === 1 ? "record" : "records"}</span></span><span className="credential-disclosure" aria-hidden="true">+</span></summary>
+                <div className="credential-band-body"><p className="credential-band-note">{band.key === "send" ? "Training relevant to supporting SEND, autistic and ADHD learners, and young people’s mental health." : band.note}</p>{records.map(renderCertificate)}</div>
+              </details>;
+            })}
           </div>
         </div>
       </section>
 
-      {/* Academic Qualifications */}
-      <section className="jw-section jw-section-surface">
-        <div className="jw-container">
-          <div className="text-center mb-5">
-            <FontAwesomeIcon icon={faGraduationCap} style={{ color: "var(--brand)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
-            <h2>Academic Qualifications</h2>
-          </div>
-          <div className="row g-4 justify-content-center">
-            {academicQuals.map((q, i) => (
-              <div key={i} className="col-12 col-md-6 col-lg-4">
-                <div className="jw-card h-100">
-                  {q.logo && (
-                    <img
-                      src={q.logo}
-                      alt={`${q.institution} logo`}
-                      style={{ height: "44px", width: "auto", maxWidth: "160px", objectFit: "contain", objectPosition: "left", marginBottom: "0.7rem", display: "block" }}
-                    />
-                  )}
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.25rem", color: "var(--text-primary)" }}>{q.title}</h3>
-                  <p style={{ fontSize: "0.85rem", color: "var(--brand)", fontWeight: 600, marginBottom: "0.25rem" }}>{q.institution}</p>
-                  {q.awarded && (
-                    <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.5rem" }}>Awarded {q.awarded}</p>
-                  )}
-                  <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginBottom: q.modules ? "0.75rem" : 0 }}>{q.detail}</p>
-                  {q.modules && (
-                    <ul className="list-unstyled mb-0" style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>
-                      {q.modules.map((m, j) => (
-                        <li key={j} className="d-flex align-items-start gap-2 mb-1">
-                          <FontAwesomeIcon icon={faCheckCircle} style={{ color: "var(--action)", marginTop: "2px", flexShrink: 0, fontSize: "0.7rem" }} />
-                          {m}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section id="professional-checks" className="jw-section credentials-checks" aria-labelledby="checks-heading">
+        <div className="jw-container credentials-checks-grid"><div><p className="jw-eyebrow">05 / Professional checks</p><h2 id="checks-heading">Know who is<br /><em>working with you.</em></h2></div><div><h3>Enhanced DBS on the Update Service</h3><p>Enhanced DBS registered with the Update Service, checked annually and verifiable on request. All placements are covered by safeguarding policies aligned to {STATUTORY.kcsie}.</p><p>Documentation packages are available to parents, agencies and local authority teams. Certificates, DBS details and professional references are available on request.</p><p className="credential-date">Information reviewed {REVIEWED}.</p><div className="credentials-checks-actions"><Link to="/contact" className="jw-btn-primary">Request documentation <span aria-hidden="true">→</span></Link><Link to="/compliance" className="jw-text-link">View compliance details <span aria-hidden="true">→</span></Link></div></div></div>
       </section>
-
-      {/* Professional Experience */}
-      <section className="jw-section jw-section-surface">
-        <div className="jw-container">
-          <div className="text-center mb-5">
-            <FontAwesomeIcon icon={faBriefcase} style={{ color: "var(--brand)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
-            <h2>Professional Experience</h2>
-          </div>
-          <div className="row g-4 justify-content-center">
-            {experience.map((e, i) => (
-              <div key={i} className="col-12 col-lg-10">
-                <div className="jw-card">
-                  {e.logo && (
-                    <img
-                      src={e.logo}
-                      alt={`${e.org} logo`}
-                      style={{ height: "48px", width: "auto", maxWidth: "180px", objectFit: "contain", objectPosition: "left", marginBottom: "0.6rem", display: "block" }}
-                    />
-                  )}
-                  <div className="d-flex flex-wrap align-items-start justify-content-between gap-2 mb-1">
-                    <h3 style={{ fontSize: "1rem", fontWeight: 700, margin: 0, color: "var(--text-primary)" }}>{e.role}</h3>
-                    <span className="jw-badge" style={{ fontSize: "0.75rem", whiteSpace: "nowrap" }}>{e.dates}</span>
-                  </div>
-                  <p style={{ fontSize: "0.85rem", color: "var(--brand)", fontWeight: 600, marginBottom: "0.5rem" }}>{e.org}</p>
-                  <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-muted)" }}>{e.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CPD */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="text-center mb-5">
-            <FontAwesomeIcon icon={faCertificate} style={{ color: "var(--brand)", fontSize: "1.75rem", marginBottom: "0.75rem" }} />
-            <h2>Training &amp; Certification</h2>
-            <p style={{ maxWidth: "560px", margin: "0 auto" }}>
-              Every certificate below is the provider's original and opens as a PDF. Dates are completion dates, not
-              enrolment dates.
-            </p>
-          </div>
-          {BANDS.map((band) => {
-            const items = cpdCerts.filter((c) => c.group === band.key);
-            if (!items.length) return null;
-            const grid = (
-              <div className="row g-4">
-                {items.map((c, i) => (
-                  <Cert key={i} c={c} />
-                ))}
-              </div>
-            );
-            if (!band.fold) {
-              return (
-                <div key={band.key} style={{ marginBottom: "2.5rem" }}>
-                  <h3 style={{ fontSize: "1.05rem", fontWeight: 700, marginBottom: "0.35rem" }}>{band.label}</h3>
-                  <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>{band.note}</p>
-                  {grid}
-                </div>
-              );
-            }
-            return (
-              <details key={band.key} style={{ marginBottom: "1.25rem", border: "1px solid var(--border)", borderRadius: "12px", background: "var(--page-bg)" }}>
-                <summary style={{ cursor: "pointer", padding: "1rem 1.25rem", fontWeight: 700, fontSize: "1.02rem", listStyle: "revert" }}>
-                  {band.label}
-                  <span style={{ fontWeight: 400, color: "var(--text-muted)", fontSize: "0.88rem" }}>
-                    {" — "}{items.length} certificates, all dated and downloadable
-                  </span>
-                </summary>
-                <div style={{ padding: "0 1.25rem 1.25rem" }}>
-                  <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>{band.note}</p>
-                  {grid}
-                </div>
-              </details>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Why It Matters */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="text-center mb-5">
-            <h2>Why This Matters</h2>
-            <p style={{ maxWidth: "480px", margin: "0 auto" }}>
-              Whether you are a parent, an agency or a local authority, this is what you are getting.
-            </p>
-          </div>
-          <div className="row g-4">
-            {whyItMatters.map((w, i) => (
-              <div key={i} className="col-12 col-md-6 col-lg-3">
-                <div className="jw-card h-100 text-center">
-                  <FontAwesomeIcon icon={faCheckCircle} style={{ color: "var(--action)", fontSize: "1.5rem", marginBottom: "0.75rem" }} />
-                  <h3 style={{ fontSize: "0.95rem", fontWeight: 700, marginBottom: "0.5rem" }}>{w.title}</h3>
-                  <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-muted)" }}>{w.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* References */}
-      <section className="jw-section jw-section-surface">
-        <div className="jw-container">
-          <div className="text-center mb-5">
-            <h2>Professional References</h2>
-            <p style={{ maxWidth: "480px", margin: "0 auto" }}>
-              Verified references from previous employers. Full documentation available on request.
-            </p>
-          </div>
-          <div className="row g-4 justify-content-center">
-            {references.map((r, i) => (
-              <div key={i} className="col-12 col-md-6">
-                <div className="jw-card h-100" style={{ borderLeft: "3px solid var(--action)" }}>
-                  <FontAwesomeIcon icon={faQuoteLeft} style={{ color: "var(--action)", marginBottom: "0.75rem" }} />
-                  <p style={{ fontSize: "0.9375rem", fontStyle: "italic", marginBottom: "1rem" }}>"{r.quote}"</p>
-                  <p style={{ margin: "0 0 0.25rem", fontWeight: 600, fontSize: "0.875rem" }}>{r.name}</p>
-                  <p style={{ margin: "0 0 0.75rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>{r.role}</p>
-                  <RatingRow label="Time keeping" score={r.ratings.timekeeping} />
-                  <RatingRow label="Flexibility" score={r.ratings.flexibility} />
-                  <RatingRow label="Honesty &amp; integrity" score={r.ratings.honesty} />
-                  <RatingRow label="Safeguarding" score={r.ratings.safeguarding} />
-                  <RatingRow label="Communication" score={r.ratings.communication} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* DBS */}
-      <section className="jw-section jw-section-white">
-        <div className="jw-container">
-          <div className="row justify-content-center">
-            <div className="col-12 col-lg-8">
-              <div className="jw-card d-flex align-items-start gap-3">
-                <FontAwesomeIcon icon={faShieldAlt} style={{ color: "var(--action)", fontSize: "1.75rem", flexShrink: 0, marginTop: "3px" }} />
-                <div>
-                  <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.35rem" }}>Enhanced DBS Certificate</h3>
-                  <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-muted)" }}>
-                    Enhanced DBS registered with the Update Service, checked annually and verifiable on request.
-                    All placements are covered by safeguarding policies aligned to KCSIE. Documentation packages
-                    available to parents, agencies and local authority teams alike.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container text-center">
-          <h2 style={{ marginBottom: "0.75rem" }}>Discuss a learner</h2>
-          <p style={{ maxWidth: "480px", margin: "0 auto 2rem", color: "var(--text-muted)" }}>
-            Certificates, DBS details and references go over the same day you ask.
-          </p>
-          <div className="d-flex flex-wrap gap-3 justify-content-center">
-            <Link to="/contact" className="jw-btn-primary">Get in touch</Link>
-            <Link to="/tuition" className="jw-btn-secondary">For families</Link>
-            <Link to="/agencies" className="jw-btn-secondary">For agencies</Link>
-            <Link to="/for-las" className="jw-btn-secondary">For local authorities</Link>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

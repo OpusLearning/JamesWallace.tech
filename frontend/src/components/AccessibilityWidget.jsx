@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 
 const STORAGE_KEY = "jw-a11y";
-
 const defaults = {
-  fontSize: "normal",   // normal | lg | xl
-  contrast: "none",     // none | light | dark
+  fontSize: "normal",
+  contrast: "none",
   dyslexic: false,
   reducedMotion: false,
   spacious: false,
@@ -12,215 +12,142 @@ const defaults = {
 
 function loadPrefs() {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? { ...defaults, ...JSON.parse(stored) } : { ...defaults };
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return {
+      fontSize: ["normal", "lg", "xl"].includes(stored?.fontSize) ? stored.fontSize : defaults.fontSize,
+      contrast: ["none", "light", "dark"].includes(stored?.contrast) ? stored.contrast : defaults.contrast,
+      dyslexic: stored?.dyslexic === true,
+      reducedMotion: stored?.reducedMotion === true,
+      spacious: stored?.spacious === true,
+    };
   } catch {
     return { ...defaults };
   }
 }
 
 function applyPrefs(prefs) {
-  const html = document.documentElement;
-  html.classList.remove(
-    "a11y-text-lg", "a11y-text-xl",
-    "a11y-contrast-light", "a11y-contrast-dark",
-    "a11y-dyslexic",
-    "a11y-reduced-motion", "a11y-spacious"
-  );
-  if (prefs.fontSize === "lg") html.classList.add("a11y-text-lg");
-  if (prefs.fontSize === "xl") html.classList.add("a11y-text-xl");
-  if (prefs.contrast === "light") html.classList.add("a11y-contrast-light");
-  if (prefs.contrast === "dark")  html.classList.add("a11y-contrast-dark");
-  if (prefs.dyslexic) html.classList.add("a11y-dyslexic");
-  if (prefs.reducedMotion) html.classList.add("a11y-reduced-motion");
-  if (prefs.spacious) html.classList.add("a11y-spacious");
+  const classes = {
+    "a11y-text-lg": prefs.fontSize === "lg",
+    "a11y-text-xl": prefs.fontSize === "xl",
+    "a11y-contrast-light": prefs.contrast === "light",
+    "a11y-contrast-dark": prefs.contrast === "dark",
+    "a11y-dyslexic": prefs.dyslexic,
+    "a11y-reduced-motion": prefs.reducedMotion,
+    "a11y-spacious": prefs.spacious,
+  };
+  Object.entries(classes).forEach(([name, enabled]) => document.documentElement.classList.toggle(name, enabled));
 }
 
 export default function AccessibilityWidget({ open, onClose }) {
   const [prefs, setPrefs] = useState(loadPrefs);
+  const [notice, setNotice] = useState("");
+  const dialogRef = useRef(null);
+  const closeRef = useRef(null);
 
   useEffect(() => {
     applyPrefs(prefs);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch {}
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    } catch {
+      // Preferences still apply for this visit when browser storage is unavailable.
+    }
   }, [prefs]);
+
+  useEffect(() => {
+    if (!open) return;
+    const dialog = dialogRef.current;
+    const trigger = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus({ preventScroll: true });
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      if (trigger instanceof HTMLElement && trigger.isConnected) trigger.focus({ preventScroll: true });
+    };
+  }, [open]);
+
+  function updatePreference(key, value) {
+    setPrefs((current) => ({ ...current, [key]: value }));
+    setNotice("");
+  }
 
   if (!open) return null;
 
   return (
-    <>
-      {/* Backdrop */}
-      <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 9998 }} />
-
-      {/* Panel */}
-      <div className="jw-a11y-panel" role="dialog" aria-modal="true" aria-label="Accessibility options">
-        <h3>Accessibility</h3>
-
-        {/* Text size */}
-        <OptionGroup label="Text size">
-          {[
-            { label: "A", size: "normal", style: { fontSize: "0.9rem" } },
-            { label: "A", size: "lg",     style: { fontSize: "1.1rem" } },
-            { label: "A", size: "xl",     style: { fontSize: "1.3rem" } },
-          ].map(({ label, size, style: s }) => (
-            <OptionBtn
-              key={size}
-              active={prefs.fontSize === size}
-              onClick={() => setPrefs((p) => ({ ...p, fontSize: size }))}
-              style={s}
-            >
-              {label}
-            </OptionBtn>
-          ))}
-        </OptionGroup>
-
-        {/* Contrast */}
-        <OptionGroup label="Contrast">
-          <OptionBtn
-            active={prefs.contrast === "none"}
-            onClick={() => setPrefs((p) => ({ ...p, contrast: "none" }))}
-          >
-            Normal
-          </OptionBtn>
-          <OptionBtn
-            active={prefs.contrast === "light"}
-            onClick={() => setPrefs((p) => ({ ...p, contrast: "light" }))}
-          >
-            ☀ Light
-          </OptionBtn>
-          <OptionBtn
-            active={prefs.contrast === "dark"}
-            onClick={() => setPrefs((p) => ({ ...p, contrast: "dark" }))}
-          >
-            ☾ Dark
-          </OptionBtn>
-        </OptionGroup>
-
-        {/* Dyslexic font */}
-        <A11yToggle
-          label="Dyslexia-friendly font"
-          checked={prefs.dyslexic}
-          onChange={() => setPrefs((p) => ({ ...p, dyslexic: !p.dyslexic }))}
-        />
-
-        {/* The blog already offered these two and the main site did not, which is the wrong way round for a site
-            selling neurodiversity expertise. */}
-        <A11yToggle
-          label="Reduce motion"
-          checked={prefs.reducedMotion}
-          onChange={() => setPrefs((p) => ({ ...p, reducedMotion: !p.reducedMotion }))}
-        />
-
-        <A11yToggle
-          label="More line spacing"
-          checked={prefs.spacious}
-          onChange={() => setPrefs((p) => ({ ...p, spacious: !p.spacious }))}
-        />
-
-        {/* Reset */}
-        <button
-          onClick={() => setPrefs({ ...defaults })}
-          style={{
-            marginTop: "0.5rem",
-            width: "100%",
-            padding: "0.4rem",
-            borderRadius: "6px",
-            border: "1px solid var(--border)",
-            background: "transparent",
-            color: "var(--text-muted)",
-            cursor: "pointer",
-            fontSize: "0.8rem",
-          }}
-        >
-          Reset to defaults
-        </button>
-      </div>
-
-      {/* FAB - X to close */}
-      <button
-        className="jw-a11y-fab"
-        aria-label="Close accessibility panel"
-        onClick={onClose}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-          <path d="M18 6 6 18M6 6l12 12" />
-        </svg>
-      </button>
-    </>
-  );
-}
-
-/* ---------- shared sub-components ---------- */
-
-function OptionGroup({ label, children }) {
-  return (
-    <div style={{ marginBottom: "1rem" }}>
-      <div style={{
-        fontSize: "0.72rem", fontWeight: 600, color: "var(--text-muted)",
-        marginBottom: "0.45rem", textTransform: "uppercase", letterSpacing: "0.06em",
-      }}>
-        {label}
-      </div>
-      <div style={{ display: "flex", gap: "0.35rem" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function OptionBtn({ active, onClick, children, style: s }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        flex: 1,
-        padding: "0.35rem 0.25rem",
-        borderRadius: "6px",
-        border: "1px solid",
-        borderColor: active ? "var(--brand)" : "var(--border)",
-        background: active ? "var(--brand-light)" : "transparent",
-        color: active ? "var(--brand)" : "var(--text-muted)",
-        cursor: "pointer",
-        fontWeight: 600,
-        fontSize: "0.8rem",
-        whiteSpace: "nowrap",
-        ...s,
+    <dialog
+      ref={dialogRef}
+      className="jw-a11y-panel"
+      aria-labelledby="a11y-heading"
+      aria-describedby="a11y-description"
+      onKeyDown={(event) => {
+        if (event.key !== "Tab") return;
+        const controls = event.currentTarget.querySelectorAll("button:not(:disabled), input:not(:disabled), a[href]");
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+      onClick={(event) => {
+        if (event.target !== event.currentTarget) return;
+        const bounds = event.currentTarget.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) onClose();
       }}
     >
-      {children}
-    </button>
+      <div className="d-flex align-items-center justify-content-between gap-3 mb-3">
+        <h2 id="a11y-heading" className="h5 mb-0">Reading preferences</h2>
+        <button ref={closeRef} type="button" className="jw-a11y-fab jw-a11y-close" aria-label="Close reading preferences" onClick={onClose} style={{ position: "static", flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <p id="a11y-description" className="small">Adjust how this site looks. Preferences are saved in this browser when storage is available.</p>
+      {[
+        { key: "fontSize", label: "Text size", options: [["normal", "Default"], ["lg", "Larger"], ["xl", "Largest"]] },
+        { key: "contrast", label: "Colour contrast", options: [["none", "Default"], ["light", "Light"], ["dark", "Dark"]] },
+      ].map(({ key, label, options }) => (
+        <fieldset key={key} className="mb-3">
+          <legend className="h6">{label}</legend>
+          <div className="d-flex flex-wrap gap-2">
+            {options.map(([value, text]) => (
+              <button key={value} type="button" className={`jw-a11y-option ${prefs[key] === value ? "jw-btn-primary" : "jw-btn-secondary"}`} aria-pressed={prefs[key] === value} onClick={() => updatePreference(key, value)}>
+                {text}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      {[
+        ["dyslexic", "Alternative reading font"],
+        ["reducedMotion", "Reduce motion"],
+        ["spacious", "More line spacing"],
+      ].map(([key, label]) => (
+        <label key={key} className="jw-a11y-toggle d-flex align-items-center justify-content-between gap-3 py-2" htmlFor={`a11y-${key}`}>
+          <span>{label}</span>
+          <input id={`a11y-${key}`} type="checkbox" role="switch" checked={prefs[key]} onChange={(event) => updatePreference(key, event.target.checked)} style={{ width: "1.25rem", height: "1.25rem", flexShrink: 0, accentColor: "var(--brand)" }} />
+        </label>
+      ))}
+      <button type="button" className="jw-btn-secondary w-100 mt-3" onClick={() => {
+        setPrefs({ ...defaults });
+        setNotice("Reading preferences reset to defaults.");
+      }}>Reset to defaults</button>
+      <p className="visually-hidden" role="status">{notice}</p>
+    </dialog>
   );
 }
 
-function A11yToggle({ label, checked, onChange }) {
-  return (
-    <label style={{
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      marginBottom: "0.65rem", cursor: "pointer", fontSize: "0.875rem",
-      color: "var(--text-primary)", userSelect: "none",
-    }}>
-      {label}
-      <span
-        role="switch"
-        aria-checked={checked}
-        onClick={onChange}
-        style={{
-          display: "inline-flex", width: "36px", height: "20px",
-          borderRadius: "9999px",
-          background: checked ? "var(--brand)" : "var(--border)",
-          position: "relative", transition: "background 0.2s",
-          cursor: "pointer", flexShrink: 0,
-        }}
-      >
-        <span style={{
-          position: "absolute", top: "2px",
-          left: checked ? "18px" : "2px",
-          width: "16px", height: "16px",
-          borderRadius: "50%", background: "#fff",
-          transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-        }} />
-      </span>
-    </label>
-  );
-}
+AccessibilityWidget.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

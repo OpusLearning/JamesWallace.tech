@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import Header from "./components/Header";
@@ -21,14 +21,25 @@ import ForLAs from "./pages/ForLAs";
 import Tuition from "./pages/Tuition";
 import Agencies from "./pages/Agencies";
 
+function RouteEffects() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.getElementById("main-content")?.focus({ preventScroll: true });
+  }, [pathname, hash]);
+  return null;
+}
+
 const App = () => {
   const [a11yOpen, setA11yOpen] = useState(false);
 
   return (
     <Router>
+      <RouteEffects />
       <div className="d-flex flex-column min-vh-100">
         <Header onA11yClick={() => setA11yOpen(true)} />
-        <main className="flex-grow-1 jw-page">
+        <main id="main-content" tabIndex="-1" className="flex-grow-1 jw-page">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/provision" element={<Provision />} />
