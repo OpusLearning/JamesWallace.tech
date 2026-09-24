@@ -52,24 +52,3 @@ export async function sendContactAcknowledgement(name, email) {
   })
 }
 
-export async function sendPurchaseConfirmation(email, name, tier, tierName) {
-  await getClient().sendEmail({
-    From: FROM_EMAIL,
-    To: email,
-    Subject: 'Your tutoring session is confirmed — James Wallace',
-    HtmlBody: `
-      <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1a1a2e;">
-        <h1 style="color: #16213e;">Booked — thank you, ${name}</h1>
-        <p>Your <strong>${tierName}</strong> purchase is confirmed.</p>
-        <p>James will be in touch within 24 hours to schedule your session and send over any prep materials.</p>
-        <p>In the meantime, if you have any questions or want to share anything useful ahead of the session, just reply to this email.</p>
-        <hr style="border: none; border-top: 1px solid #eee; margin: 32px 0;" />
-        <p style="color: #666; font-size: 14px;">
-          You can also book a free discovery call at any time:<br/>
-          <a href="${SITE_URL}/calendly" style="color: #5c6bc0;">${SITE_URL}/calendly</a>
-        </p>
-        <p style="color: #999; font-size: 12px;">James Wallace Tutoring — jameswallace.tech</p>
-      </div>
-    `,
-  })
-}

@@ -6,8 +6,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AccessibilityWidget from "./components/AccessibilityWidget";
 import SiteHelper from "./components/SiteHelper";
-import VoiceChat from "./components/VoiceChat";
-import VisualizerDemo from "./pages/VisualizerDemo";
 import Portfolio from "./components/Portfolio";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -52,8 +50,6 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/chat" element={<VoiceChat />} />
-            <Route path="/visualizer" element={<VisualizerDemo />} />
             <Route path="/credentials" element={<Credentials />} />
             <Route
               path="*"

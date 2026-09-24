@@ -17,14 +17,10 @@ console.log("OPENAI_API_KEY", process.env.OPENAI_API_KEY ? "loaded" : "MISSING")
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import fs from "fs";
-import path from "path";
 import { performance } from "perf_hooks";
-import { OpenAI } from "openai";
-import { getStripe, TIERS } from "./stripe.js";
-import { createOrder, saveEnquiry, markEnquiryEmailed, saveHelperChat, storageHealth } from "./db.js";
+import { saveEnquiry, markEnquiryEmailed, saveHelperChat, storageHealth } from "./db.js";
 import { answer as helperAnswer, rateLimit as helperRateLimit, MAX_CHARS as HELPER_MAX_CHARS } from "./helper.js";
-import { sendPurchaseConfirmation, sendContactNotification, sendContactAcknowledgement } from "./email.js";
+import { sendContactNotification, sendContactAcknowledgement } from "./email.js";
 
 const app = express();
 
@@ -46,104 +42,11 @@ const allowedOrigins = [
 ];
 app.use(cors({ origin: allowedOrigins }));
 
-/**
- * Stripe webhook — must receive raw body BEFORE JSON middleware
- */
-app.post(
-  "/api/webhook",
-  bodyParser.raw({ type: "application/json" }),
-  async (req, res) => {
-    const sig = req.headers["stripe-signature"];
-    let event;
-    try {
-      event = getStripe().webhooks.constructEvent(
-        req.body,
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } catch (err) {
-      console.error("Webhook signature verification failed:", err.message);
-      return res.status(400).json({ error: "Invalid signature" });
-    }
-
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object;
-      const email = session.customer_details?.email || "";
-      const name = session.customer_details?.name || "";
-      const tier = session.metadata?.tier || "";
-      const tierData = TIERS[tier];
-
-      try {
-        createOrder({
-          email,
-          name,
-          tier,
-          amount: session.amount_total || 0,
-          stripeSessionId: session.id,
-          stripePaymentId: session.payment_intent || null,
-        });
-        console.log(`[webhook] Order created for ${email}, tier=${tier}`);
-      } catch (dbErr) {
-        console.error("[webhook] DB write failed:", dbErr.message);
-      }
-
-      try {
-        await sendPurchaseConfirmation(email, name, tier, tierData?.name || tier);
-        console.log(`[webhook] Confirmation email sent to ${email}`);
-      } catch (emailErr) {
-        console.error("[webhook] Email failed:", emailErr.message);
-      }
-    }
-
-    return res.json({ received: true });
-  }
-);
-
-// JSON body parser for all other routes
+// JSON body parser
 app.use(bodyParser.json({ limit: "15mb" }));
 
 /**
- * 3. Stripe checkout — create session, return redirect URL
- */
-app.post("/api/checkout", async (req, res) => {
-  const { tier } = req.body;
-  if (!tier || !(tier in TIERS)) {
-    return res.status(400).json({ error: "Invalid tier" });
-  }
-
-  const tierData = TIERS[tier];
-  const baseUrl = process.env.SITE_URL || "https://jameswallace.tech";
-
-  try {
-    const session = await getStripe().checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "gbp",
-            product_data: {
-              name: tierData.name,
-              description: tierData.description,
-            },
-            unit_amount: tierData.price,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/pricing`,
-      metadata: { tier },
-    });
-    return res.json({ url: session.url });
-  } catch (err) {
-    console.error("[/api/checkout] error:", err.message);
-    return res.status(500).json({ error: "Failed to create checkout session" });
-  }
-});
-
-/**
- * 4. Contact form
+ * 3. Contact form
  */
 app.post("/api/contact", async (req, res) => {
   const { name, email, message, _hp } = req.body;
@@ -180,7 +83,7 @@ app.post("/api/contact", async (req, res) => {
 });
 
 /**
- * 5. MailerLite subscribe — blog lead magnet opt-in
+ * 4. MailerLite subscribe — blog lead magnet opt-in
  */
 app.post("/api/subscribe", async (req, res) => {
   const { name, email, _hp } = req.body;
@@ -224,12 +127,7 @@ app.post("/api/subscribe", async (req, res) => {
 });
 
 /**
- * 6. Initialise OpenAI client (transcription and speech; the assistant builds its own — see helper.js)
- */
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-/**
- * /api/health — is the site still able to record an enquiry?
+ * 5. /api/health — is the site still able to record an enquiry?
  */
 app.get("/api/health", (req, res) => {
   const storage = storageHealth();
@@ -237,7 +135,7 @@ app.get("/api/health", (req, res) => {
 });
 
 /**
- * 7. /api/helper — the assistant in the corner of the site.
+ * 6. /api/helper — the assistant in the corner of the site.
  *
  * Deliberately narrow: no tools, no lookups, a hard per-IP rate limit and a fixed body of published facts (helper.js).
  * Every exchange is stored so James can see what people ask; anything that needs him goes through /api/contact, which
@@ -283,201 +181,7 @@ app.post("/api/helper", async (req, res) => {
 });
 
 /**
- * 7b. /api/agent — the older voice-chat endpoint at /chat, now answered by the same assistant.
- *
- * It used to run an unconstrained function-calling loop with no system prompt and no rate limit, over four tools that
- * all returned invented data — including a placeholder Calendly link a visitor could have been handed as if it were
- * James's diary. Anyone who found the endpoint could have run their own chatbot on his OpenAI bill.
- */
-app.post("/api/agent", async (req, res) => {
-  const { message, history, page } = req.body || {};
-  if (typeof message !== "string" || !message.trim()) {
-    return res.status(400).json({ error: 'Missing or invalid "message"' });
-  }
-  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip || "unknown";
-  if (helperRateLimit(ip)) {
-    return res.json({ reply: "That is as much as I can answer for now. James is on 07809 735887." });
-  }
-  const out = await helperAnswer({ message, history, page });
-  return res.json({ reply: out.reply });
-});
-
-/**
- * 8. /api/transcribe — Whisper transcription with metrics
- */
-app.post("/api/transcribe", async (req, res) => {
-  console.log(
-    "[api/transcribe] audioBase64 length=",
-    req.body.audioBase64?.length
-  );
-  const { audioBase64 } = req.body;
-  if (typeof audioBase64 !== "string" || !audioBase64) {
-    return res.status(400).json({ error: 'Missing or invalid "audioBase64"' });
-  }
-
-  const t0 = performance.now();
-  try {
-    const tmpPath = path.join("/tmp", `audio-${Date.now()}.webm`);
-    fs.writeFileSync(tmpPath, Buffer.from(audioBase64, "base64"));
-    console.log("[api/transcribe] wrote file=", tmpPath);
-
-    const transcription = await openai.audio.transcriptions.create({
-      model: "whisper-1",
-      file: fs.createReadStream(tmpPath),
-      filename: path.basename(tmpPath),
-      response_format: "text",
-    });
-    console.log("[api/transcribe] transcription=", transcription);
-
-    const duration = (performance.now() - t0).toFixed(1);
-    console.log(`[perf] /api/transcribe completed in ${duration} ms`);
-    return res.json({ transcript: transcription });
-  } catch (err) {
-    console.error("[/api/transcribe] error:", err.response?.data || err);
-    return res
-      .status(500)
-      .json({ error: "Transcription failed", details: err.message });
-  }
-});
-
-/**
- * 9. /api/tts — Text-to-Speech (non-streaming fallback)
- */
-app.post("/api/tts", async (req, res) => {
-  console.log("[api/tts] body=", req.body);
-  const { text, voice = "alloy", format = "mp3" } = req.body;
-  if (typeof text !== "string" || !text.trim()) {
-    return res.status(400).json({ error: 'Missing or invalid "text"' });
-  }
-
-  const t0 = performance.now();
-  try {
-    const base64 = await openai.audio.speech.create({
-      model: "tts-1",
-      input: text,
-      voice,
-      format,
-      stream: false,
-    });
-    const buffer = Buffer.from(base64, "base64");
-    console.log("[api/tts] buffer length=", buffer.length);
-
-    const duration = (performance.now() - t0).toFixed(1);
-    console.log(`[perf] /api/tts (non-stream) completed in ${duration} ms`);
-
-    res.writeHead(200, { "Content-Type": `audio/${format}` });
-    return res.end(buffer);
-  } catch (err) {
-    console.error("[/api/tts] error:", err.response?.data || err);
-    return res.status(500).json({ error: "TTS failed", details: err.message });
-  }
-});
-
-/**
- * 10. /api/tts-stream — Streaming TTS with chunk-size logging & fallback
- */
-app.post("/api/tts-stream", async (req, res) => {
-  console.log("[api/tts-stream] body=", req.body);
-  const { text, voice = "alloy", format = "mp3" } = req.body;
-  if (typeof text !== "string" || !text.trim()) {
-    return res.status(400).json({ error: 'Missing or invalid "text"' });
-  }
-
-  const segments = [];
-  for (let i = 0; i < text.length; ) {
-    let slice = text.slice(i, i + 1000);
-    const lastDot = slice.lastIndexOf(". ");
-    if (lastDot > 50) slice = slice.slice(0, lastDot + 1);
-    segments.push(slice);
-    i += slice.length;
-  }
-
-  const t0 = performance.now();
-  res.writeHead(200, {
-    "Content-Type": `audio/${format}`,
-    "Transfer-Encoding": "chunked",
-  });
-
-  async function fetchStream(input, attempts = 3) {
-    try {
-      console.log(
-        "[fetchStream] textLen=",
-        input.length,
-        "attempt=",
-        4 - attempts
-      );
-      return await openai.audio.speech.create({
-        model: "tts-1",
-        input,
-        voice,
-        format,
-        stream: true,
-      });
-    } catch (err) {
-      if (attempts > 1 && err.status === 500) {
-        console.warn("[fetchStream] retrying due to server error");
-        await new Promise((r) => setTimeout(r, 500));
-        return fetchStream(input, attempts - 1);
-      }
-      throw err;
-    }
-  }
-
-  for (let idx = 0; idx < segments.length; idx++) {
-    const seg = segments[idx];
-    const tSeg = performance.now();
-    try {
-      const response = await fetchStream(seg);
-      const reader = response.body;
-      await new Promise((resolve, reject) => {
-        reader.on("data", (chunk) => {
-          console.log(`[tts-stream][${idx}] chunk size=`, chunk.length);
-          res.write(chunk);
-        });
-        reader.on("end", resolve);
-        reader.on("error", reject);
-      });
-      console.log(
-        `[perf] segment ${idx} streamed in ${(
-          performance.now() - tSeg
-        ).toFixed(1)} ms`
-      );
-    } catch (err) {
-      console.error(`[tts-stream][${idx}] streaming failed`, err);
-      try {
-        const resp = await openai.audio.speech.create({
-          model: "tts-1",
-          input: seg,
-          voice,
-          format,
-          stream: false,
-        });
-        const arrayBuffer = await resp.arrayBuffer();
-        const buf = Buffer.from(arrayBuffer);
-        console.log(`[tts-stream][${idx}] fallback chunk size=`, buf.length);
-        res.write(buf);
-        console.log(
-          `[perf] segment ${idx} fallback in ${(
-            performance.now() - tSeg
-          ).toFixed(1)} ms`
-        );
-      } catch (fb) {
-        console.error(`[tts-stream][${idx}] fallback failed`, fb);
-        break;
-      }
-    }
-  }
-
-  console.log(
-    `[perf] /api/tts-stream total time ${(performance.now() - t0).toFixed(
-      1
-    )} ms for ${segments.length} segments`
-  );
-  res.end();
-});
-
-/**
- * 11. Start the server
+ * 7. Start the server
  */
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Agent server running on port ${PORT}`));
