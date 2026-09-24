@@ -35,4 +35,10 @@ export default [
       ],
     },
   },
+  {
+    // Node CommonJS config files (e.g. tailwind.config.js) are not browser code,
+    // so `module`/`require` are defined here rather than undefined.
+    files: ['*.config.js'],
+    languageOptions: { globals: globals.node },
+  },
 ]

@@ -1,6 +1,7 @@
 // Waveform.jsx
 
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 
 export default function Waveform({ analyser }) {
   const canvasRef = useRef();
@@ -30,3 +31,10 @@ export default function Waveform({ analyser }) {
   }, [analyser]);
   return <canvas ref={canvasRef} width={300} height={80} />;
 }
+
+Waveform.propTypes = {
+  analyser: PropTypes.shape({
+    fftSize: PropTypes.number.isRequired,
+    getByteTimeDomainData: PropTypes.func.isRequired,
+  }).isRequired,
+};
