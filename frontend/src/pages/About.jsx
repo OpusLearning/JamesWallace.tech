@@ -128,7 +128,6 @@ export default function About() {
             with Local Authority SEND teams, EOTAS coordinators and EHCP caseworkers,
             sharing the evidence they need to review a placement.
           </p>
-          <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
           <p>
             {SAFEGUARDING_ROLES.dsl.name} is the{" "}
             {SAFEGUARDING_ROLES.dsl.role} for the provision, and I am the{" "}
@@ -140,6 +139,7 @@ export default function About() {
             Platinum award. Renewal dates are tracked with expiry alerts rather
             than left to lapse.
           </p>
+          <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
         </div>
       </section>
 

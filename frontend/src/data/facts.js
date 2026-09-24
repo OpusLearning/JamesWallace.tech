@@ -54,8 +54,8 @@ export const TRAINING = {
 
 // Who holds the safeguarding roles. Decided by James on 24 Sep 2026; source:
 // sources/training/dsl-level3-2026/README.md. Asmaa Ahmed has consented to her name, role and
-// certificate being public — publish nothing else about her (no contact details, photo or
-// biography). Both roles carry the DSL Level 3 training above.
+// certificate being public, and James supplied the brief introduction below. Publish nothing else
+// about her (no contact details, photo, employer or school). Both roles carry the DSL Level 3 training above.
 //
 // 24 Sep 2026: brief public introduction for Asmaa, from sources/people/asmaa-ahmed.md only. She
 // began as a primary teacher, taught at a charter school in New York, holds a Master's in Education
@@ -67,7 +67,7 @@ const dsl = {
   role: "Designated Safeguarding Lead",
   yearsInEducation: "over nine years",
 };
-dsl.intro = `${dsl.name} has worked in education for ${dsl.yearsInEducation}, beginning as a primary teacher and going on to teach at a charter school in New York. She holds a Master's in Education and now leads digital journey transformation in EdTech.`;
+dsl.intro = `${dsl.name} has worked in education for ${dsl.yearsInEducation}, beginning as a primary teacher at a charter school in New York. She holds a Master's in Education and now leads digital journey transformation in EdTech.`;
 
 export const SAFEGUARDING_ROLES = {
   dsl,
