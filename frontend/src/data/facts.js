@@ -60,8 +60,8 @@ export const TRAINING = {
 // 24 Sep 2026: brief public introduction for Asmaa, from sources/people/asmaa-ahmed.md only. She
 // began as a primary teacher, taught at a charter school in New York, holds a Master's in Education
 // and now leads digital journey transformation in EdTech. No employer, school or university is
-// named because the source does not supply one. "over nine years" is the source's "over 9 years";
-// James flagged that Asmaa should confirm the figure, so it stays a one-line edit here.
+// named because the source does not supply one. "over eleven years" was confirmed by James on 24 Sep 2026
+// (he first said "over 9").
 const dsl = {
   name: "Asmaa Ahmed",
   role: "Designated Safeguarding Lead",
