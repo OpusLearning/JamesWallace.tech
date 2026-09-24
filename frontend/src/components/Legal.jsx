@@ -67,7 +67,22 @@ LegalSection.propTypes = {
 export function LegalTable({ caption, columns, rows }) {
   return (
     <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem" }}>
+      {/*
+        `overflow-wrap: anywhere` is set on body for long URLs, and it is inherited into these narrow
+        cells — at 390px that broke "Postmark" and "Cloudflare" mid-word. Put normal wrapping back on
+        the table and give it a floor width, so a narrow screen scrolls the wrapper instead of squeezing
+        words. The wrapper already scrolls (overflowX above).
+      */}
+      <table
+        style={{
+          width: "100%",
+          minWidth: "40rem",
+          borderCollapse: "collapse",
+          fontSize: "0.875rem",
+          overflowWrap: "normal",
+          wordBreak: "normal",
+        }}
+      >
         <caption className="visually-hidden">{caption}</caption>
         <thead>
           <tr style={{ background: "var(--brand)", color: "#fff" }}>
