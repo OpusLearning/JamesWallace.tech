@@ -22,9 +22,15 @@ const OPENERS = [
   "Do you cover my area?",
 ];
 
+// The first thing a visitor sees. UK GDPR / ICO AI guidance expects the disclosure at first
+// interaction, so it carries all four points before anything is asked of them: that this is an AI
+// assistant, that messages go to OpenAI and are stored, how long for, and what not to type in.
+// Retention matches the 12-month deletion in server/db.js. Source: sources/legal/README.md item 6.
 const GREETING =
-  "Hello. I can answer questions about James's tuition: what he does, what it costs, how it starts. " +
-  "If you would rather talk to him, say so and I will take your details.";
+  "I'm an AI assistant, not James. Your messages go to OpenAI and are stored for up to 12 months so " +
+  "James can see what people ask. Please don't enter a child's name, a diagnosis, or any safeguarding " +
+  "detail. I can answer questions about James's tuition — what he does, what it costs, how it starts — " +
+  "and if you would rather talk to him, say so and I'll take your details.";
 
 const STORE_KEY = "jw-helper-v1";
 
@@ -149,7 +155,7 @@ export default function SiteHelper() {
           role: "assistant",
           content:
             "I could not get an answer back in time, sorry. Leave your name and email below and James will pick it up, " +
-            "or ring him on 07809 735887.",
+            "or ring him on 07897 021077.",
         },
       ]);
       setShowForm(true);
@@ -265,7 +271,7 @@ export default function SiteHelper() {
               Ask about the tuition
             </div>
             <div style={{ color: "var(--text-muted)", fontSize: "0.78rem", marginTop: "0.15rem" }}>
-              An assistant, not James. Anything it cannot answer goes straight to him.
+              An AI assistant, not James. Anything it cannot answer goes straight to him.
             </div>
           </header>
 
@@ -413,7 +419,7 @@ export default function SiteHelper() {
                 </button>
                 {formState === "error" && (
                   <div style={{ color: "#b42318", fontSize: "0.8rem" }}>
-                    That did not go through. Email hello@jameswallace.tech or ring 07809 735887.
+                    That did not go through. Email hello@jameswallace.tech or ring 07897 021077.
                   </div>
                 )}
                 <div style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
@@ -468,6 +474,5 @@ const inputStyle = {
   fontSize: "0.88rem",
   color: "var(--text-primary)",
   background: "#fff",
-  outline: "none",
   width: "100%",
 };

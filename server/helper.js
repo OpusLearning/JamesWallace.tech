@@ -39,8 +39,9 @@ What he does:
 - One-to-one tuition for children and young people who cannot manage school: anxiety-based school avoidance, autism,
   ADHD, SEMH needs, and children out of school waiting on a placement.
 - EHCP-aligned tuition, written to the outcomes in a plan, with the evidence a review needs.
-- Full EOTAS packages commissioned by a local authority or paid from a personal budget, typically five to twenty-five
-  hours a week, including planning, daily evidence, safeguarding records and attendance at reviews.
+- Full EOTAS packages commissioned by a local authority or paid from a personal budget, typically 3 to 15 hours a
+  week (the same figure as DELIVERY.hoursPerWeek in frontend/src/data/facts.js — keep the two in step), including
+  planning, daily evidence, safeguarding records and attendance at reviews.
 - KS2 to KS4 and post-16. Online or in the family home.
 
 What it costs (published on the site, no registration fee, no minimum term):
@@ -49,7 +50,7 @@ What it costs (published on the site, no registration fee, no minimum term):
 - £250 a day for EOTAS packages.
 - The first conversation is free.
 
-How to start: a short free conversation with James, no obligation. He can be reached on 07809 735887 or through the
+How to start: a short free conversation with James, no obligation. He can be reached on 07897 021077 or through the
 contact form on this site.
 `.trim();
 
@@ -112,7 +113,7 @@ export function cleanHistory(history) {
 
 const FALLBACK =
   "I cannot reach my brain at the moment, sorry. Leave your name and email below and James will come back to you himself, " +
-  "or ring him on 07809 735887.";
+  "or ring him on 07897 021077.";
 
 /**
  * Answer one message. Returns { reply, offerForm, degraded }.

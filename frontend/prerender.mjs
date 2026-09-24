@@ -27,7 +27,8 @@ try {
 
 const DIST = new URL('./dist/', import.meta.url).pathname;
 const ROUTES = ['/', '/provision', '/platform', '/compliance', '/for-las', '/tuition', '/agencies',
-                '/portfolio', '/about', '/contact', '/privacy', '/credentials'];
+                '/portfolio', '/about', '/contact', '/privacy', '/cookies', '/accessibility', '/terms',
+                '/complaints', '/credentials'];
 const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.jpg':'image/jpeg',
   '.jpeg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.ico':'image/x-icon', '.json':'application/json',
   '.pdf':'application/pdf', '.woff':'font/woff', '.woff2':'font/woff2', '.txt':'text/plain', '.xml':'application/xml' };

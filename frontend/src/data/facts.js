@@ -75,7 +75,7 @@ export const SAFEGUARDING_ROLES = {
 };
 
 // Reviewed by hand. If this date is stale the page should not claim currency.
-export const REVIEWED = "12 September 2026";
+export const REVIEWED = "25 September 2026";
 
 // "Taking new placements now" is worth more to a commissioner with a date against it: they can tell whether they are
 // reading something live or something written six months ago. Update `reviewed` whenever the status is checked, even

@@ -11,6 +11,10 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
+import Accessibility from "./pages/Accessibility";
+import Terms from "./pages/Terms";
+import Complaints from "./pages/Complaints";
 import Credentials from "./pages/Credentials";
 import Provision from "./pages/Provision";
 import Platform from "./pages/Platform";
@@ -50,6 +54,10 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="/accessibility" element={<Accessibility />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/complaints" element={<Complaints />} />
             <Route path="/credentials" element={<Credentials />} />
             <Route
               path="*"

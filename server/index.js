@@ -18,7 +18,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { performance } from "perf_hooks";
-import { saveEnquiry, markEnquiryEmailed, saveHelperChat, storageHealth } from "./db.js";
+import { saveEnquiry, markEnquiryEmailed, saveHelperChat, storageHealth, deleteOldHelperChats } from "./db.js";
 import { answer as helperAnswer, rateLimit as helperRateLimit, MAX_CHARS as HELPER_MAX_CHARS } from "./helper.js";
 import { sendContactNotification, sendContactAcknowledgement } from "./email.js";
 
@@ -49,7 +49,7 @@ app.use(bodyParser.json({ limit: "15mb" }));
  * 3. Contact form
  */
 app.post("/api/contact", async (req, res) => {
-  const { name, email, message, _hp } = req.body;
+  const { name, email, message, topic, _hp } = req.body;
   // Honeypot — bots fill this hidden field, humans don't
   if (_hp) return res.json({ ok: true });
 
@@ -63,7 +63,14 @@ app.post("/api/contact", async (req, res) => {
   // Store first. An enquiry must survive the notification failing, which is exactly what was happening.
   let id = null;
   try {
-    id = saveEnquiry({ name: name.trim(), email: email.trim(), message: message.trim(), page: req.body.page || req.get("referer") || null });
+    id = saveEnquiry({
+      name: name.trim(),
+      email: email.trim(),
+      message: message.trim(),
+      page: req.body.page || req.get("referer") || null,
+      // The data-protection complaint form on /privacy sets this; every other enquiry leaves it null.
+      topic: typeof topic === "string" ? topic.trim().slice(0, 120) || null : null,
+    });
   } catch (err) {
     console.error("[/api/contact] could not store enquiry:", err.message);
   }
@@ -160,7 +167,7 @@ app.post("/api/helper", async (req, res) => {
       reply:
         limited === "day"
           ? "That is as much as I can answer today. Leave your name and email below and James will pick it up himself."
-          : "Give me a few minutes to catch up. If it is urgent, leave your details below or ring James on 07809 735887.",
+          : "Give me a few minutes to catch up. If it is urgent, leave your details below or ring James on 07897 021077.",
       offerForm: true,
     });
   }
@@ -181,7 +188,24 @@ app.post("/api/helper", async (req, res) => {
 });
 
 /**
- * 7. Start the server
+ * 7. Chat retention — conversations are kept for 12 months (sources/legal/README.md).
+ *
+ * Run once at startup so a restart is enough to catch up, then daily. A failure here must never stop
+ * the site answering enquiries, so it is caught and logged rather than thrown.
+ */
+function runChatRetention() {
+  try {
+    const removed = deleteOldHelperChats();
+    console.log(`[retention] helper_chats older than 12 months removed: ${removed}`);
+  } catch (err) {
+    console.error("[retention] could not prune helper_chats:", err.message);
+  }
+}
+runChatRetention();
+setInterval(runChatRetention, 24 * 60 * 60 * 1000).unref();
+
+/**
+ * 8. Start the server
  */
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Agent server running on port ${PORT}`));

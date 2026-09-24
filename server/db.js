@@ -23,6 +23,13 @@ db.exec(`
   )
 `)
 
+// The /privacy data-protection complaints procedure (DUAA 2025 s103) reuses /api/contact with a hidden
+// `topic` field. Databases created before this column existed need it added once; PRAGMA first, so the
+// migration is idempotent and safe to run on every start.
+if (!db.prepare("PRAGMA table_info(enquiries)").all().some((column) => column.name === "topic")) {
+  db.exec("ALTER TABLE enquiries ADD COLUMN topic TEXT")
+}
+
 // Every exchange with the site assistant. James wanted to see what people actually ask, and an enquiry that starts in the
 // chat should reach him by the same route as one from the form — so the chat writes into `enquiries` too, via /api/contact.
 db.exec(`
@@ -64,11 +71,21 @@ export function saveHelperChat({ sessionId, page, question, reply, degraded }) {
   `).run({ sessionId, page: page || null, question, reply, degraded: degraded ? 1 : 0 }).lastInsertRowid
 }
 
-export function saveEnquiry({ name, email, message, page }) {
+export function saveEnquiry({ name, email, message, page, topic }) {
   const stmt = db.prepare(`
-    INSERT INTO enquiries (name, email, message, page) VALUES (@name, @email, @message, @page)
+    INSERT INTO enquiries (name, email, message, page, topic)
+    VALUES (@name, @email, @message, @page, @topic)
   `)
-  return stmt.run({ name, email, message, page: page || null }).lastInsertRowid
+  return stmt.run({ name, email, message, page: page || null, topic: topic || null }).lastInsertRowid
+}
+
+/**
+ * Retention for the chat assistant: conversations are kept for 12 months, then deleted
+ * (sources/legal/README.md). Called once on startup and daily by server/index.js.
+ * Returns the number of rows removed.
+ */
+export function deleteOldHelperChats() {
+  return db.prepare("DELETE FROM helper_chats WHERE createdAt < datetime('now', '-12 months')").run().changes
 }
 
 export function markEnquiryEmailed(id, ok, error) {

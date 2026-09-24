@@ -245,6 +245,7 @@ textarea.form-control { resize: vertical; }
 .jw-footer-nav a:hover { text-decoration: underline; }
 .jw-footer-bottom { margin-top: 2.8rem; padding-top: 1.3rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .75rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem; }
 .jw-footer-bottom a { color: var(--text-muted); display: inline-block; padding-block: .4rem; }
+.jw-footer-legal { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 .4rem; }
 
 /* Accessibility preferences and existing assistant/voice surfaces. */
 .jw-a11y-panel { position: fixed; bottom: 5.4rem; right: 1.25rem; z-index: 9999; width: min(340px, calc(100vw - 2rem)); max-height: calc(100dvh - 7rem); overflow-y: auto; background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem; box-shadow: 0 .8rem 3rem #193a3120; }
