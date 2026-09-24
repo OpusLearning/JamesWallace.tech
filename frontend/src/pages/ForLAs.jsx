@@ -44,7 +44,7 @@ const monthlyDeliverables = [
 
 export default function ForLAs() {
   usePageMeta({
-    title: 'For Local Authorities | Commissioning EOTAS Placements | ND Services',
+    title: 'For Local Authorities | Commissioning EOTAS Placements | James Wallace Education',
     description:
       'How commissioning works: referral to first session, weekly plans, daily reports, safeguarding nil returns and inspection-ready exports for SEND panels.',
     path: '/for-las',
@@ -59,7 +59,7 @@ export default function ForLAs() {
             <div className="col-12 col-lg-7 text-center text-lg-start">
               <h1>For Local Authorities &amp; Schools</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                Commissioning EOTAS provision should be clear. ND Services, the provision operated by James Wallace,
+                Commissioning EOTAS provision should be clear. James Wallace Education, the provision operated by James Wallace,
                 gives commissioners and referrers real-time visibility of every
                 active placement - from session evidence to safeguarding nil
                 returns - with structured monthly deliverables and
@@ -218,7 +218,7 @@ export default function ForLAs() {
             <div className="col-12 col-lg-6">
               <h2>Policies &amp; Procedures</h2>
               <p>
-                ND Services maintains a full suite of 28 EOTAS-aligned policies
+                James Wallace Education maintains a full suite of 28 EOTAS-aligned policies
                 - covering Safeguarding, Lone Working, Data Protection, Health
                 &amp; Safety, Behaviour Support, and more. Each policy is
                 version-controlled, review-dated, and available as a branded

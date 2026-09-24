@@ -37,7 +37,7 @@ function renderFocusCard(icon, title, description) {
 
 export default function About() {
   usePageMeta({
-    title: 'About James Wallace | Specialist SEND Educator | ND Services',
+    title: 'About James Wallace | Specialist SEND Educator | James Wallace Education',
     description:
       'Thirteen years teaching in specialist provision, twelve of them in a specialist SEMH school, five years inside a local authority commissioning team, now delivering EOTAS for neurodiverse young people.',
     path: '/about',
@@ -77,10 +77,13 @@ export default function About() {
                 Education Specialist &amp; EOTAS Provider
               </p>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                ND Services is the specialist educational provision operated by James
+                James Wallace Education is the specialist educational provision operated by James
                 Wallace. I deliver structured alternative provision for neurodiverse
                 learners who cannot access mainstream or special school settings, with
                 a clear record of what was planned, delivered and reviewed.
+              </p>
+              <p style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
+                Formerly trading as ND Services.
               </p>
               <div className="d-flex flex-wrap gap-2 mt-3 mb-4">
                 {[
@@ -114,7 +117,7 @@ export default function About() {
         <div className="jw-container" style={{ maxWidth: "760px" }}>
           <h2 className="mb-4">One practitioner, accountable throughout</h2>
           <p>
-            ND Services is operated by James Wallace, and in practice is James
+            James Wallace Education is operated by James Wallace, and in practice is James
             Wallace: one qualified teacher rather than a staffed agency, which is
             deliberate. Thirteen years teaching in specialist provision, twelve
             of them in a specialist SEMH school, and five inside a county
