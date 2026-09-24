@@ -6,6 +6,7 @@ const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
   { requirement: `Safeguarding / ${STATUTORY.kcsie} update`, tracked: `Completed ${TRAINING.safeguarding.completed}` },
   { requirement: TRAINING.prevent.name, tracked: `Completed ${TRAINING.prevent.completed}` },
+  { requirement: TRAINING.dsl.name, tracked: `Completed ${TRAINING.dsl.completed}, renewal ${TRAINING.dsl.renewal}` },
   { requirement: "Child-on-child abuse (agency onboarding)", tracked: "Valid to 22 August 2027" },
   { requirement: "Lone Working Safety", tracked: "Completion date recorded" },
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },

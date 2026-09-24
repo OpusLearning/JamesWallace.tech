@@ -16,6 +16,7 @@ const compliance = [
   { item: "Qualified Teacher Status", detail: "PGCE Secondary, University of Derby, July 2004", state: "held" },
   { item: "Safeguarding & child protection", detail: `${STATUTORY.kcsie} update, completed ${TRAINING.safeguarding.completed}`, state: "held" },
   { item: "Prevent duty", detail: `Completed ${TRAINING.prevent.completed}`, state: "held" },
+  { item: TRAINING.dsl.name, detail: `${TRAINING.dsl.provider}, completed ${TRAINING.dsl.completed}, renewal ${TRAINING.dsl.renewal}`, state: "held" },
   { item: "Child-on-child abuse", detail: "Completed 22 Aug 2026", state: "held" },
   { item: TRAINING.allergy.name, detail: `Academize, completed ${TRAINING.allergy.completed}`, state: "held" },
   { item: "Whole School SEND, Platinum", detail: "The top tier of the national SEND CPD framework, September 2026", state: "held" },

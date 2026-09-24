@@ -41,6 +41,24 @@ export const TRAINING = {
   prevent: { name: "Prevent duty", completed: "9 September 2026" },
   allergy: { name: "Allergy awareness and anaphylaxis", completed: "24 August 2026" },
   dbs: { name: "Enhanced DBS", status: "On the Update Service, verifiable the same day" },
+  // 24 Sep 2026: Designated Safeguarding Lead (Level 3), High Speed Training. Verified by Claude and
+  // decided by James on 24 Sep 2026; source: sources/training/dsl-level3-2026/README.md. Both James
+  // and Asmaa Ahmed completed it; the recommended renewal is 23 September 2028.
+  dsl: {
+    name: "Designated Safeguarding Lead (Level 3)",
+    provider: "High Speed Training",
+    completed: "24 September 2026",
+    renewal: "September 2028",
+  },
+};
+
+// Who holds the safeguarding roles. Decided by James on 24 Sep 2026; source:
+// sources/training/dsl-level3-2026/README.md. Asmaa Ahmed has consented to her name, role and
+// certificate being public — publish nothing else about her (no contact details, photo or
+// biography). Both roles carry the DSL Level 3 training above.
+export const SAFEGUARDING_ROLES = {
+  dsl: { name: "Asmaa Ahmed", role: "Designated Safeguarding Lead" },
+  deputy: { name: "James Wallace", role: "Deputy Designated Safeguarding Lead" },
 };
 
 // Reviewed by hand. If this date is stale the page should not claim currency.

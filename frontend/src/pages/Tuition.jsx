@@ -64,6 +64,7 @@ const quals = [
 const training = [
   { name: TRAINING.safeguarding.name, when: `completed ${TRAINING.safeguarding.completed}` },
   { name: TRAINING.prevent.name, when: `completed ${TRAINING.prevent.completed}` },
+  { name: TRAINING.dsl.name, when: `${TRAINING.dsl.provider}, completed ${TRAINING.dsl.completed}` },
   { name: "Child-on-child abuse", when: "agency onboarding, 22 August 2026" },
   { name: TRAINING.allergy.name, when: `completed ${TRAINING.allergy.completed}` },
   { name: "Whole School SEND, Platinum award", when: "September 2026" },

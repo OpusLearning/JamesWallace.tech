@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { BIO, STATUTORY } from "../data/facts";
+import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING } from "../data/facts";
 import {
   FaBrain,
   FaGraduationCap,
@@ -88,7 +88,7 @@ export default function About() {
                   "MEd",
                   "QTS",
                   "Enhanced DBS",
-                  "DSL",
+                  SAFEGUARDING_ROLES.deputy.role,
                   "ASD Awareness",
                 ].map((t) => (
                   <span key={t} className="jw-badge">
@@ -129,11 +129,15 @@ export default function About() {
             sharing the evidence they need to review a placement.
           </p>
           <p>
-            I am the Designated Safeguarding Lead for every placement I take,
-            and hold current safeguarding and {STATUTORY.kcsie}, Prevent duty,
-            child-on-child abuse, allergy awareness and lone working training,
-            with the Whole School SEND Platinum award. Renewal dates are tracked
-            with expiry alerts rather than left to lapse.
+            {SAFEGUARDING_ROLES.dsl.name} is the{" "}
+            {SAFEGUARDING_ROLES.dsl.role} for the provision, and I am the{" "}
+            {SAFEGUARDING_ROLES.deputy.role}. We both hold the{" "}
+            {TRAINING.dsl.name} qualification from {TRAINING.dsl.provider},
+            completed {TRAINING.dsl.completed}. I hold current safeguarding and{" "}
+            {STATUTORY.kcsie}, Prevent duty, child-on-child abuse, allergy
+            awareness and lone working training, with the Whole School SEND
+            Platinum award. Renewal dates are tracked with expiry alerts rather
+            than left to lapse.
           </p>
         </div>
       </section>

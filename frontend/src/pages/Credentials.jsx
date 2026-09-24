@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { BIO, STATUTORY, REVIEWED, REFERENCES as references } from "../data/facts";
+import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING, REVIEWED, REFERENCES as references } from "../data/facts";
 import "./Credentials.css";
 
 const academicQuals = [
@@ -136,6 +136,16 @@ const cpdCerts = [
     desc: "Practical frameworks for identifying and supporting sensory processing differences in young people.",
     badge: "/badges/griffinot.png",
     wide: true,
+  },
+  {
+    title: TRAINING.dsl.name,
+    group: "safeguarding",
+    provider: TRAINING.dsl.provider,
+    issued: TRAINING.dsl.completed,
+    detail: `Certificate number T-5346277-6416245. City & Guilds Assured and CPD Certified. Recommended renewal ${TRAINING.dsl.renewal}. Verify at highspeedtraining.co.uk/verify.`,
+    desc: `The Level 3 qualification for the ${SAFEGUARDING_ROLES.dsl.role} role, held by both the DSL and the ${SAFEGUARDING_ROLES.deputy.role}.`,
+    wide: true,
+    cert: "/certificates/cert_hst_designated-safeguarding-lead-l3_2026-09-24.pdf",
   },
   {
     title: "Safeguarding Young People (Level 2)",
@@ -388,6 +398,18 @@ const cpdCerts = [
   },
 ];
 
+// The Designated Safeguarding Lead's certificate. Published with her consent (name, role and
+// certificate only — no contact details, photo or biography). Source:
+// sources/training/dsl-level3-2026/README.md (James, 24 Sep 2026).
+const safeguardingLeadCertificate = {
+  title: TRAINING.dsl.name,
+  provider: TRAINING.dsl.provider,
+  issued: TRAINING.dsl.completed,
+  detail: `Certificate number T-5346253-6416216. City & Guilds Assured and CPD Certified. Recommended renewal ${TRAINING.dsl.renewal}. Verify at highspeedtraining.co.uk/verify.`,
+  desc: `Certificate held by ${SAFEGUARDING_ROLES.dsl.name}, ${SAFEGUARDING_ROLES.dsl.role}.`,
+  cert: "/certificates/cert_hst_designated-safeguarding-lead-l3_asmaa-ahmed_2026-09-24.pdf",
+};
+
 const experience = [
   {
     role: "Specialist SEMH Teacher",
@@ -545,6 +567,14 @@ export default function Credentials() {
                 <div className="credential-band-body"><p className="credential-band-note">{band.key === "send" ? "Training relevant to supporting SEND, autistic and ADHD learners, and young people’s mental health." : band.note}</p>{records.map(renderCertificate)}</div>
               </details>;
             })}
+          </div>
+          <div className="credentials-training-bands" style={{ marginTop: "2rem" }}>
+            <h3>{SAFEGUARDING_ROLES.dsl.name}, {SAFEGUARDING_ROLES.dsl.role}</h3>
+            <p>
+              {SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}; {SAFEGUARDING_ROLES.deputy.name} is the{" "}
+              {SAFEGUARDING_ROLES.deputy.role}. Both hold the {TRAINING.dsl.name} qualification from {TRAINING.dsl.provider}.
+            </p>
+            {renderCertificate(safeguardingLeadCertificate)}
           </div>
         </div>
       </section>
