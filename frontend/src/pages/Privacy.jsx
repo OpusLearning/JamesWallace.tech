@@ -237,7 +237,7 @@ export default function PrivacyPolicy() {
             ["MailerLite", "Newsletter", "Lithuania (EU)", "No transfer outside the UK/EEA"],
             ["Hetzner", "Website hosting and enquiry storage", "Germany (EU)", "No transfer outside the UK/EEA"],
             ["Neon", "Portal database (commissioned provision)", "Frankfurt (EU)", "No transfer outside the UK/EEA"],
-            ["Cloudflare R2", "Portal documents (commissioned provision)", "Western Europe (EU)", "No transfer outside the UK/EEA"],
+            ["Cloudflare R2", "Portal documents (commissioned provision), encrypted before upload", "Western Europe", "Stored in Western Europe; Cloudflare data processing addendum"],
           ]}
         />
       </LegalSection>
