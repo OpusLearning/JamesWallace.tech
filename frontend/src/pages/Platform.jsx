@@ -150,7 +150,7 @@ const proofTiles = [
 
 export default function Platform() {
   usePageMeta({
-    title: 'ND Portal | Evidence and Reporting Platform | ND Services',
+    title: 'ND Portal | Evidence and Reporting Platform | James Wallace Education',
     description:
       'The portal behind every placement: session evidence, safeguarding alerts, compliance tracking and on-demand PDF exports for monitoring visits.',
     path: '/platform',

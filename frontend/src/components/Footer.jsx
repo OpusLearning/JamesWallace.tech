@@ -11,7 +11,7 @@ export default function Footer() {
           <li><a href="https://portal.jameswallace.tech" target="_blank" rel="noopener noreferrer">Portal<span aria-hidden="true"> ↗</span></a></li>
         </ul></nav>
       </div>
-      <div className="jw-footer-bottom"><span>© 2026 James Wallace · ND Services</span><span><a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a> · <a href="tel:07897021077">07897 021077</a></span></div>
+      <div className="jw-footer-bottom"><span>© 2026 James Wallace Education Ltd. Registered in England and Wales, company number 17479328. Registered office: 71–75 Shelton Street, Covent Garden, London WC2H 9JQ.</span><span><a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a> · <a href="tel:07897021077">07897 021077</a></span></div>
     </footer>
   );
 }
