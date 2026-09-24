@@ -65,7 +65,7 @@ export const TRAINING = {
 const dsl = {
   name: "Asmaa Ahmed",
   role: "Designated Safeguarding Lead",
-  yearsInEducation: "over nine years",
+  yearsInEducation: "over eleven years",
 };
 dsl.intro = `${dsl.name} has worked in education for ${dsl.yearsInEducation}, beginning as a primary teacher at a charter school in New York. She holds a Master's in Education and now leads digital journey transformation in EdTech.`;
 
