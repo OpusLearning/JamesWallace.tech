@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 export default function ChatBubble({ sender, text }) {
   const isUser = sender === "user";
@@ -15,3 +15,8 @@ export default function ChatBubble({ sender, text }) {
     </div>
   );
 }
+
+ChatBubble.propTypes = {
+  sender: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};

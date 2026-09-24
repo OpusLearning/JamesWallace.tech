@@ -1,5 +1,5 @@
 // frontend/src/components/VoiceChat.jsx
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import VoiceRecorder from "./VoiceRecorder";
 import ChatBubble from "./ChatBubble";
 import VisualizerCanvas from "./VisualizerCanvas";
@@ -90,8 +90,8 @@ export default function VoiceChat() {
         {loading && <div className="loading-spinner" />}
         {timings.total && (
           <div className="text-muted small mt-2">
-            Agent: {timings.agent} ms • TTS: {timings.tts} ms • Total:{" "}
-            {timings.total} ms
+            Agent: {timings.agent}&nbsp;ms&nbsp;•&nbsp;TTS: {timings.tts}&nbsp;ms&nbsp;•&nbsp;Total:{" "}
+            {timings.total}&nbsp;ms
           </div>
         )}
       </div>

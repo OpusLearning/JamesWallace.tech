@@ -1,6 +1,6 @@
 // frontend/src/pages/VisualizerDemo.jsx
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import VisualizerCanvas from "../components/VisualizerCanvas";
 
 export default function VisualizerDemo() {

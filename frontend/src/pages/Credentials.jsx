@@ -572,7 +572,7 @@ export default function Credentials() {
             <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
             <p>
               {SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}; {SAFEGUARDING_ROLES.deputy.name} is the{" "}
-              {SAFEGUARDING_ROLES.deputy.role}. Both have completed {TRAINING.dsl.provider}'s {TRAINING.dsl.name} course.
+              {SAFEGUARDING_ROLES.deputy.role}. Both have completed {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course.
             </p>
             {renderCertificate(safeguardingLeadCertificate)}
             </div>

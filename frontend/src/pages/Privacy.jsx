@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
           <div style={{ marginBottom: "2.5rem" }}>
             <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>1. Introduction</h2>
             <p>
-              James Wallace Education ("<strong>we</strong>", "<strong>us</strong>", "<strong>our</strong>")
+              James Wallace Education (&quot;<strong>we</strong>&quot;, &quot;<strong>us</strong>&quot;, &quot;<strong>our</strong>&quot;)
               takes your privacy seriously. This policy explains how we collect, use, store, and share
               personal data when you use <strong>jameswallace.tech</strong>, and sets out your rights
               under UK data protection law (UK GDPR and the Data Protection Act 2018).
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
             <p>We only process your personal data where we have a lawful basis:</p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
               <li><strong style={{ color: "var(--text-primary)" }}>Contract performance</strong> - to arrange, deliver, and follow up on commissioned provision.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>Legitimate interests</strong> - to respond to enquiries and improve our service, where this doesn't override your rights.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>Legitimate interests</strong> - to respond to enquiries and improve our service, where this doesn&apos;t override your rights.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Legal obligation</strong> - where required by law (e.g. safeguarding duties).</li>
             </ul>
             <p>We do not sell your personal data or use it for automated decision-making.</p>
@@ -78,8 +78,8 @@ export default function PrivacyPolicy() {
               We use the following third-party services which may process data on our behalf:
             </p>
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-              <li><strong style={{ color: "var(--text-primary)" }}>This website's own server</strong> - enquiry forms post directly to jameswallace.tech and are stored in a database on that server. Enquiries are not sent through Google Forms.</li>
-              <li><strong style={{ color: "var(--text-primary)" }}>OpenAI</strong> - the "Ask a question" assistant on this site sends what you type to OpenAI to generate a reply. Those messages and replies are stored so James can see what people ask. Please do not type a child's name, diagnosis or any safeguarding detail into it.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>This website&apos;s own server</strong> - enquiry forms post directly to jameswallace.tech and are stored in a database on that server. Enquiries are not sent through Google Forms.</li>
+              <li><strong style={{ color: "var(--text-primary)" }}>OpenAI</strong> - the &quot;Ask a question&quot; assistant on this site sends what you type to OpenAI to generate a reply. Those messages and replies are stored so James can see what people ask. Please do not type a child&apos;s name, diagnosis or any safeguarding detail into it.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Postmark</strong> - delivers enquiry notification emails.</li>
               <li><strong style={{ color: "var(--text-primary)" }}>Google Fonts</strong> - font loading (IP address may be logged by Google).</li>
             </ul>
@@ -93,7 +93,7 @@ export default function PrivacyPolicy() {
             <p>
               This notice covers this website: enquiry forms, the assistant, and the technical data above. Records kept
               about a young person during commissioned provision are a separate processing activity, governed by the
-              agreement with the commissioning school or local authority and covered by the provision's own privacy
+              agreement with the commissioning school or local authority and covered by the provision&apos;s own privacy
               information, which is available on request. Please do not send clinical or safeguarding detail about a
               child through a web form; a secure route is arranged once a referral is under way.
             </p>
@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
             <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
               <li>Access a copy of the personal data we hold about you.</li>
               <li>Request correction of inaccurate data.</li>
-              <li>Request deletion of your data (the "right to be forgotten").</li>
+              <li>Request deletion of your data (the &quot;right to be forgotten&quot;).</li>
               <li>Object to or restrict certain processing.</li>
               <li>Request portability of your data in a machine-readable format.</li>
               <li>Withdraw consent at any time where processing is consent-based.</li>
@@ -152,7 +152,7 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
                 style={{ color: "var(--brand)" }}
               >
-                Information Commissioner's Office (ICO)
+                Information Commissioner&apos;s Office (ICO)
               </a>{" "}
               if you believe your data has been handled unlawfully.
             </p>

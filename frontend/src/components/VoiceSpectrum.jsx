@@ -1,5 +1,6 @@
 // frontend/src/components/VoiceSpectrum.jsx
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 
 export default function VoiceSpectrum({ stream, width = 380, height = 120 }) {
   const canvasRef = useRef(null);
@@ -74,3 +75,9 @@ export default function VoiceSpectrum({ stream, width = 380, height = 120 }) {
     />
   );
 }
+
+VoiceSpectrum.propTypes = {
+  stream: PropTypes.object,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
