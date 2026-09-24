@@ -131,9 +131,9 @@ export default function About() {
           <p>
             {SAFEGUARDING_ROLES.dsl.name} is the{" "}
             {SAFEGUARDING_ROLES.dsl.role} for the provision, and I am the{" "}
-            {SAFEGUARDING_ROLES.deputy.role}. We both hold the{" "}
-            {TRAINING.dsl.name} qualification from {TRAINING.dsl.provider},
-            completed {TRAINING.dsl.completed}. I hold current safeguarding and{" "}
+            {SAFEGUARDING_ROLES.deputy.role}. We have both completed{" "}
+            {TRAINING.dsl.provider}'s {TRAINING.dsl.name} course, certificated{" "}
+            {TRAINING.dsl.completed}. I hold current safeguarding and{" "}
             {STATUTORY.kcsie}, Prevent duty, child-on-child abuse, allergy
             awareness and lone working training, with the Whole School SEND
             Platinum award. Renewal dates are tracked with expiry alerts rather

@@ -143,7 +143,7 @@ const cpdCerts = [
     provider: TRAINING.dsl.provider,
     issued: TRAINING.dsl.completed,
     detail: `Certificate number T-5346277-6416245. City & Guilds Assured and CPD Certified. Recommended renewal ${TRAINING.dsl.renewal}. Verify at highspeedtraining.co.uk/verify.`,
-    desc: `The Level 3 qualification for the ${SAFEGUARDING_ROLES.dsl.role} role, held by both the DSL and the ${SAFEGUARDING_ROLES.deputy.role}.`,
+    desc: `Level 3 training for the ${SAFEGUARDING_ROLES.dsl.role} role, completed by both the DSL and the ${SAFEGUARDING_ROLES.deputy.role}.`,
     wide: true,
     cert: "/certificates/cert_hst_designated-safeguarding-lead-l3_2026-09-24.pdf",
   },
@@ -567,14 +567,14 @@ export default function Credentials() {
                 <div className="credential-band-body"><p className="credential-band-note">{band.key === "send" ? "Training relevant to supporting SEND, autistic and ADHD learners, and young people’s mental health." : band.note}</p>{records.map(renderCertificate)}</div>
               </details>;
             })}
-          </div>
-          <div className="credentials-training-bands" style={{ marginTop: "2rem" }}>
+            <div className="credential-dsl-holder" style={{ marginTop: "2.5rem" }}>
             <h3>{SAFEGUARDING_ROLES.dsl.name}, {SAFEGUARDING_ROLES.dsl.role}</h3>
             <p>
               {SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}; {SAFEGUARDING_ROLES.deputy.name} is the{" "}
-              {SAFEGUARDING_ROLES.deputy.role}. Both hold the {TRAINING.dsl.name} qualification from {TRAINING.dsl.provider}.
+              {SAFEGUARDING_ROLES.deputy.role}. Both have completed {TRAINING.dsl.provider}'s {TRAINING.dsl.name} course.
             </p>
             {renderCertificate(safeguardingLeadCertificate)}
+            </div>
           </div>
         </div>
       </section>

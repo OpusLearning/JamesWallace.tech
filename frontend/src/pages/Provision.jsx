@@ -258,7 +258,7 @@ export default function Provision() {
                 {STATUTORY.workingTogether}.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
-                <li>{SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}, and I am the {SAFEGUARDING_ROLES.deputy.role}; we both hold the {TRAINING.dsl.name} qualification from {TRAINING.dsl.provider}, completed {TRAINING.dsl.completed}</li>
+                <li>{SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}, and I am the {SAFEGUARDING_ROLES.deputy.role}; we have both completed {TRAINING.dsl.provider}'s {TRAINING.dsl.name} course, certificated {TRAINING.dsl.completed}</li>
                 <li>All concerns logged immediately in an encrypted, audit-trailed system</li>
                 <li>Physical Intervention Recording Forms (PIRFs) completed before caseload can proceed</li>
                 <li>Timestamped lone working check-in and check-out for every solo session, with the escalation route agreed in writing with the commissioner</li>
