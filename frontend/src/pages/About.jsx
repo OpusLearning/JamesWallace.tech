@@ -92,7 +92,7 @@ export default function About() {
                   "QTS",
                   "Enhanced DBS",
                   SAFEGUARDING_ROLES.deputy.role,
-                  "ASD Awareness",
+                  "Understanding Autism",
                 ].map((t) => (
                   <span key={t} className="jw-badge">
                     {t}
@@ -139,9 +139,9 @@ export default function About() {
             {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course, certificated{" "}
             {TRAINING.dsl.completed}. I hold current safeguarding and{" "}
             {STATUTORY.kcsie}, Prevent duty, child-on-child abuse, allergy
-            awareness and lone working training, with the Whole School SEND
-            Platinum award. Renewal dates are tracked with expiry alerts rather
-            than left to lapse.
+            awareness and <Link to="/credentials#training">lone working training</Link>, with the
+            Whole School SEND Platinum award. Renewal dates are tracked with
+            expiry alerts rather than left to lapse.
           </p>
           <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
         </div>

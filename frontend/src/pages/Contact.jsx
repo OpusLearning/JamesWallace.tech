@@ -12,7 +12,7 @@ const ENQUIRIES = {
       { name: "name", label: "Your name", required: true, autoComplete: "name" },
       { name: "email", label: "Email address", type: "email", required: true, autoComplete: "email" },
       { name: "phone", label: "Phone number", type: "tel", autoComplete: "tel" },
-      { name: "childAge", label: "Young person’s age", required: true, placeholder: "For example, 13" },
+      { name: "childAge", label: "Young person’s age", options: ["Under 11", "11 to 16", "16 to 25", "Prefer not to say"] },
       { name: "needsDescription", label: "What support are you looking for?", required: true, multiline: true, placeholder: "For example, subjects, approximate hours, and in-person or online tuition." },
       { name: "howHeard", label: "How did you hear about me?", wide: true },
     ],
@@ -178,7 +178,6 @@ function EnquiryForm({ audience }) {
               value: answers[field.name],
               onChange: (event) => handleChange(field, event.target.value),
               required: field.required, autoComplete: field.autoComplete || "off",
-              placeholder: field.placeholder, maxLength: field.multiline ? 3000 : 254,
               "aria-invalid": Boolean(errors[field.name]),
               "aria-describedby": [errors[field.name] ? id(`${field.name}-error`) : "", field.multiline ? id("privacy") : ""].filter(Boolean).join(" ") || undefined,
             };
@@ -187,7 +186,14 @@ function EnquiryForm({ audience }) {
                 <label htmlFor={id(field.name)} className="form-label fw-semibold">
                   {field.label}{field.required && <span aria-hidden="true"> *</span>}
                 </label>
-                {field.multiline ? <textarea {...attributes} rows={4} /> : <input {...attributes} type={field.type || "text"} />}
+                {field.options
+                  ? <select {...attributes}>
+                      <option value="">Select an age band</option>
+                      {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
+                    </select>
+                  : field.multiline
+                    ? <textarea {...attributes} placeholder={field.placeholder} maxLength={3000} rows={4} />
+                    : <input {...attributes} type={field.type || "text"} placeholder={field.placeholder} maxLength={254} />}
                 {errors[field.name] && <p id={id(`${field.name}-error`)} className="invalid-feedback">{errors[field.name]}</p>}
               </div>
             );

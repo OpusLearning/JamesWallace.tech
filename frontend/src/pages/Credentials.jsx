@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING, REVIEWED, REFERENCES as references } from "../data/facts";
+import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING, REVIEWED, PROJECT_SEARCH, REFERENCES as references } from "../data/facts";
 import "./Credentials.css";
 
 const academicQuals = [
@@ -158,12 +158,12 @@ const cpdCerts = [
     cert: "/certificates/cert_freshstart_safeguarding-young-people-l2_2026-09-09.pdf",
   },
   {
-    title: "Safe and Supported",
+    title: TRAINING.safeAndSupported.name,
     group: "safeguarding",
-    provider: "Fresh Start in Education",
-    issued: "22 August 2026",
-    detail: "CPD Certified, The CPD Certification Service.",
-    desc: "Safe working practice for one-to-one and small-group teaching away from a school site.",
+    provider: TRAINING.safeAndSupported.provider,
+    issued: TRAINING.safeAndSupported.completed,
+    detail: `CPD Certified, The CPD Certification Service. ${TRAINING.safeAndSupported.score}`,
+    desc: TRAINING.safeAndSupported.modules,
     badge: "/badges/fresh-start.png",
     cert: "/certificates/cert_freshstart_safe-and-supported_2026-08-22.pdf",
   },
@@ -417,6 +417,16 @@ const experience = [
     logo: "/badges/foxwood.png",
     dates: "Jan 2006 to Oct 2018",
     desc: "Twelve years delivering specialist teaching for young people with Social, Emotional and Mental Health needs. Developed inclusive curricula, wrote and implemented PLPs, and collaborated closely with SENCOs, educational psychologists, and family teams.",
+    // Concurrent with the Foxwood teaching, not a separate job (sources/people/james-project-search.md),
+    // so it sits inside this timeline entry rather than reading as a second employer.
+    projects: [
+      {
+        title: PROJECT_SEARCH.title,
+        dates: `${PROJECT_SEARCH.dates}, ${PROJECT_SEARCH.concurrency}`,
+        summary: PROJECT_SEARCH.summary,
+        desc: PROJECT_SEARCH.description,
+      },
+    ],
   },
   {
     role: "Public Health Support Officer",
@@ -538,7 +548,11 @@ export default function Credentials() {
           <div className="credentials-section-intro"><p className="jw-eyebrow">02 / Experience</p><h2 id="experience-heading">Teaching.<br />Commissioning.<br /><em>Perspective.</em></h2><p>Specialist classroom practice, local authority work and one-to-one provision inform the teaching I offer today.</p><Link to="/about" className="jw-text-link">More about James <span aria-hidden="true">→</span></Link></div>
           <div>
             <ol className="credentials-timeline">{experience.map((position) => <li key={position.role}>
-              <p className="credential-date">{position.dates}</p><h3>{position.role}</h3><p className="credential-provider">{position.org}</p><p>{position.desc}</p>{position.logo && <img src={position.logo} alt={`${position.org} logo`} loading="lazy" />}
+              <p className="credential-date">{position.dates}</p><h3>{position.role}</h3><p className="credential-provider">{position.org}</p><p>{position.desc}</p>
+              {position.projects && <div style={{ marginTop: "0.9rem", paddingLeft: "0.9rem", borderLeft: "2px solid var(--border)" }}>{position.projects.map((project) => <div key={project.title}>
+                <p className="credential-date">{project.dates}</p><h4 style={{ fontSize: "1rem", fontWeight: 600, margin: "0.35rem 0 0.35rem" }}>{project.title}</h4><p style={{ marginBottom: "0.35rem" }}>{project.summary}</p><p>{project.desc}</p>
+              </div>)}</div>}
+              {position.logo && <img src={position.logo} alt={`${position.org} logo`} loading="lazy" />}
             </li>)}</ol>
             <details className="credentials-context"><summary>How this experience informs the work <span aria-hidden="true">+</span></summary><div>{whyItMatters.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.desc}</p></article>)}</div></details>
           </div>

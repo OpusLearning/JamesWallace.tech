@@ -50,7 +50,36 @@ export const TRAINING = {
     completed: "24 September 2026",
     renewal: "September 2028",
   },
+  // James, 25 Sep 2026. Source: sources/people/james-project-search.md. The date and provider are
+  // also named on /compliance, so they live here once. Seven modules plus assessment; the module
+  // list is the source's own ordering, lone working and personal safety first.
+  safeAndSupported: {
+    name: "Safe and Supported",
+    provider: "Fresh Start in Education",
+    completed: "22 August 2026",
+    score: "Scored 100%. Verification code 6452621159JW.",
+    modules:
+      "Seven modules plus assessment covering lone working and personal safety, recognising dysregulation, non-physical de-escalation, when to pause or end a session, emergency procedures, absconding and incident reporting.",
+  },
 };
+
+// James, 25 Sep 2026. Source: sources/people/james-project-search.md. Ran alongside teaching at
+// Foxwood Academy (Jan 2006 to Oct 2018), not as a separate job: James's wording is "jointly led
+// rather than led; it was a project across employers". No partner is named beyond Nottingham
+// University Hospitals, and the programme is described only in general terms.
+export const PROJECT_SEARCH = {
+  title: "Project SEARCH",
+  employer: "Nottingham University Hospitals",
+  dates: "2012 to 2018",
+  concurrency: "alongside teaching at Foxwood Academy",
+  summary: "Jointly led Project SEARCH at Nottingham University Hospitals, 2012 to 2018.",
+  description:
+    "A supported-internship programme for young people with learning disabilities or autism, delivered across employers.",
+};
+
+// James, 25 Sep 2026 (QUEUE 20260925-site-followups): the platform product is "JWE Portal". Named on
+// /platform, /compliance, /provision and /for-las, so it lives here once.
+export const PRODUCT = { name: "JWE Portal" };
 
 // Who holds the safeguarding roles. Decided by James on 24 Sep 2026; source:
 // sources/training/dsl-level3-2026/README.md. Asmaa Ahmed has consented to her name, role and

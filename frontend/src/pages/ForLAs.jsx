@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING } from "../data/facts";
+import { TRAINING, PRODUCT } from "../data/facts";
 
 const commissionerQA = [
   {
@@ -240,7 +240,7 @@ export default function ForLAs() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/11-policies.webp"
-                alt="Policy library in ND Portal"
+                alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",

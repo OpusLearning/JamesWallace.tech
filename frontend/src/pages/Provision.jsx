@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { SAFEGUARDING_ROLES, STATUTORY, DELIVERY, TRAINING } from "../data/facts";
+import { SAFEGUARDING_ROLES, STATUTORY, DELIVERY, TRAINING, PRODUCT } from "../data/facts";
 
 const learnerProfiles = [
   { label: "EOTAS", description: "Education Other Than At School - full-time or part-time alternative to school placement" },
@@ -46,7 +46,7 @@ export default function Provision() {
             <div className="col-12 col-lg-5 text-center">
               <img
                 src="/portal/03b-weekly-plan-tab.webp"
-                alt="Weekly plan workflow in ND Portal"
+                alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
@@ -55,7 +55,7 @@ export default function Provision() {
                 }}
               />
               <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                Weekly plan workflow - ND Portal
+                Weekly plan workflow - {PRODUCT.name}
               </p>
             </div>
           </div>
@@ -201,10 +201,10 @@ export default function Provision() {
               </p>
               <div className="d-flex flex-column gap-3 mt-4">
                 {/* These two steps used to read "approved by supervisor" and "panic button available throughout". Both are
-                    real ND Portal features, but they are multi-practitioner features, and I am a sole practitioner. The
+                    real JWE Portal features, but they are multi-practitioner features, and I am a sole practitioner. The
                     platform and compliance pages already say so; this page now says the same thing. */}
                 {[
-                  { step: "Plan", desc: "Weekly session plan submitted in ND Portal - PLP criteria, planned activities, session logistics. The plan is locked before delivery begins, so the week has an evidence baseline. Where a commissioner wants sight of it first, approval is recorded against the plan." },
+                  { step: "Plan", desc: `Weekly session plan submitted in ${PRODUCT.name} - PLP criteria, planned activities, session logistics. The plan is locked before delivery begins, so the week has an evidence baseline. Where a commissioner wants sight of it first, approval is recorded against the plan.` },
                   { step: "Deliver", desc: "I deliver the session, with a lone working check-in at the start and check-out at the end, timestamped. The portal's panic alert and live supervisor feed are built for providers with a supervisory team; as a sole practitioner, my escalation route is agreed in writing with the commissioner before teaching begins." },
                   { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0-10), per-subject activity notes, PLP criterion progress, safeguarding observations." },
                 ].map((item) => (
@@ -233,7 +233,7 @@ export default function Provision() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/03b-weekly-plan-tab.webp"
-                alt="Weekly plan workflow in ND Portal"
+                alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
@@ -272,7 +272,7 @@ export default function Provision() {
             <div className="col-12 col-lg-4">
               <img
                 src="/portal/06-safeguarding.webp"
-                alt="Safeguarding management in ND Portal"
+                alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",

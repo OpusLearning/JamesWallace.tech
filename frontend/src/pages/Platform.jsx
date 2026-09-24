@@ -1,5 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
+import { PRODUCT } from "../data/facts";
 
 const screenshots = [
   {
@@ -150,7 +151,7 @@ const proofTiles = [
 
 export default function Platform() {
   usePageMeta({
-    title: 'ND Portal | Evidence and Reporting Platform | James Wallace Education',
+    title: `${PRODUCT.name} | Evidence and Reporting Platform | James Wallace Education`,
     description:
       'The portal behind every placement: session evidence, safeguarding alerts, compliance tracking and on-demand PDF exports for monitoring visits.',
     path: '/platform',
@@ -161,7 +162,7 @@ export default function Platform() {
       {/* Intro */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
-          <h1>ND Portal</h1>
+          <h1>{PRODUCT.name}</h1>
           <p
             style={{
               fontSize: "1.1rem",
@@ -216,7 +217,7 @@ export default function Platform() {
               <div className="col-12 col-lg-6">
                 <img
                   src={`/portal/${s.file}.webp`}
-                  alt={s.title}
+                  alt={`${s.title} in ${PRODUCT.name}`}
                   style={{
                     width: "100%",
                     borderRadius: "10px",

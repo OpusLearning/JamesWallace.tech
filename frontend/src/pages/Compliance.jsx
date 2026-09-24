@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -8,7 +8,7 @@ const staffComplianceRows = [
   { requirement: TRAINING.prevent.name, tracked: `Completed ${TRAINING.prevent.completed}` },
   { requirement: TRAINING.dsl.name, tracked: `Completed ${TRAINING.dsl.completed}, renewal ${TRAINING.dsl.renewal}` },
   { requirement: "Child-on-child abuse (agency onboarding)", tracked: "Valid to 22 August 2027" },
-  { requirement: "Lone Working Safety", tracked: "Completion date recorded" },
+  { requirement: "Lone Working Safety", tracked: `Completed ${TRAINING.safeAndSupported.completed} (${TRAINING.safeAndSupported.name}, ${TRAINING.safeAndSupported.provider})` },
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },
   { requirement: "Data Protection / UK GDPR", tracked: "Completion date recorded" },
   { requirement: "Right to Work verification", tracked: "Provider + reference date" },
@@ -81,7 +81,7 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/06-safeguarding.webp"
-                alt="Safeguarding management in ND Portal"
+                alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
@@ -117,7 +117,7 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/07-lone-working.webp"
-                alt="Lone working safety in ND Portal"
+                alt={`Live lone working sessions view in ${PRODUCT.name}`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
@@ -202,7 +202,7 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/08-compliance.webp"
-                alt="Compliance dashboard in ND Portal"
+                alt={`Compliance record and emergency procedure in ${PRODUCT.name}`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
@@ -297,7 +297,7 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/11-policies.webp"
-                alt="Policy library in ND Portal"
+                alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
@@ -337,7 +337,7 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <img
                 src="/portal/12-inspection-bundle.webp"
-                alt="Inspection bundle export in ND Portal"
+                alt={`Case view in ${PRODUCT.name} with the weekly plan, daily reports and exports tabs`}
                 style={{
                   width: "100%",
                   borderRadius: "10px",
