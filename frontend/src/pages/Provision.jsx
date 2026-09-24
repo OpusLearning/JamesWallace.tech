@@ -264,6 +264,7 @@ export default function Provision() {
                 <li>Timestamped lone working check-in and check-out for every solo session, with the escalation route agreed in writing with the commissioner</li>
                 <li>Automated daily alerts for stale or unactioned safeguarding concerns</li>
               </ul>
+              <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
               <Link to="/compliance" className="jw-btn-secondary mt-3 d-inline-block">
                 Full compliance details &rarr;
               </Link>

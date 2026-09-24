@@ -569,6 +569,7 @@ export default function Credentials() {
             })}
             <div className="credential-dsl-holder" style={{ marginTop: "2.5rem" }}>
             <h3>{SAFEGUARDING_ROLES.dsl.name}, {SAFEGUARDING_ROLES.dsl.role}</h3>
+            <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
             <p>
               {SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}; {SAFEGUARDING_ROLES.deputy.name} is the{" "}
               {SAFEGUARDING_ROLES.deputy.role}. Both have completed {TRAINING.dsl.provider}'s {TRAINING.dsl.name} course.
