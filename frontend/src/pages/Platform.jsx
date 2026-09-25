@@ -113,6 +113,7 @@ const screenshots = [
   {
     file: "10-finance",
     title: "Finance & Billing",
+    note: "Portal capability. The platform is built to turn session records into delivery reports and invoices; what a commission actually receives each month is agreed in the commission.",
     bullets: [
       "Every submitted session report automatically creates a billable record",
       "Hours, mileage, and expenses snapshotted and queued for review",
@@ -124,10 +125,11 @@ const screenshots = [
   {
     file: "11-policies",
     title: "Policies & Procedures",
+    note: "Portal capability. The policy suite is under review; approved policies are shared with commissioners on request.",
     bullets: [
-      "28 EOTAS-aligned policies - Safeguarding, Lone Working, Data Protection, and more",
+      "EOTAS-aligned policy library - Safeguarding, Lone Working, Data Protection, and more",
       "Each policy is version-controlled, review-dated, and available as a branded PDF",
-      "Download Pack exports all active policies as a single ZIP",
+      "Download Pack exports the approved policies as a single ZIP",
       "Policy health - overdue for review, due within 30 days, still in draft - monitored on dashboard",
     ],
   },
@@ -146,14 +148,14 @@ const screenshots = [
 const proofTiles = [
   { stat: "Minutes", label: "Inspection bundle generated", icon: "⚡" },
   { stat: "Real-time", label: "Lone working escalation", icon: "🛡" },
-  { stat: "28 policies", label: "Tracked and downloadable", icon: "📋" },
+  { stat: "On request", label: "Approved policy pack", icon: "📋" },
 ];
 
 export default function Platform() {
   usePageMeta({
     title: `${PRODUCT.name} | Evidence and Reporting Platform | James Wallace Education`,
     description:
-      'The portal behind every placement: session evidence, safeguarding alerts, compliance tracking and on-demand PDF exports for monitoring visits.',
+      'The portal built for EOTAS placements: session evidence, safeguarding alerts, compliance tracking and on-demand PDF exports for monitoring visits.',
     path: '/platform',
   });
 

@@ -100,7 +100,7 @@ export default function About() {
                 ))}
               </div>
               <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact?for=commissioner" className="jw-btn-primary">
+                <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
                   Make a Referral
                 </Link>
                 <Link to="/credentials" className="jw-btn-secondary">
@@ -170,7 +170,7 @@ export default function About() {
             {renderFocusCard(
               <FaUsers size={36} />,
               "LA Partnership",
-              "Direct commissioning from Local Authorities, SEND teams, and virtual school heads with transparent monthly reporting."
+              "Built for local authority, SEND team and virtual school head commissioning, with reporting arrangements agreed in the commission."
             )}
           </div>
         </div>
@@ -215,7 +215,7 @@ export default function About() {
             within 2 working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact?for=commissioner" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
               Make a Referral
             </Link>
             <Link to="/for-las" className="jw-btn-secondary">

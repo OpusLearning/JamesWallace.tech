@@ -160,8 +160,8 @@ export default function Agencies() {
             ))}
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
-            I also hold my own safeguarding, e-safety, lone-working, risk assessment and behaviour policies, which I am happy to
-            share before a first placement.
+            My own safeguarding, e-safety, lone-working, risk assessment and behaviour policies are under review; approved
+            policies can be shared before a first placement.
           </p>
         </div>
       </section>

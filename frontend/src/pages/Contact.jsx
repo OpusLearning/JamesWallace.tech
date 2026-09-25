@@ -49,7 +49,7 @@ function fieldError(field, value) {
   return "";
 }
 
-function EnquiryForm({ audience }) {
+function EnquiryForm({ audience, topic }) {
   const enquiry = ENQUIRIES[audience];
   const [answers, setAnswers] = useState(() => emptyAnswers(audience));
   const [errors, setErrors] = useState({});
@@ -106,7 +106,10 @@ function EnquiryForm({ audience }) {
           subject: enquiry.subject,
           name: values.name || values.contactName,
           message,
-          page: `/contact?for=${audience === "parent" ? "parent" : "commissioner"}`,
+          // The `?topic=` on the link that brought the enquirer here, so the enquiry records its
+          // own source (e.g. a referral vs an evidence-pack request). Absent for ordinary visits.
+          topic: topic || undefined,
+          page: `/contact?for=${audience === "parent" ? "parent" : "commissioner"}${topic ? `&topic=${encodeURIComponent(topic)}` : ""}`,
         }),
       });
       if (!response.ok) throw new Error("Enquiry not confirmed");
@@ -211,7 +214,7 @@ function EnquiryForm({ audience }) {
   );
 }
 
-EnquiryForm.propTypes = { audience: PropTypes.oneOf(["parent", "la"]).isRequired };
+EnquiryForm.propTypes = { audience: PropTypes.oneOf(["parent", "la"]).isRequired, topic: PropTypes.string };
 
 export default function Contact() {
   usePageMeta({
@@ -220,12 +223,17 @@ export default function Contact() {
     path: "/contact",
   });
   const [searchParams, setSearchParams] = useSearchParams();
+  // The enquiry source carried on the link (`?topic=referral`, `?topic=evidence-pack`). Capped to
+  // the length the server accepts, so a hand-edited URL cannot store anything unbounded.
+  const topic = (searchParams.get("topic") || "").trim().slice(0, 120);
   const activeAudience = ["commissioner", "la", "agency", "school"].includes(searchParams.get("for")) ? "la" : "parent";
 
   function selectAudience(audience) {
     setSearchParams((current) => {
       const next = new URLSearchParams(current);
       next.set("for", audience === "parent" ? "parent" : "commissioner");
+      // A topic describes the enquiry the link pointed at; don't carry it across an audience switch.
+      next.delete("topic");
       return next;
     }, { replace: true, preventScrollReset: true });
   }
@@ -258,7 +266,7 @@ export default function Contact() {
             </fieldset>
             {Object.keys(ENQUIRIES).map((audience) => (
               <div key={audience} id={`contact-panel-${audience}`} hidden={activeAudience !== audience}>
-                <EnquiryForm audience={audience} />
+                <EnquiryForm audience={audience} topic={topic} />
               </div>
             ))}
           </div>
