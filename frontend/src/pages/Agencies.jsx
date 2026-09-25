@@ -24,7 +24,7 @@ const compliance = [
   { item: "SEND Code of Practice", detail: "Certified", state: "held" },
   { item: "Understanding Autism", detail: "Open University, 24 CPD hours, 2025", state: "held" },
   { item: "Right to work", detail: "British passport, in person or certified copy", state: "held" },
-  { item: "References", detail: "Two professional referees, both former line managers", state: "held" },
+  { item: "References", detail: "Two professional referees, with written references and ratings", state: "held" },
 ];
 
 const covers = [
@@ -160,8 +160,8 @@ export default function Agencies() {
             ))}
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
-            I also hold my own safeguarding, e-safety, lone-working, risk assessment and behaviour policies, which I am happy to
-            share before a first placement.
+            My own safeguarding, e-safety, lone-working, risk assessment and behaviour policies are under review; approved
+            policies can be shared before a first placement.
           </p>
         </div>
       </section>
@@ -211,7 +211,7 @@ export default function Agencies() {
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "1rem" }}>Compliance pack on request</h2>
           <p style={{ maxWidth: "580px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
-            Certificates, DBS details, references and my policy pack are available on request. Tell me what your onboarding needs and I
+            Certificates, DBS details, references and approved policies are available on request. Tell me what your onboarding needs and I
             will send it in the format you use.
           </p>
           <Link to="/contact?for=agency" className="jw-btn-primary">

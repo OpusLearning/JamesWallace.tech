@@ -18,7 +18,7 @@ export default function Compliance() {
   usePageMeta({
     title: 'Safeguarding & Compliance | James Wallace, Specialist SEND & EOTAS Tutor',
     description:
-      'Safeguarding framework aligned to KCSIE and Working Together to Safeguard Children, with 28 EOTAS policies, DBS and training tracked in real time.',
+      'Safeguarding framework aligned to KCSIE and Working Together to Safeguard Children, with an EOTAS policy suite under review and DBS and training tracked in the portal.',
     path: '/compliance',
   });
 
@@ -36,12 +36,12 @@ export default function Compliance() {
               lineHeight: 1.7,
             }}
           >
-            Every safeguard, compliance check and policy is part of day-to-day
+            Every safeguard and compliance check is part of day-to-day
             delivery, with records available for the commissioner to review.
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">
-              Request Policy Pack
+              Request Approved Policies
             </Link>
             <Link to="/platform" className="jw-btn-secondary">
               See the Platform
@@ -277,21 +277,21 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <h2>Policies &amp; Procedures</h2>
               <p>
-                James Wallace Education, the provision operated by James Wallace, maintains 28 EOTAS-aligned policies - Safeguarding,
+                James Wallace Education, the provision operated by James Wallace, keeps an EOTAS-aligned policy suite - Safeguarding,
                 Lone Working, Data Protection, Health &amp; Safety, Behaviour
-                Support, and more. Each is version-controlled, review-dated, and
-                available as a branded PDF.
+                Support, and more. The suite is under review; approved policies
+                are shared with commissioners on request.
               </p>
               <p>
-                A Download Pack exports all active policies as a single ZIP.
-                Policy health - overdue for review, due within 30 days, still in
-                draft - is monitored on the supervisor dashboard.
+                The portal is built to version-control policies with review
+                dates, track policy health (overdue for review, due within 30
+                days, still in draft), and export approved policies.
               </p>
               <Link
                 to="/contact?for=commissioner"
                 className="jw-btn-secondary mt-2 d-inline-block"
               >
-                Request policy pack
+                Request approved policies
               </Link>
             </div>
             <div className="col-12 col-lg-6">
@@ -324,7 +324,7 @@ export default function Compliance() {
               </p>
               <p>
                 You can also export case chronologies, supervision
-                records, compliance audit logs, and policy packs to support
+                records, compliance audit logs and approved policies to support
                 the commissioner&#39;s review.
               </p>
               <Link
@@ -355,13 +355,13 @@ export default function Compliance() {
         <div className="jw-container text-center">
           <h2>Need to verify any of this?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
-            Ask for the policy pack, an example evidence bundle, or my DBS
+            Ask for approved policies, an example evidence bundle, or my DBS
             details. Parents, agencies and local authorities all get the same
             answer.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">
-              Request Policy Pack
+              Request Approved Policies
             </Link>
             <Link to="/contact?for=commissioner" className="jw-btn-secondary">
               Request Inspection Bundle Example

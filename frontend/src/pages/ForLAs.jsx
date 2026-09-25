@@ -4,8 +4,8 @@ import { TRAINING, PRODUCT } from "../data/facts";
 
 const commissionerQA = [
   {
-    q: "How do I know sessions are actually happening?",
-    a: "Every session has a timestamped daily report submitted within 24 hours - with engagement score, activity notes, and criteria progress. You can see the full picture in real time, not a summary written for you at the end of term.",
+    q: "How will I know sessions are actually happening?",
+    a: "Every session is built to carry a timestamped daily report, submitted within 24 hours - engagement score, activity notes and criteria progress - visible in the portal, not a summary written for you at the end of term.",
   },
   {
     q: "You are one person. What happens if you are ill?",
@@ -28,8 +28,8 @@ const commissionerQA = [
     a: "Placements work to the placing authority's threshold guidance, not ours. Where the placing authority is Derby City or Derbyshire, Nottingham City, or Nottinghamshire County, that guidance is the Derby City and Derbyshire Threshold Document (December 2024), the Nottingham City Interim Continuum of Need, or the Nottinghamshire Framework for Support respectively. Each is a published council document, so we work to the current version held by the placing authority.",
   },
   {
-    q: "Are you inspection-ready?",
-    a: "Yes. Case chronologies, PLP evidence, safeguarding logs, compliance records, and policy packs can be exported as PDFs for any monitoring visit.",
+    q: "Can records be produced for a monitoring visit?",
+    a: "The platform is built to export case chronologies, PLP evidence, safeguarding logs and compliance records as PDFs. It is being tested end to end with synthetic data before the first live placement. Approved policies are available on request.",
   },
 ];
 
@@ -60,13 +60,13 @@ export default function ForLAs() {
               <h1>For Local Authorities &amp; Schools</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Commissioning EOTAS provision should be clear. James Wallace Education, the provision operated by James Wallace,
-                gives commissioners and referrers real-time visibility of every
-                active placement - from session evidence to safeguarding nil
-                returns - with structured monthly deliverables and
+                is built to give commissioners and referrers visibility of a
+                placement - from session evidence to safeguarding nil
+                returns - with monthly deliverables and
                 inspection-ready exports on demand.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
-                <Link to="/contact?for=commissioner" className="jw-btn-primary">
+                <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
                   Make a Referral &rarr;
                 </Link>
                 <Link to="/compliance" className="jw-btn-secondary">
@@ -173,8 +173,9 @@ export default function ForLAs() {
             className="text-center"
             style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
           >
-            Every active commission receives the following as standard each
-            calendar month.
+            The platform is built to produce the following each calendar
+            month. What a placement actually receives is agreed in the
+            commission.
           </p>
           <div className="jw-card mx-auto" style={{ maxWidth: "700px", padding: 0, overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
@@ -218,22 +219,22 @@ export default function ForLAs() {
             <div className="col-12 col-lg-6">
               <h2>Policies &amp; Procedures</h2>
               <p>
-                James Wallace Education maintains a full suite of 28 EOTAS-aligned policies
-                - covering Safeguarding, Lone Working, Data Protection, Health
-                &amp; Safety, Behaviour Support, and more. Each policy is
-                version-controlled, review-dated, and available as a branded
-                PDF.
+                James Wallace Education keeps an EOTAS-aligned policy suite
+                covering Safeguarding, Lone Working, Data Protection, Health
+                &amp; Safety, Behaviour Support, and more. The suite is under
+                review, and approved policies are shared with commissioners on
+                request.
               </p>
               <p>
-                A full policy pack is available on request. Individual policies
-                can also be requested for review prior to commissioning.
+                Ask for the current approved policies, or a specific policy for
+                review before commissioning.
               </p>
               <div className="d-flex flex-wrap gap-3 mt-3">
                 <Link to="/compliance" className="jw-btn-secondary">
                   Compliance details
                 </Link>
                 <Link to="/contact?for=commissioner" className="jw-btn-secondary">
-                  Request policy pack
+                  Request approved policies
                 </Link>
               </div>
             </div>
@@ -296,10 +297,10 @@ export default function ForLAs() {
             days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact?for=commissioner" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
               Make a Referral
             </Link>
-            <Link to="/contact?for=commissioner" className="jw-btn-secondary">
+            <Link to="/contact?for=commissioner&topic=evidence-pack" className="jw-btn-secondary">
               Request Evidence Pack
             </Link>
           </div>

@@ -35,7 +35,7 @@ export default function Provision() {
                 contact to case closure.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
-                <Link to="/contact?for=commissioner" className="jw-btn-primary">
+                <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
                   Make a Referral &rarr;
                 </Link>
                 <Link to="/platform" className="jw-btn-secondary">
@@ -293,10 +293,10 @@ export default function Provision() {
             provision, get in touch. I come back within two working days.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-            <Link to="/contact?for=commissioner" className="jw-btn-primary">
+            <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
               Make a Referral
             </Link>
-            <Link to="/contact?for=commissioner" className="jw-btn-secondary">
+            <Link to="/contact?for=commissioner&topic=evidence-pack" className="jw-btn-secondary">
               Request an example evidence pack
             </Link>
           </div>
