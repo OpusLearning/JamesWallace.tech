@@ -396,6 +396,46 @@ const cpdCerts = [
     badge: "/badges/google-cybersecurity.png",
     desc: "Security foundations, network security, Linux and SQL, assets and vulnerabilities, detection and response, and automating security tasks in Python.",
   },
+  {
+    title: "Data Protection Essentials",
+    group: "compliance",
+    provider: "Information Commissioner's Office",
+    issued: "25 September 2026",
+    detail: "Certificate number ICO-PROG-2026-0E92E47A. Valid to 25 September 2027.",
+    desc: "The regulator's own training for small organisations: lawful bases, records of processing, rights requests, security and breach reporting under UK GDPR.",
+    wide: true,
+    cert: "/certificates/cert_ico_data-protection-essentials_2026-09-25.pdf",
+  },
+  {
+    title: "Task Risk Assessment Basics for the Accidental Health and Safety Officer",
+    group: "compliance",
+    provider: "The Knights of Safety Academy",
+    issued: "25 September 2026",
+    detail: "Certificate ID mbpv1fhzhg. Final assessment 10 out of 10. Valid to 25 September 2027.",
+    desc: "Writing, reviewing and keeping task risk assessments current: the hierarchy of controls, specific control wording, COSHH-relevant tasks and review triggers.",
+    wide: true,
+    cert: "/certificates/cert_knights-of-safety_task-risk-assessment_2026-09-25.pdf",
+  },
+  {
+    title: "Fire Prevention and Safeguarding",
+    group: "compliance",
+    provider: "Virtual College, for Sutton Local Safeguarding Children Board",
+    issued: "26 September 2026",
+    detail: "Certificate number 2MK5-BMXT-5C7L-1R3J.",
+    desc: "Fire risk in the home for children and adults at increased risk: the risk factors, person-centred fire risk assessment, and when and how to refer a fire concern as a safeguarding matter.",
+    wide: true,
+    cert: "/certificates/cert_virtual-college_fire-prevention-safeguarding_2026-09-26.pdf",
+  },
+  {
+    title: "Food Hygiene Level 2",
+    group: "compliance",
+    provider: "Kitchen Documents (Feed Safely Ltd)",
+    issued: "26 September 2026",
+    detail: "Certificate number KD-FHL2-A2170. Assessment 20 out of 20. Verify at kitchendocuments.co.uk/certificate-validation.",
+    desc: "Food safety law, personal hygiene, cleaning and disinfection, cross-contamination and the 14 allergens, temperature control and HACCP.",
+    wide: true,
+    cert: "/certificates/cert_kitchen-documents_food-hygiene-l2_2026-09-26.pdf",
+  },
 ];
 
 // The Designated Safeguarding Lead's certificate. Published with her consent (name, role and
@@ -467,6 +507,7 @@ const BANDS = [
   { key: "qualification", label: "Qualified teacher", note: "The award everything else sits on top of.", fold: false },
   { key: "send", label: "SEND, autism, ADHD and mental health", note: "The training that decides whether I can actually help your child.", fold: false },
   { key: "safeguarding", label: "Safeguarding, statutory and agency training", note: "Current safeguarding, Prevent and KCSIE, plus the agency compliance a commissioner checks.", fold: true },
+  { key: "compliance", label: "Health, safety, food hygiene and data protection", note: "Risk assessment, fire safety, food hygiene and UK GDPR: the workplace compliance a setting or agency asks for.", fold: true },
   { key: "tech", label: "Technology and project management", note: "Where the software side of the work comes from.", fold: true },
 ];
 
