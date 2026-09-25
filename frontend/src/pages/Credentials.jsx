@@ -434,7 +434,7 @@ const cpdCerts = [
     detail: "Certificate number KD-FHL2-A2170. Assessment 20 out of 20. Verify at kitchendocuments.co.uk/certificate-validation.",
     desc: "Food safety law, personal hygiene, cleaning and disinfection, cross-contamination and the 14 allergens, temperature control and HACCP.",
     wide: true,
-    cert: "/certificates/cert_kitchen-documents_food-hygiene-l2_kd-fhl2-a2170_2026-09-26.pdf",
+    cert: "/certificates/cert_food-hygiene-level2_kitchen-documents_2026-09-26_a2170.pdf",
   },
 ];
 
