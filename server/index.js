@@ -138,7 +138,7 @@ app.post("/api/subscribe", async (req, res) => {
  */
 app.get("/api/health", (req, res) => {
   const storage = storageHealth();
-  res.status(storage.writable ? 200 : 503).json({ ok: storage.writable, storage, postmark: Boolean(process.env.POSTMARK_API_KEY) });
+  res.status(storage.writable ? 200 : 503).json({ ok: storage.writable, storage, email: Boolean(process.env.RESEND_API_KEY) });
 });
 
 /**
