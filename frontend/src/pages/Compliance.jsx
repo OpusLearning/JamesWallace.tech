@@ -41,7 +41,7 @@ export default function Compliance() {
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">
-              Request Policy Pack
+              Request Approved Policies
             </Link>
             <Link to="/platform" className="jw-btn-secondary">
               See the Platform
@@ -285,13 +285,13 @@ export default function Compliance() {
               <p>
                 The portal is built to version-control policies with review
                 dates, track policy health (overdue for review, due within 30
-                days, still in draft), and export the approved policy pack.
+                days, still in draft), and export approved policies.
               </p>
               <Link
                 to="/contact?for=commissioner"
                 className="jw-btn-secondary mt-2 d-inline-block"
               >
-                Request policy pack
+                Request approved policies
               </Link>
             </div>
             <div className="col-12 col-lg-6">
@@ -324,7 +324,7 @@ export default function Compliance() {
               </p>
               <p>
                 You can also export case chronologies, supervision
-                records, compliance audit logs, and policy packs to support
+                records, compliance audit logs and approved policies to support
                 the commissioner&#39;s review.
               </p>
               <Link
@@ -355,13 +355,13 @@ export default function Compliance() {
         <div className="jw-container text-center">
           <h2>Need to verify any of this?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
-            Ask for the policy pack, an example evidence bundle, or my DBS
+            Ask for approved policies, an example evidence bundle, or my DBS
             details. Parents, agencies and local authorities all get the same
             answer.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">
-              Request Policy Pack
+              Request Approved Policies
             </Link>
             <Link to="/contact?for=commissioner" className="jw-btn-secondary">
               Request Inspection Bundle Example

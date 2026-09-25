@@ -138,7 +138,7 @@ const screenshots = [
     title: "Inspection-Ready Exports",
     bullets: [
       "Full Inspection Bundle PDF for any case: PLP, weekly plans, daily evidence, safeguarding timeline, lone working log",
-      "Case chronologies, supervision records, compliance audit logs, and policy packs",
+      "Case chronologies, supervision records, compliance audit logs and approved policies",
       "Available on demand - no preparation required for monitoring visits or Ofsted inspections",
       "Generated in minutes, not hours",
     ],
@@ -148,7 +148,7 @@ const screenshots = [
 const proofTiles = [
   { stat: "Minutes", label: "Inspection bundle generated", icon: "⚡" },
   { stat: "Real-time", label: "Lone working escalation", icon: "🛡" },
-  { stat: "On request", label: "Approved policy pack", icon: "📋" },
+  { stat: "On request", label: "Approved policies", icon: "📋" },
 ];
 
 export default function Platform() {

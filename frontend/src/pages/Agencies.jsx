@@ -211,7 +211,7 @@ export default function Agencies() {
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "1rem" }}>Compliance pack on request</h2>
           <p style={{ maxWidth: "580px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
-            Certificates, DBS details, references and my policy pack are available on request. Tell me what your onboarding needs and I
+            Certificates, DBS details, references and approved policies are available on request. Tell me what your onboarding needs and I
             will send it in the format you use.
           </p>
           <Link to="/contact?for=agency" className="jw-btn-primary">

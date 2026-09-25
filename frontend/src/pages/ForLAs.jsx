@@ -28,8 +28,8 @@ const commissionerQA = [
     a: "Placements work to the placing authority's threshold guidance, not ours. Where the placing authority is Derby City or Derbyshire, Nottingham City, or Nottinghamshire County, that guidance is the Derby City and Derbyshire Threshold Document (December 2024), the Nottingham City Interim Continuum of Need, or the Nottinghamshire Framework for Support respectively. Each is a published council document, so we work to the current version held by the placing authority.",
   },
   {
-    q: "Are you inspection-ready?",
-    a: "Yes. Case chronologies, PLP evidence, safeguarding logs, compliance records, and policy packs can be exported as PDFs for any monitoring visit.",
+    q: "Can records be produced for a monitoring visit?",
+    a: "The platform is built to export case chronologies, PLP evidence, safeguarding logs and compliance records as PDFs. It is being tested end to end with synthetic data before the first live placement. Approved policies are available on request.",
   },
 ];
 
@@ -234,7 +234,7 @@ export default function ForLAs() {
                   Compliance details
                 </Link>
                 <Link to="/contact?for=commissioner" className="jw-btn-secondary">
-                  Request policy pack
+                  Request approved policies
                 </Link>
               </div>
             </div>
