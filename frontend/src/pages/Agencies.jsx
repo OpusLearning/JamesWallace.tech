@@ -24,7 +24,7 @@ const compliance = [
   { item: "SEND Code of Practice", detail: "Certified", state: "held" },
   { item: "Understanding Autism", detail: "Open University, 24 CPD hours, 2025", state: "held" },
   { item: "Right to work", detail: "British passport, in person or certified copy", state: "held" },
-  { item: "References", detail: "Two professional referees, both former line managers", state: "held" },
+  { item: "References", detail: "Two professional referees, with written references and ratings", state: "held" },
 ];
 
 const covers = [
