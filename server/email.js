@@ -50,7 +50,7 @@ export async function sendContactAcknowledgement(name, email) {
     HtmlBody: `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #1a1a2e;">
         <h1 style="color: #1a6640;">Thanks, ${esc(name)}</h1>
-        <p>I've received your message and will be in touch within 24 hours.</p>
+        <p>I've received your message and will reply within 2 working days.</p>
         <p>If your enquiry is urgent, you can also get in touch directly:</p>
         <p><a href="${SITE_URL}/contact" style="color: #1a6640; font-weight: bold;">Get in touch</a></p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 32px 0;" />
@@ -58,7 +58,7 @@ export async function sendContactAcknowledgement(name, email) {
         <p style="color: #999; font-size: 12px;">${COMPANY_DISCLOSURE}</p>
       </div>
     `,
-    TextBody: `Thanks ${name},\n\nI've received your message and will be in touch within 24 hours.\n\nIf urgent, get in touch: ${SITE_URL}/contact\n\nJames Wallace Education\n${COMPANY_DISCLOSURE}`,
+    TextBody: `Thanks ${name},\n\nI've received your message and will reply within 2 working days.\n\nIf urgent, get in touch: ${SITE_URL}/contact\n\nJames Wallace Education\n${COMPANY_DISCLOSURE}`,
   })
 }
 
