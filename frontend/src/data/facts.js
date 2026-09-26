@@ -61,6 +61,23 @@ export const TRAINING = {
     modules:
       "Seven modules plus assessment covering lone working and personal safety, recognising dysregulation, non-physical de-escalation, when to pause or end a session, emergency procedures, absconding and incident reporting.",
   },
+  // Asmaa Ahmed's Home Office Prevent duty training, completed 26 September 2026. Source:
+  // sources/training/asmaa-prevent-2026/README.md. Three courses from the Home Office Prevent duty
+  // training service; the Home Office states no expiry, and the org rule renews Prevent every 24
+  // months (26 September 2028).
+  asmaaPrevent: {
+    provider: "Home Office, Prevent duty training service",
+    completed: "26 September 2026",
+    renewal: "26 September 2028",
+    courses: [
+      { name: "Prevent awareness course", reference: "3P9B-N462-KE7A" },
+      { name: "Prevent referrals course", reference: "2KC9-U462-B7PK" },
+      {
+        name: "Prevent Channel or Prevent Multi-Agency Panel (PMAP) course",
+        reference: "2G8V-M462-CDAC",
+      },
+    ],
+  },
 };
 
 // James, 25 Sep 2026. Source: sources/people/james-project-search.md. Ran alongside teaching at
@@ -98,9 +115,25 @@ const dsl = {
 };
 dsl.intro = `${dsl.name} has worked in education for ${dsl.yearsInEducation}, beginning as a primary teacher at a charter school in New York. She holds a Master's in Education and now leads digital journey transformation in EdTech.`;
 
+// James, 26 Sep 2026 ("yes to all"; QUEUE TRN-7S). Named safeguarding leads beyond the DSL and
+// deputy; source: sources/training/asmaa-prevent-2026/README.md ("Named leads"). The Prevent lead
+// sits with Asmaa's DSL role; James holds online safety and attendance alongside the deputy DSL role.
+const deputy = { name: "James Wallace", role: "Deputy Designated Safeguarding Lead" };
+const preventLead = { name: dsl.name, role: "Prevent lead" };
+const onlineSafetyLead = { name: "James Wallace", role: "Online safety lead" };
+const attendanceLead = { name: "James Wallace", role: "Attendance lead" };
+
 export const SAFEGUARDING_ROLES = {
   dsl,
-  deputy: { name: "James Wallace", role: "Deputy Designated Safeguarding Lead" },
+  deputy,
+  preventLead,
+  onlineSafetyLead,
+  attendanceLead,
+  // The one sentence that names every lead, built from the roles above so the names cannot drift.
+  // Rendered plainly on /credentials, /compliance and /complaints.
+  leads:
+    `${dsl.role} and ${preventLead.role}: ${dsl.name}. Deputy DSL, ` +
+    `${onlineSafetyLead.role.toLowerCase()} and ${attendanceLead.role.toLowerCase()}: ${deputy.name}.`,
 };
 
 // Reviewed by hand. If this date is stale the page should not claim currency.
