@@ -410,6 +410,24 @@ const safeguardingLeadCertificate = {
   cert: "/certificates/cert_hst_designated-safeguarding-lead-l3_asmaa-ahmed_2026-09-24.pdf",
 };
 
+// Asmaa's three Home Office Prevent certificates (James, 26 Sep 2026; QUEUE TRN-7S). Course names,
+// references, provider and dates come from TRAINING.asmaaPrevent; only the published file paths live
+// here, as with the other certificate records on this page. PDFs copied from
+// sources/training/asmaa-prevent-2026/ with identifying metadata stripped.
+const safeguardingLeadPreventCertFiles = {
+  "3P9B-N462-KE7A": "/certificates/cert_home-office-prevent_awareness-course_asmaa-ahmed_2026-09-26.pdf",
+  "2KC9-U462-B7PK": "/certificates/cert_home-office-prevent_referrals-course_asmaa-ahmed_2026-09-26.pdf",
+  "2G8V-M462-CDAC": "/certificates/cert_home-office-prevent_channel-pmap-course_asmaa-ahmed_2026-09-26.pdf",
+};
+const safeguardingLeadPreventCertificates = TRAINING.asmaaPrevent.courses.map((course) => ({
+  title: course.name,
+  provider: TRAINING.asmaaPrevent.provider,
+  issued: TRAINING.asmaaPrevent.completed,
+  detail: `Reference ${course.reference}. Home Office states no expiry; renewal recorded as ${TRAINING.asmaaPrevent.renewal}.`,
+  desc: `Certificate held by ${SAFEGUARDING_ROLES.dsl.name}, ${SAFEGUARDING_ROLES.preventLead.role}.`,
+  cert: safeguardingLeadPreventCertFiles[course.reference],
+}));
+
 const experience = [
   {
     role: "Specialist SEMH Teacher",
@@ -584,11 +602,10 @@ export default function Credentials() {
             <div className="credential-dsl-holder" style={{ marginTop: "2.5rem" }}>
             <h3>{SAFEGUARDING_ROLES.dsl.name}, {SAFEGUARDING_ROLES.dsl.role}</h3>
             <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
-            <p>
-              {SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}; {SAFEGUARDING_ROLES.deputy.name} is the{" "}
-              {SAFEGUARDING_ROLES.deputy.role}. Both have completed {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course.
-            </p>
+            <p>{SAFEGUARDING_ROLES.leads}</p>
+            <p>Both have completed {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course.</p>
             {renderCertificate(safeguardingLeadCertificate)}
+            {safeguardingLeadPreventCertificates.map(renderCertificate)}
             </div>
           </div>
         </div>

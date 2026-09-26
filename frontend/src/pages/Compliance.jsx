@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -63,6 +63,7 @@ export default function Compliance() {
                 safeguarding training annually and hold an enhanced DBS on the
                 Update Service, with details available for the checks required before a placement.
               </p>
+              <p>{SAFEGUARDING_ROLES.leads}</p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>
                   All concerns logged immediately in an encrypted,
