@@ -46,10 +46,10 @@ export default function Complaints() {
       <LegalSection heading="3. Safeguarding concerns">
         <p>
           If you have a concern about a young person&apos;s safety or welfare, please raise it with us
-          straight away. Our Designated Safeguarding Lead is{" "}
-          <strong>{SAFEGUARDING_ROLES.dsl.name}</strong>, and our Deputy Designated Safeguarding Lead is{" "}
-          <strong>{SAFEGUARDING_ROLES.deputy.name}</strong>. Both can be reached through{" "}
-          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or{" "}
+          straight away. {SAFEGUARDING_ROLES.leads}
+        </p>
+        <p>
+          Both can be reached through <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or{" "}
           <a href="tel:07897021077">{CONTACT_PHONE}</a>.
         </p>
         <p>
