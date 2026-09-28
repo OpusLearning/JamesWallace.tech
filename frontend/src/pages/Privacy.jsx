@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { LegalPage, LegalSection, LegalTable } from "../components/Legal";
+import { ICO } from "../data/facts";
 
 const CONTACT_EMAIL = "hello@jameswallace.tech";
 const CONTACT_PHONE = "07897 021077";
@@ -147,6 +148,14 @@ export default function PrivacyPolicy() {
           The company is registered in England and Wales, company number 17479328. Its registered
           office is 71–75 Shelton Street, Covent Garden, London WC2H 9JQ — that address is for
           correspondence only and is not a place of business.
+        </p>
+        <p>
+          We are registered with the Information Commissioner&apos;s Office as a data controller,
+          ICO registration number{" "}
+          <a href={ICO.registerUrl} target="_blank" rel="noopener noreferrer">
+            {ICO.registrationNumber}
+          </a>
+          . The registration can be checked on the ICO&apos;s public register of data controllers.
         </p>
         <p>
           The data-protection contact is <strong>James Wallace</strong>, who can be reached at{" "}

@@ -136,6 +136,17 @@ export const SAFEGUARDING_ROLES = {
     `${onlineSafetyLead.role.toLowerCase()} and ${attendanceLead.role.toLowerCase()}: ${deputy.name}.`,
 };
 
+// James, 28 Sep 2026 (QUEUE ICO-NUMBER). James Wallace Education Ltd's registration with the
+// Information Commissioner's Office as a data controller: number ZC257612, confirmed 28 September
+// 2026 (application reference C2042401, fee paid 25 September 2026). The older registration
+// ZB477144 is James's own as a sole trader and is deliberately not recorded here, because it is
+// not the company's. Shown in the footer company line and in the privacy notice's controller
+// details, so the number lives here once.
+export const ICO = {
+  registrationNumber: "ZC257612",
+  registerUrl: "https://ico.org.uk/ESDWebPages/Entry/ZC257612",
+};
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 
