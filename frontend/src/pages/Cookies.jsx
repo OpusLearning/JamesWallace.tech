@@ -8,14 +8,15 @@ export default function Cookies() {
       metaTitle="Cookies and storage | James Wallace"
       description="The cookies and browser storage used by jameswallace.tech, why each one is exempt, and how to clear it. There is no banner because nothing non-essential is used."
       path="/cookies"
-      updated="Last updated: 25 September 2026"
+      updated="Last updated: 5 October 2026"
       intro="What this site stores in your browser, and why you will not see a cookie banner here."
     >
       <LegalSection heading="1. No banner, because nothing non-essential is used">
         <p>
-          This site sets no cookies of its own for advertising, analytics or tracking, so there is no
-          cookie banner. Everything listed below is either strictly necessary to make the site work or
-          is a function you have asked for, and none of it is used to follow you around the web.
+          This site sets no cookies for advertising or tracking, and its visitor statistics use no
+          cookies either, so there is no cookie banner. Everything listed below is either strictly
+          necessary to make the site work or is a function you have asked for, and none of it is used
+          to follow you around the web.
         </p>
       </LegalSection>
 
@@ -35,6 +36,12 @@ export default function Cookies() {
               "sessionStorage in your browser",
               "Keeps the chat conversation for the tab you are using, so moving between pages does not wipe it.",
               "A visitor-requested function. It is cleared when you close the tab, and it is never sent to us.",
+            ],
+            [
+              "skipgc",
+              "localStorage in your browser",
+              "Remembers that you have opted out of visitor statistics.",
+              "Set only when you choose to opt out, so it is a function you requested. It is never sent to us, and clearing it starts the statistics again.",
             ],
             [
               "__cf_bm",
@@ -60,7 +67,29 @@ export default function Cookies() {
         </ul>
       </LegalSection>
 
-      <LegalSection heading="4. How to clear or block them">
+      <LegalSection heading="4. Visitor statistics">
+        <p>
+          This site counts how many times each page is viewed using <strong>GoatCounter</strong>, an
+          open-source tool we run ourselves on our own server at Hetzner in Germany. No data goes to
+          GoatCounter&apos;s makers, Google, Cloudflare Web Analytics or any advertising network.
+        </p>
+        <p>
+          It sets no cookies and stores nothing in your browser. For each page view it records the page
+          address, the referring site (if your browser sends one), the browser and operating-system
+          family, your screen size, your browser language and your country. The IP address is used in
+          memory to work out the country and to tell one visit from another for a few hours; it is not
+          stored in the statistics. Nothing is combined with enquiry, newsletter or portal data, and
+          nothing follows you to other websites.
+        </p>
+        <p>
+          <strong>To opt out,</strong> add <code>#toggle-goatcounter</code> to the end of any page
+          address on this site and load it. That stores one entry, <code>skipgc</code>, in your
+          browser&apos;s local storage, which stops counting on this browser until you toggle it again
+          or clear your site data.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="5. How to clear or block them">
         <p>
           You can clear cookies and site data at any time in your browser&apos;s settings — look for
           &quot;cookies and site data&quot; or &quot;clear browsing data&quot;. The chat entry in
@@ -68,8 +97,9 @@ export default function Cookies() {
         </p>
         <p>
           If you block storage altogether, the site still works, but your reading preferences and the
-          chat history will not be remembered between visits. For more on how we handle personal data,
-          see the <Link to="/privacy">privacy notice</Link>.
+          chat history will not be remembered between visits. Clearing site data also removes the
+          visitor-statistics opt-out, which turns counting back on for this browser. For more on how we
+          handle personal data, see the <Link to="/privacy">privacy notice</Link>.
         </p>
       </LegalSection>
     </LegalPage>

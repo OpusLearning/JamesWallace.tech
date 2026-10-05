@@ -24,6 +24,9 @@
     <link rel="preload" href="/fonts/dm-sans-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/fonts/fonts.css" />
+    <!-- Self-hosted GoatCounter. no_onload keeps it from counting on load: the SPA counts each
+         route itself (src/hooks/useAnalytics.js), so the first route is counted once, not twice. -->
+    <script data-goatcounter="/count" data-goatcounter-settings='{"no_onload": true}' async src="/count.js"></script>
   </head>
   <body>
     <div id="root"></div>

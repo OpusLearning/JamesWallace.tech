@@ -139,7 +139,7 @@ export default function PrivacyPolicy() {
       metaTitle="Privacy Notice | James Wallace, SEND & EOTAS Provision"
       description="How James Wallace Education handles personal data on this website: what we collect, why, who processes it, how long we keep it, and how to raise a data-protection complaint."
       path="/privacy"
-      updated="Last updated: 25 September 2026"
+      updated="Last updated: 5 October 2026"
     >
       <LegalSection heading="1. Who we are">
         <p>
@@ -158,8 +158,8 @@ export default function PrivacyPolicy() {
 
       <LegalSection heading="2. What this notice covers">
         <p>
-          This notice covers this website: the contact form, the chat assistant, and the newsletter
-          sign-up on our journal. Records kept about a young person during commissioned provision are a
+          This notice covers this website: the contact form, the chat assistant, the visitor
+          statistics, and the newsletter sign-up on our journal. Records kept about a young person during commissioned provision are a
           separate processing activity, governed by the agreement with the commissioning school or
           local authority and set out in the portal&apos;s own privacy notice at{" "}
           <a href="https://portal.jameswallace.tech/privacy" target="_blank" rel="noopener noreferrer">
@@ -196,6 +196,18 @@ export default function PrivacyPolicy() {
               "To send occasional emails about SEND and alternative provision",
               "Consent (you can withdraw at any time)",
             ],
+            [
+              "Visit a page (visitor statistics)",
+              "The page address, the referring site, the browser and operating-system family, the screen size, the browser language and the country. The IP address is used in memory only and is not stored",
+              "To understand which pages are useful",
+              "Legitimate interests",
+            ],
+            [
+              "Visit a page (server access logs)",
+              "The IP address, the time, the page requested, the referrer and the browser string",
+              "To keep the site secure and to find faults",
+              "Legitimate interests",
+            ],
           ]}
         />
         <p style={{ marginTop: "1rem" }}>
@@ -209,7 +221,7 @@ export default function PrivacyPolicy() {
           We use a small number of service providers. They process data on our behalf under contract:
         </p>
         <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-          <li><strong style={{ color: "var(--text-primary)" }}>Hetzner</strong> — hosts this website and stores enquiries on our own server in Germany.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Hetzner</strong> — hosts this website, stores enquiries and runs the visitor statistics on our own server in Germany.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Cloudflare</strong> — content delivery and security in front of the site.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Postmark</strong> — delivers the notification email when you send an enquiry.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>OpenAI</strong> — generates the chat assistant&apos;s replies; the conversation is stored on our server.</li>
@@ -247,6 +259,8 @@ export default function PrivacyPolicy() {
           <li><strong style={{ color: "var(--text-primary)" }}>Enquiries</strong> — up to 2 years.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Chat conversations</strong> — up to 12 months, then deleted automatically.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Newsletter</strong> — until you unsubscribe.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Visitor statistics</strong> — the counts are kept as aggregate page-view figures and carry no stored IP address or other identifier.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Server access logs</strong> — 30 days, then deleted automatically.</li>
         </ul>
       </LegalSection>
 
