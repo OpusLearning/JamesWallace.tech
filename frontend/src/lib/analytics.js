@@ -68,3 +68,47 @@ export function createPageviewCounter({
 
 /** The app's single counter. Importing this module creates it but never counts by itself. */
 export const pageviewCounter = createPageviewCounter();
+
+/**
+ * Record one GoatCounter event when the server has confirmed an enquiry was sent.
+ *
+ * - `ok` mirrors `Response.ok`; `result` is the parsed reply body and counts as confirmation when
+ *   either `result.ok` or `result.success` is `true` (the site's two accepted shapes). Both the
+ *   transport and the body must agree, so a failed or unconfirmed send records nothing.
+ * - `pagePath` is the page the form was on, e.g. `/contact`. Nothing from the form is included:
+ *   no name, email, message, subject or enquiry type — only the fixed text plus that path.
+ * - The script is loaded by `index.html` and always present by the time a form is submitted, so
+ *   unlike the page-view counter there is no retry: a missing or blocked counter is simply a no-op.
+ * - Every access is guarded so a blocked, missing or throwing counter never breaks a page. Returns
+ *   whether a count call was made.
+ *
+ * `getGoatcounter` is injectable for tests; the default reads the real `window.goatcounter`.
+ */
+export function recordEnquirySent(
+  ok,
+  result,
+  pagePath,
+  { getGoatcounter = () => (typeof window === "undefined" ? undefined : window.goatcounter) } = {},
+) {
+  if (!ok || !result || (result.ok !== true && result.success !== true)) return false;
+
+  let goatcounter;
+  try {
+    goatcounter = getGoatcounter();
+  } catch {
+    return false;
+  }
+
+  if (!goatcounter || typeof goatcounter.count !== "function") return false;
+
+  try {
+    goatcounter.count({
+      path: `enquiry-sent ${pagePath}`,
+      title: "Enquiry sent",
+      event: true,
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}

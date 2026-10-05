@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import usePageMeta from "../hooks/usePageMeta";
 import { REPLY } from "../data/facts";
+import { recordEnquirySent } from "../lib/analytics";
 
 const ENQUIRIES = {
   parent: {
@@ -117,6 +118,8 @@ function EnquiryForm({ audience, topic }) {
       const result = await response.json();
       if (result.ok !== true && result.success !== true) throw new Error("Enquiry not confirmed");
       if (requestRef.current === controller) {
+        // One statistics event per confirmed send. The page path only; nothing from the form.
+        recordEnquirySent(response.ok, result, "/contact");
         setStatus("sent");
         setAnswers(emptyAnswers(audience));
       }

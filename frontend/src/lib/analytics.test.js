@@ -5,7 +5,7 @@
 // browser or a renderer; the React hook is a one-line caller.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createPageviewCounter, pageviewPath } from "./analytics.js";
+import { createPageviewCounter, pageviewPath, recordEnquirySent } from "./analytics.js";
 
 /** A fake window.goatcounter that records every count() call. */
 function fakeGoatcounter() {
@@ -126,5 +126,78 @@ test("a throwing getGoatcounter() never propagates", () => {
   assert.doesNotThrow(() => {
     counter.count("/");
     s.flush();
+  });
+});
+
+// --- Enquiry events (recordEnquirySent) ------------------------------------------------
+
+test("records one enquiry event on a confirmed send", () => {
+  const gc = fakeGoatcounter();
+  assert.equal(
+    recordEnquirySent(true, { ok: true }, "/contact", { getGoatcounter: () => gc.api }),
+    true,
+  );
+  assert.deepEqual(gc.calls, [{ path: "enquiry-sent /contact", title: "Enquiry sent", event: true }]);
+
+  const gc2 = fakeGoatcounter();
+  assert.equal(
+    recordEnquirySent(true, { success: true }, "/tuition", { getGoatcounter: () => gc2.api }),
+    true,
+  );
+  assert.deepEqual(gc2.calls, [{ path: "enquiry-sent /tuition", title: "Enquiry sent", event: true }]);
+});
+
+test("does not record an enquiry event when the send was not confirmed", () => {
+  const cases = [
+    [false, { ok: true }], // server said no
+    [true, null], // no body
+    [true, {}], // unconfirmed body
+    [true, { ok: false }],
+    [true, { success: false }],
+    [true, { ok: false, success: false }],
+  ];
+  for (const [ok, result] of cases) {
+    const gc = fakeGoatcounter();
+    assert.equal(
+      recordEnquirySent(ok, result, "/contact", { getGoatcounter: () => gc.api }),
+      false,
+    );
+    assert.deepEqual(gc.calls, []);
+  }
+});
+
+test("stays silent when the counting script is missing", () => {
+  assert.equal(
+    recordEnquirySent(true, { ok: true }, "/contact", { getGoatcounter: () => undefined }),
+    false,
+  );
+  // A goatcounter object that exists but has no count() is treated as missing.
+  assert.equal(
+    recordEnquirySent(true, { ok: true }, "/contact", { getGoatcounter: () => ({}) }),
+    false,
+  );
+});
+
+test("a throwing counter or window never propagates from an enquiry event", () => {
+  const api = {
+    count: () => {
+      throw new Error("blocked by an extension");
+    },
+  };
+  assert.doesNotThrow(() => {
+    assert.equal(
+      recordEnquirySent(true, { ok: true }, "/contact", { getGoatcounter: () => api }),
+      false,
+    );
+  });
+  assert.doesNotThrow(() => {
+    assert.equal(
+      recordEnquirySent(true, { ok: true }, "/contact", {
+        getGoatcounter: () => {
+          throw new Error("window unavailable");
+        },
+      }),
+      false,
+    );
   });
 });

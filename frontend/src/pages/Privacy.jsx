@@ -211,6 +211,10 @@ export default function PrivacyPolicy() {
           ]}
         />
         <p style={{ marginTop: "1rem" }}>
+          When an enquiry form is sent, the visitor statistics record that one enquiry was sent from
+          that page, as a count, with nothing from the form.
+        </p>
+        <p style={{ marginTop: "1rem" }}>
           We do not sell your personal data. We do not use it to make automated decisions about you,
           and we do not profile you.
         </p>
