@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import usePageMeta from "../hooks/usePageMeta";
+import { REPLY } from "../data/facts";
 
 const ENQUIRIES = {
   parent: {
@@ -132,7 +133,7 @@ function EnquiryForm({ audience, topic }) {
       <div className="jw-card jw-form-feedback" ref={resultRef} tabIndex={-1} role="status">
         <p className="jw-eyebrow">Message received</p>
         <h2>Thank you for getting in touch.</h2>
-        <p>Your enquiry has been received. I will reply using the contact details you provided.</p>
+        <p>Your enquiry has been received. I will reply {REPLY.within} using the contact details you provided.</p>
         <p>There is no need to send it again. Please keep any learner documents for an agreed secure route.</p>
         <Link className="jw-btn-secondary" to={audience === "parent" ? "/tuition" : "/provision"}>
           {audience === "parent" ? "Explore tuition" : "Explore the provision"}
@@ -203,6 +204,7 @@ function EnquiryForm({ audience, topic }) {
           })}
           <div className="col-12">
             <p className="small">Your details will be used to respond to this enquiry. Read the <Link to="/privacy">privacy notice</Link>.</p>
+            <p className="small">I reply {REPLY.within}.</p>
             <button type="submit" className="jw-btn-primary" disabled={status === "sending"}>
               {status === "sending" ? "Sending your enquiry…" : "Send enquiry"}
             </button>
