@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import AccessibilityWidget from "./components/AccessibilityWidget";
 import SiteHelper from "./components/SiteHelper";
 import Portfolio from "./components/Portfolio";
+import useAnalytics from "./hooks/useAnalytics";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -33,12 +34,19 @@ function RouteEffects() {
   return null;
 }
 
+// One place counts every route, including the first, from the router's own location.
+function RouteAnalytics() {
+  useAnalytics(useLocation());
+  return null;
+}
+
 const App = () => {
   const [a11yOpen, setA11yOpen] = useState(false);
 
   return (
     <Router>
       <RouteEffects />
+      <RouteAnalytics />
       <div className="d-flex flex-column min-vh-100">
         <Header onA11yClick={() => setA11yOpen(true)} />
         <main id="main-content" tabIndex="-1" className="flex-grow-1 jw-page">
