@@ -36,6 +36,15 @@ export const DELIVERY = {
   hoursPerWeek: "3 to 15 hours per week",
 };
 
+// The reply-time promise. /for-las already published "within 2 working days" for referral
+// enquiries; James extended the same promise to parents on 5 Oct 2026 (QUEUE REPLY-PROMISE,
+// prompt prompts/2026-10-05-analytics-jobs.md), so /for-las, /tuition and /contact read it from
+// here and cannot drift. Source: already published on /for-las; extended to parents by James,
+// 5 Oct 2026. Do not strengthen it (not "same day", not "within hours").
+export const REPLY = {
+  within: "within 2 working days",
+};
+
 export const TRAINING = {
   safeguarding: { name: "Safeguarding and child protection, KCSIE 2026 update", completed: "9 September 2026" },
   prevent: { name: "Prevent duty", completed: "9 September 2026" },

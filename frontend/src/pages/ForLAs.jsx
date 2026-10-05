@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT } from "../data/facts";
+import { TRAINING, PRODUCT, REPLY } from "../data/facts";
 
 const commissionerQA = [
   {
@@ -110,7 +110,7 @@ export default function ForLAs() {
             className="text-center"
             style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
           >
-            I respond to referral enquiries within 2 working days and begin
+            I respond to referral enquiries {REPLY.within} and begin
               placement assessments within 5 working days of receiving a commission.
           </p>
           <div className="row g-4">
@@ -118,7 +118,7 @@ export default function ForLAs() {
               {
                 step: "1",
                 title: "Initial Referral",
-                desc: "Submit the referral form on this site or contact us directly. We'll respond within 2 working days to discuss the placement.",
+                desc: `Submit the referral form on this site or contact us directly. We'll respond ${REPLY.within} to discuss the placement.`,
               },
               {
                 step: "2",
@@ -293,8 +293,7 @@ export default function ForLAs() {
         <div className="jw-container text-center">
           <h2>Ready to commission?</h2>
           <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
-            Submit a referral or request an evidence pack. I respond within 2 working
-            days.
+            Submit a referral or request an evidence pack. I respond {REPLY.within}.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">

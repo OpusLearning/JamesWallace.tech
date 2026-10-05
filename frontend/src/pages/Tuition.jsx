@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY, TRAINING } from "../data/facts";
+import { BIO, DELIVERY, REPLY, TRAINING } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -308,6 +308,7 @@ export default function Tuition() {
                     <strong style={{ color: "var(--text, inherit)" }}>{k}:</strong> {v}
                   </p>
                 ))}
+                <p style={{ color: "var(--text-muted)", marginBottom: "0.65rem" }}>I reply {REPLY.within}.</p>
                 <Link to="/contact?for=parent" className="jw-btn-primary" style={{ marginTop: "0.5rem", display: "inline-block" }}>
                   Get in touch
                 </Link>
