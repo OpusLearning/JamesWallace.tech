@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
+import { recordEnquirySent } from "../lib/analytics";
 
 /**
  * The assistant in the corner of the site.
@@ -186,6 +187,8 @@ export default function SiteHelper() {
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || !data.ok) throw new Error("send failed");
+      // One statistics event per confirmed send from the chat; the page path only.
+      recordEnquirySent(r.ok, data, pathname);
       setFormState("sent");
       setFormOpen(false);
       setMessages((m) => [

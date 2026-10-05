@@ -82,6 +82,10 @@ export default function Cookies() {
           nothing follows you to other websites.
         </p>
         <p>
+          When an enquiry form is sent, the statistics record that one enquiry was sent from that
+          page, as a count, with nothing from the form.
+        </p>
+        <p>
           <strong>To opt out,</strong> add <code>#toggle-goatcounter</code> to the end of any page
           address on this site and load it. That stores one entry, <code>skipgc</code>, in your
           browser&apos;s local storage, which stops counting on this browser until you toggle it again
