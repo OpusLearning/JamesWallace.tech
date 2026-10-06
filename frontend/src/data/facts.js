@@ -171,6 +171,14 @@ export const REGISTRATIONS = [
     held: true,
   },
   {
+    // nasen Core (free, individual) membership in James's name, joined 6 October 2026. The member
+    // e-badge comes only with the paid Plus tier, so this entry is text only.
+    key: "nasen",
+    name: "nasen member",
+    detail: "National Association for Special Educational Needs, since October 2026",
+    held: true,
+  },
+  {
     key: "disability-confident",
     name: "Disability Confident Committed",
     detail: "Applied 6 October 2026, confirmation pending",
