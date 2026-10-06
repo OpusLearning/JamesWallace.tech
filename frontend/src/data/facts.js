@@ -145,6 +145,45 @@ export const SAFEGUARDING_ROLES = {
     `${onlineSafetyLead.role.toLowerCase()} and ${attendanceLead.role.toLowerCase()}: ${deputy.name}.`,
 };
 
+// James, 28 Sep 2026 (QUEUE ICO-NUMBER). James Wallace Education Ltd's registration with the
+// Information Commissioner's Office as a data controller: number ZC257612, confirmed 28 September
+// 2026 (application reference C2042401, fee paid 25 September 2026). The older registration
+// ZB477144 is James's own as a sole trader and is deliberately not recorded here, because it is
+// not the company's. Shown in the footer company line and in the privacy notice's controller
+// details, so the number lives here once.
+export const ICO = {
+  registrationNumber: "ZC257612",
+  registerUrl: "https://ico.org.uk/ESDWebPages/Entry/ZC257612",
+};
+
+// James, 6 Oct 2026 (QUEUE BADGES). The footer's registrations strip. `held: false` renders greyed
+// with its status line, and must be flipped only when the evidence is in hand:
+// - Disability Confident Committed: applied 6 October 2026 (DWP scheme ID DCS050928); DWP allows up
+//   to 10 working days. Until the confirmation arrives the official badge must not be used.
+// - Emergency First Aid at Work: Skills Training Group course booked for 12 October 2026.
+// The ICO does not let registered organisations use its logo, so that entry is text only.
+export const REGISTRATIONS = [
+  {
+    key: "ico",
+    name: "ICO registered",
+    detail: `Data protection registration ${ICO.registrationNumber}`,
+    href: ICO.registerUrl,
+    held: true,
+  },
+  {
+    key: "disability-confident",
+    name: "Disability Confident Committed",
+    detail: "Applied 6 October 2026, confirmation pending",
+    held: false,
+  },
+  {
+    key: "first-aid",
+    name: "Emergency First Aid at Work",
+    detail: "Course booked for 12 October 2026",
+    held: false,
+  },
+];
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 
