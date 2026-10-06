@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, AVAILABILITY, STATUTORY, TRAINING } from "../data/facts";
+import { BIO, AVAILABILITY, STATUTORY, TRAINING, POLICY_PACK } from "../data/facts";
 
 /**
  * For agencies and schools — the fastest-paying door, and the one the site never had.
@@ -160,8 +160,8 @@ export default function Agencies() {
             ))}
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
-            My own safeguarding, e-safety, lone-working, risk assessment and behaviour policies are under review; approved
-            policies can be shared before a first placement.
+            My own safeguarding, e-safety, lone-working, risk assessment and behaviour policies were {POLICY_PACK.status}.
+            They can be shared before a first placement.
           </p>
         </div>
       </section>
@@ -191,7 +191,8 @@ export default function Agencies() {
         <div className="jw-container">
           <h2 style={{ marginBottom: "0.5rem" }}>What you get on placement</h2>
           <p style={{ color: "var(--text-muted)", maxWidth: "640px", marginBottom: "2rem" }}>
-            The reason to place a specialist rather than fill the slot is what comes back to you afterwards.
+            The reason to place a specialist rather than fill the slot is what comes back to you afterwards.{" "}
+            <Link to="/sample-report">See a sample report</Link>, shown with invented data.
           </p>
           <div className="row g-4">
             {placement.map((p) => (

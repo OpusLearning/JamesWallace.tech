@@ -241,6 +241,16 @@ export const ARMED_FORCES = {
     "James Wallace Education Ltd submitted its pledge to the Armed Forces Covenant on 6 October 2026 and is awaiting confirmation.",
 };
 
+// The policy pack. Checked against the live portal on 6 October 2026: 46 policies ACTIVE with an
+// APPROVED current version (43 approved 27 September 2026, three more on 5 October 2026), four retired.
+// Every page that describes the suite's status reads it from here. The public /policies page is a
+// separate job (QUEUE POL-PUB-S); until it ships, policies are shared on request.
+export const POLICY_PACK = {
+  approved: "27 September 2026",
+  version: "2.0",
+  status: "approved on 27 September 2026 and reviewed every year",
+};
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 

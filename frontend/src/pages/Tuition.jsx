@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES } from "../data/facts";
+import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -291,7 +291,7 @@ export default function Tuition() {
               </ul>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: 0 }}>
                 Certificates available to any parent or agency who asks. My own safeguarding, e-safety, risk assessment
-                and lone-working policies are under review; approved policies can be shared before we begin.
+                and lone-working policies were {POLICY_PACK.status}, and can be shared before we begin.
               </p>
             </div>
 

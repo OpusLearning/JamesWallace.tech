@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT, REPLY } from "../data/facts";
+import { TRAINING, PRODUCT, REPLY, POLICY_PACK } from "../data/facts";
 
 const commissionerQA = [
   {
@@ -175,7 +175,8 @@ export default function ForLAs() {
           >
             The platform is built to produce the following each calendar
             month. What a placement actually receives is agreed in the
-            commission.
+            commission.{" "}
+            <Link to="/sample-report">See a sample report</Link>, shown with invented data.
           </p>
           <div className="jw-card mx-auto" style={{ maxWidth: "700px", padding: 0, overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
@@ -221,9 +222,8 @@ export default function ForLAs() {
               <p>
                 James Wallace Education keeps an EOTAS-aligned policy suite
                 covering Safeguarding, Lone Working, Data Protection, Health
-                &amp; Safety, Behaviour Support, and more. The suite is under
-                review, and approved policies are shared with commissioners on
-                request.
+                &amp; Safety, Behaviour Support, and more. The suite was {POLICY_PACK.status}; policies are shared with
+                commissioners on request.
               </p>
               <p>
                 Ask for the current approved policies, or a specific policy for

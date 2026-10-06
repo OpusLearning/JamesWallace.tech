@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { PRODUCT } from "../data/facts";
+import { PRODUCT, POLICY_PACK } from "../data/facts";
 
 const screenshots = [
   {
@@ -125,7 +125,7 @@ const screenshots = [
   {
     file: "11-policies",
     title: "Policies & Procedures",
-    note: "Portal capability. The policy suite is under review; approved policies are shared with commissioners on request.",
+    note: `Portal capability. The policy suite was ${POLICY_PACK.status}; policies are shared with commissioners on request.`,
     bullets: [
       "EOTAS-aligned policy library - Safeguarding, Lone Working, Data Protection, and more",
       "Each policy is version-controlled, review-dated, and available as a branded PDF",

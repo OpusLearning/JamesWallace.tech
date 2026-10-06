@@ -25,6 +25,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://jameswallace.tech/sample-report</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://jameswallace.tech/for-las</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>

@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -18,7 +18,7 @@ export default function Compliance() {
   usePageMeta({
     title: 'Safeguarding & Compliance | James Wallace, Specialist SEND & EOTAS Tutor',
     description:
-      'Safeguarding framework aligned to KCSIE and Working Together to Safeguard Children, with an EOTAS policy suite under review and DBS and training tracked in the portal.',
+      'Safeguarding framework aligned to KCSIE and Working Together to Safeguard Children, with an approved EOTAS policy suite and DBS and training tracked in the portal.',
     path: '/compliance',
   });
 
@@ -299,7 +299,7 @@ export default function Compliance() {
               <p>
                 James Wallace Education, the provision operated by James Wallace, keeps an EOTAS-aligned policy suite - Safeguarding,
                 Lone Working, Data Protection, Health &amp; Safety, Behaviour
-                Support, and more. The suite is under review; approved policies
+                Support, and more. The suite was {POLICY_PACK.status}; policies
                 are shared with commissioners on request.
               </p>
               <p>
