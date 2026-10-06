@@ -158,8 +158,8 @@ export const ICO = {
 
 // James, 6 Oct 2026 (QUEUE BADGES). The footer's registrations strip. `held: false` renders greyed
 // with its status line, and must be flipped only when the evidence is in hand:
-// - Disability Confident Committed: applied 6 October 2026 (DWP scheme ID DCS050928); DWP allows up
-//   to 10 working days. Until the confirmation arrives the official badge must not be used.
+// - Disability Confident Committed: confirmed by DWP on 6 October 2026 (scheme ID DCS050928), valid
+//   to 6 October 2029. Renewal is every three years.
 // - Emergency First Aid at Work: Skills Training Group course booked for 12 October 2026.
 // The ICO does not let registered organisations use its logo, so that entry is text only.
 export const REGISTRATIONS = [
@@ -181,8 +181,12 @@ export const REGISTRATIONS = [
   {
     key: "disability-confident",
     name: "Disability Confident Committed",
-    detail: "Applied 6 October 2026, confirmation pending",
-    held: false,
+    detail: "Valid to 6 October 2029",
+    // DWP's own badge file, downloaded from the employer account on 6 October 2026. The branding
+    // guidance says it must not be recoloured, cropped or redrawn, so it is shown as supplied.
+    image: "/badges/disability-confident-committed.png",
+    imageAlt: "Disability Confident Committed badge",
+    held: true,
   },
   {
     key: "first-aid",
