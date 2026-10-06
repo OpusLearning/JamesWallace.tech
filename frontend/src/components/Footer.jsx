@@ -15,7 +15,9 @@ export default function Footer() {
       <ul className="jw-footer-badges" aria-label="Registrations and training">
         {REGISTRATIONS.map((r) => (
           <li key={r.key} className={r.held ? "jw-badge" : "jw-badge jw-badge-pending"}>
-            <span className="jw-badge-mark" aria-hidden="true">{r.held ? "✓" : "…"}</span>
+            {r.image
+              ? <img className="jw-badge-logo" src={r.image} alt={r.imageAlt} width="500" height="241" loading="lazy" />
+              : <span className="jw-badge-mark" aria-hidden="true">{r.held ? "✓" : "…"}</span>}
             <span className="jw-badge-text">
               <span className="jw-badge-name">{r.name}{r.held ? "" : <span className="jw-badge-chip">Pending</span>}</span>
               <span className="jw-badge-detail">{r.href ? <a href={r.href} target="_blank" rel="noopener noreferrer">{r.detail}<span aria-hidden="true"> ↗</span></a> : r.detail}</span>
