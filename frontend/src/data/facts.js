@@ -161,12 +161,15 @@ export const ICO = {
 // - Disability Confident Committed: confirmed by DWP on 6 October 2026 (scheme ID DCS050928), valid
 //   to 6 October 2029. Renewal is every three years.
 // - Emergency First Aid at Work: Skills Training Group course booked for 12 October 2026.
-// The ICO does not let registered organisations use its logo, so that entry is text only.
+// The ICO does not let registered organisations use its logo, and nasen's member e-badge comes only
+// with the paid Plus tier, so those two and first aid carry the site's own drawn icons (`icon`),
+// never the bodies' logos. Disability Confident is the one scheme that issues a badge to display.
 export const REGISTRATIONS = [
   {
     key: "ico",
+    icon: "shield",
     name: "ICO registered",
-    detail: `Data protection registration ${ICO.registrationNumber}`,
+    detail: `Registration ${ICO.registrationNumber}`,
     href: ICO.registerUrl,
     held: true,
   },
@@ -174,8 +177,9 @@ export const REGISTRATIONS = [
     // nasen Core (free, individual) membership in James's name, joined 6 October 2026. The member
     // e-badge comes only with the paid Plus tier, so this entry is text only.
     key: "nasen",
+    icon: "book",
     name: "nasen member",
-    detail: "National Association for Special Educational Needs, since October 2026",
+    detail: "Special educational needs association",
     held: true,
   },
   {
@@ -190,8 +194,9 @@ export const REGISTRATIONS = [
   },
   {
     key: "first-aid",
+    icon: "cross",
     name: "Emergency First Aid at Work",
-    detail: "Course booked for 12 October 2026",
+    detail: "Course booked, 12 October 2026",
     held: false,
   },
 ];
