@@ -250,7 +250,9 @@ export const REVIEWED = "25 September 2026";
 export const AVAILABILITY = {
   status: "Taking new students and placements now",
   statusPlacements: "Taking new placements now",
-  reviewed: REVIEWED,
+  // James confirmed availability on 6 October 2026. Kept apart from REVIEWED, which dates the qualifications and
+  // compliance review and must not move unless that review is redone.
+  reviewed: "6 October 2026",
 };
 
 // Written references from previous employers, held on file. The full set with ratings is on /credentials; the homepage
