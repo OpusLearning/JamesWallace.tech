@@ -243,7 +243,17 @@ textarea.form-control { resize: vertical; }
 .jw-footer-nav ul { display: flex; flex-wrap: wrap; gap: .7rem 1.7rem; margin: 0; padding: .5rem 0; list-style: none; }
 .jw-footer-nav a { font-size: .79rem; color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; min-height: 2.5rem; }
 .jw-footer-nav a:hover { text-decoration: underline; }
-.jw-footer-bottom { margin-top: 2.8rem; padding-top: 1.3rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .75rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem; }
+.jw-footer-badges { max-width: calc(1440px - 2 * var(--gutter)); margin: 2.2rem auto 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .8rem; }
+.jw-badge { display: flex; align-items: center; gap: .7rem; padding: .65rem .95rem; background: var(--card-bg); border: 1px solid var(--brand); border-radius: 4px; color: var(--text-primary); }
+.jw-badge-mark { flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--brand); color: #fffdf7; display: flex; align-items: center; justify-content: center; font-size: .9rem; font-weight: 700; }
+.jw-badge-text { display: flex; flex-direction: column; gap: .1rem; }
+.jw-badge-name { font-size: .82rem; font-weight: 600; }
+.jw-badge-detail, .jw-badge-detail a { font-size: .74rem; color: var(--text-muted); }
+.jw-badge-pending { background: transparent; border: 1px dashed #a9afa3; color: var(--text-muted); }
+.jw-badge-pending .jw-badge-mark { background: var(--surface); color: var(--text-muted); border: 1px dashed #a9afa3; }
+.jw-badge-pending .jw-badge-name { font-weight: 500; }
+.jw-badge-chip { margin-left: .5rem; padding: .08rem .4rem; border: 1px solid #a9afa3; border-radius: 2px; font-size: .64rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.jw-footer-bottom { margin-top: 1.6rem; padding-top: 1.3rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .75rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem; }
 .jw-footer-bottom a { color: var(--text-muted); display: inline-block; padding-block: .4rem; }
 .jw-footer-legal { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 .4rem; }
 

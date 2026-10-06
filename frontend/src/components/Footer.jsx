@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ICO } from "../data/facts";
+import { ICO, REGISTRATIONS } from "../data/facts";
 
 export default function Footer() {
   return (
@@ -12,6 +12,17 @@ export default function Footer() {
           <li><a href="https://portal.jameswallace.tech" target="_blank" rel="noopener noreferrer">Portal<span aria-hidden="true"> ↗</span></a></li>
         </ul></nav>
       </div>
+      <ul className="jw-footer-badges" aria-label="Registrations and training">
+        {REGISTRATIONS.map((r) => (
+          <li key={r.key} className={r.held ? "jw-badge" : "jw-badge jw-badge-pending"}>
+            <span className="jw-badge-mark" aria-hidden="true">{r.held ? "✓" : "…"}</span>
+            <span className="jw-badge-text">
+              <span className="jw-badge-name">{r.name}{r.held ? "" : <span className="jw-badge-chip">Pending</span>}</span>
+              <span className="jw-badge-detail">{r.href ? <a href={r.href} target="_blank" rel="noopener noreferrer">{r.detail}<span aria-hidden="true"> ↗</span></a> : r.detail}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
       <div className="jw-footer-bottom">
         <span>© 2026 James Wallace Education Ltd. Registered in England and Wales, company number 17479328. ICO registration number {ICO.registrationNumber}. Registered office: 71–75 Shelton Street, Covent Garden, London WC2H 9JQ.</span>
         <span className="jw-footer-legal">
