@@ -202,6 +202,18 @@ export const REGISTRATIONS = [
     held: true,
   },
   {
+    // James's own certificate (Coursera, eight courses), issued 25 December 2023; the badge is the one
+    // Credly issued to him. Full record on /credentials.
+    key: "google-cyber",
+    icon: "shield",
+    image: "/badges/google-cybersecurity.png",
+    imageAlt: "Google Cybersecurity Professional Certificate badge",
+    imageSize: [256, 243],
+    name: "Google Cybersecurity Certificate",
+    detail: "Issued December 2023",
+    held: true,
+  },
+  {
     key: "first-aid",
     image: "/badges/skills-training-group.svg",
     imageAlt: "Skills Training Group",
