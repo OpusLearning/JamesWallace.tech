@@ -42,7 +42,7 @@ export default function Footer() {
         {REGISTRATIONS.map((r) => (
           <li key={r.key} className={r.held ? "jw-badge" : "jw-badge jw-badge-pending"}>
             {r.image
-              ? <img className="jw-badge-logo" src={r.image} alt={r.imageAlt} width="500" height="241" loading="lazy" />
+              ? <img className="jw-badge-logo" src={r.image} alt={r.imageAlt} width={r.imageSize[0]} height={r.imageSize[1]} loading="lazy" />
               : <span className="jw-badge-mark" aria-hidden="true">{badgeIcon(r.icon)}</span>}
             <span className="jw-badge-text">
               <span className="jw-badge-name">{r.name}{r.held ? "" : <span className="jw-badge-chip">Pending</span>}</span>

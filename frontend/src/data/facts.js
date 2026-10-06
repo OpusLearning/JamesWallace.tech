@@ -161,12 +161,17 @@ export const ICO = {
 // - Disability Confident Committed: confirmed by DWP on 6 October 2026 (scheme ID DCS050928), valid
 //   to 6 October 2029. Renewal is every three years.
 // - Emergency First Aid at Work: Skills Training Group course booked for 12 October 2026.
-// The ICO does not let registered organisations use its logo, and nasen's member e-badge comes only
-// with the paid Plus tier, so those two and first aid carry the site's own drawn icons (`icon`),
-// never the bodies' logos. Disability Confident is the one scheme that issues a badge to display.
+// Logos (James, 6 Oct 2026: "use the organisations actual images"). The ICO image is the file James
+// supplied; the nasen mark is its site logo (white) on its own header green; first aid carries the
+// training provider's logo, greyed until the certificate is in hand. Claude told James that the ICO's
+// re-use terms say its logo signifies ICO approval, and that nasen's member e-badge is a Plus-tier
+// benefit; he chose to show them. `icon` is the drawn fallback if an image is ever removed.
 export const REGISTRATIONS = [
   {
     key: "ico",
+    image: "/badges/ico-registered.png",
+    imageAlt: "ICO registered",
+    imageSize: [81, 76],
     icon: "shield",
     name: "ICO registered",
     detail: `Registration ${ICO.registrationNumber}`,
@@ -177,6 +182,9 @@ export const REGISTRATIONS = [
     // nasen Core (free, individual) membership in James's name, joined 6 October 2026. The member
     // e-badge comes only with the paid Plus tier, so this entry is text only.
     key: "nasen",
+    image: "/badges/nasen.png",
+    imageAlt: "nasen",
+    imageSize: [478, 200],
     icon: "book",
     name: "nasen member",
     detail: "Special educational needs association",
@@ -190,10 +198,14 @@ export const REGISTRATIONS = [
     // guidance says it must not be recoloured, cropped or redrawn, so it is shown as supplied.
     image: "/badges/disability-confident-committed.png",
     imageAlt: "Disability Confident Committed badge",
+    imageSize: [500, 241],
     held: true,
   },
   {
     key: "first-aid",
+    image: "/badges/skills-training-group.svg",
+    imageAlt: "Skills Training Group",
+    imageSize: [125, 53],
     icon: "cross",
     name: "Emergency First Aid at Work",
     detail: "Course booked, 12 October 2026",
