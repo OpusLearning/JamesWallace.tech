@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY, REPLY, TRAINING } from "../data/facts";
+import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -303,6 +303,7 @@ export default function Tuition() {
                   ["Ages", "KS2 to KS4 and post-16, including Functional Skills."],
                   ["Subjects", "English, maths, science, computing and ICT."],
                   ["Funding", "Privately, or through an EHCP personal budget where your local authority agrees it."],
+                  ["Forces families", ARMED_FORCES.families],
                 ].map(([k, v]) => (
                   <p key={k} style={{ marginBottom: "0.65rem", color: "var(--text-muted)" }}>
                     <strong style={{ color: "var(--text, inherit)" }}>{k}:</strong> {v}

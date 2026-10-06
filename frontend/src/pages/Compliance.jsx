@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -228,6 +228,25 @@ export default function Compliance() {
               therapy or legal advice, and nothing here should be read as any of those. Where a learner needs a
               diagnosis, therapeutic input or representation at tribunal, I will say so and point you to the right
               service rather than work outside what a qualified teacher should be doing.
+            </p>
+          </div>
+
+          {/* Armed Forces families. Status wording comes from facts.js and says "submitted" until the
+              certificate is signed; no Covenant logo before then. */}
+          <div className="jw-card" style={{ marginBottom: "2.5rem", borderLeft: "3px solid var(--brand)" }}>
+            <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.5rem" }}>Armed Forces families</h3>
+            <p style={{ margin: "0 0 0.6rem", fontSize: "0.92rem", color: "var(--text-muted)" }}>
+              Children in Forces families can change schools often and spend long stretches with a parent away.
+              I take that into account in how teaching begins, the pace it moves at and what happens when a
+              family is posted, so that a young person is not set back by their family&apos;s service. Where a
+              family needs help beyond teaching, I will point them to the support available to the Armed
+              Forces community.
+            </p>
+            <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              {ARMED_FORCES.statement}{" "}
+              <a href={ARMED_FORCES.covenantUrl} target="_blank" rel="noopener noreferrer">
+                About the Covenant<span aria-hidden="true"> ↗</span>
+              </a>
             </p>
           </div>
 

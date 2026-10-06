@@ -225,6 +225,22 @@ export const REGISTRATIONS = [
   },
 ];
 
+// James, 6 Oct 2026 (QUEUE AFC-1). The company's Armed Forces Covenant pledge was submitted on GOV.UK on
+// 6 October 2026 (form reference L36GV2PM). Until Defence Relationship Management confirm it and James
+// signs the certificate, the site must say "submitted", never "signed", and must not show the Covenant
+// logo. The pledges James chose: promote externally, fair access to services, the wellbeing of Service
+// children, signposting to support, and display of the logo once issued. `status` flips to "signed"
+// (with the date) when the certificate is in hand; the two sentences below are then rewritten together.
+export const ARMED_FORCES = {
+  status: "submitted",
+  submitted: "6 October 2026",
+  covenantUrl: "https://www.armedforcescovenant.gov.uk/",
+  families:
+    "If someone in your family is serving, I plan around postings and deployments. Sessions can move online or be rearranged, and a move does not have to end the teaching.",
+  statement:
+    "James Wallace Education Ltd submitted its pledge to the Armed Forces Covenant on 6 October 2026 and is awaiting confirmation.",
+};
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 
