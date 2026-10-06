@@ -21,6 +21,7 @@ import Provision from "./pages/Provision";
 import Platform from "./pages/Platform";
 import Compliance from "./pages/Compliance";
 import ForLAs from "./pages/ForLAs";
+import SampleReport from "./pages/SampleReport";
 import Tuition from "./pages/Tuition";
 import Agencies from "./pages/Agencies";
 
@@ -56,6 +57,7 @@ const App = () => {
             <Route path="/platform" element={<Platform />} />
             <Route path="/compliance" element={<Compliance />} />
             <Route path="/for-las" element={<ForLAs />} />
+            <Route path="/sample-report" element={<SampleReport />} />
             <Route path="/tuition" element={<Tuition />} />
             <Route path="/agencies" element={<Agencies />} />
             <Route path="/portfolio" element={<Portfolio />} />

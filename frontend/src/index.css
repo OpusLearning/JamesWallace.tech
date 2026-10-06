@@ -234,6 +234,27 @@ textarea.form-control { resize: vertical; }
 .jw-page li::marker { color: #718369; }
 
 /* Footer continues the visual identity without repeating the primary invitation. */
+/* Sample report page: the two records are drawn as paper documents. */
+.jw-sample-doc { position: relative; background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: clamp(1.4rem, 4vw, 2.6rem); box-shadow: 0 .4rem 1.6rem #193a3110; }
+.jw-sample-doc h2 { margin: 0 0 1.2rem; }
+.jw-sample-doc h3 { font-size: 1rem; font-weight: 700; margin: 1.8rem 0 .5rem; }
+.jw-sample-stamp { display: inline-block; margin: 0 0 1rem; padding: .2rem .6rem; border: 1px solid var(--brand); border-radius: 2px; color: var(--brand); font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.jw-sample-rows { margin: 0; border-top: 1px solid var(--border); }
+.jw-sample-rows > div { display: grid; grid-template-columns: 13rem 1fr; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--border); }
+.jw-sample-rows dt { font-weight: 600; font-size: .9rem; }
+.jw-sample-rows dd { margin: 0; color: var(--text-muted); font-size: .92rem; }
+.jw-sample-table-wrap { overflow-x: auto; }
+.jw-sample-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.jw-sample-table th, .jw-sample-table td { text-align: left; vertical-align: top; padding: .6rem .7rem .6rem 0; border-bottom: 1px solid var(--border); }
+.jw-sample-table thead th { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+.jw-sample-table tbody th { font-weight: 600; width: 36%; }
+.jw-sample-table td { color: var(--text-muted); }
+@media (max-width: 620px) {
+  .jw-sample-rows > div { grid-template-columns: 1fr; gap: .1rem; }
+  .jw-sample-table thead { display: none; }
+  .jw-sample-table tr { display: block; padding: .6rem 0; border-bottom: 1px solid var(--border); }
+  .jw-sample-table tbody th, .jw-sample-table td { display: block; width: auto; border: 0; padding: .15rem 0; }
+}
 .jw-footer { background: var(--page-bg); border-top: 1px solid var(--border); margin-top: auto; padding: 3.5rem var(--gutter) 1.8rem; }
 .jw-footer-grid, .jw-footer-bottom { max-width: calc(1440px - 2 * var(--gutter)); margin-inline: auto; }
 .jw-footer-grid { display: flex; justify-content: space-between; align-items: start; gap: 3rem; }

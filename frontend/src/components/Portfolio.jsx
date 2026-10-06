@@ -69,7 +69,7 @@ export default function Portfolio() {
         </>
       ),
       image: PPHomepage,
-      liveLink: "https://purplepixel.dev",
+      // The project site is no longer online (checked 6 October 2026), so no live link is shown.
     },
     {
       title: "Learning Legends",
@@ -153,7 +153,7 @@ export default function Portfolio() {
         </>
       ),
       image: LLDesktop,
-      liveLink: "https://learninglegends.org",
+      // The project site is no longer online (checked 6 October 2026), so no live link is shown.
     },
     {
       title: "Events Platform",
@@ -275,9 +275,11 @@ export default function Portfolio() {
               <div className="jw-project-body">
                 <h2>{item.title}</h2>
                 <p>{item.shortDescription}</p>
-                <a href={item.liveLink} target="_blank" rel="noopener noreferrer" className="jw-text-link">
-                  Visit project <span aria-hidden="true">↗</span><span className="visually-hidden"> (opens in a new tab)</span>
-                </a>
+                {item.liveLink && (
+                  <a href={item.liveLink} target="_blank" rel="noopener noreferrer" className="jw-text-link">
+                    Visit project <span aria-hidden="true">↗</span><span className="visually-hidden"> (opens in a new tab)</span>
+                  </a>
+                )}
                 <details className="jw-project-details">
                   <summary>Explore the project</summary>
                   <div>{item.fullDescription}</div>
