@@ -264,6 +264,19 @@ export const PRICES = {
   commissionedOnline: "£55",
 };
 
+// Care leavers. James, 7 Oct 2026 ("you pick a workable offer for care leaver", then "add this to the
+// website and emails"). The offer was submitted on the Care Leaver Covenant's sign-up form on 7 October
+// 2026; the Covenant team confirm and publish it after James approves their draft. Until then the site
+// states the offer itself and says the company "has applied to join", never "signatory", and shows no
+// Covenant logo. server/email.js repeats the offer line by hand: change both.
+export const CARE_LEAVERS = {
+  offer:
+    "Each year I offer ten free one-to-one online tuition sessions, in maths or English, to one care leaver aged 16 to 25 who is working towards a GCSE or Functional Skills qualification.",
+  how: "To ask about it, email hello@jameswallace.tech, or ask a personal adviser or leaving care team to email for you.",
+  statement: "James Wallace Education Ltd has applied to join the Care Leaver Covenant (7 October 2026).",
+  covenantUrl: "https://mycovenant.org.uk/",
+};
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 

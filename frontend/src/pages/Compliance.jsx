@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -228,6 +228,21 @@ export default function Compliance() {
               therapy or legal advice, and nothing here should be read as any of those. Where a learner needs a
               diagnosis, therapeutic input or representation at tribunal, I will say so and point you to the right
               service rather than work outside what a qualified teacher should be doing.
+            </p>
+          </div>
+
+          {/* Care leavers. The offer and status come from facts.js; no Covenant logo until confirmed. */}
+          <div className="jw-card" style={{ marginBottom: "2.5rem", borderLeft: "3px solid var(--brand)" }}>
+            <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.5rem" }}>Care leavers</h3>
+            <p style={{ margin: "0 0 0.6rem", fontSize: "0.92rem", color: "var(--text-muted)" }}>
+              Leaving care often means sitting exams without the help most young people can count on at home.{" "}
+              {CARE_LEAVERS.offer} {CARE_LEAVERS.how}
+            </p>
+            <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              {CARE_LEAVERS.statement}{" "}
+              <a href={CARE_LEAVERS.covenantUrl} target="_blank" rel="noopener noreferrer">
+                About the Covenant<span aria-hidden="true"> ↗</span>
+              </a>
             </p>
           </div>
 
