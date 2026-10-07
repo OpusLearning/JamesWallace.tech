@@ -97,7 +97,7 @@ export default function Agencies() {
               </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
                 QTS since 2004, a Master of Education, thirteen years teaching in specialist provision — twelve of them in a
-                specialist SEMH school — and five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
+                special school — and five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
               </p>
               <p style={{ marginBottom: "1rem" }}>
                 Enhanced DBS on the Update Service, with safeguarding and Prevent training records available to review.
