@@ -470,7 +470,7 @@ const safeguardingLeadPreventCertificates = TRAINING.asmaaPrevent.courses.map((c
 
 const experience = [
   {
-    role: "Specialist SEMH Teacher",
+    role: "Specialist Teacher",
     org: "Foxwood Academy, Nottinghamshire",
     logo: "/badges/foxwood.png",
     dates: "Jan 2006 to Oct 2018",
