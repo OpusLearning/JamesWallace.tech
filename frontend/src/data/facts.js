@@ -20,11 +20,11 @@ export const STATUTORY = {
 // "BSc (Hons) Computer Science", and the years split between twelve and thirteen depending on the page. The credentials
 // page is the one explicitly presenting verifiable evidence, so its wording wins and every other page imports it.
 //
-// The years are not in conflict once written out: Foxwood Academy Jan 2006 to Oct 2018 is twelve years in a specialist
-// SEMH school, and EOTAS delivery resumed in April 2025. Thirteen years teaching in specialist provision is the
+// The years are not in conflict once written out: Foxwood Academy Jan 2006 to Oct 2018 is twelve years in a special
+// school (James, 7 Oct 2026: "it's not a special SEMH school, it's just special school"), and EOTAS delivery resumed in April 2025. Thirteen years teaching in specialist provision is the
 // aggregate. Write the aggregate and the Foxwood figure together so neither reads as a contradiction of the other.
 // The years are written into each page's own sentence rather than exported as a string, because the grammar differs
-// every time. What must not differ: thirteen years teaching, twelve of them at the SEMH school, five commissioning.
+// every time. What must not differ: thirteen years teaching, twelve of them at the special school, five commissioning.
 export const BIO = {
   degree: "BSc (Hons) Computer Science",
   degreeShort: "BSc Computer Science",
