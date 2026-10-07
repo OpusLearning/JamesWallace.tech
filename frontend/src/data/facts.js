@@ -251,6 +251,19 @@ export const POLICY_PACK = {
   status: "approved on 27 September 2026 and reviewed every year",
 };
 
+// Prices. James, 7 Oct 2026: "make prices consistent but remember what's been added in previous bids".
+// The commissioned rates are the ones tendered to Derbyshire (CCS061, 27 Sep 2026) and Leicestershire
+// (DN827502, 6 Oct 2026): 67.50 an hour in person or at home, 55.00 an hour online, travel met by the
+// company and not charged, no VAT (the company is not VAT registered). The site used to show "£250 per
+// day" for commissioned work, which matched neither bid. Family rates are James's private rates and are
+// not part of any bid. server/helper.js (the chat assistant) repeats these figures by hand: change both.
+export const PRICES = {
+  family: "£45",
+  familyEhcp: "£50",
+  commissionedInPerson: "£67.50",
+  commissionedOnline: "£55",
+};
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 
