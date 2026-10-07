@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK } from "../data/facts";
+import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -330,22 +330,22 @@ export default function Tuition() {
           <div className="row g-4">
             {[
               {
-                rate: "£45",
+                rate: PRICES.family,
                 unit: "per hour",
                 title: "One-to-one tuition",
                 body: "Online or in your home, KS2 to KS4 and post-16. Session notes after every session. This is the rate most families pay.",
               },
               {
-                rate: "£50",
+                rate: PRICES.familyEhcp,
                 unit: "per hour",
                 title: "EHCP-aligned work",
                 body: "Where the tuition is written to the outcomes in a plan and you need the evidence for reviews: a personal learning plan, progress against criteria, and reports you can hand to school or the local authority.",
               },
               {
-                rate: "£250",
-                unit: "per day",
-                title: "EOTAS packages",
-                body: `Commissioned by a local authority or paid from a personal budget, typically ${DELIVERY.hoursPerWeek}. Includes planning, daily evidence, safeguarding records and attendance at reviews.`,
+                rate: PRICES.commissionedInPerson,
+                unit: "per hour",
+                title: "Commissioned provision",
+                body: `Commissioned by a local authority or school, typically ${DELIVERY.hoursPerWeek}: ${PRICES.commissionedInPerson} an hour in person, ${PRICES.commissionedOnline} an hour online. Includes planning, a report after every session, safeguarding records, attendance at reviews and travel. No VAT is added.`,
               },
             ].map((f) => (
               <div key={f.title} className="col-12 col-md-4">

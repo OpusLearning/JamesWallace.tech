@@ -47,7 +47,8 @@ What he does:
 What it costs (published on the site, no registration fee, no minimum term):
 - £45 an hour, one to one. This is what most families pay.
 - £50 an hour where the work is written to EHCP outcomes and needs reporting for reviews.
-- £250 a day for EOTAS packages.
+- Commissioned by a local authority or school: £67.50 an hour in person, £55 an hour online. Travel is included and no
+  VAT is added. (The same figures as PRICES in frontend/src/data/facts.js — keep the two in step.)
 - The first conversation is free.
 
 How to start: a short free conversation with James, no obligation. He can be reached on 07897 021077 or through the
