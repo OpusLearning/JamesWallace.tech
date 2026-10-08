@@ -323,6 +323,12 @@ export const GUIDES = [
     url: "https://blog.jameswallace.tech/exclusions-guide/",
   },
   {
+    key: "eotas-guide",
+    name: "Education when a child cannot attend school: Section 19 and EOTAS",
+    line: "What the council must arrange when a child cannot attend school, and how education otherwise than at school (EOTAS) works.",
+    url: "https://blog.jameswallace.tech/eotas-guide/",
+  },
+  {
     key: "admissions-guide",
     name: "School admission appeals",
     line: "How to appeal a school admission decision, the deadlines, and how the panel decides.",
