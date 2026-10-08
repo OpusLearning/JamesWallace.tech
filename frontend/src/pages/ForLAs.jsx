@@ -9,7 +9,7 @@ const commissionerQA = [
   },
   {
     q: "You are one person. What happens if you are ill?",
-    a: "I tell you the same day and we agree a catch-up plan, in writing. Missed hours are logged against entitlement and made up, not quietly lost, and the running total is visible to you throughout. A single specialist is the trade: one consistent adult for a child who has usually had far too many, and no cover pool to fall back on. Most of the young people I take on could not tolerate a rotating staff team anyway.",
+    a: "I tell you the same day and agree a catch-up plan, in writing. Missed hours are logged against entitlement and made up, not quietly lost, and the running total is visible to you throughout. A single specialist is the trade: one consistent adult for a child who has usually had far too many, and no cover pool to fall back on. Most of the young people I take on could not tolerate a rotating staff team anyway.",
   },
   {
     q: "How do you handle safeguarding?",
@@ -25,7 +25,7 @@ const commissionerQA = [
   },
   {
     q: "Which local thresholds do you work to?",
-    a: "Placements work to the placing authority's threshold guidance, not ours. Where the placing authority is Derby City or Derbyshire, Nottingham City, or Nottinghamshire County, that guidance is the Derby City and Derbyshire Threshold Document (December 2024), the Nottingham City Interim Continuum of Need, or the Nottinghamshire Framework for Support respectively. Each is a published council document, so we work to the current version held by the placing authority.",
+    a: "Placements work to the placing authority's threshold guidance, not mine. Where the placing authority is Derby City or Derbyshire, Nottingham City, or Nottinghamshire County, that guidance is the Derby City and Derbyshire Threshold Document (December 2024), the Nottingham City Interim Continuum of Need, or the Nottinghamshire Framework for Support respectively. Each is a published council document, so I work to the current version held by the placing authority.",
   },
   {
     q: "Can records be produced for a monitoring visit?",
@@ -89,7 +89,8 @@ export default function ForLAs() {
                 is built to give commissioners and referrers visibility of a
                 placement - from session evidence to safeguarding nil
                 returns - with monthly deliverables and
-                inspection-ready exports on demand.
+                inspection-ready exports on demand. In person across Derbyshire and
+                Nottinghamshire. Online across the UK.
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
                 <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
@@ -144,12 +145,12 @@ export default function ForLAs() {
               {
                 step: "1",
                 title: "Initial Referral",
-                desc: `Submit the referral form on this site or contact us directly. We'll respond ${REPLY.within} to discuss the placement.`,
+                desc: `Submit the referral form on this site or contact me directly. I'll respond ${REPLY.within} to discuss the placement.`,
               },
               {
                 step: "2",
                 title: "Documentation",
-                desc: "We'll need the current EHCP or SEN support plan, LA commissioning letter or PO reference, risk assessment, and preferred hours per week.",
+                desc: "I'll need the current EHCP or SEN support plan, LA commissioning letter or PO reference, risk assessment, and preferred hours per week.",
               },
               {
                 step: "3",
@@ -311,7 +312,7 @@ export default function ForLAs() {
                 </Link>
               </div>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
-                Free parent guides we maintain: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a>.
+                Free parent guides I maintain: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a>.
               </p>
             </div>
             <div className="col-12 col-lg-6">

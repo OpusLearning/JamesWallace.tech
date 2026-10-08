@@ -474,7 +474,7 @@ const experience = [
     org: "Foxwood Academy, Nottinghamshire",
     logo: "/badges/foxwood.png",
     dates: "Jan 2006 to Oct 2018",
-    desc: "Twelve years delivering specialist teaching for young people with Social, Emotional and Mental Health needs. Developed inclusive curricula, wrote and implemented PLPs, and collaborated closely with SENCOs, educational psychologists, and family teams.",
+    desc: "Twelve years delivering specialist teaching in a special school. Developed inclusive curricula, wrote and implemented PLPs, and collaborated closely with SENCOs, educational psychologists, and family teams.",
     // Concurrent with the Foxwood teaching, not a separate job (sources/people/james-project-search.md),
     // so it sits inside this timeline entry rather than reading as a second employer.
     projects: [

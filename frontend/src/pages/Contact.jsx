@@ -271,7 +271,7 @@ export default function Contact() {
             <div className="mt-4">
               <h2 className="h5">Prefer to contact me directly?</h2>
               <p><a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a><br /><a href="tel:07897021077">07897 021077</a></p>
-              <p className="small">Based in Nottingham. Working across Nottinghamshire, Derbyshire and online.</p>
+              <p className="small">Working in person across Derbyshire and Nottinghamshire, and online.</p>
             </div>
           </div>
           <div className="col-12 col-lg-8">

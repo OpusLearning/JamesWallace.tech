@@ -21,6 +21,7 @@ export default function Portfolio() {
     description:
       "Selected work from James Wallace: specialist SEND and EOTAS teaching alongside the reporting and evidence tools built to support it.",
     path: "/portfolio",
+    noindex: true,
   });
 
   const portfolioItems = [

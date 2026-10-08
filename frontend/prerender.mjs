@@ -26,9 +26,12 @@ try {
 }
 
 const DIST = new URL('./dist/', import.meta.url).pathname;
+// '/404' is not a real route: it matches the router's catch-all and renders the not-found page,
+// so the same HTML can serve both as dist/404/index.html and, copied below, as dist/404.html for
+// the server's error page.
 const ROUTES = ['/', '/provision', '/platform', '/compliance', '/for-las', '/tuition', '/agencies',
                 '/portfolio', '/about', '/contact', '/privacy', '/cookies', '/accessibility', '/terms',
-                '/complaints', '/credentials', '/sample-report'];
+                '/complaints', '/credentials', '/sample-report', '/404'];
 const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.jpg':'image/jpeg',
   '.jpeg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.ico':'image/x-icon', '.json':'application/json',
   '.pdf':'application/pdf', '.woff':'font/woff', '.woff2':'font/woff2', '.txt':'text/plain', '.xml':'application/xml' };
@@ -72,6 +75,13 @@ for (const route of ROUTES) {
     failed.push(`${route}: ${e.message.slice(0, 60)}`);
   }
   await page.close();
+}
+// The same not-found HTML, at /404.html, so a server error-page directive can point at it.
+try {
+  const notFound = await readFile(join(DIST, '404', 'index.html'));
+  await writeFile(join(DIST, '404.html'), notFound);
+} catch (e) {
+  failed.push(`404.html: ${e.message.slice(0, 60)}`);
 }
 await browser.close();
 server.close();

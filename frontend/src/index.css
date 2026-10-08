@@ -473,6 +473,39 @@ html.a11y-spacious .jw-hero-copy h1 { line-height: 1.12; }
   .jw-hero-actions .jw-text-link { font-size: .75rem; }
   .jw-hero-portrait figcaption { flex-direction: column; }
 }
+/* Phones: lift the home page's reading text to at least 15px and give every footer link a 44px
+   touch target. Scoped under 600px, so wider screens are untouched. */
+@media (max-width: 600px) {
+  .jw-home .jw-hero-description,
+  .jw-home .jw-proof-grid strong,
+  .jw-home .jw-proof-grid a > span,
+  .jw-home .jw-family-path p,
+  .jw-home .jw-professional-path p,
+  .jw-home .jw-path-link,
+  .jw-home .jw-reference figcaption strong,
+  .jw-home .jw-reference figcaption span,
+  .jw-home .jw-reference figcaption a,
+  .jw-home .jw-heading-split > p,
+  .jw-home .jw-steps p,
+  .jw-home .jw-evidence-copy p:not(.jw-eyebrow),
+  .jw-home .jw-plan-entries dd,
+  .jw-home .jw-plan-entries dd small,
+  .jw-home .jw-plan-figure figcaption,
+  .jw-home .jw-faq-answer p,
+  .jw-home .jw-faq-answer .jw-text-link,
+  .jw-home .jw-availability,
+  .jw-home .jw-availability small,
+  .jw-home .jw-invitation-inner > p:not(.jw-eyebrow):not(.jw-invitation-note),
+  .jw-home .jw-invitation-note {
+    font-size: 15px;
+  }
+  .jw-footer-nav a,
+  .jw-footer-bottom a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
 
 /* The enquiry remains an ordinary form; these rules style its visible states. */
 .jw-contact-layout { --bs-gutter-x: 4rem; }

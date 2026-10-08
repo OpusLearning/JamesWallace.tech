@@ -24,6 +24,7 @@ import ForLAs from "./pages/ForLAs";
 import SampleReport from "./pages/SampleReport";
 import Tuition from "./pages/Tuition";
 import Agencies from "./pages/Agencies";
+import NotFound from "./pages/NotFound";
 
 function RouteEffects() {
   const { pathname, hash } = useLocation();
@@ -69,10 +70,7 @@ const App = () => {
             <Route path="/terms" element={<Terms />} />
             <Route path="/complaints" element={<Complaints />} />
             <Route path="/credentials" element={<Credentials />} />
-            <Route
-              path="*"
-              element={<div className="text-center py-5"><h2>Page Not Found</h2></div>}
-            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

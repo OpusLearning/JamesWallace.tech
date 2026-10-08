@@ -7,7 +7,7 @@ import { useEffect } from "react";
  * and shared the same social preview. This sets them per page without adding a dependency, and cleans up any JSON-LD it injected so
  * two pages can never both claim to be the same thing.
  */
-export default function usePageMeta({ title, description, path, jsonLd }) {
+export default function usePageMeta({ title, description, path, jsonLd, noindex }) {
   useEffect(() => {
     const previousTitle = document.title;
     if (title) document.title = title;
@@ -62,6 +62,28 @@ export default function usePageMeta({ title, description, path, jsonLd }) {
       });
     }
 
+    // Pages that must not be indexed (the not-found page, /portfolio) get a robots noindex and must
+    // not point a canonical at another page. Clear any canonical or og:url a previously visited
+    // page left behind, and remove the noindex again when the next page does not ask for it.
+    let robots = document.head.querySelector('meta[name="robots"][data-jw-noindex]');
+    if (noindex) {
+      // No path is passed for the not-found page, so `canonical` is null even though the served
+      // shell (the home page) left a canonical in the head. Remove any canonical outright.
+      document.head.querySelector('link[rel="canonical"]')?.remove();
+      canonical = null;
+      document.head.querySelector('meta[property="og:url"]')?.remove();
+      if (!robots) {
+        robots = document.createElement("meta");
+        robots.setAttribute("name", "robots");
+        robots.dataset.jwNoindex = "true";
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute("content", "noindex");
+    } else if (robots) {
+      robots.remove();
+      robots = null;
+    }
+
     // A prerendered route bakes its JSON-LD into the served HTML, and every route is served the
     // home page's HTML as its shell, so the baked Organization node arrives on every page. Clear
     // every node this hook owns — the baked one included — before adding this page's own, so a
@@ -79,6 +101,7 @@ export default function usePageMeta({ title, description, path, jsonLd }) {
     return () => {
       document.title = previousTitle;
       for (const el of document.head.querySelectorAll('script[data-page-meta]')) el.remove();
+      document.head.querySelector('meta[name="robots"][data-jw-noindex]')?.remove();
     };
-  }, [title, description, path, jsonLd]);
+  }, [title, description, path, jsonLd, noindex]);
 }
