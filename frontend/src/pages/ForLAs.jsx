@@ -42,12 +42,38 @@ const monthlyDeliverables = [
   { item: "Invoice", detail: "Session-level billing with funding stream tagging" },
 ];
 
+// Structured data for the commissioned service, built like Tuition.jsx's Service node. The
+// credentials are the set already published on /agencies, read from facts.js where a value lives
+// there. No price, address or profile link is added; the service is described, not the business.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Commissioned EOTAS and alternative provision",
+  provider: {
+    "@type": "Person",
+    name: "James Wallace",
+    hasCredential: [
+      "Qualified Teacher Status (QTS), 2004",
+      "MEd Education, The Open University, 2012",
+      "Enhanced DBS on the Update Service",
+      TRAINING.safeguarding.name,
+    ],
+  },
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Derbyshire" },
+    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
+    { "@type": "AdministrativeArea", name: "East Midlands" },
+  ],
+  audience: { "@type": "Audience", audienceType: "Local authorities and schools" },
+};
+
 export default function ForLAs() {
   usePageMeta({
     title: 'For Local Authorities | Commissioning EOTAS Placements | James Wallace Education',
     description:
       'How commissioning works: referral to first session, weekly plans, daily reports, safeguarding nil returns and inspection-ready exports for SEND panels.',
     path: '/for-las',
+    jsonLd,
   });
 
   return (

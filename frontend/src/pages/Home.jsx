@@ -51,11 +51,29 @@ function Arrow() {
   return <svg className="jw-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>;
 }
 
+// Structured data for the organisation. Every value repeats what the page already publishes: the
+// company name, the canonical URL, the page's own description and the three service areas. No
+// postal address, phone or profile link is added, and no LocalBusiness type is used — the business
+// is home-based and has no posted address to give. Injected and removed by usePageMeta.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "James Wallace Education Ltd",
+  url: "https://jameswallace.tech/",
+  description: "Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.",
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Derbyshire" },
+    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
+    { "@type": "AdministrativeArea", name: "East Midlands" },
+  ],
+};
+
 export default function Home() {
   usePageMeta({
     title: "James Wallace | One-to-one teaching for children who cannot manage school",
     description: "Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.",
     path: "/",
+    jsonLd,
   });
 
   return (
