@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { PRODUCT, POLICY_PACK } from "../data/facts";
+import { PRODUCT, POLICY_PACK, HOSTING } from "../data/facts";
 
 const screenshots = [
   {
@@ -262,7 +262,7 @@ export default function Platform() {
               { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest - learner names, diagnoses, carer contacts, session notes" },
               { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
               { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
-              { label: "EU hosting", desc: "Neon PostgreSQL on Frankfurt infrastructure. Data protection information available on request." },
+              { label: "EU hosting, moving to the UK", desc: `Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data protection information available on request.` },
             ].map((item) => (
               <div key={item.label} className="col-12 col-md-6 col-lg-3">
                 <div className="jw-card h-100 text-center">

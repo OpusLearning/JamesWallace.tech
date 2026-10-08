@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { LegalPage, LegalSection, LegalTable } from "../components/Legal";
-import { ICO } from "../data/facts";
+import { ICO, HOSTING } from "../data/facts";
 
 const CONTACT_EMAIL = "hello@jameswallace.tech";
 const CONTACT_PHONE = "07897 021077";
@@ -243,7 +243,7 @@ export default function PrivacyPolicy() {
         <p>
           For commissioned provision, the portal stores records on Neon (Frankfurt) and encrypted
           documents on Cloudflare R2 (Western Europe). That processing is described in the portal&apos;s
-          own privacy notice.
+          own privacy notice. {HOSTING.planned}
         </p>
       </LegalSection>
 
