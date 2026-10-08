@@ -62,9 +62,14 @@ export default function usePageMeta({ title, description, path, jsonLd }) {
       });
     }
 
-    let script = null;
+    // A prerendered route bakes its JSON-LD into the served HTML, and every route is served the
+    // home page's HTML as its shell, so the baked Organization node arrives on every page. Clear
+    // every node this hook owns — the baked one included — before adding this page's own, so a
+    // page with no jsonLd ends with none and two pages can never both claim to be the same thing.
+    for (const stale of document.head.querySelectorAll('script[data-page-meta]')) stale.remove();
+
     if (jsonLd) {
-      script = document.createElement("script");
+      const script = document.createElement("script");
       script.type = "application/ld+json";
       script.dataset.pageMeta = "true";
       script.textContent = JSON.stringify(jsonLd);
@@ -73,7 +78,7 @@ export default function usePageMeta({ title, description, path, jsonLd }) {
 
     return () => {
       document.title = previousTitle;
-      if (script) script.remove();
+      for (const el of document.head.querySelectorAll('script[data-page-meta]')) el.remove();
     };
   }, [title, description, path, jsonLd]);
 }
