@@ -32,7 +32,7 @@ const BADGES = [
 const BADGES_HTML = BADGES.map(([file, alt, h]) =>
   `<img src="${SITE_URL}/badges/${file}" alt="${alt}" height="${h}" style="height:${h}px;width:auto;margin:0 12px 6px 0;vertical-align:middle;border:0;" />`).join('')
 const REGISTRATIONS_TEXT = 'ICO registered (ZC257612) · nasen member · Disability Confident Committed · Google Cybersecurity Certificate'
-const PRICES_TEXT = 'Prices: families £45 an hour, or £50 an hour for EHCP-aligned work. Commissioned provision £67.50 an hour in person, £55 an hour online, travel included.'
+const PRICES_TEXT = 'Prices: families £45 an hour, or £50 an hour for EHCP-aligned work. Commissioned provision £67.50 an hour in person, £55 an hour online, travel included; half-day and day prices are at jameswallace.tech/for-las#prices.'
 const CARE_LEAVERS_TEXT = 'Each year we offer ten free online tuition sessions to one care leaver aged 16 to 25 working towards GCSE or Functional Skills. Ask us for details.'
 
 export async function sendContactNotification(name, email, message) {

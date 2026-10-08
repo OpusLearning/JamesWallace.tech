@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES } from "../data/facts";
+import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY } from "../data/facts";
 
 const commissionerQA = [
   {
@@ -239,17 +239,17 @@ export default function ForLAs() {
         </div>
       </section>
 
-      {/* Prices: the rates tendered to Derbyshire and Leicestershire, read from facts.js. */}
+      {/* Prices: the rates tendered to Derbyshire, Leicestershire and Nottingham, read from facts.js. */}
       <section className="jw-section jw-section-white" id="prices">
         <div className="jw-container" style={{ maxWidth: "860px" }}>
           <h2 className="text-center mb-2">What it costs</h2>
           <p className="text-center" style={{ maxWidth: "560px", margin: "0 auto 2.5rem" }}>
-            One hourly rate for each way of teaching, with the work around the session included.
+            One set of prices for each way of teaching, by the hour, half day or day, with the work around the session included.
           </p>
           <div className="row g-4">
             {[
-              { rate: PRICES.commissionedInPerson, title: "In person", body: "One-to-one teaching in the home or a community setting, or a mix of in person and online." },
-              { rate: PRICES.commissionedOnline, title: "Online", body: "One-to-one teaching by video, anywhere in the UK." },
+              { rate: PRICES.commissionedInPerson, halfDay: PRICES.commissionedHalfDayInPerson, day: PRICES.commissionedDayInPerson, title: "In person", body: "One-to-one teaching in the home or a community setting, or a mix of in person and online." },
+              { rate: PRICES.commissionedOnline, halfDay: PRICES.commissionedHalfDayOnline, day: PRICES.commissionedDayOnline, title: "Online", body: "One-to-one teaching by video, anywhere in the UK." },
             ].map((f) => (
               <div key={f.title} className="col-12 col-md-6">
                 <div className="jw-card h-100">
@@ -258,12 +258,22 @@ export default function ForLAs() {
                     <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>per hour</span>
                   </div>
                   <h3 style={{ fontSize: "1.05rem", marginBottom: "0.5rem" }}>{f.title}</h3>
-                  <p style={{ marginBottom: 0, color: "var(--text-muted)", fontSize: "0.95rem" }}>{f.body}</p>
+                  <p style={{ marginBottom: "0.75rem", color: "var(--text-muted)", fontSize: "0.95rem" }}>{f.body}</p>
+                  <p style={{ marginBottom: 0, fontSize: "0.92rem" }}>
+                    Half day, up to 3 hours: <strong>{f.halfDay}</strong>
+                    <br />
+                    Day, up to 5.5 hours: <strong>{f.day}</strong>
+                  </p>
                 </div>
               </div>
             ))}
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", margin: "1.5rem 0 0.4rem" }}>
+            <strong style={{ color: "var(--text-primary)" }}>Frameworks:</strong> where a council buys through a framework, the
+            prices and units are the ones tendered to that framework. Some buy by the half day and day and not by the hour.
+            A placement is {DELIVERY.hoursPerWeek} for each pupil.
+          </p>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", margin: "0 0 0.4rem" }}>
             <strong style={{ color: "var(--text-primary)" }}>Included:</strong> planning and preparation, a report within 24 hours of
             every session, monthly reporting, safeguarding records and a monthly nil return, travel to the session, and
             attendance at reviews by agreement.

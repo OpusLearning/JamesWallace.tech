@@ -50,7 +50,7 @@ const placement = [
   },
   {
     title: "Commissioning experience",
-    body: "Five years inside a county council's children's commissioning team. I know what a monitoring visit asks for, because I used to be the one asking.",
+    body: "Five years in a county council's children's commissioning team, supporting commissioning and quality assurance. I know what a monitoring visit asks for.",
   },
 ];
 

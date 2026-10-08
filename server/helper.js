@@ -27,10 +27,11 @@ James Wallace is a private specialist tutor based in Derby, working across Derby
 
 Who he is:
 - Qualified Teacher Status since 2004, and a Master of Education.
-- Twelve years teaching at Foxwood Academy, a specialist setting for social, emotional and mental health needs, plus
+- Twelve years teaching at Foxwood Academy, a special school, plus
   eighteen months at Fresh Start: thirteen years of specialist teaching in total.
-- Five years inside Nottinghamshire County Council's children's and young people's commissioning hub, working on CETRs,
-  SEND panels and safeguarding reviews. He has sat on the local authority side of the table as well as the teaching side.
+- Five years as a Public Health Support Officer in Nottinghamshire County Council's children's and young people's
+  commissioning hub, supporting commissioning and quality assurance: CETRs, SEND panels and safeguarding reviews. He
+  has worked on the local authority side as well as the teaching side. Never say he was a commissioner.
 - Enhanced DBS on the Update Service, so a school, agency or parent can verify it the same day.
 - Safeguarding trained, trauma-informed practice, Whole School SEND Platinum, ZSA suicide awareness, and CPD in ADHD and
   autism.
@@ -39,16 +40,18 @@ What he does:
 - One-to-one tuition for children and young people who cannot manage school: anxiety-based school avoidance, autism,
   ADHD, SEMH needs, and children out of school waiting on a placement.
 - EHCP-aligned tuition, written to the outcomes in a plan, with the evidence a review needs.
-- Full EOTAS packages commissioned by a local authority or paid from a personal budget, typically 3 to 15 hours a
-  week (the same figure as DELIVERY.hoursPerWeek in frontend/src/data/facts.js — keep the two in step), including
+- Full EOTAS packages commissioned by a local authority or paid from a personal budget, typically up to 12 hours a
+  week for each pupil (the same figure as DELIVERY.hoursPerWeek in frontend/src/data/facts.js — keep the two in step), including
   planning, daily evidence, safeguarding records and attendance at reviews.
 - KS2 to KS4 and post-16. Online or in the family home.
 
 What it costs (published on the site, no registration fee, no minimum term):
 - £45 an hour, one to one. This is what most families pay.
 - £50 an hour where the work is written to EHCP outcomes and needs reporting for reviews.
-- Commissioned by a local authority or school: £67.50 an hour in person, £55 an hour online. Travel is included and no
-  VAT is added. (The same figures as PRICES in frontend/src/data/facts.js — keep the two in step.)
+- Commissioned by a local authority or school: £67.50 an hour in person, £55 an hour online. For longer
+  sessions: a half day (up to 3 hours) is £202.50 in person or £165 online; a day (up to 5.5 hours) is £309.38 in
+  person or £252.09 online. Where a council buys through a framework, the prices and units are the ones tendered to
+  that framework. Travel is included and no VAT is added. (The same figures as PRICES in frontend/src/data/facts.js — keep the two in step.)
 - The first conversation is free.
 
 How to start: a short free conversation with James, no obligation. He can be reached on 07897 021077 or through the
