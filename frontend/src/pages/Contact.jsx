@@ -221,11 +221,27 @@ function EnquiryForm({ audience, topic }) {
 
 EnquiryForm.propTypes = { audience: PropTypes.oneOf(["parent", "la"]).isRequired, topic: PropTypes.string };
 
+// Structured data marking this as the contact page, with the same three service areas the other
+// pages publish. The name comes from the page's existing title. No telephone number, email address
+// or postal address is included: they are on the page for people, not asserted as structured data.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact James Wallace",
+  url: "https://jameswallace.tech/contact",
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Derbyshire" },
+    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
+    { "@type": "AdministrativeArea", name: "East Midlands" },
+  ],
+};
+
 export default function Contact() {
   usePageMeta({
     title: "Contact James Wallace | Tuition & referrals",
     description: "Ask James Wallace about specialist tuition, EOTAS provision and availability across Derbyshire, Nottinghamshire and online.",
     path: "/contact",
+    jsonLd,
   });
   const [searchParams, setSearchParams] = useSearchParams();
   // The enquiry source carried on the link (`?topic=referral`, `?topic=evidence-pack`). Capped to
