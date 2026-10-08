@@ -153,8 +153,7 @@ export default function Tuition() {
                 <span style={{ color: "var(--action)" }}>who cannot manage school</span>
               </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
-                I am James Wallace. I have taught for thirteen years in specialist provision: twelve of them in a specialist school
-                for young people with social, emotional and mental health needs.
+                I am James Wallace. I have taught for thirteen years in specialist provision: twelve of them in a special school.
               </p>
               <p style={{ marginBottom: "1rem" }}>
                 Since 2025 I have delivered education otherwise than at school for autistic, ADHD and PDA learners, commissioned
@@ -345,7 +344,7 @@ export default function Tuition() {
                 rate: PRICES.commissionedInPerson,
                 unit: "per hour",
                 title: "Commissioned provision",
-                body: `Commissioned by a local authority or school, typically ${DELIVERY.hoursPerWeek}: ${PRICES.commissionedInPerson} an hour in person, ${PRICES.commissionedOnline} an hour online. Includes planning, a report after every session, safeguarding records, attendance at reviews and travel. No VAT is added.`,
+                body: `Commissioned by a local authority or school, typically ${DELIVERY.hoursPerWeek}: ${PRICES.commissionedInPerson} an hour in person, ${PRICES.commissionedOnline} an hour online, with half-day and day prices on the page for local authorities. Includes planning, a report after every session, safeguarding records, attendance at reviews and travel. No VAT is added.`,
               },
             ].map((f) => (
               <div key={f.title} className="col-12 col-md-4">

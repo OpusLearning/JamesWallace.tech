@@ -31,9 +31,11 @@ export const BIO = {
 };
 
 // Placements and taught hours. /provision and /tuition each carried their own range (3-15 and 5-25) and disagreed.
-// 12 Sep 2026: 3-15 taught hours a week is the accurate range. One number, one place.
+// 12 Sep 2026: 3-15 taught hours a week was the range. 8 Oct 2026 (James: "align the website with the bid"): the
+// Nottingham tender (CPU7109 Lot 1) offers up to twelve hours a week for a pupil, so the site says the same.
+// One number, one place.
 export const DELIVERY = {
-  hoursPerWeek: "3 to 15 hours per week",
+  hoursPerWeek: "up to 12 hours per week",
 };
 
 // The reply-time promise. /for-las already published "within 2 working days" for referral
@@ -262,6 +264,14 @@ export const PRICES = {
   familyEhcp: "£50",
   commissionedInPerson: "£67.50",
   commissionedOnline: "£55",
+  // 8 Oct 2026: the day and half-day prices tendered to Nottingham (CPU7109 Lot 1), which buys by the day and
+  // half day and takes no hourly price. A half day is up to 3 hours (three hours at the hourly rate); a day is
+  // more than 3 and up to 5.5 hours (the Derbyshire day price, in person). server/helper.js and server/email.js
+  // repeat these by hand.
+  commissionedHalfDayInPerson: "£202.50",
+  commissionedDayInPerson: "£309.38",
+  commissionedHalfDayOnline: "£165",
+  commissionedDayOnline: "£252.09",
 };
 
 // Care leavers. James, 7 Oct 2026 ("you pick a workable offer for care leaver", then "add this to the
