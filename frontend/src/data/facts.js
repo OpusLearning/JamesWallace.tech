@@ -274,6 +274,16 @@ export const PRICES = {
   commissionedDayOnline: "£252.09",
 };
 
+// Where commissioned records are hosted. James, 8 Oct 2026: "write EU and to be ported to UK only". True today:
+// the portal database is in Frankfurt and its documents in Western Europe. The Nottingham tender (CPU7109) commits
+// to UK storage before any Nottingham pupil's data is entered; that framework starts on 14 April 2027, so that is
+// the latest date. When the move is done (QUEUE UK-INSTANCE), change `now` and delete `planned`.
+export const HOSTING = {
+  now: "EU (Frankfurt)",
+  planned:
+    "Moving to UK-only hosting before 14 April 2027, and sooner for any placement that needs it.",
+};
+
 // Care leavers. James, 7 Oct 2026 ("you pick a workable offer for care leaver", then "add this to the
 // website and emails"). The offer was submitted on the Care Leaver Covenant's sign-up form on 7 October
 // 2026; the Covenant team confirm and publish it after James approves their draft. Until then the site

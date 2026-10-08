@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS, HOSTING } from "../data/facts";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -277,8 +277,8 @@ export default function Compliance() {
                 desc: "Every access and change to learner data is logged and timestamped - available for inspection or SAR response.",
               },
               {
-                title: "EU-region infrastructure",
-                desc: "Data hosted on Neon PostgreSQL, Frankfurt (EU). Data processor agreement available on request.",
+                title: "EU hosting, moving to the UK",
+                desc: `Data is hosted on Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data processor agreement available on request.`,
               },
               {
                 title: "SAR process",
