@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { AVAILABILITY, REFERENCES, REVIEWED } from "../data/facts";
+import { AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
 
 const questions = [
   {
@@ -182,7 +182,7 @@ export default function Home() {
       </section>
 
       <section className="jw-section jw-faq-section" aria-labelledby="faq-heading">
-        <div className="jw-container jw-faq-grid"><div><p className="jw-eyebrow">Before you get in touch</p><h2 id="faq-heading">A few things<br />you may be<br /><em>wondering.</em></h2><Link to="/about" className="jw-text-link">Get to know James <Arrow /></Link></div><div className="jw-faq-list">{questions.map((item) => <details key={item.question} className="jw-faq"><summary>{item.question}<span aria-hidden="true" className="jw-faq-indicator" /></summary><div className="jw-faq-answer"><p>{item.answer}</p><Link to={item.to} className="jw-text-link">{item.link} <Arrow /></Link></div></details>)}</div></div>
+        <div className="jw-container jw-faq-grid"><div><p className="jw-eyebrow">Before you get in touch</p><h2 id="faq-heading">A few things<br />you may be<br /><em>wondering.</em></h2><Link to="/about" className="jw-text-link">Get to know James <Arrow /></Link><p style={{ marginTop: "1rem", marginBottom: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>Free parent guides: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a></p></div><div className="jw-faq-list">{questions.map((item) => <details key={item.question} className="jw-faq"><summary>{item.question}<span aria-hidden="true" className="jw-faq-indicator" /></summary><div className="jw-faq-answer"><p>{item.answer}</p><Link to={item.to} className="jw-text-link">{item.link} <Arrow /></Link></div></details>)}</div></div>
       </section>
 
       <section className="jw-invitation" aria-labelledby="invitation-heading">

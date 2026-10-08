@@ -297,6 +297,50 @@ export const CARE_LEAVERS = {
   covenantUrl: "https://mycovenant.org.uk/",
 };
 
+// James, 8 Oct 2026 (QUEUE LINKS-2: "add links to make some of the tools and pages more visible").
+// The free parent-facing guides on the journal, so the main site can point families and carers at
+// them from one place. The lines are deliberately flat and factual: the guides are free, written for
+// parents and carers in England from the law and government guidance, and are information rather than
+// legal advice (GUIDES_NOTE). No outcome claims and no sales language. `hub` is the journal's index of
+// every guide; the rest are the individual guides plus the deadline calculator.
+export const GUIDES = [
+  {
+    key: "hub",
+    name: "Parent guides hub",
+    line: "All of the free parent guides in one place.",
+    url: "https://blog.jameswallace.tech/guides/",
+  },
+  {
+    key: "send-guide",
+    name: "EHC plans and SEND Tribunal appeals",
+    line: "How EHC plans work, how to ask for an assessment, and how to appeal to the SEND Tribunal.",
+    url: "https://blog.jameswallace.tech/send-guide/",
+  },
+  {
+    key: "exclusions-guide",
+    name: "School suspensions and permanent exclusions",
+    line: "How suspensions and permanent exclusions work, what the school must tell you, and how to challenge a decision.",
+    url: "https://blog.jameswallace.tech/exclusions-guide/",
+  },
+  {
+    key: "admissions-guide",
+    name: "School admission appeals",
+    line: "How to appeal a school admission decision, the deadlines, and how the panel decides.",
+    url: "https://blog.jameswallace.tech/admissions-guide/",
+  },
+  {
+    key: "calculator",
+    name: "EHC plan deadline calculator",
+    line: "Works out the usual EHC plan deadlines from a date you enter.",
+    url: "https://blog.jameswallace.tech/ehcp-deadline-calculator/",
+  },
+];
+
+// The journal's index of every guide, and the one note that describes the whole set.
+export const GUIDES_HUB = GUIDES[0];
+export const GUIDES_NOTE =
+  "Free, for parents and carers in England, written from the law and government guidance. Information, not legal advice.";
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 

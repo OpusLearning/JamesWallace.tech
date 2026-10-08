@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY } from "../data/facts";
+import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB } from "../data/facts";
 
 const commissionerQA = [
   {
@@ -310,6 +310,9 @@ export default function ForLAs() {
                   Request approved policies
                 </Link>
               </div>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
+                Free parent guides we maintain: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a>.
+              </p>
             </div>
             <div className="col-12 col-lg-6">
               <img

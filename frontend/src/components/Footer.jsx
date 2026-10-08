@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ICO, REGISTRATIONS } from "../data/facts";
+import { GUIDES_HUB, ICO, REGISTRATIONS } from "../data/facts";
 
 // The site's own icons for the registrations strip. They are deliberately not the bodies' logos.
 const BADGE_ICONS = {
@@ -35,6 +35,7 @@ export default function Footer() {
         <nav className="jw-footer-nav" aria-label="Footer navigation"><ul>
           <li><Link to="/credentials">Credentials</Link></li><li><Link to="/compliance">Compliance</Link></li><li><Link to="/privacy">Privacy</Link></li>
           <li><a href="https://blog.jameswallace.tech" target="_blank" rel="noopener noreferrer">Journal<span aria-hidden="true"> ↗</span></a></li>
+          <li><a href={GUIDES_HUB.url}>Parent guides</a></li>
           <li><a href="https://portal.jameswallace.tech" target="_blank" rel="noopener noreferrer">Portal<span aria-hidden="true"> ↗</span></a></li>
         </ul></nav>
       </div>

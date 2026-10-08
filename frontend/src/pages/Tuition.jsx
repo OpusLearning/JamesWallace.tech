@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES } from "../data/facts";
+import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
 
 /**
  * Private tuition — the page for families.
@@ -364,6 +364,22 @@ export default function Tuition() {
             If money is the obstacle and your child needs the help, say so when we speak — I would rather have that conversation
             than lose a child who needs teaching.
           </p>
+        </div>
+      </section>
+
+      {/* Free parent guides — the family-facing guides on the journal, linked quietly. */}
+      <section className="jw-section jw-section-white">
+        <div className="jw-container">
+          <h2 style={{ marginBottom: "0.5rem" }}>Free guides for parents</h2>
+          <p style={{ color: "var(--text-muted)", maxWidth: "620px", marginBottom: "1.5rem" }}>{GUIDES_NOTE}</p>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0, maxWidth: "620px" }}>
+            {GUIDES.filter((g) => g.key !== "hub").map((g) => (
+              <li key={g.key} style={{ padding: "0.75rem 0", borderTop: "1px solid var(--border, #e5e0d8)" }}>
+                <a href={g.url} style={{ fontWeight: 600 }}>{g.name}</a>
+                <p style={{ margin: "0.15rem 0 0", color: "var(--text-muted)", fontSize: "0.9rem" }}>{g.line}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
