@@ -12,7 +12,8 @@ export default function SafeguardingLead({ className }) {
   return (
     <p className={className}>
       Designated safeguarding lead: {SAFEGUARDING_ROLES.dsl.name}. Safeguarding concerns:{" "}
-      <a href={`mailto:${SAFEGUARDING_CONTACT.email}`}>{SAFEGUARDING_CONTACT.email}</a>
+      <a href={`mailto:${SAFEGUARDING_CONTACT.email}`}>{SAFEGUARDING_CONTACT.email}</a>. If a child is in
+      immediate danger, call 999.
     </p>
   );
 }

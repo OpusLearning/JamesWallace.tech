@@ -356,6 +356,8 @@ export const AREA = {
   sentence:
     "In person across the East Midlands, mainly Derby, Derbyshire, Nottingham and Nottinghamshire, and online.",
   label: "East Midlands (mainly Derby, Derbyshire, Nottingham and Nottinghamshire); online anywhere",
+  // For the home page hero and search descriptions, where the full label is too long (Claude, 9 Oct 2026).
+  short: "Derbyshire, Nottinghamshire, the wider East Midlands and online",
   jsonLd: [
     { "@type": "AdministrativeArea", name: "Derby" },
     { "@type": "AdministrativeArea", name: "Derbyshire" },

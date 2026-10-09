@@ -3,7 +3,7 @@ import usePageMeta from "../hooks/usePageMeta";
 import { AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
 
 // The page's own description, and the service's, both read the area from facts.js (SITEFIX-3).
-const META_DESCRIPTION = `One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. ${AREA.label}.`;
+const META_DESCRIPTION = `One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. ${AREA.short}.`;
 
 /**
  * Private tuition — the page for families.
@@ -125,12 +125,12 @@ const jsonLd = {
   areaServed: AREA.jsonLd,
   audience: { "@type": "Audience", audienceType: "Parents and carers of children with SEND" },
   description:
-    `One-to-one tuition for children who cannot access mainstream school, including autistic, ADHD and PDA learners. EHCP-aligned and evidenced. ${AREA.label}.`,
+    `One-to-one tuition for children who cannot access mainstream school, including autistic, ADHD and PDA learners. EHCP-aligned and evidenced. ${AREA.short}.`,
 };
 
 export default function Tuition() {
   usePageMeta({
-    title: "Private SEND & EOTAS Tuition, East Midlands | James Wallace",
+    title: "Private SEND & EOTAS Tuition, Derbyshire and Notts | James Wallace",
     description: META_DESCRIPTION,
     path: "/tuition",
     jsonLd,

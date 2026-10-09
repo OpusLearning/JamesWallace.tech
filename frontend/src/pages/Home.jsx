@@ -4,7 +4,7 @@ import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HU
 
 // One description for the page and its JSON-LD, so the two cannot drift. The area wording comes
 // from facts.js (SITEFIX-3 item 1).
-const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.label}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
+const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.short}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
 
 const questions = [
   {
@@ -93,7 +93,7 @@ export default function Home() {
               <Link to="/contact?for=parent" className="jw-btn-primary">Talk about your child <Arrow /></Link>
               <a href="#how-it-starts" className="jw-text-link">How it starts <span aria-hidden="true">↓</span></a>
             </div>
-            <p className="jw-hero-location">{AREA.label}</p>
+            <p className="jw-hero-location">{AREA.short}</p>
           </div>
           <figure className="jw-hero-portrait">
             <div className="jw-portrait-frame">
