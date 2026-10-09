@@ -4,7 +4,7 @@ import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HU
 
 // One description for the page and its JSON-LD, so the two cannot drift. The area wording comes
 // from facts.js (SITEFIX-3 item 1).
-const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.short}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
+const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.meta}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
 
 const questions = [
   {

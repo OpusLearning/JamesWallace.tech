@@ -11,9 +11,10 @@ import { SAFEGUARDING_CONTACT, SAFEGUARDING_ROLES } from "../data/facts";
 export default function SafeguardingLead({ className }) {
   return (
     <p className={className}>
-      Designated safeguarding lead: {SAFEGUARDING_ROLES.dsl.name}. Safeguarding concerns:{" "}
+      Designated Safeguarding Lead: {SAFEGUARDING_ROLES.dsl.name}. Safeguarding concerns:{" "}
       <a href={`mailto:${SAFEGUARDING_CONTACT.email}`}>{SAFEGUARDING_CONTACT.email}</a>. If a child is in
-      immediate danger, call 999.
+      immediate danger, call 999. You can also contact the child&apos;s local authority
+      children&apos;s social care front door.
     </p>
   );
 }

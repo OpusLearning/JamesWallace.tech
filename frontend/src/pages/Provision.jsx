@@ -195,7 +195,7 @@ export default function Provision() {
             <div className="col-12 col-lg-6">
               <h2>The Evidence Chain</h2>
               <p>
-                Every placement follows a structured, auditable evidence
+                Every placement is designed to follow a structured, auditable evidence
                 workflow from first session to case closure. {PLATFORM_STATUS.sentence}
               </p>
               <div className="d-flex flex-column gap-3 mt-4">

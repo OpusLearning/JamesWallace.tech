@@ -236,7 +236,7 @@ const jsonLd = {
 export default function Contact() {
   usePageMeta({
     title: "Contact James Wallace | Tuition & referrals",
-    description: `Ask James Wallace about specialist tuition, EOTAS provision and availability. ${AREA.short}.`,
+    description: `Ask James Wallace about specialist tuition, EOTAS provision and availability. ${AREA.meta}.`,
     path: "/contact",
     jsonLd,
   });

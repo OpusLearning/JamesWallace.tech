@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { LegalPage, LegalSection } from "../components/Legal";
-import { SAFEGUARDING_ROLES } from "../data/facts";
+import { SAFEGUARDING_CONTACT, SAFEGUARDING_ROLES } from "../data/facts";
 
 const CONTACT_EMAIL = "hello@jameswallace.tech";
 const CONTACT_PHONE = "07897 021077";
@@ -49,7 +49,9 @@ export default function Complaints() {
           straight away. {SAFEGUARDING_ROLES.leads}
         </p>
         <p>
-          Both can be reached through <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or{" "}
+          Both can be reached through{" "}
+          <a href={`mailto:${SAFEGUARDING_CONTACT.email}`}>{SAFEGUARDING_CONTACT.email}</a>,{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> or{" "}
           <a href="tel:07897021077">{CONTACT_PHONE}</a>.
         </p>
         <p>

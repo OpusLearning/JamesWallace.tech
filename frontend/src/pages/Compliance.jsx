@@ -357,8 +357,8 @@ export default function Compliance() {
                 For LA monitoring visits or Ofsted inspections, the platform
                 is built to generate a full Inspection Bundle PDF for any case:
                 PLP with criteria, weekly plans, daily evidence, safeguarding
-                timeline, and lone working log - all in one document, on demand.
-                {PLATFORM_STATUS.sentence}
+                timeline, and lone working log - all in one document, on demand.{" "}
+                {PLATFORM_STATUS.follow}
               </p>
               <p>
                 You can also export case chronologies, supervision

@@ -355,9 +355,11 @@ export const GUIDES_NOTE =
 export const AREA = {
   sentence:
     "In person across the East Midlands, mainly Derby, Derbyshire, Nottingham and Nottinghamshire, and online.",
-  label: "East Midlands (mainly Derby, Derbyshire, Nottingham and Nottinghamshire); online anywhere",
+  label: "East Midlands (mainly Derby, Derbyshire, Nottingham and Nottinghamshire); online across the UK",
   // For the home page hero and search descriptions, where the full label is too long (Claude, 9 Oct 2026).
-  short: "Derbyshire, Nottinghamshire, the wider East Midlands and online",
+  short: "Derby, Derbyshire, Nottingham, Nottinghamshire and online",
+  // For search descriptions, which are cut off at about 160 characters (red team, 9 Oct 2026).
+  meta: "Derbyshire, Nottinghamshire and online",
   jsonLd: [
     { "@type": "AdministrativeArea", name: "Derby" },
     { "@type": "AdministrativeArea", name: "Derbyshire" },
@@ -371,13 +373,16 @@ export const AREA = {
 // who can get to school is usually better placed in lessons there.
 export const SESSIONS = {
   school:
-    "Sessions can take place in a school where that suits the child, but most are at home, in an agreed community setting or online.",
+    "A session can take place in a school where that suits the child, but that is rare.",
 };
 
 // The platform's status. James, 9 Oct 2026: it cannot truly be live until there is a real pupil.
 export const PLATFORM_STATUS = {
   sentence:
-    "The platform is built and has been tested end to end with made-up data. It goes into live use with the first commissioned placement.",
+    "The platform is built and is being tested end to end with made-up data. It goes into live use with the first commissioned placement.",
+  // The same fact for use straight after a sentence that already begins "The platform is built to".
+  follow:
+    "It is being tested end to end with made-up data and goes into live use with the first commissioned placement.",
 };
 
 // The safeguarding mailbox, shown beside the named designated safeguarding lead wherever a parent

@@ -76,7 +76,7 @@ export default function Agencies() {
   usePageMeta({
     title: "For Agencies & Schools | James Wallace, QTS — SEND & EOTAS Tutor",
     description:
-      `Compliance-ready specialist SEND tutor. QTS, MEd, enhanced DBS on the Update Service, safeguarding current. ${AREA.short}. Compliance pack on request.`,
+      `Compliance-ready specialist SEND tutor. QTS, MEd, enhanced DBS on the Update Service, safeguarding current. ${AREA.meta}. Compliance pack on request.`,
     path: "/agencies",
     jsonLd,
   });

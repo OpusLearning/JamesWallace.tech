@@ -48,7 +48,7 @@ test("the new facts are defined once in facts.js", async () => {
   );
   assert.equal(
     facts.AREA.label,
-    "East Midlands (mainly Derby, Derbyshire, Nottingham and Nottinghamshire); online anywhere",
+    "East Midlands (mainly Derby, Derbyshire, Nottingham and Nottinghamshire); online across the UK",
   );
   assert.deepEqual(facts.AREA.jsonLd, [
     { "@type": "AdministrativeArea", name: "Derby" },
@@ -59,11 +59,11 @@ test("the new facts are defined once in facts.js", async () => {
   ]);
   assert.equal(
     facts.SESSIONS.school,
-    "Sessions can take place in a school where that suits the child, but most are at home, in an agreed community setting or online.",
+    "A session can take place in a school where that suits the child, but that is rare.",
   );
   assert.equal(
     facts.PLATFORM_STATUS.sentence,
-    "The platform is built and has been tested end to end with made-up data. It goes into live use with the first commissioned placement.",
+    "The platform is built and is being tested end to end with made-up data. It goes into live use with the first commissioned placement.",
   );
   assert.equal(facts.SAFEGUARDING_CONTACT.email, "safeguarding@jameswallace.tech");
   assert.deepEqual(facts.PROFILES, [

@@ -30,7 +30,7 @@ const commissionerQA = [
   },
   {
     q: "Can records be produced for a monitoring visit?",
-    a: `The platform is built to export case chronologies, PLP evidence, safeguarding logs and compliance records as PDFs. ${PLATFORM_STATUS.sentence} Approved policies are available on request.`,
+    a: `The platform is built to export case chronologies, PLP evidence, safeguarding logs and compliance records as PDFs. ${PLATFORM_STATUS.follow} Approved policies are available on request.`,
   },
 ];
 

@@ -3,7 +3,7 @@ import usePageMeta from "../hooks/usePageMeta";
 import { AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
 
 // The page's own description, and the service's, both read the area from facts.js (SITEFIX-3).
-const META_DESCRIPTION = `One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. ${AREA.short}.`;
+const META_DESCRIPTION = `One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. ${AREA.meta}.`;
 
 /**
  * Private tuition — the page for families.
@@ -125,7 +125,7 @@ const jsonLd = {
   areaServed: AREA.jsonLd,
   audience: { "@type": "Audience", audienceType: "Parents and carers of children with SEND" },
   description:
-    `One-to-one tuition for children who cannot access mainstream school, including autistic, ADHD and PDA learners. EHCP-aligned and evidenced. ${AREA.short}.`,
+    `One-to-one tuition for children who cannot access mainstream school, including autistic, ADHD and PDA learners. EHCP-aligned and evidenced. ${AREA.meta}.`,
 };
 
 export default function Tuition() {
@@ -296,7 +296,7 @@ export default function Tuition() {
               <div className="jw-card">
                 <h3 style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>Practical things</h3>
                 {[
-                  ["Where", `Your home, a library or community setting, or online. ${SESSIONS.school}`],
+                  ["Where", `Your home, an agreed community setting, or online. ${SESSIONS.school}`],
                   ["Ages", "KS2 to KS4 and post-16, including Functional Skills."],
                   ["Subjects", "English, maths, science, computing and ICT."],
                   ["Funding", "Privately, or through an EHCP personal budget where your local authority agrees it."],

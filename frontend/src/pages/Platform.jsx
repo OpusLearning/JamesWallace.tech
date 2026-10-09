@@ -183,8 +183,8 @@ export default function Platform() {
             }}
           >
             The provision runs on a case management platform I built
-            specifically for EOTAS and alternative provision delivery. Every
-            aspect of a learner’s placement is tracked from first referral
+            specifically for EOTAS and alternative provision delivery. It is built
+            to track every aspect of a learner’s placement from first referral
             through to case closure, so a parent, an agency or a commissioner
             can see what happened without having to ask. {PLATFORM_STATUS.sentence}
           </p>
