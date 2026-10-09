@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { AREA, SESSIONS, PROFILES, BIO } from "../data/facts";
+import { AREA, SESSIONS, PROFILES, BIO, REFERENCES } from "../data/facts";
 import { councilRows } from "../lib/council-policies";
 
 /**
@@ -111,7 +111,7 @@ export default function SendTuitionDerbyshire() {
               <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>
                 Derbyshire County Council and Derby City Council publish their own guidance and signposting for
                 children who cannot attend school. The links below are Derbyshire&#39;s and Derby&#39;s own pages,
-                under the titles each council uses; where a council publishes nothing for one of these, this page says
+                under the titles each council uses; where I could not find a page for one of these, this page says
                 so. The Journal has a free <a href="https://blog.jameswallace.tech/eotas-guide/">parent guide to education when a child cannot attend school</a> and the same{" "}
                 <a href="https://blog.jameswallace.tech/eotas-guide-council-policies/">list for thirty-nine councils</a>.
               </p>
@@ -168,6 +168,17 @@ export default function SendTuitionDerbyshire() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* One written reference, held on file; the same words as /credentials. */}
+      <section className="jw-reference-section" aria-label="Written reference">
+        <div className="jw-container jw-reference-layout">
+          <div className="jw-reference-label"><p className="jw-eyebrow">A written reference</p><span aria-hidden="true">“</span></div>
+          <figure className="jw-reference">
+            <blockquote>“{REFERENCES[0].quote}”</blockquote>
+            <figcaption><div><strong>{REFERENCES[0].name}</strong><span>{REFERENCES[0].role}</span></div><Link to="/credentials" className="jw-text-link">Read the references in full</Link></figcaption>
+          </figure>
         </div>
       </section>
 

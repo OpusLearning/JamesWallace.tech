@@ -36,7 +36,7 @@ export function formatChecked(iso) {
 // One row per kind for one council: the label, the council's own title, its link (or null where the
 // council publishes nothing), and the date the link was checked. A record counts as "found" only
 // when it carries a URL that answered on the day it was checked.
-export function councilRows(council) {
+function rawRows(council) {
   return POLICY_KINDS.map(({ kind, label }) => {
     const rec = records.find((r) => r.council === council && r.kind === kind);
     if (!rec) return { label, title: null, url: null, checked: null, found: false };
@@ -49,4 +49,16 @@ export function councilRows(council) {
       found,
     };
   });
+}
+
+// Where a council covers two of the page's labels with one page, print that page once under both
+// labels, so one council document is never shown as two.
+export function councilRows(council) {
+  const out = [];
+  for (const row of rawRows(council)) {
+    const same = row.found && out.find((r) => r.found && r.url === row.url);
+    if (same) same.label = `${same.label}, and ${row.label}`;
+    else out.push({ ...row });
+  }
+  return out;
 }

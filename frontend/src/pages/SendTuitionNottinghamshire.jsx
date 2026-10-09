@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { AREA, SESSIONS, PROFILES, BIO } from "../data/facts";
+import { AREA, SESSIONS, PROFILES, BIO, REFERENCES } from "../data/facts";
 import { councilRows } from "../lib/council-policies";
 
 /**
@@ -94,7 +94,7 @@ export default function SendTuitionNottinghamshire() {
               <h2 style={{ marginBottom: "1rem" }}>Where I can teach in Nottinghamshire</h2>
               <p style={{ marginBottom: 0 }}>
                 In person, I can travel to Nottingham. Long Eaton and Ilkeston, just
-                over the border in Derbyshire, are also within reach. Elsewhere in Nottinghamshire, or if neither is
+                over the border in Derbyshire, are also within reach. Elsewhere in Nottinghamshire, or if none of those is
                 near you, sessions are by arrangement or online.
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function SendTuitionNottinghamshire() {
               <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>
                 Nottinghamshire County Council and Nottingham City Council publish their own guidance and signposting
                 for children who cannot attend school. The links below are Nottinghamshire&#39;s and Nottingham&#39;s
-                own pages, under the titles each council uses; where a council publishes nothing for one of these, this
+                own pages, under the titles each council uses; where I could not find a page for one of these, this
                 page says so. The Journal has a free{" "}
                 <a href="https://blog.jameswallace.tech/eotas-guide/">parent guide to education when a child cannot attend school</a> and the same{" "}
                 <a href="https://blog.jameswallace.tech/eotas-guide-council-policies/">list for thirty-nine councils</a>.
@@ -172,13 +172,24 @@ export default function SendTuitionNottinghamshire() {
         </div>
       </section>
 
+      {/* One written reference, held on file; the same words as /credentials. */}
+      <section className="jw-reference-section" aria-label="Written reference">
+        <div className="jw-container jw-reference-layout">
+          <div className="jw-reference-label"><p className="jw-eyebrow">A written reference</p><span aria-hidden="true">“</span></div>
+          <figure className="jw-reference">
+            <blockquote>“{REFERENCES[1].quote}”</blockquote>
+            <figcaption><div><strong>{REFERENCES[1].name}</strong><span>{REFERENCES[1].role}</span></div><Link to="/credentials" className="jw-text-link">Read the references in full</Link></figcaption>
+          </figure>
+        </div>
+      </section>
+
       {/* Close */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "1.25rem" }}>Talk to me about tuition in Nottinghamshire</h2>
           <p style={{ maxWidth: "560px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
-            If your child cannot attend school in Nottinghamshire, the first step is a short conversation about them,
-            with no commitment to book anything.
+            Start with a short conversation about your child and what has been tried so far. Nothing needs to be booked
+            at that stage.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <Link to="/contact?for=parent" className="jw-btn-primary">
