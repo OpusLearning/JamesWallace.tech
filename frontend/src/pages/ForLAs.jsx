@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS } from "../data/facts";
+import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS, REFERENCES } from "../data/facts";
 import SafeguardingLead from "../components/SafeguardingLead";
 
 const commissionerQA = [
@@ -125,6 +125,19 @@ export default function ForLAs() {
           </div>
         </div>
       </section>
+
+      {/* Written references: the two held on file, the same words as /credentials. */}
+      {REFERENCES.map((r, i) => (
+        <section className="jw-reference-section" aria-label={`Written reference from ${r.name}`} key={r.name}>
+          <div className="jw-container jw-reference-layout">
+            <div className="jw-reference-label"><p className="jw-eyebrow">{i === 0 ? "Written references" : "A second reference"}</p><span aria-hidden="true">“</span></div>
+            <figure className="jw-reference">
+              <blockquote>“{r.quote}”</blockquote>
+              <figcaption><div><strong>{r.name}</strong><span>{r.role}</span></div>{i === REFERENCES.length - 1 && <Link to="/credentials" className="jw-text-link">Read the references in full</Link>}</figcaption>
+            </figure>
+          </div>
+        </section>
+      ))}
 
       {/* Referral process */}
       <section className="jw-section jw-section-white">
