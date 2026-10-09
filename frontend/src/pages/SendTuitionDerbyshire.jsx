@@ -93,8 +93,8 @@ export default function SendTuitionDerbyshire() {
             <div className="col-12 col-lg-8">
               <h2 style={{ marginBottom: "1rem" }}>Where I can teach in Derbyshire</h2>
               <p style={{ marginBottom: 0 }}>
-                In person, I work in Derby, Long Eaton, Ilkeston and Belper — the Derbyshire towns on my list. Burton
-                upon Trent, just over the border, is also within reach. Elsewhere in Derbyshire, or if none of those
+                In person, I can travel to Derby, Long Eaton, Ilkeston and Belper. Burton upon Trent, just over the
+                border in Staffordshire, is also within reach. Elsewhere in Derbyshire, or if none of those
                 is near you, sessions are by arrangement or online.
               </p>
             </div>
@@ -112,7 +112,8 @@ export default function SendTuitionDerbyshire() {
                 Derbyshire County Council and Derby City Council publish their own guidance and signposting for
                 children who cannot attend school. The links below are Derbyshire&#39;s and Derby&#39;s own pages,
                 under the titles each council uses; where a council publishes nothing for one of these, this page says
-                so.
+                so. The Journal has a free <a href="https://blog.jameswallace.tech/eotas-guide/">parent guide to education when a child cannot attend school</a> and the same{" "}
+                <a href="https://blog.jameswallace.tech/eotas-guide-council-policies/">list for thirty-nine councils</a>.
               </p>
 
               {COUNCILS.map((c) => (

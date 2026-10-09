@@ -93,7 +93,7 @@ export default function SendTuitionNottinghamshire() {
             <div className="col-12 col-lg-8">
               <h2 style={{ marginBottom: "1rem" }}>Where I can teach in Nottinghamshire</h2>
               <p style={{ marginBottom: 0 }}>
-                In person, I work in Nottingham — the Nottinghamshire place on my list. Long Eaton and Ilkeston, just
+                In person, I can travel to Nottingham. Long Eaton and Ilkeston, just
                 over the border in Derbyshire, are also within reach. Elsewhere in Nottinghamshire, or if neither is
                 near you, sessions are by arrangement or online.
               </p>
@@ -112,7 +112,9 @@ export default function SendTuitionNottinghamshire() {
                 Nottinghamshire County Council and Nottingham City Council publish their own guidance and signposting
                 for children who cannot attend school. The links below are Nottinghamshire&#39;s and Nottingham&#39;s
                 own pages, under the titles each council uses; where a council publishes nothing for one of these, this
-                page says so.
+                page says so. The Journal has a free{" "}
+                <a href="https://blog.jameswallace.tech/eotas-guide/">parent guide to education when a child cannot attend school</a> and the same{" "}
+                <a href="https://blog.jameswallace.tech/eotas-guide-council-policies/">list for thirty-nine councils</a>.
               </p>
 
               {COUNCILS.map((c) => (
