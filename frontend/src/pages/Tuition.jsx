@@ -68,10 +68,15 @@ const training = [
   { name: TRAINING.safeguarding.name, when: `completed ${TRAINING.safeguarding.completed}` },
   { name: TRAINING.prevent.name, when: `completed ${TRAINING.prevent.completed}` },
   { name: TRAINING.dsl.name, when: `${TRAINING.dsl.provider}, completed ${TRAINING.dsl.completed}` },
+  { name: TRAINING.safeAndSupported.name, when: `${TRAINING.safeAndSupported.provider}, ${TRAINING.safeAndSupported.completed}` },
   { name: "Child-on-child abuse", when: "agency onboarding, 22 August 2026" },
   { name: TRAINING.allergy.name, when: `completed ${TRAINING.allergy.completed}` },
-  { name: "Whole School SEND, Platinum award", when: "September 2026" },
-  { name: "Suicide awareness, Zero Suicide Alliance", when: "September 2026" },
+  { name: "Data Protection Essentials", when: "Information Commissioner's Office, 25 September 2026" },
+  { name: "Whole School SEND, Platinum award", when: "11 September 2026" },
+  { name: "Understanding ADHD, Open University", when: "11 September 2026" },
+  { name: "Supporting children's mental health and wellbeing, Open University", when: "11 September 2026" },
+  { name: "Trauma-informed, relationship-based practice, Open University", when: "11 September 2026" },
+  { name: "Suicide awareness, including supporting autistic people, Zero Suicide Alliance", when: "11 September 2026" },
   { name: "SEND Code of Practice", when: "certified" },
   { name: "Understanding Autism, Open University", when: "24 CPD hours, 2025" },
   { name: "Language and communication in autism", when: "CPD certified, 2025" },
@@ -283,13 +288,14 @@ export default function Tuition() {
                     className="d-flex justify-content-between align-items-baseline gap-3"
                     style={{ padding: "0.55rem 0", borderBottom: "1px solid var(--border, #e5e0d8)" }}
                   >
-                    <span>{t.name}</span>
-                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", whiteSpace: "normal" }}>{t.when}</span>
+                    <span style={{ minWidth: 0 }}>{t.name}</span>
+                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", flex: "0 0 40%", textAlign: "right" }}>{t.when}</span>
                   </li>
                 ))}
               </ul>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: 0 }}>
-                Certificates available to any parent or agency who asks. My own safeguarding, e-safety, risk assessment
+                This is a selection. The full list, with a copy of each certificate, is on the{" "}
+                <Link to="/credentials">Credentials page</Link>. My own safeguarding, e-safety, risk assessment
                 and lone-working policies were {POLICY_PACK.status}, and can be shared before we begin.
               </p>
             </div>

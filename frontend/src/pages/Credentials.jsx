@@ -500,6 +500,14 @@ const experience = [
     dates: "April 2025 to present",
     desc: "One-to-one EOTAS provision commissioned by local authorities, for pupils with ASD, ADHD, PDA, SEMH needs and anxiety-based school avoidance, delivered at home, in the community and online. Re-engaging learners with long gaps in attendance, writing personalised programmes to EHCP outcomes, and producing the session reports, attendance evidence and progress updates commissioners and annual reviews need.",
   },
+  {
+    // James, 9 Oct 2026: "this needs a quick update for remedy". Compliance confirmed 21 September 2026;
+    // No logo held.
+    role: "Tutor",
+    org: "Remedy Tutors",
+    dates: "September 2026 to present",
+    desc: "One-to-one tuition placements for pupils who cannot attend school, taught at home and in community settings, with a written report to the agency each week.",
+  },
 ];
 
 const whyItMatters = [
