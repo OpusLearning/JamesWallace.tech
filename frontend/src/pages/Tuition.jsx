@@ -159,7 +159,9 @@ export default function Tuition() {
                 by local authorities. In between I spent five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                I now take a small number of private students alongside that work. {AREA.sentence}
+                I now take a small number of private students alongside that work. {AREA.sentence} For the local
+                detail, see the <Link to="/send-tuition-derbyshire">Derbyshire page</Link> or the{" "}
+                <Link to="/send-tuition-nottinghamshire">Nottinghamshire page</Link>.
               </p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/contact?for=parent" className="jw-btn-primary">

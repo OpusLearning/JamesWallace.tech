@@ -23,6 +23,8 @@ import Compliance from "./pages/Compliance";
 import ForLAs from "./pages/ForLAs";
 import SampleReport from "./pages/SampleReport";
 import Tuition from "./pages/Tuition";
+import SendTuitionDerbyshire from "./pages/SendTuitionDerbyshire";
+import SendTuitionNottinghamshire from "./pages/SendTuitionNottinghamshire";
 import Agencies from "./pages/Agencies";
 import NotFound from "./pages/NotFound";
 
@@ -60,6 +62,8 @@ const App = () => {
             <Route path="/for-las" element={<ForLAs />} />
             <Route path="/sample-report" element={<SampleReport />} />
             <Route path="/tuition" element={<Tuition />} />
+            <Route path="/send-tuition-derbyshire" element={<SendTuitionDerbyshire />} />
+            <Route path="/send-tuition-nottinghamshire" element={<SendTuitionNottinghamshire />} />
             <Route path="/agencies" element={<Agencies />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />

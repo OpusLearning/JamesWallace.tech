@@ -29,7 +29,8 @@ const DIST = new URL('./dist/', import.meta.url).pathname;
 // '/404' is not a real route: it matches the router's catch-all and renders the not-found page,
 // so the same HTML can serve both as dist/404/index.html and, copied below, as dist/404.html for
 // the server's error page.
-const ROUTES = ['/', '/provision', '/platform', '/compliance', '/for-las', '/tuition', '/agencies',
+const ROUTES = ['/', '/provision', '/platform', '/compliance', '/for-las', '/tuition',
+                '/send-tuition-derbyshire', '/send-tuition-nottinghamshire', '/agencies',
                 '/portfolio', '/about', '/contact', '/privacy', '/cookies', '/accessibility', '/terms',
                 '/complaints', '/credentials', '/sample-report', '/404'];
 const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.jpg':'image/jpeg',
