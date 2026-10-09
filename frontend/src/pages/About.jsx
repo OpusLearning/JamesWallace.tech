@@ -128,9 +128,9 @@ export default function About() {
           <p>
             The provision is deliberately small: one qualified teacher remains
             responsible for the teaching and records, with safeguarding led by the
-            Designated Safeguarding Lead. I work directly
-            with Local Authority SEND teams, EOTAS coordinators and EHCP caseworkers,
-            sharing the evidence they need to review a placement.
+            Designated Safeguarding Lead. I work with Local Authority SEND teams, EOTAS coordinators and EHCP caseworkers,
+            at present on placements that come through agencies, sharing the evidence they need
+            to review a placement.
           </p>
           <p>
             {SAFEGUARDING_ROLES.dsl.name} is the{" "}

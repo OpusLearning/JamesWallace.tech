@@ -104,16 +104,16 @@ export default function Compliance() {
             <div className="col-12 col-lg-6">
               <h2>Lone Working</h2>
               <p>
-                I check in through the portal at the start of every solo session
-                and check out at the end, so there is a timestamped record of where
-                I was and for how long. The portal supports a live supervisor feed
+                On a placement commissioned directly from James Wallace Education, every solo session
+                is checked in through the portal at the start and checked out at the end, so there is
+                a timestamped record of where I was and for how long. {PLATFORM_STATUS.follow} The portal supports a live supervisor feed
                 and overdue-session alerting for multi-practitioner providers; as a
                 sole practitioner the escalation route is agreed in writing with the
                 commissioning school or local authority before teaching begins.
               </p>
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>
-                  Lone working audit reports available for inspection
+                  Lone working audit reports can be produced for inspection
                 </li>
               </ul>
             </div>

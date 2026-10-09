@@ -205,7 +205,7 @@ export default function Provision() {
                 {[
                   { step: "Plan", desc: `Weekly session plan submitted in ${PRODUCT.name} - PLP criteria, planned activities, session logistics. The plan is locked before delivery begins, so the week has an evidence baseline. Where a commissioner wants sight of it first, approval is recorded against the plan.` },
                   { step: "Deliver", desc: "I deliver the session, with a lone working check-in at the start and check-out at the end, timestamped. The portal's panic alert and live supervisor feed are built for providers with a supervisory team; as a sole practitioner, my escalation route is agreed in writing with the commissioner before teaching begins." },
-                  { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0-10), per-subject activity notes, PLP criterion progress, safeguarding observations." },
+                  { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0 to 5), per-subject activity notes, PLP criterion progress, safeguarding observations." },
                 ].map((item) => (
                   <div key={item.step} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
                     <div

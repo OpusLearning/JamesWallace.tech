@@ -73,6 +73,10 @@ export default function SampleReport() {
             Every name, date and figure on this page is invented. No learner&apos;s record is shown here, and
             none ever will be.
           </p>
+          <p style={{ fontSize: "0.95rem", lineHeight: 1.65, color: "var(--text-muted)" }}>
+            The engagement score is the teacher&apos;s own observation of that session, on a scale of 0 to 5.
+            It shows how a learner&apos;s engagement changes over time. It is not a measure of attainment.
+          </p>
         </div>
       </section>
 

@@ -50,7 +50,7 @@ const screenshots = [
     title: "Daily Session Reports",
     bullets: [
       "Submitted within 24 hours of each session",
-      "Attendance and engagement score (0-10)",
+      "Attendance and engagement score (0 to 5)",
       "Per-subject activity notes linked to the approved weekly plan",
       "PLP success criteria automatically updated on submission",
       "Safeguarding observations and travel/expense logging",
