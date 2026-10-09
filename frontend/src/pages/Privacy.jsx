@@ -140,7 +140,7 @@ export default function PrivacyPolicy() {
       metaTitle="Privacy Notice | James Wallace, SEND & EOTAS Provision"
       description="How James Wallace Education handles personal data on this website: what we collect, why, who processes it, how long we keep it, and how to raise a data-protection complaint."
       path="/privacy"
-      updated="Last updated: 5 October 2026"
+      updated="Last updated: 9 October 2026"
     >
       <LegalSection heading="1. Who we are">
         <p>
@@ -220,8 +220,11 @@ export default function PrivacyPolicy() {
           ]}
         />
         <p style={{ marginTop: "1rem" }}>
-          When an enquiry form is sent, the visitor statistics record that one enquiry was sent from
-          that page, as a count, with nothing from the form.
+          When an enquiry form is sent, the visitor statistics record that one enquiry was sent and
+          which kind it was (for example, from a family or from a local authority), as a count, with
+          nothing from the form. They also count when a link to email us, to phone us or to open the
+          contact page is clicked, and for the contact page which page the link was on. None of this
+          identifies anyone.
         </p>
         <p style={{ marginTop: "1rem" }}>
           We do not sell your personal data. We do not use it to make automated decisions about you,

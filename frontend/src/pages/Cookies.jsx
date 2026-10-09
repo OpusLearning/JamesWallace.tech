@@ -8,7 +8,7 @@ export default function Cookies() {
       metaTitle="Cookies and storage | James Wallace"
       description="The cookies and browser storage used by jameswallace.tech, why each one is exempt, and how to clear it. There is no banner because nothing non-essential is used."
       path="/cookies"
-      updated="Last updated: 5 October 2026"
+      updated="Last updated: 9 October 2026"
       intro="What this site stores in your browser, and why you will not see a cookie banner here."
     >
       <LegalSection heading="1. No banner, because nothing non-essential is used">
@@ -82,8 +82,11 @@ export default function Cookies() {
           nothing follows you to other websites.
         </p>
         <p>
-          When an enquiry form is sent, the statistics record that one enquiry was sent from that
-          page, as a count, with nothing from the form.
+          When an enquiry form is sent, the visitor statistics record that one enquiry was sent and
+          which kind it was (for example, from a family or from a local authority), as a count, with
+          nothing from the form. They also count when a link to email us, to phone us or to open the
+          contact page is clicked, and for the contact page which page the link was on. None of this
+          identifies anyone.
         </p>
         <p>
           <strong>To opt out,</strong> add <code>#toggle-goatcounter</code> to the end of any page
