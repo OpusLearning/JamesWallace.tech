@@ -1,6 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB } from "../data/facts";
+import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS } from "../data/facts";
+import SafeguardingLead from "../components/SafeguardingLead";
 
 const commissionerQA = [
   {
@@ -29,7 +30,7 @@ const commissionerQA = [
   },
   {
     q: "Can records be produced for a monitoring visit?",
-    a: "The platform is built to export case chronologies, PLP evidence, safeguarding logs and compliance records as PDFs. It is being tested end to end with synthetic data before the first live placement. Approved policies are available on request.",
+    a: `The platform is built to export case chronologies, PLP evidence, safeguarding logs and compliance records as PDFs. ${PLATFORM_STATUS.sentence} Approved policies are available on request.`,
   },
 ];
 
@@ -52,6 +53,7 @@ const jsonLd = {
   provider: {
     "@type": "Person",
     name: "James Wallace",
+    sameAs: PROFILES,
     hasCredential: [
       "Qualified Teacher Status (QTS), 2004",
       "MEd Education, The Open University, 2012",
@@ -59,11 +61,7 @@ const jsonLd = {
       TRAINING.safeguarding.name,
     ],
   },
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Derbyshire" },
-    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
-    { "@type": "AdministrativeArea", name: "East Midlands" },
-  ],
+  areaServed: AREA.jsonLd,
   audience: { "@type": "Audience", audienceType: "Local authorities and schools" },
 };
 
@@ -89,8 +87,7 @@ export default function ForLAs() {
                 is built to give commissioners and referrers visibility of a
                 placement - from session evidence to safeguarding nil
                 returns - with monthly deliverables and
-                inspection-ready exports on demand. In person across Derbyshire and
-                Nottinghamshire. Online across the UK.
+                inspection-ready exports on demand. {AREA.sentence} {SESSIONS.school}
               </p>
               <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
                 <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
@@ -303,6 +300,7 @@ export default function ForLAs() {
                 Ask for the current approved policies, or a specific policy for
                 review before commissioning.
               </p>
+              <SafeguardingLead />
               <div className="d-flex flex-wrap gap-3 mt-3">
                 <Link to="/compliance" className="jw-btn-secondary">
                   Compliance details

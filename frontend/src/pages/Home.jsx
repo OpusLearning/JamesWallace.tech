@@ -1,6 +1,10 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
+import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
+
+// One description for the page and its JSON-LD, so the two cannot drift. The area wording comes
+// from facts.js (SITEFIX-3 item 1).
+const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.label}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
 
 const questions = [
   {
@@ -17,7 +21,7 @@ const questions = [
   },
   {
     question: "Where does teaching take place?",
-    answer: "In person across Derbyshire and Nottinghamshire, or online. Sessions can take place at home or in an agreed community setting, depending on what your child can manage and what is appropriate for the placement.",
+    answer: `${AREA.sentence} Sessions can take place at home or in an agreed community setting, depending on what your child can manage and what is appropriate for the placement. ${SESSIONS.school}`,
     to: "/tuition",
     link: "Explore the options",
   },
@@ -53,9 +57,8 @@ function Arrow() {
 
 // Structured data for the organisation. Every value repeats what the site already publishes: the
 // company name, the canonical URL, the site's logo, the contact address and number shown on
-// /contact, the page's own description and the three service areas. No postal address and no
-// profile link is added — the business is home-based, has no posted address to give, and no
-// profile URL is published on the site to point at. Injected and removed by usePageMeta.
+// /contact, the page's own description, the five service areas from facts.js and the two profile
+// URLs. No postal address. Injected and removed by usePageMeta.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -64,18 +67,15 @@ const jsonLd = {
   logo: "https://jameswallace.tech/favicon.svg",
   email: "hello@jameswallace.tech",
   telephone: "07897 021077",
-  description: "Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.",
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Derbyshire" },
-    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
-    { "@type": "AdministrativeArea", name: "East Midlands" },
-  ],
+  description: DESCRIPTION,
+  sameAs: PROFILES,
+  areaServed: AREA.jsonLd,
 };
 
 export default function Home() {
   usePageMeta({
     title: "James Wallace | One-to-one teaching for children who cannot manage school",
-    description: "Specialist SEND and EOTAS teaching in Derbyshire, Nottinghamshire and online. QTS, MEd, enhanced DBS. For families, agencies and local authorities.",
+    description: DESCRIPTION,
     path: "/",
     jsonLd,
   });
@@ -93,7 +93,7 @@ export default function Home() {
               <Link to="/contact?for=parent" className="jw-btn-primary">Talk about your child <Arrow /></Link>
               <a href="#how-it-starts" className="jw-text-link">How it starts <span aria-hidden="true">↓</span></a>
             </div>
-            <p className="jw-hero-location">Derbyshire, Nottinghamshire &amp; online</p>
+            <p className="jw-hero-location">{AREA.label}</p>
           </div>
           <figure className="jw-hero-portrait">
             <div className="jw-portrait-frame">

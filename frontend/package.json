@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build && node prerender.mjs",
     "lint": "eslint .",
-    "test": "node --test src/lib/analytics.test.js",
+    "test": "node --test src/lib/analytics.test.js src/data/facts.test.js",
     "preview": "vite preview",
     "build:nossg": "vite build"
   },

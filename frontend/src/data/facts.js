@@ -347,6 +347,52 @@ export const GUIDES_HUB = GUIDES[0];
 export const GUIDES_NOTE =
   "Free, for parents and carers in England, written from the law and government guidance. Information, not legal advice.";
 
+// James, 9 Oct 2026 (QUEUE SITEFIX-3). The area served. James: "let's say East Midlands, although
+// primarily D2N2" — the abbreviation is never written on the site. A sentence for prose, a short
+// form for labels, and one areaServed list for JSON-LD, so every page says the same thing. The two
+// place names that stay put are employment facts (Nottinghamshire County Council, Foxwood Academy),
+// not statements of the area served.
+export const AREA = {
+  sentence:
+    "In person across the East Midlands, mainly Derby, Derbyshire, Nottingham and Nottinghamshire, and online.",
+  label: "East Midlands (mainly Derby, Derbyshire, Nottingham and Nottinghamshire); online anywhere",
+  jsonLd: [
+    { "@type": "AdministrativeArea", name: "Derby" },
+    { "@type": "AdministrativeArea", name: "Derbyshire" },
+    { "@type": "AdministrativeArea", name: "Nottingham" },
+    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
+    { "@type": "AdministrativeArea", name: "East Midlands" },
+  ],
+};
+
+// Where sessions can take place. James, 9 Oct 2026: a school is possible but rare, because a child
+// who can get to school is usually better placed in lessons there.
+export const SESSIONS = {
+  school:
+    "Sessions can take place in a school where that suits the child, but most are at home, in an agreed community setting or online.",
+};
+
+// The platform's status. James, 9 Oct 2026: it cannot truly be live until there is a real pupil.
+export const PLATFORM_STATUS = {
+  sentence:
+    "The platform is built and has been tested end to end with made-up data. It goes into live use with the first commissioned placement.",
+};
+
+// The safeguarding mailbox, shown beside the named designated safeguarding lead wherever a parent
+// or commissioner would look (SITEFIX-3 item 4). Asmaa Ahmed has consented to her name and role
+// (see the comment above SAFEGUARDING_ROLES); this adds only the mailbox.
+export const SAFEGUARDING_CONTACT = {
+  email: "safeguarding@jameswallace.tech",
+};
+
+// Profile URLs published on the site's own pages, for the Organization and Person JSON-LD sameAs.
+// James, 9 Oct 2026 (SITEFIX-3 item 5). The footer has no place for social links, so these are
+// structured-data only.
+export const PROFILES = [
+  "https://www.linkedin.com/in/jameswallace-education",
+  "https://www.youtube.com/@JamesWallaceEducation",
+];
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 

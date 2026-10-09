@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, AVAILABILITY, STATUTORY, TRAINING, POLICY_PACK } from "../data/facts";
+import { BIO, AREA, PROFILES, AVAILABILITY, STATUTORY, TRAINING, POLICY_PACK } from "../data/facts";
 
 /**
  * For agencies and schools — the fastest-paying door, and the one the site never had.
@@ -32,7 +32,7 @@ const covers = [
   { label: "Subjects", value: "English, maths, science, computing and ICT" },
   { label: "Specialisms", value: "SEMH, autism, ADHD, PDA profiles, EBSA, EHCP-aligned provision" },
   { label: "Settings", value: "Home tuition, community settings, AP and specialist settings, online" },
-  { label: "Areas", value: "Derbyshire, Nottinghamshire and the wider East Midlands; online anywhere" },
+  { label: "Areas", value: AREA.label },
 ];
 
 const placement = [
@@ -60,6 +60,7 @@ const jsonLd = {
   name: "James Wallace",
   jobTitle: "Specialist SEND and EOTAS Tutor",
   url: "https://jameswallace.tech/agencies",
+  sameAs: PROFILES,
   hasCredential: [
     "Qualified Teacher Status (QTS), 2004",
     "MEd Education, The Open University, 2012",
@@ -68,14 +69,14 @@ const jsonLd = {
     TRAINING.safeguarding.name,
   ],
   knowsAbout: ["SEMH", "Autism", "ADHD", "PDA", "EBSA", "EHCP", "Alternative provision", "EOTAS"],
-  areaServed: ["Derbyshire", "Nottinghamshire", "East Midlands"],
+  areaServed: AREA.jsonLd,
 };
 
 export default function Agencies() {
   usePageMeta({
     title: "For Agencies & Schools | James Wallace, QTS — SEND & EOTAS Tutor",
     description:
-      "Compliance-ready specialist SEND tutor. QTS, MEd, enhanced DBS on the Update Service, safeguarding current. Derbyshire, Nottinghamshire and online. Compliance pack on request.",
+      `Compliance-ready specialist SEND tutor. QTS, MEd, enhanced DBS on the Update Service, safeguarding current. ${AREA.label}. Compliance pack on request.`,
     path: "/agencies",
     jsonLd,
   });
@@ -122,7 +123,7 @@ export default function Agencies() {
                   Reviewed {AVAILABILITY.reviewed}
                 </p>
                 <p style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>
-                  {AVAILABILITY.statusPlacements}, in person across Derbyshire and Nottinghamshire or online anywhere in the UK.
+                  {AVAILABILITY.statusPlacements}. {AREA.sentence}
                 </p>
                 <p style={{ color: "var(--text-muted)", marginBottom: 0 }}>
                   Tell me the learner, the key stage and the hours, and I will confirm days by return.

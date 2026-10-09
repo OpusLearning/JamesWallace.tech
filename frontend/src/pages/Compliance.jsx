@@ -1,6 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS, HOSTING } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS, HOSTING, PLATFORM_STATUS } from "../data/facts";
+import SafeguardingLead from "../components/SafeguardingLead";
 
 const staffComplianceRows = [
   { requirement: "Enhanced DBS (Update Service or renewed)", tracked: "RAG status, expiry alert" },
@@ -64,6 +65,7 @@ export default function Compliance() {
                 Update Service, with details available for the checks required before a placement.
               </p>
               <p>{SAFEGUARDING_ROLES.leads}</p>
+              <SafeguardingLead />
               <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
                 <li>
                   All concerns logged immediately in an encrypted,
@@ -353,9 +355,10 @@ export default function Compliance() {
               <h2>Inspection Readiness</h2>
               <p>
                 For LA monitoring visits or Ofsted inspections, the platform
-                generates a full Inspection Bundle PDF for any case: PLP with
-                criteria, weekly plans, daily evidence, safeguarding timeline,
-                and lone working log - all in one document, on demand.
+                is built to generate a full Inspection Bundle PDF for any case:
+                PLP with criteria, weekly plans, daily evidence, safeguarding
+                timeline, and lone working log - all in one document, on demand.
+                {PLATFORM_STATUS.sentence}
               </p>
               <p>
                 You can also export case chronologies, supervision

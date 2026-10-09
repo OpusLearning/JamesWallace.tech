@@ -1,6 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { SAFEGUARDING_ROLES, STATUTORY, DELIVERY, TRAINING, PRODUCT } from "../data/facts";
+import { SAFEGUARDING_ROLES, STATUTORY, DELIVERY, TRAINING, PRODUCT, AREA, PLATFORM_STATUS } from "../data/facts";
+import SafeguardingLead from "../components/SafeguardingLead";
 
 const learnerProfiles = [
   { label: "EOTAS", description: "Education Other Than At School - full-time or part-time alternative to school placement" },
@@ -81,8 +82,7 @@ export default function Provision() {
                 </h3>
                 <p style={{ fontSize: "0.9rem", margin: 0 }}>
                   Sessions delivered at a community venue, learner&#39;s home (with
-                  appropriate risk assessment), or agreed location. East
-                  Midlands-based with wider coverage by arrangement.
+                  appropriate risk assessment), or agreed location. {AREA.sentence}
                 </p>
               </div>
             </div>
@@ -129,8 +129,7 @@ export default function Provision() {
                   Coverage
                 </h3>
                 <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  East Midlands for in-person delivery. Remote delivery
-                  available UK-wide. Ask me about anywhere else.
+                  {AREA.label}. Ask me about anywhere else.
                 </p>
               </div>
             </div>
@@ -197,7 +196,7 @@ export default function Provision() {
               <h2>The Evidence Chain</h2>
               <p>
                 Every placement follows a structured, auditable evidence
-                workflow from first session to case closure.
+                workflow from first session to case closure. {PLATFORM_STATUS.sentence}
               </p>
               <div className="d-flex flex-column gap-3 mt-4">
                 {/* These two steps used to read "approved by supervisor" and "panic button available throughout". Both are
@@ -265,6 +264,7 @@ export default function Provision() {
                 <li>Automated daily alerts for stale or unactioned safeguarding concerns</li>
               </ul>
               <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
+              <SafeguardingLead />
               <Link to="/compliance" className="jw-btn-secondary mt-3 d-inline-block">
                 Full compliance details &rarr;
               </Link>

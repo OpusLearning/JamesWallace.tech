@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import usePageMeta from "../hooks/usePageMeta";
-import { REPLY } from "../data/facts";
+import { AREA, REPLY } from "../data/facts";
+import SafeguardingLead from "../components/SafeguardingLead";
 import { recordEnquirySent } from "../lib/analytics";
 
 const ENQUIRIES = {
@@ -229,17 +230,13 @@ const jsonLd = {
   "@type": "ContactPage",
   name: "Contact James Wallace",
   url: "https://jameswallace.tech/contact",
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Derbyshire" },
-    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
-    { "@type": "AdministrativeArea", name: "East Midlands" },
-  ],
+  areaServed: AREA.jsonLd,
 };
 
 export default function Contact() {
   usePageMeta({
     title: "Contact James Wallace | Tuition & referrals",
-    description: "Ask James Wallace about specialist tuition, EOTAS provision and availability across Derbyshire, Nottinghamshire and online.",
+    description: `Ask James Wallace about specialist tuition, EOTAS provision and availability. ${AREA.label}.`,
     path: "/contact",
     jsonLd,
   });
@@ -271,7 +268,8 @@ export default function Contact() {
             <div className="mt-4">
               <h2 className="h5">Prefer to contact me directly?</h2>
               <p><a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a><br /><a href="tel:07897021077">07897 021077</a></p>
-              <p className="small">Working in person across Derbyshire and Nottinghamshire, and online.</p>
+              <p className="small">{AREA.sentence}</p>
+              <SafeguardingLead className="small" />
             </div>
           </div>
           <div className="col-12 col-lg-8">

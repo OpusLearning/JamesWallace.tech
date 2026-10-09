@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
+import { AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
+
+// The page's own description, and the service's, both read the area from facts.js (SITEFIX-3).
+const META_DESCRIPTION = `One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. ${AREA.label}.`;
 
 /**
  * Private tuition — the page for families.
@@ -111,6 +114,7 @@ const jsonLd = {
     name: "James Wallace",
     jobTitle: "Specialist EOTAS and SEND tutor",
     url: "https://jameswallace.tech/tuition",
+    sameAs: PROFILES,
     hasCredential: [
       "Qualified Teacher Status (QTS)",
       "Master of Education (MEd)",
@@ -118,21 +122,16 @@ const jsonLd = {
       "Enhanced DBS on the Update Service",
     ],
   },
-  areaServed: [
-    { "@type": "AdministrativeArea", name: "Derbyshire" },
-    { "@type": "AdministrativeArea", name: "Nottinghamshire" },
-    { "@type": "AdministrativeArea", name: "East Midlands" },
-  ],
+  areaServed: AREA.jsonLd,
   audience: { "@type": "Audience", audienceType: "Parents and carers of children with SEND" },
   description:
-    "One-to-one tuition for children who cannot access mainstream school, including autistic, ADHD and PDA learners. EHCP-aligned and evidenced. Derbyshire, Nottinghamshire and online.",
+    `One-to-one tuition for children who cannot access mainstream school, including autistic, ADHD and PDA learners. EHCP-aligned and evidenced. ${AREA.label}.`,
 };
 
 export default function Tuition() {
   usePageMeta({
-    title: "Private SEND & EOTAS Tuition, Derbyshire and Notts | James Wallace",
-    description:
-      "One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. Derbyshire, Nottinghamshire and online.",
+    title: "Private SEND & EOTAS Tuition, East Midlands | James Wallace",
+    description: META_DESCRIPTION,
     path: "/tuition",
     jsonLd,
   });
@@ -160,8 +159,7 @@ export default function Tuition() {
                 by local authorities. In between I spent five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                I now take a small number of private students alongside that work. In person across Derbyshire and Nottinghamshire,
-                or online anywhere.
+                I now take a small number of private students alongside that work. {AREA.sentence}
               </p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/contact?for=parent" className="jw-btn-primary">
@@ -298,7 +296,7 @@ export default function Tuition() {
               <div className="jw-card">
                 <h3 style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>Practical things</h3>
                 {[
-                  ["Where", "Your home, a library or community setting, or online."],
+                  ["Where", `Your home, a library or community setting, or online. ${SESSIONS.school}`],
                   ["Ages", "KS2 to KS4 and post-16, including Functional Skills."],
                   ["Subjects", "English, maths, science, computing and ICT."],
                   ["Funding", "Privately, or through an EHCP personal budget where your local authority agrees it."],

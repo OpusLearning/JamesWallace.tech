@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { PRODUCT, POLICY_PACK, HOSTING } from "../data/facts";
+import { PRODUCT, POLICY_PACK, HOSTING, PLATFORM_STATUS } from "../data/facts";
 
 const screenshots = [
   {
@@ -186,7 +186,7 @@ export default function Platform() {
             specifically for EOTAS and alternative provision delivery. Every
             aspect of a learner’s placement is tracked from first referral
             through to case closure, so a parent, an agency or a commissioner
-            can see what happened without having to ask.
+            can see what happened without having to ask. {PLATFORM_STATUS.sentence}
           </p>
           <div className="d-flex flex-wrap justify-content-center gap-3">
             <Link to="/contact?for=commissioner" className="jw-btn-primary">
