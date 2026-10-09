@@ -119,8 +119,8 @@ function EnquiryForm({ audience, topic }) {
       const result = await response.json();
       if (result.ok !== true && result.success !== true) throw new Error("Enquiry not confirmed");
       if (requestRef.current === controller) {
-        // One statistics event per confirmed send. The page path only; nothing from the form.
-        recordEnquirySent(response.ok, result, "/contact");
+        // One statistics event per confirmed send, with the audience only; nothing else from the form.
+        recordEnquirySent(response.ok, result, audience);
         setStatus("sent");
         setAnswers(emptyAnswers(audience));
       }

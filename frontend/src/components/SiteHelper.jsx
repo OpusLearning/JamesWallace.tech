@@ -187,8 +187,8 @@ export default function SiteHelper() {
       });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || !data.ok) throw new Error("send failed");
-      // One statistics event per confirmed send from the chat; the page path only.
-      recordEnquirySent(r.ok, data, pathname);
+      // One statistics event per confirmed send from the chat; nothing else from the conversation.
+      recordEnquirySent(r.ok, data);
       setFormState("sent");
       setFormOpen(false);
       setMessages((m) => [

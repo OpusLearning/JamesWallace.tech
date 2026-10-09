@@ -8,6 +8,7 @@ import AccessibilityWidget from "./components/AccessibilityWidget";
 import SiteHelper from "./components/SiteHelper";
 import Portfolio from "./components/Portfolio";
 import useAnalytics from "./hooks/useAnalytics";
+import { installClickEvents } from "./lib/analytics";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -44,6 +45,12 @@ function RouteAnalytics() {
   return null;
 }
 
+// One delegated listener counts clicks on email, phone and /contact links (TRACK-1). Mounted once.
+function ClickEvents() {
+  useEffect(() => installClickEvents(), []);
+  return null;
+}
+
 const App = () => {
   const [a11yOpen, setA11yOpen] = useState(false);
 
@@ -51,6 +58,7 @@ const App = () => {
     <Router>
       <RouteEffects />
       <RouteAnalytics />
+      <ClickEvents />
       <div className="d-flex flex-column min-vh-100">
         <Header onA11yClick={() => setA11yOpen(true)} />
         <main id="main-content" tabIndex="-1" className="flex-grow-1 jw-page">
