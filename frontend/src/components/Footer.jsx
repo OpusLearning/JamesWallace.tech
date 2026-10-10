@@ -38,6 +38,7 @@ export default function Footer() {
           <li><a href={GUIDES_HUB.url}>Parent guides</a></li>
           <li><a href="https://blog.jameswallace.tech/councils/">Find your council&apos;s policies</a></li>
           <li><a href="https://blog.jameswallace.tech/councils/assistant/">Council policy assistant</a></li>
+          <li><a href="https://blog.jameswallace.tech/tutors/">The Tutor Handbook</a></li>
           <li><a href="https://portal.jameswallace.tech" target="_blank" rel="noopener noreferrer">Portal<span aria-hidden="true"> ↗</span></a></li>
         </ul></nav>
       </div>

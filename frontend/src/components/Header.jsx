@@ -40,6 +40,7 @@ export default function Header({ onA11yClick }) {
               {links.map(({ to, label }) => <li key={to}><Link to={to} className={`jw-nav-link${isActive(to) ? " is-active" : ""}`} aria-current={isActive(to) ? "page" : undefined}>{label}</Link></li>)}
               <li><a href="https://blog.jameswallace.tech" target="_blank" rel="noopener noreferrer" className="jw-nav-link">Journal<span aria-hidden="true"> ↗</span></a></li>
               <li><a href="https://blog.jameswallace.tech/councils/assistant/" target="_blank" rel="noopener noreferrer" className="jw-nav-link">Council assistant<span aria-hidden="true"> ↗</span></a></li>
+              <li><a href="https://blog.jameswallace.tech/tutors/" target="_blank" rel="noopener noreferrer" className="jw-nav-link">For tutors<span aria-hidden="true"> ↗</span></a></li>
               <li><Link to="/contact" className="jw-nav-link jw-nav-action">Start a conversation</Link></li>
               <li><a href="https://portal.jameswallace.tech" target="_blank" rel="noopener noreferrer" className="jw-nav-link jw-nav-portal">Portal<span aria-hidden="true"> ↗</span></a></li>
               {onA11yClick && <li><button type="button" className="jw-nav-link jw-nav-a11y" onClick={onA11yClick}>Accessibility</button></li>}
