@@ -580,6 +580,16 @@ export default function Credentials() {
             <a href="#qualifications" className="jw-text-link">Explore the evidence <span aria-hidden="true">↓</span></a>
           </div>
           <aside className="credentials-summary" aria-label="Professional background at a glance">
+            <img
+              src="/hero/credentials-1100.webp"
+              srcSet="/hero/credentials-600.webp 600w, /hero/credentials-1100.webp 1100w"
+              sizes="(max-width: 991px) 100vw, 28rem"
+              width="1100"
+              height="1100"
+              fetchPriority="high"
+              alt="A document folder, a lanyard with an ID card holder and a pen on a desk."
+              style={{ display: "block", width: "100%", height: "auto", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "center 70%", borderRadius: "14px", marginBottom: "1.5rem" }}
+            />
             <p className="jw-eyebrow">James Wallace · QTS, MEd</p>
             <dl>
               <div><dt>Teaching</dt><dd>Thirteen years in specialist provision.<span>Twelve of them at Foxwood Academy.</span></dd></div>

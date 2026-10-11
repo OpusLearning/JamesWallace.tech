@@ -27,26 +27,35 @@ export default function Compliance() {
     <>
       {/* Hero */}
       <section className="jw-section jw-section-warm">
-        <div className="jw-container text-center">
-          <h1>Safeguarding you can inspect</h1>
-          <p
-            style={{
-              fontSize: "1.05rem",
-              maxWidth: "620px",
-              margin: "1rem auto 2rem",
-              lineHeight: 1.7,
-            }}
-          >
-            Every safeguard and compliance check is part of day-to-day
-            delivery, with records available for the commissioner to review.
-          </p>
-          <div className="d-flex flex-wrap justify-content-center gap-3">
-            <Link to="/contact?for=commissioner" className="jw-btn-primary">
-              Request Approved Policies
-            </Link>
-            <Link to="/platform" className="jw-btn-secondary">
-              See the Platform
-            </Link>
+        <div className="jw-container">
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-7">
+              <h1>Safeguarding you can inspect</h1>
+              <p style={{ fontSize: "1.05rem", maxWidth: "620px", margin: "1rem 0 2rem", lineHeight: 1.7 }}>
+                Every safeguard and compliance check is part of day-to-day
+                delivery, with records available for the commissioner to review.
+              </p>
+              <div className="d-flex flex-wrap gap-3">
+                <Link to="/contact?for=commissioner" className="jw-btn-primary">
+                  Request Approved Policies
+                </Link>
+                <Link to="/platform" className="jw-btn-secondary">
+                  See the Platform
+                </Link>
+              </div>
+            </div>
+            <div className="col-12 col-lg-5">
+              <img
+                src="/hero/compliance-1100.webp"
+                srcSet="/hero/compliance-600.webp 600w, /hero/compliance-1100.webp 1100w"
+                sizes="(max-width: 991px) 100vw, 30rem"
+                width="1100"
+                height="1100"
+                fetchPriority="high"
+                alt="Neat stacks of printed records and folders on a desk beside a laptop."
+                style={{ display: "block", width: "100%", height: "auto", aspectRatio: "4 / 3", objectFit: "cover", borderRadius: "14px" }}
+              />
+            </div>
           </div>
         </div>
       </section>
