@@ -6,6 +6,17 @@ import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HU
 // from facts.js (SITEFIX-3 item 1).
 const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.meta}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
 
+// The hero image lives here on its own, so swapping it is a one-line change (STUDENTS-1 brief).
+// Options 1-6 are all in public/hero/ at 1600 and 800 wide; width/height are the converted 1600
+// file's, so the box does not move while the image loads. Illustrations, not photographs of pupils.
+const HERO_IMAGE = {
+  src: "/hero/1-kitchen-table-maths-1600.webp",
+  src800: "/hero/1-kitchen-table-maths-800.webp",
+  width: 1600,
+  height: 893,
+  alt: "An illustration of a lesson at a kitchen table, working through maths together.",
+};
+
 const questions = [
   {
     question: "My child cannot manage school. Where do we start?",
@@ -89,18 +100,24 @@ export default function Home() {
             <h1 id="home-heading">A way back<br />to <em>learning.</em></h1>
             <p className="jw-hero-intro">For children who find school difficult.<br />Teaching that starts with who they are.</p>
             <p className="jw-hero-description">I’m James Wallace. I help young people find a starting point, build trust and take their next step in education.</p>
+            <p className="jw-hero-commissioners">For commissioners: a placement you can see the evidence for — session reports, safeguarding nil returns and inspection-ready exports on demand.</p>
             <div className="jw-hero-actions">
-              <Link to="/contact?for=parent" className="jw-btn-primary">Talk about your child <Arrow /></Link>
-              <a href="#how-it-starts" className="jw-text-link">How it starts <span aria-hidden="true">↓</span></a>
+              <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">Make a referral <Arrow /></Link>
+              <a href="#find-your-route" className="jw-btn-secondary">For agencies &amp; councils</a>
             </div>
             <p className="jw-hero-location">{AREA.short}</p>
           </div>
-          <figure className="jw-hero-portrait">
-            <div className="jw-portrait-frame">
-              <img src="/james-wallace.webp" alt="James Wallace, specialist teacher" width="1024" height="1536" fetchPriority="high" />
-              <span className="jw-portrait-edge" aria-hidden="true">A personal approach to education</span>
-            </div>
-            <figcaption><span>James Wallace</span><span>Specialist teacher · QTS, MEd</span></figcaption>
+          <figure className="jw-hero-provision">
+            <img
+              src={HERO_IMAGE.src}
+              srcSet={`${HERO_IMAGE.src800} 800w, ${HERO_IMAGE.src} 1600w`}
+              sizes="(max-width: 620px) 85vw, 32rem"
+              width={HERO_IMAGE.width}
+              height={HERO_IMAGE.height}
+              fetchPriority="high"
+              alt={HERO_IMAGE.alt}
+            />
+            <figcaption>Images are illustrative. They do not show real pupils.</figcaption>
           </figure>
         </div>
         <div className="jw-container">
@@ -187,6 +204,20 @@ export default function Home() {
 
       <section className="jw-section jw-faq-section" aria-labelledby="faq-heading">
         <div className="jw-container jw-faq-grid"><div><p className="jw-eyebrow">Before you get in touch</p><h2 id="faq-heading">A few things<br />you may be<br /><em>wondering.</em></h2><Link to="/about" className="jw-text-link">Get to know James <Arrow /></Link><p style={{ marginTop: "1rem", marginBottom: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>Free parent guides: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a></p></div><div className="jw-faq-list">{questions.map((item) => <details key={item.question} className="jw-faq"><summary>{item.question}<span aria-hidden="true" className="jw-faq-indicator" /></summary><div className="jw-faq-answer"><p>{item.answer}</p><Link to={item.to} className="jw-text-link">{item.link} <Arrow /></Link></div></details>)}</div></div>
+      </section>
+
+      <section className="jw-section jw-lead-section" aria-labelledby="lead-heading">
+        <div className="jw-container jw-lead-grid">
+          <figure className="jw-lead-portrait">
+            <img src="/james-wallace.webp" alt="James Wallace, specialist teacher" width="1024" height="1536" loading="lazy" />
+          </figure>
+          <div>
+            <p className="jw-eyebrow">Who leads the teaching</p>
+            <h2 id="lead-heading">Led by a qualified SEND teacher</h2>
+            <p>James is a qualified teacher with thirteen years in specialist provision, twelve of them in a special school. He keeps one small caseload, so the teaching and the records stay with the person who knows the young person.</p>
+            <Link to="/about" className="jw-text-link">More about James <Arrow /></Link>
+          </div>
+        </div>
       </section>
 
       <section className="jw-invitation" aria-labelledby="invitation-heading">

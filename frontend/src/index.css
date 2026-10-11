@@ -542,3 +542,20 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 .jw-project-details h3 { font-size: 1.4rem; margin-top: 1.5rem; }
 .jw-project-details p, .jw-project-details li { font-size: .9rem; overflow-wrap: anywhere; }
 @media (max-width: 900px) { .jw-project-grid { grid-template-columns: 1fr; } .jw-project-cover { aspect-ratio: 1.8; } .jw-project-body > p { min-height: 0; } }
+
+/* STUDENTS-1: the home hero leads with the provision image, and the portrait moves to a smaller
+   section lower on the page. The image is a landscape title-card, so it takes the portrait frame's
+   place without the portrait's decorative frame. */
+.jw-hero-provision { width: 100%; max-width: 32rem; justify-self: end; margin: 0; }
+.jw-hero-provision img { display: block; width: 100%; border: 1px solid var(--border); border-radius: 4px; }
+.jw-hero-provision figcaption { margin-top: .8rem; font-size: .72rem; color: var(--text-muted); line-height: 1.5; }
+.jw-hero-commissioners { font-size: .87rem; color: var(--text-muted); max-width: 30rem; margin-bottom: 1.5rem; }
+.jw-lead-grid { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+.jw-lead-portrait { margin: 0; }
+.jw-lead-portrait img { display: block; width: 100%; border-radius: 10px; border: 1px solid var(--border); }
+.jw-lead-grid h2 { margin-bottom: 1rem; }
+@media (max-width: 620px) {
+  .jw-hero-provision { max-width: 100%; justify-self: stretch; }
+  .jw-lead-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .jw-lead-portrait { max-width: 16rem; }
+}
