@@ -178,6 +178,16 @@ export default function Tuition() {
               </div>
             </div>
             <div className="col-12 col-lg-5">
+              <img
+                src="/hero/parent1-1100.webp"
+                srcSet="/hero/parent1-600.webp 600w, /hero/parent1-1100.webp 1100w"
+                sizes="(max-width: 991px) 100vw, 30rem"
+                width="1100"
+                height="1100"
+                fetchPriority="high"
+                alt="A teenager and his mother sitting together at a table, both smiling."
+                style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px", marginBottom: "1rem" }}
+              />
               <div className="row g-3">
                 {quals.map((q) => (
                   <div key={q.label} className="col-6">
@@ -207,9 +217,6 @@ export default function Tuition() {
               alt="A teenager and a teacher working side by side at a table, both smiling, in a bright room with plants."
               style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
             />
-            <figcaption style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-              Images are illustrative. They do not show real pupils.
-            </figcaption>
           </figure>
         </div>
       </section>

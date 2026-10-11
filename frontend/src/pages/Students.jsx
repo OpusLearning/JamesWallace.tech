@@ -105,13 +105,29 @@ export default function Students() {
 
       {/* 2. What happens first */}
       <section className="jw-section jw-section-white">
-        <div className="jw-container" style={{ maxWidth: "46rem" }}>
-          <h2 style={{ marginBottom: "1.25rem" }}>What happens first</h2>
-          <p>You meet James with your parent or carer. This is the first meeting.</p>
-          <p>You say what you like, what you find hard, and what you want to get out of it.</p>
-          <p style={{ marginBottom: 0 }}>
-            <strong>Nothing is decided without you.</strong>
-          </p>
+        <div className="jw-container">
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-5">
+              <img
+                src="/hero/parent2-1100.webp"
+                srcSet="/hero/parent2-600.webp 600w, /hero/parent2-1100.webp 1100w"
+                sizes="(max-width: 991px) 100vw, 30rem"
+                width="1100"
+                height="1100"
+                loading="lazy"
+                alt="A teenager and her mother sitting together at a table in a first meeting, both smiling."
+                style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
+              />
+            </div>
+            <div className="col-12 col-lg-7">
+              <h2 style={{ marginBottom: "1.25rem" }}>What happens first</h2>
+              <p>You meet James with your parent or carer. This is the first meeting.</p>
+              <p>You say what you like, what you find hard, and what you want to get out of it.</p>
+              <p style={{ marginBottom: 0 }}>
+                <strong>Nothing is decided without you.</strong>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -252,15 +268,6 @@ export default function Students() {
           <Link to="/contact" className="jw-btn-primary">
             Go to the contact page
           </Link>
-        </div>
-      </section>
-
-      {/* The image note the brief asks for at the foot of the page. */}
-      <section className="jw-section" style={{ paddingBlock: "2rem" }}>
-        <div className="jw-container" style={{ maxWidth: "46rem" }}>
-          <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: 0 }}>
-            Images on this page are illustrative. They do not show real pupils.
-          </p>
         </div>
       </section>
     </>

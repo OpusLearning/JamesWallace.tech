@@ -111,7 +111,6 @@ export default function Home() {
             <p className="jw-eyebrow jw-hero-eyebrow"><span aria-hidden="true" /> Specialist one-to-one teaching</p>
             <h1 id="home-heading">A way back<br />to <em>learning.</em></h1>
             <p className="jw-hero-intro">For children who find school difficult.<br />Teaching that starts with who they are.</p>
-            <p className="jw-hero-description">I’m James Wallace. I help young people find a starting point, build trust and take their next step in education.</p>
             <p className="jw-hero-commissioners">For commissioners: a placement you can see the evidence for — session reports, safeguarding nil returns and inspection-ready exports on demand.</p>
             <div className="jw-hero-actions">
               <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">Make a referral <Arrow /></Link>
@@ -122,7 +121,6 @@ export default function Home() {
         </div>
         <div className="jw-container">
           <div className="jw-hero-footnote"><p>One young person. Their own way forward.</p><a href="#find-your-route">Find the right support <span aria-hidden="true">↓</span></a></div>
-          <p className="jw-hero-imagenote">Images are illustrative. They do not show real pupils.</p>
         </div>
       </section>
 
