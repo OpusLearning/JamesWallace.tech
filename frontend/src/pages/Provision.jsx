@@ -2,6 +2,7 @@ import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { SAFEGUARDING_ROLES, STATUTORY, DELIVERY, TRAINING, PRODUCT, AREA, PLATFORM_STATUS } from "../data/facts";
 import SafeguardingLead from "../components/SafeguardingLead";
+import PhotoBanner from "../components/PhotoBanner";
 
 const learnerProfiles = [
   { label: "EOTAS", description: "Education Other Than At School - full-time or part-time alternative to school placement" },
@@ -22,12 +23,21 @@ export default function Provision() {
 
   return (
     <>
-      {/* Hero */}
+      <PhotoBanner
+        name="provision"
+        eyebrow="The provision"
+        alt="A teenager and a tutor working together at a table in a library, both smiling."
+      >
+        Teaching that makes
+        <br />
+        <em>the next step possible</em>
+      </PhotoBanner>
+
+      {/* Introduction */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
           <div className="row align-items-center g-4">
             <div className="col-12 col-lg-7 text-center text-lg-start">
-              <h1>Teaching that makes the next step possible</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Structured, specialist teaching for young people who cannot
                 access a mainstream or special school. I work across EOTAS,
@@ -46,34 +56,82 @@ export default function Provision() {
             </div>
             <div className="col-12 col-lg-5 text-center">
               <img
-                src="/portal/03b-weekly-plan-tab.webp"
-                alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  border: "1px solid var(--border)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-                }}
+                src="/hero/with-tutor-clean-1942.webp"
+                srcSet="/hero/with-tutor-clean-1000.webp 1000w, /hero/with-tutor-clean-1942.webp 1942w"
+                sizes="(max-width: 991px) 100vw, 34rem"
+                loading="lazy"
+                alt="A teenager and a teacher working side by side at a table, both smiling."
+                style={{ display: "block", width: "100%", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "58% center", borderRadius: "14px" }}
               />
-              <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                Weekly plan workflow - {PRODUCT.name}
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Delivery Model */}
+      {/* Learner Profiles */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Delivery Model</h2>
+          <h2 className="text-center mb-2">Who I work with</h2>
           <p
             className="text-center"
             style={{ maxWidth: "560px", margin: "0 auto 3rem" }}
           >
-            Flexible, structured provision built around each learner&#39;s needs,
-            location, and commissioning arrangement.
+            Referrals come from families, agencies and local authorities,
+            across a range of SEND, SEMH and placement categories.
           </p>
+          <div className="row g-4">
+            {learnerProfiles.map((profile) => (
+              <div key={profile.label} className="col-12 col-md-6 col-lg-4">
+                <div className="jw-card h-100" style={{ display: "flex", gap: "0.75rem" }}>
+                  <div
+                    style={{
+                      minWidth: "36px",
+                      padding: "0 0.5rem",
+                      whiteSpace: "nowrap",
+                      flexShrink: 0,
+                      height: "36px",
+                      borderRadius: "6px",
+                      background: "var(--brand)",
+                      color: "#fff",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: 700,
+                      fontSize: "0.75rem",
+                    }}
+                  >
+                    {profile.label}
+                  </div>
+                  <p style={{ margin: 0, fontSize: "0.9rem" }}>{profile.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Delivery Model */}
+      <section className="jw-section jw-section-surface">
+        <div className="jw-container">
+          <div className="row align-items-center g-5" style={{ marginBottom: "3rem" }}>
+            <div className="col-12 col-lg-6">
+              <h2 className="mb-3">How it is delivered</h2>
+              <p style={{ fontSize: "1.05rem", marginBottom: 0 }}>
+                Flexible, structured provision built around each learner&#39;s needs,
+                location, and commissioning arrangement.
+              </p>
+            </div>
+            <div className="col-12 col-lg-6">
+              <img
+                src="/hero/student-working-1600.webp"
+                srcSet="/hero/student-working-800.webp 800w, /hero/student-working-1600.webp 1600w"
+                sizes="(max-width: 991px) 100vw, 34rem"
+                loading="lazy"
+                alt="A teenager writing in a notebook beside a laptop, smiling."
+                style={{ display: "block", width: "100%", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "center", borderRadius: "14px" }}
+              />
+            </div>
+          </div>
           <div className="row g-4">
             <div className="col-12 col-md-4">
               <div className="jw-card h-100 text-center">
@@ -149,51 +207,12 @@ export default function Provision() {
         </div>
       </section>
 
-      {/* Learner Profiles */}
-      <section className="jw-section jw-section-surface">
-        <div className="jw-container">
-          <h2 className="text-center mb-2">Who I work with</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "560px", margin: "0 auto 3rem" }}
-          >
-            Referrals come from families, agencies and local authorities,
-            across a range of SEND, SEMH and placement categories.
-          </p>
-          <div className="row g-4">
-            {learnerProfiles.map((profile) => (
-              <div key={profile.label} className="col-12 col-md-6 col-lg-4">
-                <div className="jw-card h-100" style={{ display: "flex", gap: "0.75rem" }}>
-                  <div
-                    style={{
-                      minWidth: "36px",
-                      height: "36px",
-                      borderRadius: "6px",
-                      background: "var(--brand)",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 700,
-                      fontSize: "0.75rem",
-                    }}
-                  >
-                    {profile.label}
-                  </div>
-                  <p style={{ margin: 0, fontSize: "0.9rem" }}>{profile.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Evidence Chain */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
           <div className="row align-items-center g-5">
             <div className="col-12 col-lg-6">
-              <h2>The Evidence Chain</h2>
+              <h2>The evidence you receive</h2>
               <p>
                 Every placement is designed to follow a structured, auditable evidence
                 workflow from first session to case closure. {PLATFORM_STATUS.sentence}
@@ -210,7 +229,7 @@ export default function Provision() {
                   <div key={item.step} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
                     <div
                       style={{
-                        minWidth: "80px",
+                        minWidth: "96px",
                         background: "var(--brand)",
                         color: "#fff",
                         borderRadius: "6px",
