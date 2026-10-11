@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
 import { AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
+import PageHeader from "../components/PageHeader";
 
 // The page's own description, and the service's, both read the area from facts.js (SITEFIX-3).
 const META_DESCRIPTION = `One-to-one tuition for children who cannot manage school. QTS, MEd, thirteen years in specialist provision and five inside a local authority. ${AREA.meta}.`;
@@ -143,65 +144,47 @@ export default function Tuition() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container">
-          <div className="row align-items-center g-5">
-            <div className="col-12 col-lg-7">
-              <span className="jw-badge jw-badge-brand mb-3" style={{ display: "inline-block" }}>
-                For families
-              </span>
-              <h1 style={{ marginBottom: "1.25rem" }}>
-                One-to-one tuition for children
-                <br />
-                <span style={{ color: "var(--action)" }}>who cannot manage school</span>
-              </h1>
-              <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
-                I am James Wallace. I have taught for thirteen years in specialist provision: twelve of them in a special school.
-              </p>
-              <p style={{ marginBottom: "1rem" }}>
-                Since 2025 I have delivered education otherwise than at school for autistic, ADHD and PDA learners, commissioned
-                by local authorities. In between I spent five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
-              </p>
-              <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                I now take a small number of private students alongside that work. {AREA.sentence} For the local
-                detail, see the <Link to="/send-tuition-derbyshire">Derbyshire page</Link> or the{" "}
-                <Link to="/send-tuition-nottinghamshire">Nottinghamshire page</Link>.
-              </p>
-              <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact?for=parent" className="jw-btn-primary">
-                  Arrange a conversation
-                </Link>
-                <Link to="/credentials" className="jw-btn-secondary">
-                  See my full background
-                </Link>
+      {/* Style B hero (LOOK-SITE-1 item 5): the qualifications grid stays under the image. */}
+      <PageHeader
+        eyebrow="For families"
+        title={<>One-to-one tuition for children<br /><em>who cannot manage school</em></>}
+        lede="I am James Wallace. I have taught for thirteen years in specialist provision: twelve of them in a special school."
+        body={<>
+          <p className="jw-body">
+            Since 2025 I have delivered education otherwise than at school for autistic, ADHD and PDA learners, commissioned
+            by local authorities. In between I spent five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
+          </p>
+          <p className="jw-body" style={{ color: "var(--text-muted)" }}>
+            I now take a small number of private students alongside that work. {AREA.sentence} For the local
+            detail, see the <Link to="/send-tuition-derbyshire">Derbyshire page</Link> or the{" "}
+            <Link to="/send-tuition-nottinghamshire">Nottinghamshire page</Link>.
+          </p>
+        </>}
+        actions={<>
+          <Link to="/contact?for=parent" className="jw-btn-primary">Arrange a conversation</Link>
+          <Link to="/credentials" className="jw-btn-secondary">See my full background</Link>
+        </>}
+        image={{
+          src: "/hero/parent2-1100.webp",
+          srcSet: "/hero/parent2-600.webp 600w, /hero/parent2-1100.webp 1100w",
+          sizes: "(max-width: 991px) 100vw, 30rem",
+          width: 1100,
+          height: 1100,
+          fetchPriority: "high",
+          alt: "A teenager and her mother sitting together at a table, both smiling.",
+        }}
+      >
+        <div className="row g-3 mt-1">
+          {quals.map((q) => (
+            <div key={q.label} className="col-6">
+              <div className="jw-card h-100" style={{ padding: "1.1rem 1.25rem" }}>
+                <div style={{ fontSize: "1.35rem", fontWeight: 700, color: "var(--action)", lineHeight: 1.1 }}>{q.label}</div>
+                <div className="jw-caption" style={{ marginTop: "0.35rem" }}>{q.sub}</div>
               </div>
             </div>
-            <div className="col-12 col-lg-5">
-              <img
-                src="/hero/parent2-1100.webp"
-                srcSet="/hero/parent2-600.webp 600w, /hero/parent2-1100.webp 1100w"
-                sizes="(max-width: 991px) 100vw, 30rem"
-                width="1100"
-                height="1100"
-                fetchPriority="high"
-                alt="A teenager and her mother sitting together at a table, both smiling."
-                style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px", marginBottom: "1rem" }}
-              />
-              <div className="row g-3">
-                {quals.map((q) => (
-                  <div key={q.label} className="col-6">
-                    <div className="jw-card h-100" style={{ padding: "1.1rem 1.25rem" }}>
-                      <div style={{ fontSize: "1.35rem", fontWeight: 700, color: "var(--action)", lineHeight: 1.1 }}>{q.label}</div>
-                      <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.35rem" }}>{q.sub}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </PageHeader>
 
       {/* A picture of the work itself (image supplied by James, 11 Oct 2026; illustrative). */}
       <section style={{ background: "var(--surface, #f5f3ec)" }}>
@@ -252,10 +235,10 @@ export default function Tuition() {
             <div className="row">
               <div className="col-12 col-lg-8">
                 <h2 style={{ marginBottom: "1rem" }}>{caseExample.heading}</h2>
-                <p style={{ fontSize: "1.05rem", lineHeight: 1.7, marginBottom: "1rem" }}>
+                <p className="jw-body" style={{ marginBottom: "1rem" }}>
                   {caseExample.body}
                 </p>
-                <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", marginBottom: 0 }}>
+                <p className="jw-caption" style={{ marginBottom: 0 }}>
                   {caseExample.footnote}
                 </p>
               </div>
@@ -321,11 +304,11 @@ export default function Tuition() {
                     style={{ padding: "0.55rem 0", borderBottom: "1px solid var(--border, #e5e0d8)" }}
                   >
                     <span style={{ minWidth: 0 }}>{t.name}</span>
-                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", flex: "0 0 40%", textAlign: "right" }}>{t.when}</span>
+                    <span className="jw-caption" style={{ flex: "0 0 40%", textAlign: "right" }}>{t.when}</span>
                   </li>
                 ))}
               </ul>
-              <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: 0 }}>
+              <p className="jw-caption" style={{ marginBottom: 0 }}>
                 This is a selection. The full list, with a copy of each certificate, is on the{" "}
                 <Link to="/credentials">Credentials page</Link>. My own safeguarding, e-safety, risk assessment
                 and lone-working policies were {POLICY_PACK.status}, and can be shared before we begin.
@@ -389,15 +372,15 @@ export default function Tuition() {
                 <div className="jw-card h-100">
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.5rem" }}>
                     <span style={{ fontSize: "2rem", fontWeight: 700, color: "var(--action)", lineHeight: 1 }}>{f.rate}</span>
-                    <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>{f.unit}</span>
+                    <span className="jw-caption">{f.unit}</span>
                   </div>
                   <h3 style={{ fontSize: "1.05rem", marginBottom: "0.5rem" }}>{f.title}</h3>
-                  <p style={{ marginBottom: 0, color: "var(--text-muted)", fontSize: "0.95rem" }}>{f.body}</p>
+                  <p className="jw-body" style={{ marginBottom: 0, color: "var(--text-muted)" }}>{f.body}</p>
                 </div>
               </div>
             ))}
           </div>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1.25rem", marginBottom: 0 }}>
+          <p className="jw-caption" style={{ marginTop: "1.25rem", marginBottom: 0 }}>
             Travel is included within about 30 minutes of Derby. Further than that, let us talk about it rather than assume.
             If money is the obstacle and your child needs the help, say so when we speak — I would rather have that conversation
             than lose a child who needs teaching.
@@ -414,7 +397,7 @@ export default function Tuition() {
             {GUIDES.filter((g) => g.key !== "hub").map((g) => (
               <li key={g.key} style={{ padding: "0.75rem 0", borderTop: "1px solid var(--border, #e5e0d8)" }}>
                 <a href={g.url} style={{ fontWeight: 600 }}>{g.name}</a>
-                <p style={{ margin: "0.15rem 0 0", color: "var(--text-muted)", fontSize: "0.9rem" }}>{g.line}</p>
+                <p className="jw-caption" style={{ margin: "0.15rem 0 0" }}>{g.line}</p>
               </li>
             ))}
           </ul>

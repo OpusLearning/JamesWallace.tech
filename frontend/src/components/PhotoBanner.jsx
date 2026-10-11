@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
  */
 export default function PhotoBanner({ name, alt, eyebrow, children }) {
   return (
-    <section className="jw-photo-banner">
+    <section className="jw-photo-banner" data-hero>
       <picture className="jw-hero-bg">
         <source media="(max-width: 760px)" srcSet={`/hero/${name}-mobile-900.webp`} />
         <img

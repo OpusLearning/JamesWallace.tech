@@ -14,6 +14,8 @@ import { recordEnquirySent } from "../lib/analytics";
  *   - never asks for anything about a child. Name and email is all it takes.
  *   - keeps working when the model does not: the server answers with a sentence and the form either way.
  *   - keeps the transcript in sessionStorage, so moving between pages does not wipe the conversation.
+ *   - stays out of the way: it hides while a hero or any form is on screen and whenever it would sit
+ *     over a link or control, and the page reserves its height so the last line clears it (LOOK-SITE-1).
  */
 
 const OPENERS = [
@@ -35,6 +37,10 @@ const GREETING =
 
 const STORE_KEY = "jw-helper-v1";
 
+// The candidate controls the launcher must never sit over. Kept in one place so the component and
+// its test (src/lib/sitehelper-overlap.test.js) agree on what "covers content" means.
+const CONTROL_SELECTOR = "a, button, input, select, textarea, label";
+
 export default function SiteHelper() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
@@ -45,23 +51,7 @@ export default function SiteHelper() {
   const [formOpen, setFormOpen] = useState(false);   // they have said yes, so the fields are up
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [formState, setFormState] = useState("idle"); // idle | sending | sent | error
-
-  // Kept off the first screen on phones: the three hero doors are the point of the homepage and the
-  // launcher was sitting on top of two of them.
-  const [belowHero, setBelowHero] = useState(true);
-  useEffect(() => {
-    const update = () => {
-      const narrow = window.matchMedia("(max-width: 700px)").matches;
-      setBelowHero(!narrow || window.scrollY > 260);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
+  const [hidden, setHidden] = useState(false);
 
   const launcherRef = useRef(null);
   const inputRef = useRef(null);
@@ -74,6 +64,65 @@ export default function SiteHelper() {
       (typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID().slice(0, 18)) ||
       Math.random().toString(36).slice(2, 12);
   }
+
+  // The launcher gets out of the way of anything it would cover. A hero or a form on screen keeps it
+  // hidden outright; otherwise it hides whenever its own box would intersect a link or control in
+  // the viewport. This is deliberately the same rule the item-4 test checks, so the two cannot drift.
+  useEffect(() => {
+    const update = () => {
+      const el = launcherRef.current;
+      if (!el) return;
+      if (open) { setHidden(false); return; }
+      const box = el.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const onScreen = (r) => r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw;
+
+      for (const section of document.querySelectorAll("[data-hero], form")) {
+        if (onScreen(section.getBoundingClientRect())) { setHidden(true); return; }
+      }
+      for (const control of document.querySelectorAll(CONTROL_SELECTOR)) {
+        if (control === el || el.contains(control) || control.contains(el)) continue;
+        if (control.closest(".visually-hidden, .jw-skip-link")) continue;
+        const style = getComputedStyle(control);
+        if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) continue;
+        const r = control.getBoundingClientRect();
+        if (r.width < 2 || r.height < 2 || !onScreen(r)) continue;
+        const overlaps = !(box.right <= r.left || box.left >= r.right || box.bottom <= r.top || box.top >= r.bottom);
+        if (overlaps) { setHidden(true); return; }
+      }
+      setHidden(false);
+    };
+    update();
+    let raf = 0;
+    const schedule = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [open, pathname]);
+
+  // The page reserves the launcher's height, so the last line of content clears it however far you
+  // scroll. Cleared again if the component ever unmounts.
+  useEffect(() => {
+    const root = document.documentElement;
+    const apply = () => {
+      const el = launcherRef.current;
+      if (!el) return;
+      // The launcher's own height plus its bottom offset and a small gap, so the last line of the
+      // page clears the button wherever it sits in the viewport.
+      root.style.setProperty("--jw-helper-space", `${Math.round(el.offsetHeight + 40)}px`);
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => {
+      window.removeEventListener("resize", apply);
+      root.style.removeProperty("--jw-helper-space");
+    };
+  }, []);
 
   // Restore anything from earlier in this visit.
   useEffect(() => {
@@ -205,40 +254,34 @@ export default function SiteHelper() {
 
   return (
     <>
-      {/* Launcher */}
+      {/* Launcher. The marker and the class are what the item-4 test and the stylesheet key on. */}
       <button
         ref={launcherRef}
         type="button"
+        data-sitehelper-launcher=""
+        data-open={open ? "true" : "false"}
         onClick={() => (open ? close() : setOpen(true))}
         aria-expanded={open}
         aria-controls="jw-helper-panel"
+        aria-label={open ? "Close the question assistant" : "Ask a question"}
+        className="jw-helper-launcher"
         style={{
           position: "fixed",
           right: "1.25rem",
-          // Sat on top of the hero's "For agencies & schools" button on a 390px screen. The doors are the
-          // point of the homepage, so the launcher gets out of their way on small screens.
           bottom: "max(1.25rem, env(safe-area-inset-bottom, 0px))",
           zIndex: 9990,
           maxWidth: "calc(100vw - 2.5rem)",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          padding: "0.7rem 1.1rem",
-          borderRadius: "999px",
-          border: "1px solid rgba(0,0,0,0.06)",
-          background: open ? "var(--text-primary)" : "var(--brand)",
-          color: "#fff",
-          fontSize: "0.95rem",
-          fontWeight: 600,
-          cursor: "pointer",
-          boxShadow: "0 6px 20px rgba(15,23,42,0.18)",
-          opacity: belowHero || open ? 1 : 0,
-          pointerEvents: belowHero || open ? "auto" : "none",
+          opacity: hidden && !open ? 0 : 1,
+          pointerEvents: hidden && !open ? "none" : "auto",
           transition: "opacity 0.2s ease",
         }}
       >
-        <span aria-hidden="true" style={{ fontSize: "1.05rem", lineHeight: 1 }}>{open ? "✕" : "💬"}</span>
-        {open ? "Close" : "Ask a question"}
+        {open ? (
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        ) : (
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M20 15.5a2.5 2.5 0 0 1-2.5 2.5H8l-4 3V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5Z" /><path d="M8.5 9.5h7M8.5 12.5h4" /></svg>
+        )}
+        <span className="jw-helper-launcher-label">{open ? "Close" : "Ask a question"}</span>
       </button>
 
       {open && (
@@ -270,10 +313,8 @@ export default function SiteHelper() {
               borderBottom: "1px solid var(--border)",
             }}
           >
-            <div style={{ fontWeight: 700, color: "var(--text-primary)", fontSize: "0.98rem" }}>
-              Ask about the tuition
-            </div>
-            <div style={{ color: "var(--text-muted)", fontSize: "0.78rem", marginTop: "0.15rem" }}>
+            <div className="jw-helper-title">Ask about the tuition</div>
+            <div className="jw-helper-sub">
               An AI assistant, not James. Anything it cannot answer goes straight to him.
             </div>
           </header>
@@ -286,6 +327,7 @@ export default function SiteHelper() {
             {shown.map((m, i) => (
               <div
                 key={i}
+                className="jw-helper-msg"
                 style={{
                   alignSelf: m.role === "user" ? "flex-end" : "flex-start",
                   maxWidth: "88%",
@@ -293,9 +335,6 @@ export default function SiteHelper() {
                   borderRadius: m.role === "user" ? "12px 12px 3px 12px" : "12px 12px 12px 3px",
                   background: m.role === "user" ? "var(--action)" : "var(--surface)",
                   color: m.role === "user" ? "#fff" : "var(--text-primary)",
-                  fontSize: "0.9rem",
-                  lineHeight: 1.5,
-                  whiteSpace: "pre-wrap",
                 }}
               >
                 {m.content}
@@ -303,7 +342,7 @@ export default function SiteHelper() {
             ))}
 
             {pending && (
-              <div style={{ alignSelf: "flex-start", color: "var(--text-muted)", fontSize: "0.85rem", padding: "0.2rem 0.1rem" }}>
+              <div className="jw-helper-note" style={{ alignSelf: "flex-start", padding: "0.2rem 0.1rem" }}>
                 thinking…
               </div>
             )}
@@ -311,20 +350,7 @@ export default function SiteHelper() {
             {messages.length === 0 && (
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.3rem" }}>
                 {OPENERS.map((o) => (
-                  <button
-                    key={o}
-                    type="button"
-                    onClick={() => send(o)}
-                    style={{
-                      border: "1px solid var(--border)",
-                      background: "#fff",
-                      color: "var(--brand)",
-                      borderRadius: "999px",
-                      padding: "0.35rem 0.7rem",
-                      fontSize: "0.8rem",
-                      cursor: "pointer",
-                    }}
-                  >
+                  <button key={o} type="button" onClick={() => send(o)} className="jw-helper-chip">
                     {o}
                   </button>
                 ))}
@@ -344,7 +370,7 @@ export default function SiteHelper() {
                   gap: "0.6rem",
                 }}
               >
-                <span style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>Want James to come back to you?</span>
+                <span className="jw-helper-note">Want James to come back to you?</span>
                 <button
                   type="button"
                   onClick={() => setFormOpen(true)}
@@ -353,9 +379,9 @@ export default function SiteHelper() {
                     color: "#fff",
                     border: "none",
                     borderRadius: "8px",
-                    padding: "0.4rem 0.7rem",
+                    padding: "0.45rem 0.7rem",
                     fontWeight: 600,
-                    fontSize: "0.82rem",
+                    fontSize: "0.875rem",
                     whiteSpace: "nowrap",
                     cursor: "pointer",
                   }}
@@ -378,7 +404,7 @@ export default function SiteHelper() {
                   gap: "0.45rem",
                 }}
               >
-                <div style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>
+                <div className="jw-helper-note">
                   Leave your name and email and James will come back to you himself.
                 </div>
                 <input
@@ -386,7 +412,7 @@ export default function SiteHelper() {
                   placeholder="Your name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  style={inputStyle}
+                  className="jw-helper-input"
                 />
                 <input
                   required
@@ -394,14 +420,15 @@ export default function SiteHelper() {
                   placeholder="Your email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  style={inputStyle}
+                  className="jw-helper-input"
                 />
                 <textarea
                   rows={2}
                   placeholder="Anything you want him to know (optional)"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  style={{ ...inputStyle, resize: "vertical" }}
+                  className="jw-helper-input"
+                  style={{ resize: "vertical" }}
                 />
                 <button
                   type="submit"
@@ -411,9 +438,9 @@ export default function SiteHelper() {
                     color: "#fff",
                     border: "none",
                     borderRadius: "8px",
-                    padding: "0.5rem 0.8rem",
+                    padding: "0.55rem 0.8rem",
                     fontWeight: 600,
-                    fontSize: "0.88rem",
+                    fontSize: "0.9375rem",
                     cursor: formState === "sending" ? "default" : "pointer",
                     opacity: formState === "sending" ? 0.7 : 1,
                   }}
@@ -421,11 +448,11 @@ export default function SiteHelper() {
                   {formState === "sending" ? "Sending…" : "Send to James"}
                 </button>
                 {formState === "error" && (
-                  <div style={{ color: "#b42318", fontSize: "0.8rem" }}>
+                  <div className="jw-helper-error">
                     That did not go through. Email hello@jameswallace.tech or ring 07897 021077.
                   </div>
                 )}
-                <div style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>
+                <div className="jw-helper-note">
                   Your details are used only to reply to you. See the{" "}
                   <a href="/privacy" style={{ color: "var(--brand)" }}>privacy notice</a>.
                 </div>
@@ -443,23 +470,15 @@ export default function SiteHelper() {
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
               placeholder="Type your question…"
-              style={{ ...inputStyle, flex: 1 }}
+              className="jw-helper-input"
+              style={{ flex: 1 }}
             />
             <button
               type="button"
               onClick={() => send()}
               disabled={pending || !draft.trim()}
-              style={{
-                background: "var(--brand)",
-                color: "#fff",
-                border: "none",
-                borderRadius: "8px",
-                padding: "0 0.85rem",
-                fontWeight: 600,
-                fontSize: "0.88rem",
-                cursor: pending || !draft.trim() ? "default" : "pointer",
-                opacity: pending || !draft.trim() ? 0.5 : 1,
-              }}
+              className="jw-helper-send"
+              style={{ cursor: pending || !draft.trim() ? "default" : "pointer", opacity: pending || !draft.trim() ? 0.5 : 1 }}
             >
               Send
             </button>
@@ -469,13 +488,3 @@ export default function SiteHelper() {
     </>
   );
 }
-
-const inputStyle = {
-  border: "1px solid var(--border)",
-  borderRadius: "8px",
-  padding: "0.5rem 0.65rem",
-  fontSize: "0.88rem",
-  color: "var(--text-primary)",
-  background: "#fff",
-  width: "100%",
-};

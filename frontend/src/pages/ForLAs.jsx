@@ -44,6 +44,29 @@ const monthlyDeliverables = [
   { item: "Invoice", detail: "Session-level billing with funding stream tagging" },
 ];
 
+const referralSteps = [
+  {
+    step: "1",
+    title: "Initial referral",
+    desc: `Submit the referral form on this site or contact me directly. I'll respond ${REPLY.within} to discuss the placement.`,
+  },
+  {
+    step: "2",
+    title: "Documentation",
+    desc: "I'll need the current EHCP or SEN support plan, LA commissioning letter or PO reference, risk assessment, and preferred hours per week.",
+  },
+  {
+    step: "3",
+    title: "Placement assessment",
+    desc: "I review the documentation and confirm a placement start date, available hours, and PLP scope.",
+  },
+  {
+    step: "4",
+    title: "Delivery begins",
+    desc: "Sessions commence. Weekly plans submitted and approved. Daily reports filed within 24 hours. Safeguarding and lone working active from day one.",
+  },
+];
+
 // Structured data for the commissioned service, built like Tuition.jsx's Service node. The
 // credentials are the set already published on /agencies, read from facts.js where a value lives
 // there. No price, address or profile link is added; the service is described, not the business.
@@ -85,12 +108,12 @@ export default function ForLAs() {
         For Local Authorities &amp; Schools
       </PhotoBanner>
 
-      {/* Hero */}
+      {/* Hero. LOOK-SITE-1 item 3: the two unreadable thumbnails are replaced by one readable image. */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
-          <div className="row align-items-center g-4">
-            <div className="col-12 col-lg-7 text-center text-lg-start">
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-7">
+              <p className="jw-lede">
                 Commissioning EOTAS provision should be clear. James Wallace Education, the provision operated by James Wallace,
                 is built to give commissioners and referrers visibility of a
                 placement - from session evidence to safeguarding nil
@@ -107,56 +130,49 @@ export default function ForLAs() {
               </div>
             </div>
             <div className="col-12 col-lg-5">
-              <div className="row g-3">
-                <div className="col-6">
-                  <img
-                    src="/portal/09-provision.webp"
-                    alt="Provision assurance view"
-                    style={{ width: "100%", borderRadius: "8px", border: "1px solid var(--border)" }}
-                  />
-                  <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.4rem", marginBottom: 0 }}>
-                    Provision assurance
-                  </p>
-                </div>
-                <div className="col-6">
-                  <img
-                    src="/portal/10-finance.webp"
-                    alt="Finance and billing view"
-                    style={{ width: "100%", borderRadius: "8px", border: "1px solid var(--border)" }}
-                  />
-                  <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.4rem", marginBottom: 0 }}>
-                    Finance &amp; billing
-                  </p>
-                </div>
-              </div>
+              <figure className="jw-shot">
+                <img
+                  src="/portal/10-finance.webp"
+                  alt={`Finance and billing view in ${PRODUCT.name}`}
+                  loading="lazy"
+                />
+                <figcaption>
+                  Finance &amp; billing in {PRODUCT.name}.{" "}
+                  <a className="jw-shot-open" href="/portal/10-finance.webp" target="_blank" rel="noopener noreferrer">
+                    Open full size<span aria-hidden="true"> ↗</span>
+                  </a>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
       </section>
 
       {/* Pictures of the work (supplied by James, 11 Oct 2026; illustrative). */}
-      <section className="jw-section jw-section-white" style={{ paddingBlock: "2.5rem" }}>
+      <section className="jw-section jw-section--media jw-section-white">
         <div className="jw-container">
           <div className="row g-4 align-items-stretch">
             <div className="col-12 col-lg-7">
-              <img
-                src="/hero/evidence-1400.webp"
-                srcSet="/hero/evidence-700.webp 700w, /hero/evidence-1400.webp 1400w"
-                sizes="(max-width: 991px) 100vw, 46rem"
-                loading="lazy"
-                alt="A laptop showing charts beside a printed report on a desk."
-                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
-              />
+              <figure className="jw-media-figure">
+                <img
+                  src="/hero/evidence-1400.webp"
+                  srcSet="/hero/evidence-700.webp 700w, /hero/evidence-1400.webp 1400w"
+                  sizes="(max-width: 991px) 100vw, 46rem"
+                  loading="lazy"
+                  alt="A laptop showing charts beside a printed report on a desk."
+                />
+              </figure>
             </div>
             <div className="col-12 col-lg-5">
-              <img
-                src="/hero/professionals-1100.webp"
-                srcSet="/hero/professionals-600.webp 600w, /hero/professionals-1100.webp 1100w"
-                sizes="(max-width: 991px) 100vw, 32rem"
-                loading="lazy"
-                alt="Three professionals talking over a folder at a round table."
-                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
-              />
+              <figure className="jw-media-figure">
+                <img
+                  src="/hero/professionals-1100.webp"
+                  srcSet="/hero/professionals-600.webp 600w, /hero/professionals-1100.webp 1100w"
+                  sizes="(max-width: 991px) 100vw, 32rem"
+                  loading="lazy"
+                  alt="Three professionals talking over a folder at a round table."
+                />
+              </figure>
             </div>
           </div>
         </div>
@@ -175,122 +191,51 @@ export default function ForLAs() {
         </section>
       ))}
 
-      {/* Referral process */}
+      {/* Referral process — ruled rows, no numbered circles */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-2">A clear route from referral to review</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "540px", margin: "0 auto 3rem" }}
-          >
+          <h2>A clear route from referral to review</h2>
+          <p className="jw-body jw-measure">
             I respond to referral enquiries {REPLY.within} and begin
               placement assessments within 5 working days of receiving a commission.
           </p>
-          <div className="row g-4">
-            {[
-              {
-                step: "1",
-                title: "Initial Referral",
-                desc: `Submit the referral form on this site or contact me directly. I'll respond ${REPLY.within} to discuss the placement.`,
-              },
-              {
-                step: "2",
-                title: "Documentation",
-                desc: "I'll need the current EHCP or SEN support plan, LA commissioning letter or PO reference, risk assessment, and preferred hours per week.",
-              },
-              {
-                step: "3",
-                title: "Placement Assessment",
-                desc: "I review the documentation and confirm a placement start date, available hours, and PLP scope.",
-              },
-              {
-                step: "4",
-                title: "Delivery Begins",
-                desc: "Sessions commence. Weekly plans submitted and approved. Daily reports filed within 24 hours. Safeguarding and lone working active from day one.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="col-12 col-md-6 col-lg-3">
-                <div className="jw-card h-100">
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "50%",
-                      background: "var(--brand)",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 700,
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    {item.step}
-                  </div>
-                  <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.5rem" }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "0.875rem" }}>{item.desc}</p>
-                </div>
-              </div>
+          <ul className="jw-row-list">
+            {referralSteps.map((item) => (
+              <li key={item.step}>
+                <h3>{item.step}. {item.title}</h3>
+                <p>{item.desc}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* Monthly deliverables */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Monthly Deliverables</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
-          >
+          <h2>Monthly deliverables</h2>
+          <p className="jw-body jw-measure">
             The platform is built to produce the following each calendar
             month. What a placement actually receives is agreed in the
             commission.{" "}
             <Link to="/sample-report">See a sample report</Link>, shown with invented data.
           </p>
-          <div className="jw-card mx-auto" style={{ maxWidth: "700px", padding: 0, overflow: "hidden" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
-              <thead>
-                <tr style={{ background: "var(--brand)", color: "#fff" }}>
-                  <th style={{ padding: "0.75rem 1.25rem", textAlign: "left", fontWeight: 600 }}>
-                    Deliverable
-                  </th>
-                  <th style={{ padding: "0.75rem 1.25rem", textAlign: "left", fontWeight: 600 }}>
-                    Detail
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {monthlyDeliverables.map((row, i) => (
-                  <tr
-                    key={row.item}
-                    style={{
-                      background: i % 2 === 0 ? "var(--surface)" : "transparent",
-                      borderBottom: "1px solid var(--border)",
-                    }}
-                  >
-                    <td style={{ padding: "0.75rem 1.25rem", fontWeight: 600 }}>
-                      {row.item}
-                    </td>
-                    <td style={{ padding: "0.75rem 1.25rem", color: "var(--text-muted)" }}>
-                      {row.detail}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ul className="jw-row-list">
+            {monthlyDeliverables.map((row) => (
+              <li key={row.item}>
+                <h3>{row.item}</h3>
+                <p>{row.detail}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* Prices: the rates tendered to Derbyshire, Leicestershire and Nottingham, read from facts.js. */}
+      {/* Prices. The rates come from facts.js and are unchanged. */}
       <section className="jw-section jw-section-white" id="prices">
-        <div className="jw-container" style={{ maxWidth: "860px" }}>
-          <h2 className="text-center mb-2">What it costs</h2>
-          <p className="text-center" style={{ maxWidth: "560px", margin: "0 auto 2.5rem" }}>
+        <div className="jw-container">
+          <h2>What it costs</h2>
+          <p className="jw-body jw-measure">
             One set of prices for each way of teaching, by the hour, half day or day, with the work around the session included.
           </p>
           <div className="row g-4">
@@ -300,13 +245,13 @@ export default function ForLAs() {
             ].map((f) => (
               <div key={f.title} className="col-12 col-md-6">
                 <div className="jw-card h-100">
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.5rem" }}>
-                    <span style={{ fontSize: "2rem", fontWeight: 700, color: "var(--action)", lineHeight: 1 }}>{f.rate}</span>
-                    <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>per hour</span>
+                  <div className="jw-rate">
+                    <strong>{f.rate}</strong>
+                    <span className="jw-caption">per hour</span>
                   </div>
-                  <h3 style={{ fontSize: "1.05rem", marginBottom: "0.5rem" }}>{f.title}</h3>
-                  <p style={{ marginBottom: "0.75rem", color: "var(--text-muted)", fontSize: "0.95rem" }}>{f.body}</p>
-                  <p style={{ marginBottom: 0, fontSize: "0.92rem" }}>
+                  <h3>{f.title}</h3>
+                  <p className="jw-body" style={{ color: "var(--text-muted)" }}>{f.body}</p>
+                  <p className="jw-body">
                     Half day, up to 3 hours: <strong>{f.halfDay}</strong>
                     <br />
                     Day, up to 5.5 hours: <strong>{f.day}</strong>
@@ -315,18 +260,16 @@ export default function ForLAs() {
               </div>
             ))}
           </div>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", margin: "1.5rem 0 0.4rem" }}>
-            <strong style={{ color: "var(--text-primary)" }}>Frameworks:</strong> where a council buys through a framework, the
-            prices and units are the ones tendered to that framework. Some buy by the half day and day and not by the hour.
-            A placement is {DELIVERY.hoursPerWeek} for each pupil.
+          <p className="jw-caption">
+            Some buy by the half day and day and not by the hour. A placement is {DELIVERY.hoursPerWeek} for each pupil.
           </p>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", margin: "0 0 0.4rem" }}>
-            <strong style={{ color: "var(--text-primary)" }}>Included:</strong> planning and preparation, a report within 24 hours of
+          <p className="jw-caption">
+            <strong>Included:</strong> planning and preparation, a report within 24 hours of
             every session, monthly reporting, safeguarding records and a monthly nil return, travel to the session, and
             attendance at reviews by agreement.
           </p>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", margin: 0 }}>
-            <strong style={{ color: "var(--text-primary)" }}>Not included:</strong> transport for the young person, and exam or
+          <p className="jw-caption">
+            <strong>Not included:</strong> transport for the young person, and exam or
             accreditation fees, which are charged at cost where agreed in advance. James Wallace Education Ltd is not VAT
             registered, so no VAT is added. Billing is monthly in arrears, session by session.
           </p>
@@ -338,14 +281,14 @@ export default function ForLAs() {
         <div className="jw-container">
           <div className="row align-items-center g-5">
             <div className="col-12 col-lg-6">
-              <h2>Policies &amp; Procedures</h2>
-              <p>
+              <h2>Policies &amp; procedures</h2>
+              <p className="jw-body">
                 James Wallace Education keeps an EOTAS-aligned policy suite
                 covering Safeguarding, Lone Working, Data Protection, Health
                 &amp; Safety, Behaviour Support, and more. The suite was {POLICY_PACK.status}; policies are shared with
                 commissioners on request.
               </p>
-              <p>
+              <p className="jw-body">
                 Ask for the current approved policies, or a specific policy for
                 review before commissioning.
               </p>
@@ -358,57 +301,38 @@ export default function ForLAs() {
                   Request approved policies
                 </Link>
               </div>
-              <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
+              <p className="jw-caption">
                 Free parent guides I maintain: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a>.
               </p>
             </div>
             <div className="col-12 col-lg-6">
-              <img
-                src="/portal/11-policies.webp"
-                alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  border: "1px solid var(--border)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                }}
-              />
+              <figure className="jw-shot jw-shot--sm">
+                <img
+                  src="/portal/11-policies.webp"
+                  alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
+                  loading="lazy"
+                />
+              </figure>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Commissioner Q&A */}
+      {/* Commissioner Q&A — ruled rows */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Commissioner Questions</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "520px", margin: "0 auto 3rem" }}
-          >
+          <h2>Commissioner questions</h2>
+          <p className="jw-body jw-measure">
             The questions commissioners most commonly ask - answered directly.
           </p>
-          <div className="row g-4">
-            {commissionerQA.map((item, i) => (
-              <div key={i} className="col-12 col-md-6">
-                <div className="jw-card h-100">
-                  <h3
-                    style={{
-                      fontWeight: 600,
-                      fontSize: "0.95rem",
-                      marginBottom: "0.75rem",
-                      color: "var(--text-primary)",
-                    }}
-                  >
-                    &quot;{item.q}&quot;
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-muted)" }}>
-                    {item.a}
-                  </p>
-                </div>
-              </div>
+          <ul className="jw-row-list">
+            {commissionerQA.map((item) => (
+              <li key={item.q}>
+                <h3>&quot;{item.q}&quot;</h3>
+                <p>{item.a}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -416,7 +340,7 @@ export default function ForLAs() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2>Ready to commission?</h2>
-          <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
+          <p className="jw-body jw-measure jw-measure--center">
             Submit a referral or request an evidence pack. I respond {REPLY.within}.
           </p>
           <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
 import { AREA, SESSIONS, PROFILES, BIO, REFERENCES } from "../data/facts";
 import { councilRows } from "../lib/council-policies";
+import PageHeader from "../components/PageHeader";
 
 /**
  * Specialist SEND tuition in Derbyshire — a county landing page for a parent or professional
@@ -59,32 +60,17 @@ export default function SendTuitionDerbyshire() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container">
-          <div className="row">
-            <div className="col-12 col-lg-8">
-              <span className="jw-badge jw-badge-brand mb-3" style={{ display: "inline-block" }}>
-                For families in Derbyshire and Derby
-              </span>
-              <h1 style={{ marginBottom: "1.25rem" }}>Specialist SEND tuition in Derbyshire</h1>
-              <p style={{ fontSize: "1.05rem", marginBottom: "1.75rem" }}>
-                If your child is out of school in Derbyshire and you are looking for a one-to-one tutor, this page
-                collects the routes Derbyshire County Council and Derby City Council publish for children who cannot
-                attend school, and explains how I can teach here.
-              </p>
-              <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact?for=parent" className="jw-btn-primary">
-                  Arrange a conversation
-                </Link>
-                <Link to="/tuition" className="jw-btn-secondary">
-                  How tuition works
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Style B hero, no image (LOOK-SITE-1 item 5). */}
+      <PageHeader
+        eyebrow="For families in Derbyshire and Derby"
+        title="Specialist SEND tuition in Derbyshire"
+        lede="If your child is out of school in Derbyshire and you are looking for a one-to-one tutor, this page collects the routes Derbyshire County Council and Derby City Council publish for children who cannot attend school, and explains how I can teach here."
+        actions={<>
+          <Link to="/contact?for=parent" className="jw-btn-primary">Arrange a conversation</Link>
+          <Link to="/tuition" className="jw-btn-secondary">How tuition works</Link>
+        </>}
+        noImage
+      />
 
       {/* Where, in Derbyshire */}
       <section className="jw-section jw-section-white">
@@ -128,14 +114,14 @@ export default function SendTuitionDerbyshire() {
                             <a href={row.url} target="_blank" rel="noopener noreferrer">
                               {row.title}
                             </a>{" "}
-                            <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+                            <span className="jw-caption">
                               (checked {row.checked})
                             </span>
                           </>
                         ) : (
                           <>
                             {row.label}: none found{" "}
-                            <span style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
+                            <span className="jw-caption">
                               (checked {row.checked})
                             </span>
                           </>
@@ -156,7 +142,7 @@ export default function SendTuitionDerbyshire() {
           <div className="row">
             <div className="col-12 col-lg-8">
               <h2 style={{ marginBottom: "1rem" }}>How I teach in Derbyshire</h2>
-              <p style={{ color: "var(--text-muted)", marginBottom: "1rem" }}>
+              <p className="jw-body" style={{ color: "var(--text-muted)", marginBottom: "1rem" }}>
                 Thirteen years teaching in specialist provision, twelve of them in a special school, and in between
                 five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team. {AREA.sentence}{" "}
                 {SESSIONS.school} For sessions at the child&#39;s home or in a community setting, a responsible adult
@@ -186,7 +172,7 @@ export default function SendTuitionDerbyshire() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "1.25rem" }}>Talk to me about tuition in Derbyshire</h2>
-          <p style={{ maxWidth: "560px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
+          <p className="jw-body jw-measure jw-measure--center">
             If your child cannot attend school in Derbyshire, the first step is a short conversation about them, with no
             commitment to book anything.
           </p>

@@ -99,7 +99,7 @@ export default function Agencies() {
         <div className="jw-container">
           <div className="row align-items-center g-5">
             <div className="col-12 col-lg-7">
-              <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
+              <p className="jw-lede">
                 QTS since 2004, a Master of Education, thirteen years teaching in specialist provision — twelve of them in a
                 special school — and five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
               </p>
@@ -122,7 +122,7 @@ export default function Agencies() {
               <div className="jw-card">
                 <h2 style={{ fontSize: "1rem", marginBottom: "0.25rem" }}>Availability</h2>
                 {/* Dated, so a booker can tell this is live rather than something written last term. */}
-                <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.75rem" }}>
+                <p className="jw-caption" style={{ marginBottom: "0.75rem" }}>
                   Reviewed {AVAILABILITY.reviewed}
                 </p>
                 <p style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>
@@ -138,28 +138,30 @@ export default function Agencies() {
       </section>
 
       {/* Pictures of the work (supplied by James, 11 Oct 2026; illustrative). */}
-      <section className="jw-section jw-section-white" style={{ paddingBlock: "2.5rem" }}>
+      <section className="jw-section jw-section--media jw-section-white">
         <div className="jw-container">
           <div className="row g-4 align-items-stretch">
             <div className="col-12 col-lg-8">
+              <figure className="jw-media-figure">
               <img
                 src="/hero/community-1600.webp"
                 srcSet="/hero/community-800.webp 800w, /hero/community-1600.webp 1600w"
                 sizes="(max-width: 991px) 100vw, 52rem"
                 loading="lazy"
                 alt="A teenager and a tutor working together at a table in a library, both smiling."
-                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
               />
+              </figure>
             </div>
             <div className="col-12 col-lg-4">
+              <figure className="jw-media-figure">
               <img
                 src="/hero/workbag-1100.webp"
                 srcSet="/hero/workbag-600.webp 600w, /hero/workbag-1100.webp 1100w"
                 sizes="(max-width: 991px) 100vw, 26rem"
                 loading="lazy"
                 alt="A tutor's bag, laptop, folder, mini whiteboard, pens and lanyard laid out on a table."
-                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
               />
+              </figure>
             </div>
           </div>
         </div>
@@ -187,11 +189,11 @@ export default function Agencies() {
                   ✓
                 </span>
                 <span style={{ fontWeight: 600, minWidth: "230px", flex: "0 1 auto" }}>{c.item}</span>
-                <span style={{ color: "var(--text-muted)", fontSize: "0.92rem", flex: "1 1 260px" }}>{c.detail}</span>
+                <span className="jw-caption" style={{ flex: "1 1 260px" }}>{c.detail}</span>
               </div>
             ))}
           </div>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "1rem", marginBottom: 0 }}>
+          <p className="jw-caption" style={{ marginTop: "1rem", marginBottom: 0 }}>
             My own safeguarding, e-safety, lone-working, risk assessment and behaviour policies were {POLICY_PACK.status}.
             They can be shared before a first placement.
           </p>
@@ -243,7 +245,7 @@ export default function Agencies() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2 style={{ marginBottom: "1rem" }}>Compliance pack on request</h2>
-          <p style={{ maxWidth: "580px", margin: "0 auto 1.5rem", color: "var(--text-muted)" }}>
+          <p className="jw-body jw-measure jw-measure--center">
             Certificates, DBS details, references and approved policies are available on request. Tell me what your onboarding needs and I
             will send it in the format you use.
           </p>

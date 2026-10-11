@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import usePageMeta from "../hooks/usePageMeta";
+import PageHeader from "./PageHeader";
 
 /**
  * The furniture the legal and information pages share.
@@ -17,17 +18,8 @@ export function LegalPage({ title, metaTitle, description, path, updated, intro,
 
   return (
     <>
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container" style={{ maxWidth: "780px" }}>
-          <h1>{title}</h1>
-          {intro && (
-            <p style={{ fontSize: "1.05rem", maxWidth: "620px", marginBottom: "1rem" }}>{intro}</p>
-          )}
-          {updated && (
-            <p style={{ color: "var(--text-muted)", marginBottom: 0 }}>{updated}</p>
-          )}
-        </div>
-      </section>
+      {/* Style B without an image (LOOK-SITE-1 item 5): the same header every other inner page uses. */}
+      <PageHeader title={title} lede={intro} note={updated} noImage />
 
       <section className="jw-section jw-section-white">
         <div className="jw-container" style={{ maxWidth: "780px" }}>{children}</div>
@@ -74,11 +66,11 @@ export function LegalTable({ caption, columns, rows }) {
         words. The wrapper already scrolls (overflowX above).
       */}
       <table
+        className="jw-cell"
         style={{
           width: "100%",
           minWidth: "40rem",
           borderCollapse: "collapse",
-          fontSize: "0.875rem",
           overflowWrap: "normal",
           wordBreak: "normal",
         }}

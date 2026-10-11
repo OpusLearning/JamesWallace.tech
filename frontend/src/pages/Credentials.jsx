@@ -1,6 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING, REVIEWED, PROJECT_SEARCH, REFERENCES as references, POLICY_PACK } from "../data/facts";
+import PageHeader from "../components/PageHeader";
 import "./Credentials.css";
 
 const academicQuals = [
@@ -570,36 +571,33 @@ export default function Credentials() {
 
   return (
     <div className="credentials-page">
-      <section className="credentials-hero jw-section" aria-labelledby="credentials-heading">
-        <div className="jw-container credentials-hero-grid">
-          <div>
-            <p className="jw-eyebrow">Qualifications &amp; experience</p>
-            <h1 id="credentials-heading">The experience <br /><em>behind the teaching.</em></h1>
-            <p className="credentials-lead">A qualified teacher, a specialist background, and a clear record of the work behind both.</p>
-            <p className="credentials-introduction">Here you can read my qualifications and experience, hear from previous colleagues, and inspect the training certificates. The detail is here for families and professionals alike.</p>
-            <a href="#qualifications" className="jw-text-link">Explore the evidence <span aria-hidden="true">↓</span></a>
-          </div>
-          <aside className="credentials-summary" aria-label="Professional background at a glance">
-            <img
-              src="/hero/credentials-1100.webp"
-              srcSet="/hero/credentials-600.webp 600w, /hero/credentials-1100.webp 1100w"
-              sizes="(max-width: 991px) 100vw, 28rem"
-              width="1100"
-              height="1100"
-              fetchPriority="high"
-              alt="A document folder, a lanyard with an ID card holder and a pen on a desk."
-              style={{ display: "block", width: "100%", height: "auto", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "center 70%", borderRadius: "14px", marginBottom: "1.5rem" }}
-            />
-            <p className="jw-eyebrow">James Wallace · QTS, MEd</p>
-            <dl>
-              <div><dt>Teaching</dt><dd>Thirteen years in specialist provision.<span>Twelve of them at Foxwood Academy.</span></dd></div>
-              <div><dt>Commissioning</dt><dd>Five years in a local authority.<span>Nottinghamshire County Council’s children’s commissioning team.</span></dd></div>
-              <div><dt>Professional checks</dt><dd>Enhanced DBS.<span>Registered with the Update Service.</span></dd></div>
-            </dl>
-            <Link to="/compliance" className="jw-text-link">Compliance and safeguarding <span aria-hidden="true">↗</span></Link>
-          </aside>
-        </div>
-      </section>
+      {/* Style B (LOOK-SITE-1 item 5), with the professional-background summary kept under the image. */}
+      <PageHeader
+        eyebrow="Qualifications & experience"
+        title={<>The experience <br /><em>behind the teaching.</em></>}
+        lede="A qualified teacher, a specialist background, and a clear record of the work behind both."
+        body={<p className="jw-body">Here you can read my qualifications and experience, hear from previous colleagues, and inspect the training certificates. The detail is here for families and professionals alike.</p>}
+        actions={<a href="#qualifications" className="jw-text-link">Explore the evidence <span aria-hidden="true">↓</span></a>}
+        image={{
+          src: "/hero/credentials-1100.webp",
+          srcSet: "/hero/credentials-600.webp 600w, /hero/credentials-1100.webp 1100w",
+          sizes: "(max-width: 991px) 100vw, 28rem",
+          width: 1100,
+          height: 1100,
+          fetchPriority: "high",
+          alt: "A document folder, a lanyard with an ID card holder and a pen on a desk.",
+        }}
+      >
+        <aside className="credentials-summary" aria-label="Professional background at a glance">
+          <p className="jw-eyebrow">James Wallace · QTS, MEd</p>
+          <dl>
+            <div><dt>Teaching</dt><dd>Thirteen years in specialist provision.<span>Twelve of them at Foxwood Academy.</span></dd></div>
+            <div><dt>Commissioning</dt><dd>Five years in a local authority.<span>Nottinghamshire County Council’s children’s commissioning team.</span></dd></div>
+            <div><dt>Professional checks</dt><dd>Enhanced DBS.<span>Registered with the Update Service.</span></dd></div>
+          </dl>
+          <Link to="/compliance" className="jw-text-link">Compliance and safeguarding <span aria-hidden="true">↗</span></Link>
+        </aside>
+      </PageHeader>
 
       <nav className="credentials-index" aria-label="On this credentials page">
         <div className="jw-container"><span>On this page</span><ul><li><a href="#qualifications">Qualifications</a></li><li><a href="#experience">Experience</a></li><li><a href="#references">References</a></li><li><a href="#training">Training &amp; certificates</a></li><li><a href="#professional-checks">Professional checks</a></li></ul></div>

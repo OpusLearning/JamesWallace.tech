@@ -1,5 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
+import PageHeader from "../components/PageHeader";
 
 // A sample of the two records a commissioner receives. EVERY name, date and figure here is invented:
 // nothing on this page comes from a learner's record. The field list follows the portal's own session
@@ -64,24 +65,22 @@ export default function SampleReport() {
 
   return (
     <>
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container" style={{ maxWidth: "860px" }}>
-          <p className="jw-eyebrow">Sample, with invented data</p>
-          <h1>What a commissioner receives</h1>
-          <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-            One session report and one monthly summary, laid out with the fields recorded for every session.
-            Every name, date and figure on this page is invented. No learner&apos;s record is shown here, and
-            none ever will be.
-          </p>
-          <p style={{ fontSize: "0.95rem", lineHeight: 1.65, color: "var(--text-muted)" }}>
+      {/* Style B hero, no image: this page is a document, not a photograph (LOOK-SITE-1 item 5). */}
+      <PageHeader
+        eyebrow="Sample, with invented data"
+        title="What a commissioner receives"
+        lede="One session report and one monthly summary, laid out with the fields recorded for every session. Every name, date and figure on this page is invented. No learner's record is shown here, and none ever will be."
+        body={
+          <p className="jw-caption">
             The engagement score is the teacher&apos;s own observation of that session, on a scale of 0 to 5.
             It shows how a learner&apos;s engagement changes over time. It is not a measure of attainment.
           </p>
-        </div>
-      </section>
+        }
+        noImage
+      />
 
       <section className="jw-section jw-section-white">
-        <div className="jw-container" style={{ maxWidth: "860px" }}>
+        <div className="jw-container jw-measure--doc">
           <article className="jw-sample-doc" aria-labelledby="sample-session">
             <p className="jw-sample-stamp">Sample: invented data</p>
             <h2 id="sample-session">Session report</h2>
@@ -121,7 +120,7 @@ export default function SampleReport() {
             </p>
           </article>
 
-          <article className="jw-sample-doc" aria-labelledby="sample-month" style={{ marginTop: "2.5rem" }}>
+          <article className="jw-sample-doc" aria-labelledby="sample-month">
             <p className="jw-sample-stamp">Sample: invented data</p>
             <h2 id="sample-month">Monthly summary</h2>
             <p>Month 2 of the placement, for the commissioning officer.</p>
@@ -135,7 +134,7 @@ export default function SampleReport() {
             </p>
           </article>
 
-          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "2rem" }}>
+          <p className="jw-caption" style={{ marginTop: "2rem" }}>
             A real report is shared only with the commissioner and the people named in the placement plan.
             What a placement receives, and how often, is agreed in the commission.
           </p>

@@ -1,11 +1,12 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { PRODUCT, POLICY_PACK, HOSTING, PLATFORM_STATUS } from "../data/facts";
+import PageHeader from "../components/PageHeader";
 
 const screenshots = [
   {
     file: "01-dashboard",
-    title: "Supervisor Dashboard",
+    title: "Supervisor dashboard",
     bullets: [
       "Live overview of the full active portfolio",
       "Active case count, weekly session activity, engagement scores",
@@ -15,7 +16,7 @@ const screenshots = [
   },
   {
     file: "02-case-flags",
-    title: "Case Flags & Early Warning System",
+    title: "Case flags & early warning system",
     bullets: [
       "Automated flags when a learner has had no session in 14+ days",
       "Flags when engagement scores drop across three or more consecutive sessions",
@@ -26,7 +27,7 @@ const screenshots = [
   },
   {
     file: "03a-case-detail",
-    title: "Case Management",
+    title: "Case management",
     bullets: [
       "Full learner profile: EHCP, risk assessment, carer contacts, medical information",
       "Referral details, commissioning letter, and placement history in one place",
@@ -36,7 +37,7 @@ const screenshots = [
   },
   {
     file: "03b-weekly-plan-tab",
-    title: "Weekly Plan Workflow",
+    title: "Weekly plan workflow",
     bullets: [
       "Structured weekly plan - PLP criteria to target, planned activities per subject, session logistics",
       "Supervisor approval before delivery begins - creates the evidence baseline for the week",
@@ -47,7 +48,7 @@ const screenshots = [
   },
   {
     file: "04-daily-reports",
-    title: "Daily Session Reports",
+    title: "Daily session reports",
     bullets: [
       "Submitted within 24 hours of each session",
       "Attendance and engagement score (0 to 5)",
@@ -58,7 +59,7 @@ const screenshots = [
   },
   {
     file: "05-plp-analytics",
-    title: "PLP Analytics",
+    title: "PLP analytics",
     bullets: [
       "Portfolio-wide view of PLP engagement and criterion completion rates",
       "Individual PLP with EHCP-aligned targets, teaching strategies, and measurable success criteria",
@@ -68,7 +69,7 @@ const screenshots = [
   },
   {
     file: "06-safeguarding",
-    title: "Safeguarding Management",
+    title: "Safeguarding management",
     bullets: [
       "All concerns logged immediately, stored encrypted, tracked through a structured lifecycle",
       "Queued → In Progress → Resolved / Escalated workflow",
@@ -79,7 +80,7 @@ const screenshots = [
   },
   {
     file: "07-lone-working",
-    title: "Lone Working Safety",
+    title: "Lone working safety",
     note: "Portal capability. Built for multi-practitioner providers; as a sole practitioner James uses the check-in, check-out and audit trail, and the escalation route is agreed with the commissioner before teaching starts.",
     bullets: [
       "Check-in at session start; check-out at session end",
@@ -91,7 +92,7 @@ const screenshots = [
   },
   {
     file: "08-compliance",
-    title: "Compliance Dashboard",
+    title: "Compliance dashboard",
     bullets: [
       "DBS, safeguarding, right-to-work and mandatory training tracked with RAG status and expiry alerts",
       "Team-wide compliance summary highlighting expiring or expired records",
@@ -101,7 +102,7 @@ const screenshots = [
   },
   {
     file: "09-provision",
-    title: "Provision Assurance",
+    title: "Provision assurance",
     bullets: [
       "Live portfolio view of commissioned vs. delivered hours for every active case",
       "RAG status, variance percentage, and recovery projections",
@@ -112,7 +113,7 @@ const screenshots = [
   },
   {
     file: "10-finance",
-    title: "Finance & Billing",
+    title: "Finance & billing",
     note: "Portal capability. The platform is built to turn session records into delivery reports and invoices; what a commission actually receives each month is agreed in the commission.",
     bullets: [
       "Every submitted session report automatically creates a billable record",
@@ -124,7 +125,7 @@ const screenshots = [
   },
   {
     file: "11-policies",
-    title: "Policies & Procedures",
+    title: "Policies & procedures",
     note: `Portal capability. The policy suite was ${POLICY_PACK.status}; policies are shared with commissioners on request.`,
     bullets: [
       "EOTAS-aligned policy library - Safeguarding, Lone Working, Data Protection, and more",
@@ -135,7 +136,7 @@ const screenshots = [
   },
   {
     file: "12-inspection-bundle",
-    title: "Inspection-Ready Exports",
+    title: "Inspection-ready exports",
     bullets: [
       "Full Inspection Bundle PDF for any case: PLP, weekly plans, daily evidence, safeguarding timeline, lone working log",
       "Case chronologies, supervision records, compliance audit logs and approved policies",
@@ -145,10 +146,18 @@ const screenshots = [
   },
 ];
 
+// LOOK-SITE-1 item 2: the emoji that sat on these three tiles are gone; they are a plain ruled list.
 const proofTiles = [
-  { stat: "Minutes", label: "Inspection bundle generated", icon: "⚡" },
-  { stat: "Real-time", label: "Lone working escalation", icon: "🛡" },
-  { stat: "On request", label: "Approved policies", icon: "📋" },
+  { stat: "Minutes", label: "Inspection bundle generated" },
+  { stat: "Real-time", label: "Lone working escalation" },
+  { stat: "On request", label: "Approved policies" },
+];
+
+const securityPoints = [
+  { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest - learner names, diagnoses, carer contacts, session notes" },
+  { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
+  { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
+  { label: "EU hosting, moving to the UK", desc: `Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data protection information available on request.` },
 ];
 
 export default function Platform() {
@@ -161,94 +170,83 @@ export default function Platform() {
 
   return (
     <>
-      {/* Intro */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container text-center">
-          <h1>{PRODUCT.name}</h1>
-          <p
-            style={{
-              fontSize: "1.1rem",
-              maxWidth: "660px",
-              margin: "1rem auto 2rem",
-              lineHeight: 1.7,
-            }}
-          >
-            Purpose-built for EOTAS providers. Not adapted from a school MIS.
-          </p>
-          <p
-            style={{
-              maxWidth: "680px",
-              margin: "0 auto 2rem",
-              fontSize: "0.95rem",
-            }}
-          >
+      {/* Style B hero (LOOK-SITE-1 item 5) — the cleanest of the portal screenshots. */}
+      <PageHeader
+        title={PRODUCT.name}
+        lede="Purpose-built for EOTAS providers. Not adapted from a school MIS."
+        body={
+          <p className="jw-body">
             The provision runs on a case management platform I built
             specifically for EOTAS and alternative provision delivery. It is built
             to track every aspect of a learner’s placement from first referral
             through to case closure, so a parent, an agency or a commissioner
             can see what happened without having to ask. {PLATFORM_STATUS.sentence}
           </p>
-          <div className="d-flex flex-wrap justify-content-center gap-3">
-            <Link to="/contact?for=commissioner" className="jw-btn-primary">
-              Request a Demo
-            </Link>
-            <a
-              href="https://portal.jameswallace.tech"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="jw-btn-secondary"
-            >
-              Open Portal ↗
-            </a>
-          </div>
-        </div>
-      </section>
+        }
+        actions={<>
+          <Link to="/contact?for=commissioner" className="jw-btn-primary">Request a Demo</Link>
+          <a
+            href="https://portal.jameswallace.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="jw-btn-secondary"
+          >
+            Open Portal ↗
+          </a>
+        </>}
+        image={{
+          src: "/portal/05-plp-analytics.webp",
+          alt: `PLP analytics in ${PRODUCT.name}`,
+          fetchPriority: "high",
+        }}
+      />
 
-      {/* Screenshot sections */}
+      {/* Screenshot sections. Each one is full content width, captioned, and opens full size on click
+          (LOOK-SITE-1 item 3). */}
       {screenshots.map((s, i) => (
         <section
           key={s.file}
           className={`jw-section ${i % 2 === 0 ? "jw-section-white" : "jw-section-surface"}`}
         >
           <div className="jw-container">
-            <div
-              className={`row align-items-center g-5 ${
-                i % 2 === 1 ? "flex-lg-row-reverse" : ""
-              }`}
-            >
-              <div className="col-12 col-lg-6">
-                <img
-                  src={`/portal/${s.file}.webp`}
-                  alt={`${s.title} in ${PRODUCT.name}`}
-                  style={{
-                    width: "100%",
-                    borderRadius: "10px",
-                    border: "1px solid var(--border)",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-                  }}
-                />
-              </div>
-              <div className="col-12 col-lg-6">
+            <div className="row">
+              <div className="col-12 col-lg-7">
                 <h2>{s.title}</h2>
                 {s.note && (
-                  <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontStyle: "italic", marginBottom: "0.75rem" }}>
-                    {s.note}
-                  </p>
+                  <p className="jw-caption jw-italic">{s.note}</p>
                 )}
-                <ul
-                  style={{
-                    paddingLeft: "1.25rem",
-                    fontSize: "0.95rem",
-                    lineHeight: 1.8,
-                    margin: 0,
-                  }}
-                >
+                <ul className="jw-list">
                   {s.bullets.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
                 </ul>
               </div>
             </div>
+            <figure className="jw-shot">
+              <a
+                href={`/portal/${s.file}.webp`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open the ${s.title} screenshot full size`}
+              >
+                <img
+                  src={`/portal/${s.file}.webp`}
+                  alt={`${s.title} in ${PRODUCT.name}`}
+                  loading="lazy"
+                />
+              </a>
+              <figcaption>
+                {s.title} in {PRODUCT.name}.{" "}
+                <a
+                  className="jw-shot-open"
+                  href={`/portal/${s.file}.webp`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open full size<span aria-hidden="true"> ↗</span>
+                </a>
+              </figcaption>
+            </figure>
           </div>
         </section>
       ))}
@@ -256,50 +254,29 @@ export default function Platform() {
       {/* Security strip */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-4">Security & Data Protection</h2>
-          <div className="row g-4 justify-content-center">
-            {[
-              { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest - learner names, diagnoses, carer contacts, session notes" },
-              { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
-              { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
-              { label: "EU hosting, moving to the UK", desc: `Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data protection information available on request.` },
-            ].map((item) => (
-              <div key={item.label} className="col-12 col-md-6 col-lg-3">
-                <div className="jw-card h-100 text-center">
-                  <h3 style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--brand)", marginBottom: "0.5rem" }}>
-                    {item.label}
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "0.875rem" }}>{item.desc}</p>
-                </div>
-              </div>
+          <h2>Security &amp; data protection</h2>
+          <ul className="jw-row-list">
+            {securityPoints.map((item) => (
+              <li key={item.label}>
+                <h3>{item.label}</h3>
+                <p>{item.desc}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* Proof tiles */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <div className="row g-4 justify-content-center">
+          <ul className="jw-row-list">
             {proofTiles.map((tile) => (
-              <div key={tile.label} className="col-12 col-md-4">
-                <div className="jw-card text-center h-100">
-                  <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>{tile.icon}</div>
-                  <div
-                    style={{
-                      fontSize: "1.4rem",
-                      fontWeight: 700,
-                      color: "var(--brand)",
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    {tile.stat}
-                  </div>
-                  <p style={{ margin: 0, fontSize: "0.9rem" }}>{tile.label}</p>
-                </div>
-              </div>
+              <li key={tile.label}>
+                <h3>{tile.stat}</h3>
+                <p>{tile.label}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -307,7 +284,7 @@ export default function Platform() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2>Request a demo</h2>
-          <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
+          <p className="jw-body jw-measure jw-measure--center">
             If you are commissioning EOTAS provision and want to see the
             platform, get in touch. I will walk you through the portal and answer any
             questions.

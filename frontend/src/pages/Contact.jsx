@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import usePageMeta from "../hooks/usePageMeta";
 import { AREA, REPLY } from "../data/facts";
 import SafeguardingLead from "../components/SafeguardingLead";
+import PageHeader from "../components/PageHeader";
 import { recordEnquirySent } from "../lib/analytics";
 
 const ENQUIRIES = {
@@ -257,51 +258,56 @@ export default function Contact() {
   }
 
   return (
-    <section className="jw-section jw-section-warm">
-      <div className="jw-container">
-        <div className="jw-contact-layout row g-5 align-items-start">
-          <div className="jw-contact-intro col-12 col-lg-4">
-            <p className="jw-eyebrow">A conversation is a good place to start</p>
-            <h1>Let’s find a way forward.</h1>
-            <p className="lead">For families looking for tuition, and professionals planning a young person’s provision.</p>
-            <p>Tell me a little about what you need. I can help you understand whether my teaching is a suitable fit and what to consider next.</p>
-            <div className="mt-4">
-              <h2 className="h5">Prefer to contact me directly?</h2>
-              <p><a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a><br /><a href="tel:07897021077">07897 021077</a></p>
-              <p className="small">{AREA.sentence}</p>
-              <SafeguardingLead className="small" />
+    <>
+      {/* Style B hero (LOOK-SITE-1 item 5). */}
+      <PageHeader
+        eyebrow="A conversation is a good place to start"
+        title="Let’s find a way forward."
+        lede="For families looking for tuition, and professionals planning a young person’s provision."
+        body={<>
+          <p className="jw-body">
+            Tell me a little about what you need. I can help you understand whether my teaching is a suitable fit and what to consider next.
+          </p>
+          <div className="mt-3">
+            <h2 className="h5">Prefer to contact me directly?</h2>
+            <p className="jw-body">
+              <a href="mailto:hello@jameswallace.tech">hello@jameswallace.tech</a><br />
+              <a href="tel:07897021077">07897 021077</a>
+            </p>
+            <p className="jw-caption">{AREA.sentence}</p>
+            <SafeguardingLead className="small" />
+          </div>
+        </>}
+        image={{
+          src: "/hero/phone-1100.webp",
+          srcSet: "/hero/phone-600.webp 600w, /hero/phone-1100.webp 1100w",
+          sizes: "(max-width: 991px) 100vw, 24rem",
+          width: 1100,
+          height: 1100,
+          loading: "lazy",
+          alt: "A parent on the phone at home, smiling, while a teenager works at a table behind her.",
+        }}
+      />
+
+      <section className="jw-section jw-section-white">
+        <div className="jw-container">
+          <fieldset className="mb-4 jw-contact-options">
+            <legend className="h5">Which best describes your enquiry?</legend>
+            <div className="d-flex flex-wrap gap-2" role="group" aria-label="Enquiry type">
+              {[["parent", "Parent or carer"], ["la", "School, agency or local authority"]].map(([audience, label]) => (
+                <button key={audience} type="button" aria-pressed={activeAudience === audience} aria-controls={`contact-panel-${audience}`} onClick={() => selectAudience(audience)} className={activeAudience === audience ? "jw-btn-primary" : "jw-btn-secondary"}>
+                  {label}
+                </button>
+              ))}
             </div>
-            <img
-              src="/hero/phone-1100.webp"
-              srcSet="/hero/phone-600.webp 600w, /hero/phone-1100.webp 1100w"
-              sizes="(max-width: 991px) 100vw, 24rem"
-              width="1100"
-              height="1100"
-              loading="lazy"
-              alt="A parent on the phone at home, smiling, while a teenager works at a table behind her."
-              className="mt-4"
-              style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
-            />
-          </div>
-          <div className="col-12 col-lg-8">
-            <fieldset className="mb-4 jw-contact-options">
-              <legend className="h5">Which best describes your enquiry?</legend>
-              <div className="d-flex flex-wrap gap-2" role="group" aria-label="Enquiry type">
-                {[["parent", "Parent or carer"], ["la", "School, agency or local authority"]].map(([audience, label]) => (
-                  <button key={audience} type="button" aria-pressed={activeAudience === audience} aria-controls={`contact-panel-${audience}`} onClick={() => selectAudience(audience)} className={activeAudience === audience ? "jw-btn-primary" : "jw-btn-secondary"}>
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
-            {Object.keys(ENQUIRIES).map((audience) => (
-              <div key={audience} id={`contact-panel-${audience}`} hidden={activeAudience !== audience}>
-                <EnquiryForm audience={audience} topic={topic} />
-              </div>
-            ))}
-          </div>
+          </fieldset>
+          {Object.keys(ENQUIRIES).map((audience) => (
+            <div key={audience} id={`contact-panel-${audience}`} hidden={activeAudience !== audience}>
+              <EnquiryForm audience={audience} topic={topic} />
+            </div>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

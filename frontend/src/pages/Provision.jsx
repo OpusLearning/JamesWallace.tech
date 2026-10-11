@@ -10,7 +10,34 @@ const learnerProfiles = [
   { label: "AP", description: "Alternative Provision alongside or instead of a specialist school placement" },
   { label: "EHCP", description: "Learners with an Education, Health and Care Plan requiring specialist delivery" },
   { label: "LAC", description: "Looked After Children with SEND or SEMH needs, including virtual school commissioned placements" },
-  { label: "PDA Profile", description: "Pathological Demand Avoidance - sessions adapted to demand avoidance and autonomy" },
+  { label: "PDA profile", description: "Pathological Demand Avoidance - sessions adapted to demand avoidance and autonomy" },
+];
+
+const deliveryModels = [
+  {
+    title: "In-Person",
+    desc: <>Sessions delivered at a community venue, learner&#39;s home (with appropriate risk assessment), or agreed location. {AREA.sentence}</>,
+  },
+  {
+    title: "Remote",
+    desc: "Online sessions via a secure video platform, suitable for learners with EBSA, phobia, or significant sensory needs. Full daily session reporting applies.",
+  },
+  {
+    title: "Mixed / blended",
+    desc: "A combination of in-person and remote delivery, often used in EBSA reintegration programmes or where session days vary.",
+  },
+  {
+    title: "Session cadence",
+    desc: <>Typically {DELIVERY.hoursPerWeek} of taught sessions, depending on the commission. Sessions are planned weekly, with individual daily reports submitted within 24 hours.</>,
+  },
+  {
+    title: "Coverage",
+    desc: <>{AREA.label}. Ask me about anywhere else.</>,
+  },
+  {
+    title: "Subject coverage",
+    desc: "Maths, English, Computer Science, Science, and functional skills. Wider curriculum by agreement. PLP outcomes determine subject focus.",
+  },
 ];
 
 export default function Provision() {
@@ -36,9 +63,9 @@ export default function Provision() {
       {/* Introduction */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
-          <div className="row align-items-center g-4">
-            <div className="col-12 col-lg-7 text-center text-lg-start">
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-7">
+              <p className="jw-lede">
                 Structured, specialist teaching for young people who cannot
                 access a mainstream or special school. I work across EOTAS,
                 EBSA, alternative provision and EHCP placements, with evidence
@@ -54,211 +81,110 @@ export default function Provision() {
                 </Link>
               </div>
             </div>
-            <div className="col-12 col-lg-5 text-center">
-              <img
-                src="/hero/with-tutor-clean-1942.webp"
-                srcSet="/hero/with-tutor-clean-1000.webp 1000w, /hero/with-tutor-clean-1942.webp 1942w"
-                sizes="(max-width: 991px) 100vw, 34rem"
-                loading="lazy"
-                alt="A teenager and a teacher working side by side at a table, both smiling."
-                style={{ display: "block", width: "100%", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "58% center", borderRadius: "14px" }}
-              />
+            <div className="col-12 col-lg-5">
+              <figure className="jw-media-figure">
+                <img
+                  className="jw-photo-43 jw-photo-43--left"
+                  src="/hero/with-tutor-clean-1942.webp"
+                  srcSet="/hero/with-tutor-clean-1000.webp 1000w, /hero/with-tutor-clean-1942.webp 1942w"
+                  sizes="(max-width: 991px) 100vw, 34rem"
+                  loading="lazy"
+                  alt="A teenager and a teacher working side by side at a table, both smiling."
+                />
+              </figure>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Learner Profiles */}
+      {/* Learner profiles — ruled rows, no coloured chips */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-2">Who I work with</h2>
-          <p
-            className="text-center"
-            style={{ maxWidth: "560px", margin: "0 auto 3rem" }}
-          >
+          <h2>Who I work with</h2>
+          <p className="jw-body jw-measure">
             Referrals come from families, agencies and local authorities,
             across a range of SEND, SEMH and placement categories.
           </p>
-          <div className="row g-4">
+          <ul className="jw-row-list">
             {learnerProfiles.map((profile) => (
-              <div key={profile.label} className="col-12 col-md-6 col-lg-4">
-                <div className="jw-card h-100" style={{ display: "flex", gap: "0.75rem" }}>
-                  <div
-                    style={{
-                      minWidth: "36px",
-                      padding: "0 0.5rem",
-                      whiteSpace: "nowrap",
-                      flexShrink: 0,
-                      height: "36px",
-                      borderRadius: "6px",
-                      background: "var(--brand)",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 700,
-                      fontSize: "0.75rem",
-                    }}
-                  >
-                    {profile.label}
-                  </div>
-                  <p style={{ margin: 0, fontSize: "0.9rem" }}>{profile.description}</p>
-                </div>
-              </div>
+              <li key={profile.label}>
+                <h3>{profile.label}</h3>
+                <p>{profile.description}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Delivery Model */}
+      {/* Delivery model */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <div className="row align-items-center g-5" style={{ marginBottom: "3rem" }}>
+          <div className="row align-items-center g-5">
             <div className="col-12 col-lg-6">
-              <h2 className="mb-3">How it is delivered</h2>
-              <p style={{ fontSize: "1.05rem", marginBottom: 0 }}>
+              <h2>How it is delivered</h2>
+              <p className="jw-lede">
                 Flexible, structured provision built around each learner&#39;s needs,
                 location, and commissioning arrangement.
               </p>
             </div>
             <div className="col-12 col-lg-6">
-              <img
-                src="/hero/student-working-1600.webp"
-                srcSet="/hero/student-working-800.webp 800w, /hero/student-working-1600.webp 1600w"
-                sizes="(max-width: 991px) 100vw, 34rem"
-                loading="lazy"
-                alt="A teenager writing in a notebook beside a laptop, smiling."
-                style={{ display: "block", width: "100%", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "center", borderRadius: "14px" }}
-              />
+              <figure className="jw-media-figure">
+                <img
+                  className="jw-photo-43"
+                  src="/hero/student-working-1600.webp"
+                  srcSet="/hero/student-working-800.webp 800w, /hero/student-working-1600.webp 1600w"
+                  sizes="(max-width: 991px) 100vw, 34rem"
+                  loading="lazy"
+                  alt="A teenager writing in a notebook beside a laptop, smiling."
+                />
+              </figure>
             </div>
           </div>
-          <div className="row g-4">
-            <div className="col-12 col-md-4">
-              <div className="jw-card h-100 text-center">
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "var(--brand)", marginBottom: "0.5rem" }}>
-                  In-Person
-                </h3>
-                <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  Sessions delivered at a community venue, learner&#39;s home (with
-                  appropriate risk assessment), or agreed location. {AREA.sentence}
-                </p>
-              </div>
-            </div>
-            <div className="col-12 col-md-4">
-              <div className="jw-card h-100 text-center">
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "var(--brand)", marginBottom: "0.5rem" }}>
-                  Remote
-                </h3>
-                <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  Online sessions via a secure video platform, suitable for
-                  learners with EBSA, phobia, or significant sensory needs.
-                  Full daily session reporting applies.
-                </p>
-              </div>
-            </div>
-            <div className="col-12 col-md-4">
-              <div className="jw-card h-100 text-center">
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "var(--brand)", marginBottom: "0.5rem" }}>
-                  Mixed / Blended
-                </h3>
-                <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  A combination of in-person and remote delivery, often used in
-                  EBSA reintegration programmes or where session days vary.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="row g-4 mt-2">
-            <div className="col-12 col-md-4">
-              <div className="jw-card h-100 text-center">
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.5rem" }}>
-                  Session Cadence
-                </h3>
-                <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  Typically {DELIVERY.hoursPerWeek} of taught sessions,
-                  depending on the commission. Sessions are planned weekly,
-                  with individual daily reports submitted within 24 hours.
-                </p>
-              </div>
-            </div>
-            <div className="col-12 col-md-4">
-              <div className="jw-card h-100 text-center">
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.5rem" }}>
-                  Coverage
-                </h3>
-                <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  {AREA.label}. Ask me about anywhere else.
-                </p>
-              </div>
-            </div>
-            <div className="col-12 col-md-4">
-              <div className="jw-card h-100 text-center">
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.5rem" }}>
-                  Subject Coverage
-                </h3>
-                <p style={{ fontSize: "0.9rem", margin: 0 }}>
-                  Maths, English, Computer Science, Science, and functional
-                  skills. Wider curriculum by agreement. PLP outcomes determine
-                  subject focus.
-                </p>
-              </div>
-            </div>
-          </div>
+          <ul className="jw-row-list">
+            {deliveryModels.map((model) => (
+              <li key={model.title}>
+                <h3>{model.title}</h3>
+                <p>{model.desc}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* Evidence Chain */}
+      {/* Evidence chain */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
           <div className="row align-items-center g-5">
             <div className="col-12 col-lg-6">
               <h2>The evidence you receive</h2>
-              <p>
+              <p className="jw-body">
                 Every placement is designed to follow a structured, auditable evidence
                 workflow from first session to case closure. {PLATFORM_STATUS.sentence}
               </p>
-              <div className="d-flex flex-column gap-3 mt-4">
-                {/* These two steps used to read "approved by supervisor" and "panic button available throughout". Both are
-                    real JWE Portal features, but they are multi-practitioner features, and I am a sole practitioner. The
-                    platform and compliance pages already say so; this page now says the same thing. */}
+              {/* These two steps used to read "approved by supervisor" and "panic button available throughout". Both are
+                  real JWE Portal features, but they are multi-practitioner features, and I am a sole practitioner. The
+                  platform and compliance pages already say so; this page now says the same thing. */}
+              <ul className="jw-row-list">
                 {[
                   { step: "Plan", desc: `Weekly session plan submitted in ${PRODUCT.name} - PLP criteria, planned activities, session logistics. The plan is locked before delivery begins, so the week has an evidence baseline. Where a commissioner wants sight of it first, approval is recorded against the plan.` },
                   { step: "Deliver", desc: "I deliver the session, with a lone working check-in at the start and check-out at the end, timestamped. The portal's panic alert and live supervisor feed are built for providers with a supervisory team; as a sole practitioner, my escalation route is agreed in writing with the commissioner before teaching begins." },
                   { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0 to 5), per-subject activity notes, PLP criterion progress, safeguarding observations." },
                 ].map((item) => (
-                  <div key={item.step} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-                    <div
-                      style={{
-                        minWidth: "96px",
-                        background: "var(--brand)",
-                        color: "#fff",
-                        borderRadius: "6px",
-                        padding: "0.4rem 0.75rem",
-                        fontWeight: 700,
-                        fontSize: "0.85rem",
-                        textAlign: "center",
-                      }}
-                    >
-                      {item.step}
-                    </div>
-                    <p style={{ margin: 0, fontSize: "0.9rem", lineHeight: 1.6 }}>
-                      {item.desc}
-                    </p>
-                  </div>
+                  <li key={item.step}>
+                    <h3>{item.step}</h3>
+                    <p>{item.desc}</p>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
             <div className="col-12 col-lg-6">
-              <img
-                src="/portal/03b-weekly-plan-tab.webp"
-                alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  border: "1px solid var(--border)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                }}
-              />
+              <figure className="jw-shot">
+                <img
+                  src="/portal/03b-weekly-plan-tab.webp"
+                  alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
+                  loading="lazy"
+                />
+              </figure>
             </div>
           </div>
         </div>
@@ -267,37 +193,35 @@ export default function Provision() {
       {/* Safeguarding summary */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <div className="row align-items-center g-4">
+          <div className="row align-items-center g-5">
             <div className="col-12 col-lg-8">
               <h2>Safeguarding</h2>
-              <p>
+              <p className="jw-body">
                 Safeguarding is built into every stage of delivery - not added
                 after the fact. I work in line with {STATUTORY.kcsie} and{" "}
                 {STATUTORY.workingTogether}.
               </p>
-              <ul style={{ fontSize: "0.95rem", lineHeight: 1.8, paddingLeft: "1.25rem" }}>
+              <ul className="jw-list">
                 <li>{SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}, and I am the {SAFEGUARDING_ROLES.deputy.role}; we have both completed {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course, certificated {TRAINING.dsl.completed}</li>
                 <li>All concerns logged immediately in an encrypted, audit-trailed system</li>
                 <li>Physical Intervention Recording Forms (PIRFs) completed before caseload can proceed</li>
                 <li>Timestamped lone working check-in and check-out for every solo session, with the escalation route agreed in writing with the commissioner</li>
                 <li>Automated daily alerts for stale or unactioned safeguarding concerns</li>
               </ul>
-              <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
+              <p className="jw-body">{SAFEGUARDING_ROLES.dsl.intro}</p>
               <SafeguardingLead />
               <Link to="/compliance" className="jw-btn-secondary mt-3 d-inline-block">
                 Full compliance details &rarr;
               </Link>
             </div>
             <div className="col-12 col-lg-4">
-              <img
-                src="/portal/06-safeguarding.webp"
-                alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  border: "1px solid var(--border)",
-                }}
-              />
+              <figure className="jw-shot">
+                <img
+                  src="/portal/06-safeguarding.webp"
+                  alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
+                  loading="lazy"
+                />
+              </figure>
             </div>
           </div>
         </div>
@@ -307,7 +231,7 @@ export default function Provision() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2>Make a referral</h2>
-          <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
+          <p className="jw-body jw-measure jw-measure--center">
             If you have a young person who needs structured, specialist
             provision, get in touch. I come back within two working days.
           </p>

@@ -1,39 +1,47 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING } from "../data/facts";
-import {
-  FaBrain,
-  FaGraduationCap,
-  FaHandsHelping,
-  FaCogs,
-  FaRocket,
-  FaShieldAlt,
-  FaClipboardCheck,
-  FaUsers,
-} from "react-icons/fa";
+import PageHeader from "../components/PageHeader";
 
-function renderFocusCard(icon, title, description) {
-  return (
-    <div className="col-12 col-md-6 col-lg-3 mb-4 d-flex">
-      <div className="jw-card text-center w-100">
-        <div style={{ color: "var(--brand)", marginBottom: "0.75rem" }}>
-          {icon}
-        </div>
-        <h3
-          style={{
-            fontSize: "1rem",
-            fontWeight: 600,
-            marginBottom: "0.4rem",
-            color: "var(--text-primary)",
-          }}
-        >
-          {title}
-        </h3>
-        <p style={{ margin: 0, fontSize: "0.875rem" }}>{description}</p>
-      </div>
-    </div>
-  );
-}
+// LOOK-SITE-1 item 2: the icon cards are gone. Both "where my experience is most useful" and
+// "how I work" are now plain ruled rows, in the same left-aligned style as Home and Credentials.
+const specialisms = [
+  {
+    title: "Neurodivergent learners",
+    description: "ADHD, Autism, PDA profile, Dyslexia, and co-occurring presentations - structured sessions adapted to each learner's profile.",
+  },
+  {
+    title: "SEMH & complex needs",
+    description: "Social, emotional, and mental health needs; EBSA; LAC; and learners with trauma-informed requirements.",
+  },
+  {
+    title: "EHCP delivery",
+    description: "Provision aligned to EHCP outcomes with PLP criterion tracking updated after every session.",
+  },
+  {
+    title: "LA partnership",
+    description: "Built for local authority, SEND team and virtual school head commissioning, with reporting arrangements agreed in the commission.",
+  },
+];
+
+const workingPrinciples = [
+  {
+    title: "Learner-centred",
+    description: "Every placement is built around the individual - their interests, communication style, and learning environment.",
+  },
+  {
+    title: "Evidence-based practice",
+    description: "Teaching informed by SEND training, with daily session evidence used to review and adjust the plan.",
+  },
+  {
+    title: "Structured provision",
+    description: "Predictable session structure, weekly planning, and records from referral to case closure.",
+  },
+  {
+    title: "Clear reporting",
+    description: "Portal access, safeguarding records, and evidence exports for placement reviews.",
+  },
+];
 
 export default function About() {
   usePageMeta({
@@ -45,78 +53,47 @@ export default function About() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="jw-section jw-section-warm">
-        <div className="jw-container">
-          <div className="row align-items-center g-4">
-            <div className="col-12 col-lg-5 text-center">
-              <img
-                src="/james-wallace.webp"
-                alt="James Wallace - Education Specialist and EOTAS Provider"
-                style={{
-                  width: "260px",
-                  maxWidth: "100%",
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
-                  border: "1px solid var(--border)",
-                }}
-              />
-            </div>
-            <div className="col-12 col-lg-7 text-center text-lg-start">
-              <h1>Meet James Wallace</h1>
-              <p
-                style={{
-                  fontSize: "1.1rem",
-                  fontWeight: 500,
-                  color: "var(--brand)",
-                  marginBottom: "1rem",
-                }}
-              >
-                Education Specialist &amp; EOTAS Provider
-              </p>
-              <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
-                James Wallace Education is the specialist educational provision operated by James
-                Wallace. I deliver structured alternative provision for neurodiverse
-                learners who cannot access mainstream or special school settings, with
-                a clear record of what was planned, delivered and reviewed.
-              </p>
-              <p style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
-                Formerly trading as ND Services.
-              </p>
-              <div className="d-flex flex-wrap gap-2 mt-3 mb-4">
-                {[
-                  BIO.degreeShort,
-                  "MEd",
-                  "QTS",
-                  "Enhanced DBS",
-                  SAFEGUARDING_ROLES.deputy.role,
-                  "Understanding Autism",
-                ].map((t) => (
-                  <span key={t} className="jw-badge">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <div className="d-flex flex-wrap gap-3">
-                <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">
-                  Make a Referral
-                </Link>
-                <Link to="/credentials" className="jw-btn-secondary">
-                  Full Credentials
-                </Link>
-              </div>
-            </div>
+      {/* Style B hero (LOOK-SITE-1 item 5). */}
+      <PageHeader
+        eyebrow="Education Specialist & EOTAS Provider"
+        title="Meet James Wallace"
+        lede="James Wallace Education is the specialist educational provision operated by James Wallace. I deliver structured alternative provision for neurodiverse learners who cannot access mainstream or special school settings, with a clear record of what was planned, delivered and reviewed."
+        body={<>
+          <p className="jw-caption">Formerly trading as ND Services.</p>
+          <div className="d-flex flex-wrap gap-2 mt-2">
+            {[
+              BIO.degreeShort,
+              "MEd",
+              "QTS",
+              "Enhanced DBS",
+              SAFEGUARDING_ROLES.deputy.role,
+              "Understanding Autism",
+            ].map((t) => (
+              <span key={t} className="jw-badge">
+                {t}
+              </span>
+            ))}
           </div>
-        </div>
-      </section>
+        </>}
+        actions={<>
+          <Link to="/contact?for=commissioner&topic=referral" className="jw-btn-primary">Make a Referral</Link>
+          <Link to="/credentials" className="jw-btn-secondary">Full Credentials</Link>
+        </>}
+        image={{
+          className: "jw-object-top",
+          src: "/james-wallace.webp",
+          width: 1024,
+          height: 1536,
+          fetchPriority: "high",
+          alt: "James Wallace - Education Specialist and EOTAS Provider",
+        }}
+      />
 
       {/* Bio */}
       <section className="jw-section jw-section-white">
-        <div className="jw-container" style={{ maxWidth: "760px" }}>
-          <h2 className="mb-4">One practitioner, accountable throughout</h2>
-          <p>
+        <div className="jw-container jw-measure">
+          <h2>One practitioner, accountable throughout</h2>
+          <p className="jw-body">
             James Wallace Education is operated by James Wallace, and in practice is James
             Wallace: one qualified teacher rather than a staffed agency, which is
             deliberate. Thirteen years teaching in specialist provision, twelve
@@ -125,14 +102,14 @@ export default function About() {
             a {BIO.degree}, a Master of Education (MEd), Qualified
             Teacher Status since 2004, and an Enhanced DBS on the Update Service.
           </p>
-          <p>
+          <p className="jw-body">
             The provision is deliberately small: one qualified teacher remains
             responsible for the teaching and records, with safeguarding led by the
             Designated Safeguarding Lead. I work with Local Authority SEND teams, EOTAS coordinators and EHCP caseworkers,
             at present on placements that come through agencies, sharing the evidence they need
             to review a placement.
           </p>
-          <p>
+          <p className="jw-body">
             {SAFEGUARDING_ROLES.dsl.name} is the{" "}
             {SAFEGUARDING_ROLES.dsl.role} for the provision, and I am the{" "}
             {SAFEGUARDING_ROLES.deputy.role}. We have both completed{" "}
@@ -145,65 +122,37 @@ export default function About() {
             Whole School SEND Platinum award. Renewal dates are tracked with
             expiry alerts rather than left to lapse.
           </p>
-          <p>{SAFEGUARDING_ROLES.dsl.intro}</p>
+          <p className="jw-body">{SAFEGUARDING_ROLES.dsl.intro}</p>
         </div>
       </section>
 
       {/* Provision specialisms */}
       <section className="jw-section jw-section-surface">
         <div className="jw-container">
-          <h2 className="text-center mb-5">Where my experience is most useful</h2>
-          <div className="row">
-            {renderFocusCard(
-              <FaBrain size={36} />,
-              "Neurodivergent Learners",
-              "ADHD, Autism, PDA profile, Dyslexia, and co-occurring presentations - structured sessions adapted to each learner's profile."
-            )}
-            {renderFocusCard(
-              <FaShieldAlt size={36} />,
-              "SEMH & Complex Needs",
-              "Social, emotional, and mental health needs; EBSA; LAC; and learners with trauma-informed requirements."
-            )}
-            {renderFocusCard(
-              <FaClipboardCheck size={36} />,
-              "EHCP Delivery",
-              "Provision aligned to EHCP outcomes with PLP criterion tracking updated after every session."
-            )}
-            {renderFocusCard(
-              <FaUsers size={36} />,
-              "LA Partnership",
-              "Built for local authority, SEND team and virtual school head commissioning, with reporting arrangements agreed in the commission."
-            )}
-          </div>
+          <h2>Where my experience is most useful</h2>
+          <ul className="jw-row-list">
+            {specialisms.map((item) => (
+              <li key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* Provider Values */}
+      {/* Provider values */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
-          <h2 className="text-center mb-5">How I work</h2>
-          <div className="row">
-            {renderFocusCard(
-              <FaHandsHelping size={36} />,
-              "Learner-Centred",
-              "Every placement is built around the individual - their interests, communication style, and learning environment."
-            )}
-            {renderFocusCard(
-              <FaGraduationCap size={36} />,
-              "Evidence-Based Practice",
-              "Teaching informed by SEND training, with daily session evidence used to review and adjust the plan."
-            )}
-            {renderFocusCard(
-              <FaCogs size={36} />,
-              "Structured Provision",
-              "Predictable session structure, weekly planning, and records from referral to case closure."
-            )}
-            {renderFocusCard(
-              <FaRocket size={36} />,
-              "Clear Reporting",
-              "Portal access, safeguarding records, and evidence exports for placement reviews."
-            )}
-          </div>
+          <h2>How I work</h2>
+          <ul className="jw-row-list">
+            {workingPrinciples.map((item) => (
+              <li key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -211,7 +160,7 @@ export default function About() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container text-center">
           <h2>Commission specialist provision</h2>
-          <p style={{ maxWidth: "480px", margin: "0 auto 2rem" }}>
+          <p className="jw-body jw-measure jw-measure--center">
             If you have a young person who needs structured, specialist
             alternative provision, get in touch. I respond to referral enquiries
             within 2 working days.

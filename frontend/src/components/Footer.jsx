@@ -57,7 +57,7 @@ export default function Footer() {
         ))}
       </ul>
       <div className="jw-footer-bottom">
-        <span>© 2026 James Wallace Education Ltd. Registered in England and Wales, company number 17479328. ICO registration number {ICO.registrationNumber}. Registered office: 71–75 Shelton Street, Covent Garden, London WC2H 9JQ. Photographs are illustrative.</span>
+        <span data-legal-small>© 2026 James Wallace Education Ltd. Registered in England and Wales, company number 17479328. ICO registration number {ICO.registrationNumber}. Registered office: 71–75 Shelton Street, Covent Garden, London WC2H 9JQ. Photographs are illustrative.</span>
         <span className="jw-footer-legal">
           <Link to="/privacy">Privacy</Link> · <Link to="/cookies">Cookies</Link> ·{" "}
           <Link to="/accessibility">Accessibility</Link> · <Link to="/terms">Terms</Link> ·{" "}

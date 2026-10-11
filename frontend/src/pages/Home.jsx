@@ -98,7 +98,7 @@ export default function Home() {
 
   return (
     <div className="jw-home">
-      <section className="jw-home-hero jw-home-hero--photo" aria-labelledby="home-heading">
+      <section className="jw-home-hero jw-home-hero--photo" aria-labelledby="home-heading" data-hero>
         <div className="jw-hero-bg jw-hero-rotating">
           {HERO_IMAGES.map((image, index) => (
             <picture key={image.name} className={index === heroIndex ? "is-active" : undefined} aria-hidden={index === heroIndex ? undefined : "true"}>
@@ -213,7 +213,7 @@ export default function Home() {
       </section>
 
       <section className="jw-section jw-faq-section" aria-labelledby="faq-heading">
-        <div className="jw-container jw-faq-grid"><div><p className="jw-eyebrow">Before you get in touch</p><h2 id="faq-heading">A few things<br />you may be<br /><em>wondering.</em></h2><Link to="/about" className="jw-text-link">Get to know James <Arrow /></Link><p style={{ marginTop: "1rem", marginBottom: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>Free parent guides: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a></p></div><div className="jw-faq-list">{questions.map((item) => <details key={item.question} className="jw-faq"><summary>{item.question}<span aria-hidden="true" className="jw-faq-indicator" /></summary><div className="jw-faq-answer"><p>{item.answer}</p><Link to={item.to} className="jw-text-link">{item.link} <Arrow /></Link></div></details>)}</div></div>
+        <div className="jw-container jw-faq-grid"><div><p className="jw-eyebrow">Before you get in touch</p><h2 id="faq-heading">A few things<br />you may be<br /><em>wondering.</em></h2><Link to="/about" className="jw-text-link">Get to know James <Arrow /></Link><p className="jw-note" style={{ marginTop: "1rem", marginBottom: 0 }}>Free parent guides: <a href={GUIDES_HUB.url}>{GUIDES_HUB.name}</a></p></div><div className="jw-faq-list">{questions.map((item) => <details key={item.question} className="jw-faq"><summary>{item.question}<span aria-hidden="true" className="jw-faq-indicator" /></summary><div className="jw-faq-answer"><p>{item.answer}</p><Link to={item.to} className="jw-text-link">{item.link} <Arrow /></Link></div></details>)}</div></div>
       </section>
 
       <section className="jw-section jw-lead-section" aria-labelledby="lead-heading">
