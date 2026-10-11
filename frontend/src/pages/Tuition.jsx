@@ -208,8 +208,8 @@ export default function Tuition() {
         <div className="jw-container" style={{ paddingBlock: "2rem 2.5rem" }}>
           <figure style={{ margin: 0 }}>
             <img
-              src="/hero/with-tutor-1942.webp"
-              srcSet="/hero/with-tutor-1000.webp 1000w, /hero/with-tutor-1942.webp 1942w"
+              src="/hero/with-tutor-clean-1942.webp"
+              srcSet="/hero/with-tutor-clean-1000.webp 1000w, /hero/with-tutor-clean-1942.webp 1942w"
               sizes="(max-width: 1320px) 100vw, 1260px"
               width="1942"
               height="809"
