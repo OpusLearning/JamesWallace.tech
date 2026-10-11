@@ -80,7 +80,7 @@ export default function About() {
           <Link to="/credentials" className="jw-btn-secondary">Full Credentials</Link>
         </>}
         image={{
-          className: "jw-object-top",
+          className: "jw-page-header-portrait",
           src: "/james-wallace.webp",
           width: 1024,
           height: 1536,
