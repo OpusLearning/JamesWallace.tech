@@ -138,8 +138,10 @@ export default function About() {
             {SAFEGUARDING_ROLES.deputy.role}. We have both completed{" "}
             {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course, certificated{" "}
             {TRAINING.dsl.completed}. I hold current safeguarding and{" "}
-            {STATUTORY.kcsie}, Prevent duty, child-on-child abuse, allergy
-            awareness and <Link to="/credentials#training">lone working training</Link>, with the
+            {STATUTORY.kcsie}, Prevent duty, child-on-child abuse and allergy
+            awareness training, and have completed {TRAINING.safeAndSupported.provider}&apos;s{" "}
+            <Link to="/credentials#training">{TRAINING.safeAndSupported.name}</Link> course, which covers
+            lone working and personal safety. I also hold the
             Whole School SEND Platinum award. Renewal dates are tracked with
             expiry alerts rather than left to lapse.
           </p>

@@ -9,7 +9,7 @@ const staffComplianceRows = [
   { requirement: TRAINING.prevent.name, tracked: `Completed ${TRAINING.prevent.completed}` },
   { requirement: TRAINING.dsl.name, tracked: `Completed ${TRAINING.dsl.completed}, renewal ${TRAINING.dsl.renewal}` },
   { requirement: "Child-on-child abuse (agency onboarding)", tracked: "Valid to 22 August 2027" },
-  { requirement: "Lone Working Safety", tracked: `Completed ${TRAINING.safeAndSupported.completed} (${TRAINING.safeAndSupported.name}, ${TRAINING.safeAndSupported.provider})` },
+  { requirement: "Lone working and personal safety", tracked: `Covered in ${TRAINING.safeAndSupported.name} (${TRAINING.safeAndSupported.provider}), completed ${TRAINING.safeAndSupported.completed}` },
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },
   { requirement: "Data Protection / UK GDPR", tracked: "Completion date recorded" },
   { requirement: "Right to Work verification", tracked: "Provider + reference date" },
