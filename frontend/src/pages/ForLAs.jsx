@@ -1,4 +1,5 @@
 import usePageMeta from "../hooks/usePageMeta";
+import PhotoBanner from "../components/PhotoBanner";
 import { Link } from "react-router-dom";
 import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS, REFERENCES } from "../data/facts";
 import SafeguardingLead from "../components/SafeguardingLead";
@@ -76,12 +77,19 @@ export default function ForLAs() {
 
   return (
     <>
+      <PhotoBanner
+        name="la"
+        eyebrow="Commissioned provision"
+        alt="A teenager in a mustard jumper writing at a table, smiling, with a tutor beside her."
+      >
+        For Local Authorities &amp; Schools
+      </PhotoBanner>
+
       {/* Hero */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
           <div className="row align-items-center g-4">
             <div className="col-12 col-lg-7 text-center text-lg-start">
-              <h1>For Local Authorities &amp; Schools</h1>
               <p style={{ fontSize: "1.05rem", lineHeight: 1.65 }}>
                 Commissioning EOTAS provision should be clear. James Wallace Education, the provision operated by James Wallace,
                 is built to give commissioners and referrers visibility of a
@@ -121,6 +129,34 @@ export default function ForLAs() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pictures of the work (supplied by James, 11 Oct 2026; illustrative). */}
+      <section className="jw-section jw-section-white" style={{ paddingBlock: "2.5rem" }}>
+        <div className="jw-container">
+          <div className="row g-4 align-items-stretch">
+            <div className="col-12 col-lg-7">
+              <img
+                src="/hero/evidence-1400.webp"
+                srcSet="/hero/evidence-700.webp 700w, /hero/evidence-1400.webp 1400w"
+                sizes="(max-width: 991px) 100vw, 46rem"
+                loading="lazy"
+                alt="A laptop showing charts beside a printed report on a desk."
+                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
+              />
+            </div>
+            <div className="col-12 col-lg-5">
+              <img
+                src="/hero/professionals-1100.webp"
+                srcSet="/hero/professionals-600.webp 600w, /hero/professionals-1100.webp 1100w"
+                sizes="(max-width: 991px) 100vw, 32rem"
+                loading="lazy"
+                alt="Three professionals talking over a folder at a round table."
+                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
+              />
             </div>
           </div>
         </div>

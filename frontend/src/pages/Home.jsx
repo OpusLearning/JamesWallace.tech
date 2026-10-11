@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
@@ -6,16 +7,13 @@ import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HU
 // from facts.js (SITEFIX-3 item 1).
 const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.meta}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
 
-// The hero photograph sits behind the headline, full width (James, 11 Oct 2026: his own image,
-// `sitehero.png`). Swap the three files in public/hero/ to change it. Illustrative, not a real pupil.
-const HERO_IMAGE = {
-  src: "/hero/home-1942.webp",
-  src1100: "/hero/home-1100.webp",
-  mobile: "/hero/home-mobile-900.webp",
-  width: 1942,
-  height: 809,
-  alt: "A teenager in a hoodie writing at a table, smiling, in a warm room with plants and bookshelves.",
-};
+// Two hero photographs, both supplied by James (11 Oct 2026), fading from one to the other every
+// eight seconds. Files are in public/hero/. With "reduce motion" set, the first one stays put.
+const HERO_IMAGES = [
+  { name: "home2", alt: "A teenager in a dark hoodie writing at a table and smiling, in a warm room with plants and bookshelves." },
+  { name: "home", alt: "A teenager in a hoodie writing at a table, smiling, in a warm room with plants and bookshelves." },
+];
+const HERO_INTERVAL_MS = 8000;
 
 const questions = [
   {
@@ -91,21 +89,33 @@ export default function Home() {
     jsonLd,
   });
 
+  const [heroIndex, setHeroIndex] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const timer = setInterval(() => setHeroIndex((current) => (current + 1) % HERO_IMAGES.length), HERO_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="jw-home">
       <section className="jw-home-hero jw-home-hero--photo" aria-labelledby="home-heading">
-        <picture className="jw-hero-bg">
-          <source media="(max-width: 760px)" srcSet={HERO_IMAGE.mobile} />
-          <img
-            src={HERO_IMAGE.src}
-            srcSet={`${HERO_IMAGE.src1100} 1100w, ${HERO_IMAGE.src} 1942w`}
-            sizes="100vw"
-            width={HERO_IMAGE.width}
-            height={HERO_IMAGE.height}
-            fetchPriority="high"
-            alt={HERO_IMAGE.alt}
-          />
-        </picture>
+        <div className="jw-hero-bg jw-hero-rotating">
+          {HERO_IMAGES.map((image, index) => (
+            <picture key={image.name} className={index === heroIndex ? "is-active" : undefined} aria-hidden={index === heroIndex ? undefined : "true"}>
+              <source media="(max-width: 760px)" srcSet={`/hero/${image.name}-mobile-900.webp`} />
+              <img
+                src={`/hero/${image.name}-1942.webp`}
+                srcSet={`/hero/${image.name}-1100.webp 1100w, /hero/${image.name}-1942.webp 1942w`}
+                sizes="100vw"
+                width="1942"
+                height="809"
+                fetchPriority={index === 0 ? "high" : "low"}
+                loading={index === 0 ? "eager" : "lazy"}
+                alt={image.alt}
+              />
+            </picture>
+          ))}
+        </div>
         <div className="jw-container jw-hero-grid">
           <div className="jw-hero-copy">
             <p className="jw-eyebrow jw-hero-eyebrow"><span aria-hidden="true" /> Specialist one-to-one teaching</p>

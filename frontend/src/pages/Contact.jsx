@@ -271,6 +271,17 @@ export default function Contact() {
               <p className="small">{AREA.sentence}</p>
               <SafeguardingLead className="small" />
             </div>
+            <img
+              src="/hero/phone-1100.webp"
+              srcSet="/hero/phone-600.webp 600w, /hero/phone-1100.webp 1100w"
+              sizes="(max-width: 991px) 100vw, 24rem"
+              width="1100"
+              height="1100"
+              loading="lazy"
+              alt="A parent on the phone at home, smiling, while a teenager works at a table behind her."
+              className="mt-4"
+              style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
+            />
           </div>
           <div className="col-12 col-lg-8">
             <fieldset className="mb-4 jw-contact-options">

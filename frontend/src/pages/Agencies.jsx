@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PhotoBanner from "../components/PhotoBanner";
 import usePageMeta from "../hooks/usePageMeta";
 import { BIO, AREA, PROFILES, AVAILABILITY, STATUTORY, TRAINING, POLICY_PACK } from "../data/facts";
 
@@ -83,19 +84,21 @@ export default function Agencies() {
 
   return (
     <>
+      <PhotoBanner
+        name="agencies"
+        eyebrow="For agencies & schools"
+        alt="A teenager in a teal hoodie working at a kitchen table, smiling, with an adult beside him."
+      >
+        Specialist SEND teaching
+        <br />
+        <em>with evidence ready to review</em>
+      </PhotoBanner>
+
       {/* Hero */}
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
           <div className="row align-items-center g-5">
             <div className="col-12 col-lg-7">
-              <span className="jw-badge jw-badge-brand mb-3" style={{ display: "inline-block" }}>
-                For agencies &amp; schools
-              </span>
-              <h1 style={{ marginBottom: "1.25rem" }}>
-                Specialist SEND teaching
-                <br />
-                <span style={{ color: "var(--action)" }}>with evidence ready to review</span>
-              </h1>
               <p style={{ fontSize: "1.05rem", marginBottom: "1rem" }}>
                 QTS since 2004, a Master of Education, thirteen years teaching in specialist provision — twelve of them in a
                 special school — and five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
@@ -129,6 +132,34 @@ export default function Agencies() {
                   Tell me the learner, the key stage and the hours, and I will confirm days by return.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pictures of the work (supplied by James, 11 Oct 2026; illustrative). */}
+      <section className="jw-section jw-section-white" style={{ paddingBlock: "2.5rem" }}>
+        <div className="jw-container">
+          <div className="row g-4 align-items-stretch">
+            <div className="col-12 col-lg-8">
+              <img
+                src="/hero/community-1600.webp"
+                srcSet="/hero/community-800.webp 800w, /hero/community-1600.webp 1600w"
+                sizes="(max-width: 991px) 100vw, 52rem"
+                loading="lazy"
+                alt="A teenager and a tutor working together at a table in a library, both smiling."
+                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
+              />
+            </div>
+            <div className="col-12 col-lg-4">
+              <img
+                src="/hero/workbag-1100.webp"
+                srcSet="/hero/workbag-600.webp 600w, /hero/workbag-1100.webp 1100w"
+                sizes="(max-width: 991px) 100vw, 26rem"
+                loading="lazy"
+                alt="A tutor's bag, laptop, folder, mini whiteboard, pens and lanyard laid out on a table."
+                style={{ display: "block", width: "100%", height: "100%", minHeight: "16rem", objectFit: "cover", borderRadius: "14px" }}
+              />
             </div>
           </div>
         </div>

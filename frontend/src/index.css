@@ -582,7 +582,10 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 /* Full-width photograph hero (James, 11 Oct 2026). The picture is dark on the left, so the headline
    sits over it in light text; on phones the picture goes above the copy instead of behind it. */
 .jw-home-hero--photo { position: relative; padding-top: 0; background: #14211b; color: #f5f3ec; overflow: hidden; }
+.jw-hero-bg { position: absolute; inset: 0; display: block; }
 .jw-hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+.jw-hero-rotating img { opacity: 0; transition: opacity 1.4s ease; }
+.jw-hero-rotating picture.is-active img { opacity: 1; }
 .jw-home-hero--photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(12,22,27,.94) 0%, rgba(12,22,27,.82) 30%, rgba(12,22,27,.28) 58%, rgba(12,22,27,0) 74%); }
 .jw-home-hero--photo .jw-container { position: relative; z-index: 2; }
 .jw-home-hero--photo .jw-hero-grid { display: block; padding-block: clamp(2.5rem, 4.5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem); }
@@ -599,10 +602,24 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 .jw-home-hero--photo .jw-hero-footnote p, .jw-home-hero--photo .jw-hero-footnote a { color: #e3e8e3; }
 .jw-hero-imagenote { font-size: .7rem; color: #aab5ad; margin: 0; padding-bottom: 1rem; }
 @media (max-width: 760px) {
-  .jw-hero-bg img { position: static; height: auto; aspect-ratio: 900 / 662; }
+  .jw-hero-bg { position: relative; aspect-ratio: 900 / 662; }
   .jw-home-hero--photo::before { display: none; }
   .jw-home-hero--photo .jw-hero-grid { padding-block: 1.6rem 1.8rem; }
 }
 
 .jw-students-link { margin: 2rem 0 0; font-size: 1rem; }
 .jw-students-link a { font-weight: 600; margin-left: .35rem; }
+
+/* Photograph banner for inner pages (PhotoBanner.jsx): same treatment as the home hero. */
+.jw-photo-banner { position: relative; background: #14211b; color: #f5f3ec; overflow: hidden; }
+.jw-photo-banner::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(12,22,27,.94) 0%, rgba(12,22,27,.8) 30%, rgba(12,22,27,.25) 56%, rgba(12,22,27,0) 72%); }
+.jw-photo-banner .jw-container { position: relative; z-index: 2; }
+.jw-photo-banner-copy { max-width: 34rem; padding-block: clamp(4.5rem, 9vw, 8rem); }
+.jw-photo-banner-copy h1 { color: #fff; margin: 0; font-size: clamp(2.5rem, 4.6vw, 4rem); line-height: 1.05; }
+.jw-photo-banner-copy h1 em { color: #a9d3ae; }
+.jw-photo-banner .jw-hero-eyebrow { color: #f5f3ec; }
+.jw-photo-banner .jw-hero-eyebrow span { background: #a9d3ae; }
+@media (max-width: 760px) {
+  .jw-photo-banner::before { display: none; }
+  .jw-photo-banner-copy { padding-block: 1.6rem 1.8rem; }
+}
