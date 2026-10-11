@@ -18,8 +18,15 @@ import { SAFEGUARDING_ROLES } from "../data/facts";
  */
 
 // Confirmed on their own sites, 11 October 2026. Numbers and wording are only those seen there.
-// Childline, NSPCC and Kidscape could not be confirmed and are deliberately absent.
+// NSPCC and Kidscape could not be confirmed and are deliberately absent. Childline was confirmed
+// by Claude in a browser on 11 October 2026 (childline.org.uk/get-support/contacting-childline/).
 const SERVICES = [
+  {
+    key: "childline",
+    name: "Childline",
+    line: "Free and confidential, open any time, day or night. Call 0800 1111 or chat online.",
+    url: "https://www.childline.org.uk/",
+  },
   {
     key: "shout",
     name: "Shout",

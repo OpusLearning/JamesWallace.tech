@@ -193,6 +193,27 @@ export default function Tuition() {
         </div>
       </section>
 
+      {/* A picture of the work itself (image supplied by James, 11 Oct 2026; illustrative). */}
+      <section style={{ background: "var(--surface, #f5f3ec)" }}>
+        <div className="jw-container" style={{ paddingBlock: "2rem 2.5rem" }}>
+          <figure style={{ margin: 0 }}>
+            <img
+              src="/hero/with-tutor-1942.webp"
+              srcSet="/hero/with-tutor-1000.webp 1000w, /hero/with-tutor-1942.webp 1942w"
+              sizes="(max-width: 1320px) 100vw, 1260px"
+              width="1942"
+              height="809"
+              loading="lazy"
+              alt="A teenager and a teacher working side by side at a table, both smiling, in a bright room with plants."
+              style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
+            />
+            <figcaption style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
+              Images are illustrative. They do not show real pupils.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
       {/* Who I work with */}
       <section className="jw-section jw-section-white">
         <div className="jw-container">
