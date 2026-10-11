@@ -558,4 +558,23 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
   .jw-hero-provision { max-width: 100%; justify-self: stretch; }
   .jw-lead-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .jw-lead-portrait { max-width: 16rem; }
+  /* The commissioner line made the hero taller, which pushed the action buttons down into the
+     fixed SiteHelper button's corner on phones. Tighten the copy's rhythm and keep the two
+     buttons on one row so they sit clear of it (measured on 390x844, 390x700, 375x667,
+     360x740, 360x640, 412x660 — all clear; see stages/04-verify/output/STUDENTS-1.md). */
+  .jw-home-hero { padding-top: 1.4rem; }
+  .jw-hero-eyebrow { margin-bottom: .9rem; }
+  .jw-hero-copy h1 { margin-bottom: .9rem; }
+  .jw-hero-intro { margin-bottom: .55rem; }
+  .jw-hero-description { margin-bottom: .7rem; }
+  .jw-hero-commissioners { margin-bottom: .9rem; line-height: 1.4; }
+  .jw-hero-location { margin-top: .9rem; }
+  .jw-hero-actions { gap: .45rem 1rem; }
+  .jw-hero-actions .jw-btn-primary,
+  .jw-hero-actions .jw-btn-secondary { font-size: .8rem; padding-inline: .85rem; gap: .5rem; }
+}
+@media (max-width: 380px) {
+  .jw-hero-actions { gap: .4rem .7rem; }
+  .jw-hero-actions .jw-btn-primary,
+  .jw-hero-actions .jw-btn-secondary { padding-inline: .68rem; font-size: .78rem; }
 }
