@@ -179,13 +179,13 @@ export default function Tuition() {
             </div>
             <div className="col-12 col-lg-5">
               <img
-                src="/hero/parent1-1100.webp"
-                srcSet="/hero/parent1-600.webp 600w, /hero/parent1-1100.webp 1100w"
+                src="/hero/parent2-1100.webp"
+                srcSet="/hero/parent2-600.webp 600w, /hero/parent2-1100.webp 1100w"
                 sizes="(max-width: 991px) 100vw, 30rem"
                 width="1100"
                 height="1100"
                 fetchPriority="high"
-                alt="A teenager and his mother sitting together at a table, both smiling."
+                alt="A teenager and her mother sitting together at a table, both smiling."
                 style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px", marginBottom: "1rem" }}
               />
               <div className="row g-3">
