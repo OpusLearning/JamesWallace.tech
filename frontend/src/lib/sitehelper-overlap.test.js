@@ -57,6 +57,24 @@ function inspectLauncher(selector) {
         hits.push({ selector: describe(el), text: (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 48) });
       }
     }
+    // Body text as well as controls: any visible glyph under the launcher's box is a hit.
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const range = document.createRange();
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.nodeValue.trim()) continue;
+      const parent = node.parentElement;
+      if (!parent || launcher.contains(parent) || parent.closest(".visually-hidden, .jw-skip-link, #jw-helper-panel, script, style")) continue;
+      const ps = getComputedStyle(parent);
+      if (ps.display === "none" || ps.visibility === "hidden" || Number(ps.opacity) === 0) continue;
+      range.selectNodeContents(node);
+      for (const r of range.getClientRects()) {
+        if (r.width < 1 || r.height < 1) continue;
+        if (!(box.right <= r.left || box.left >= r.right || box.bottom <= r.top || box.top >= r.bottom)) {
+          hits.push({ selector: `text in ${describe(parent)}`, text: node.nodeValue.trim().replace(/\s+/g, " ").slice(0, 48) });
+          break;
+        }
+      }
+    }
   }
   return { found: true, visible, name, hits };
 }

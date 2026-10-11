@@ -16,6 +16,7 @@ const links = [
 const resources = [
   { href: "https://blog.jameswallace.tech", label: "Journal" },
   { href: GUIDES_HUB.url, label: "Parent guides" },
+  { href: "https://blog.jameswallace.tech/councils/", label: "Council policies" },
   { href: "https://blog.jameswallace.tech/councils/assistant/", label: "Council assistant" },
   { href: "https://blog.jameswallace.tech/tutors/", label: "Tutor Handbook" },
 ];

@@ -261,7 +261,9 @@ export default function ForLAs() {
             ))}
           </div>
           <p className="jw-caption">
-            Some buy by the half day and day and not by the hour. A placement is {DELIVERY.hoursPerWeek} for each pupil.
+            <strong>Frameworks:</strong> where a council buys through a framework, the
+            prices and units are the ones tendered to that framework. Some buy by the half day and day and not by the hour.
+            A placement is {DELIVERY.hoursPerWeek} for each pupil.
           </p>
           <p className="jw-caption">
             <strong>Included:</strong> planning and preparation, a report within 24 hours of

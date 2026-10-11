@@ -91,6 +91,22 @@ export default function SiteHelper() {
         const overlaps = !(box.right <= r.left || box.left >= r.right || box.bottom <= r.top || box.top >= r.bottom);
         if (overlaps) { setHidden(true); return; }
       }
+      // Body text counts too (review of LOOK-SITE-1): hide if the box would sit over any visible glyph.
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const range = document.createRange();
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (!node.nodeValue.trim()) continue;
+        const parent = node.parentElement;
+        if (!parent || el.contains(parent) || parent.closest(".visually-hidden, .jw-skip-link, #jw-helper-panel, script, style")) continue;
+        const pr = parent.getBoundingClientRect();
+        if (pr.bottom <= box.top || pr.top >= box.bottom || pr.right <= box.left || pr.left >= box.right) continue;
+        const style = getComputedStyle(parent);
+        if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) continue;
+        range.selectNodeContents(node);
+        for (const r of range.getClientRects()) {
+          if (!(box.right <= r.left || box.left >= r.right || box.bottom <= r.top || box.top >= r.bottom)) { setHidden(true); return; }
+        }
+      }
       setHidden(false);
     };
     update();
