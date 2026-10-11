@@ -173,10 +173,26 @@ export default function Students() {
 
       {/* 4. On a bad day */}
       <section className="jw-section jw-section-white">
-        <div className="jw-container" style={{ maxWidth: "46rem" }}>
-          <h2 style={{ marginBottom: "1.25rem" }}>On a bad day</h2>
-          <p>You can say so. That is allowed.</p>
-          <p style={{ marginBottom: 0 }}>We change the plan. A hard day does not get you into trouble.</p>
+        <div className="jw-container">
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-6">
+              <img
+                src="/hero/younger-1254.webp"
+                srcSet="/hero/younger-700.webp 700w, /hero/younger-1254.webp 1254w"
+                sizes="(max-width: 991px) 100vw, 38rem"
+                width="1254"
+                height="1000"
+                loading="lazy"
+                alt="A girl at a desk at home with a notebook and a laptop, resting her chin on her hand and smiling."
+                style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
+              />
+            </div>
+            <div className="col-12 col-lg-6">
+              <h2 style={{ marginBottom: "1.25rem" }}>On a bad day</h2>
+              <p>You can say so. That is allowed.</p>
+              <p style={{ marginBottom: 0 }}>We change the plan. A hard day does not get you into trouble.</p>
+            </div>
+          </div>
         </div>
       </section>
 

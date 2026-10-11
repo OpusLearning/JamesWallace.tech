@@ -160,6 +160,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          <p className="jw-students-link">Are you the young person? <Link to="/students">This page is for you <Arrow /></Link></p>
         </div>
       </section>
 

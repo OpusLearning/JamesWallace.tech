@@ -218,6 +218,10 @@ export default function Tuition() {
               style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
             />
           </figure>
+          <p style={{ marginTop: "1.25rem", marginBottom: 0 }}>
+            Is your child wondering what this would be like? There is{" "}
+            <Link to="/students">a page written for them</Link>.
+          </p>
         </div>
       </section>
 

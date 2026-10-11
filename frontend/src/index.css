@@ -603,3 +603,6 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
   .jw-home-hero--photo::before { display: none; }
   .jw-home-hero--photo .jw-hero-grid { padding-block: 1.6rem 1.8rem; }
 }
+
+.jw-students-link { margin: 2rem 0 0; font-size: 1rem; }
+.jw-students-link a { font-weight: 600; margin-left: .35rem; }
