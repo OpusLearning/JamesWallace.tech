@@ -66,17 +66,33 @@ export default function Students() {
     <>
       {/* 1. Heading and two-line welcome */}
       <section className="jw-section jw-section-warm">
-        <div className="jw-container" style={{ maxWidth: "46rem" }}>
-          <span className="jw-badge jw-badge-brand mb-3" style={{ display: "inline-block" }}>
-            For students
-          </span>
-          <h1 style={{ marginBottom: "1.25rem" }}>This page is for you</h1>
-          <p style={{ fontSize: "1.15rem", color: "var(--text-primary)", marginBottom: "0.5rem" }}>
-            School does not work for everyone all the time.
-          </p>
-          <p style={{ fontSize: "1.15rem", color: "var(--text-primary)", marginBottom: 0 }}>
-            This page says what working with James is like.
-          </p>
+        <div className="jw-container">
+          <div className="row align-items-center g-5">
+            <div className="col-12 col-lg-7">
+              <span className="jw-badge jw-badge-brand mb-3" style={{ display: "inline-block" }}>
+                For students
+              </span>
+              <h1 style={{ marginBottom: "1.25rem" }}>This page is for you</h1>
+              <p style={{ fontSize: "1.15rem", color: "var(--text-primary)", marginBottom: "0.5rem" }}>
+                School does not work for everyone all the time.
+              </p>
+              <p style={{ fontSize: "1.15rem", color: "var(--text-primary)", marginBottom: 0 }}>
+                This page says what working with James is like.
+              </p>
+            </div>
+            <div className="col-12 col-lg-5">
+              <img
+                src="/hero/student-1200.webp"
+                srcSet="/hero/student-600.webp 600w, /hero/student-1200.webp 1200w"
+                sizes="(max-width: 991px) 100vw, 30rem"
+                width="1200"
+                height="1200"
+                fetchPriority="high"
+                alt="A teenager in a grey hoodie sitting at a table, smiling."
+                style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -117,18 +133,15 @@ export default function Students() {
             <div className="col-12 col-lg-6">
               <figure style={{ margin: 0 }}>
                 <img
-                  src="/hero/4-online-lesson-1600.webp"
-                  srcSet="/hero/4-online-lesson-800.webp 800w, /hero/4-online-lesson-1600.webp 1600w"
+                  src="/hero/student-working-1600.webp"
+                  srcSet="/hero/student-working-800.webp 800w, /hero/student-working-1600.webp 1600w"
                   sizes="(max-width: 991px) 100vw, 40rem"
                   width="1600"
-                  height="893"
+                  height="883"
                   loading="lazy"
-                  alt="An illustration of a lesson: a young person at a laptop with a teacher on the screen."
+                  alt="A teenager writing in a notebook beside a laptop, smiling."
                   style={{ display: "block", width: "100%", borderRadius: "10px", border: "1px solid var(--border)" }}
                 />
-                <figcaption style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                  An illustration of an online lesson.
-                </figcaption>
               </figure>
             </div>
           </div>

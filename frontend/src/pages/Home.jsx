@@ -6,15 +6,15 @@ import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HU
 // from facts.js (SITEFIX-3 item 1).
 const DESCRIPTION = `Specialist SEND and EOTAS teaching. ${AREA.meta}. QTS, MEd, enhanced DBS. For families, agencies and local authorities.`;
 
-// The hero image lives here on its own, so swapping it is a one-line change (STUDENTS-1 brief).
-// Options 1-6 are all in public/hero/ at 1600 and 800 wide; width/height are the converted 1600
-// file's, so the box does not move while the image loads. Illustrations, not photographs of pupils.
+// The hero photograph sits behind the headline, full width (James, 11 Oct 2026: his own image,
+// `sitehero.png`). Swap the three files in public/hero/ to change it. Illustrative, not a real pupil.
 const HERO_IMAGE = {
-  src: "/hero/1-kitchen-table-maths-1600.webp",
-  src800: "/hero/1-kitchen-table-maths-800.webp",
-  width: 1600,
-  height: 893,
-  alt: "An illustration of a lesson at a kitchen table, working through maths together.",
+  src: "/hero/home-1942.webp",
+  src1100: "/hero/home-1100.webp",
+  mobile: "/hero/home-mobile-900.webp",
+  width: 1942,
+  height: 809,
+  alt: "A teenager in a hoodie writing at a table, smiling, in a warm room with plants and bookshelves.",
 };
 
 const questions = [
@@ -93,7 +93,19 @@ export default function Home() {
 
   return (
     <div className="jw-home">
-      <section className="jw-home-hero" aria-labelledby="home-heading">
+      <section className="jw-home-hero jw-home-hero--photo" aria-labelledby="home-heading">
+        <picture className="jw-hero-bg">
+          <source media="(max-width: 760px)" srcSet={HERO_IMAGE.mobile} />
+          <img
+            src={HERO_IMAGE.src}
+            srcSet={`${HERO_IMAGE.src1100} 1100w, ${HERO_IMAGE.src} 1942w`}
+            sizes="100vw"
+            width={HERO_IMAGE.width}
+            height={HERO_IMAGE.height}
+            fetchPriority="high"
+            alt={HERO_IMAGE.alt}
+          />
+        </picture>
         <div className="jw-container jw-hero-grid">
           <div className="jw-hero-copy">
             <p className="jw-eyebrow jw-hero-eyebrow"><span aria-hidden="true" /> Specialist one-to-one teaching</p>
@@ -107,21 +119,10 @@ export default function Home() {
             </div>
             <p className="jw-hero-location">{AREA.short}</p>
           </div>
-          <figure className="jw-hero-provision">
-            <img
-              src={HERO_IMAGE.src}
-              srcSet={`${HERO_IMAGE.src800} 800w, ${HERO_IMAGE.src} 1600w`}
-              sizes="(max-width: 620px) 85vw, 32rem"
-              width={HERO_IMAGE.width}
-              height={HERO_IMAGE.height}
-              fetchPriority="high"
-              alt={HERO_IMAGE.alt}
-            />
-            <figcaption>Images are illustrative. They do not show real pupils.</figcaption>
-          </figure>
         </div>
         <div className="jw-container">
           <div className="jw-hero-footnote"><p>One young person. Their own way forward.</p><a href="#find-your-route">Find the right support <span aria-hidden="true">↓</span></a></div>
+          <p className="jw-hero-imagenote">Images are illustrative. They do not show real pupils.</p>
         </div>
       </section>
 
