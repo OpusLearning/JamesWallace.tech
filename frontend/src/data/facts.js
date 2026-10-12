@@ -162,7 +162,8 @@ export const ICO = {
 // with its status line, and must be flipped only when the evidence is in hand:
 // - Disability Confident Committed: confirmed by DWP on 6 October 2026 (scheme ID DCS050928), valid
 //   to 6 October 2029. Renewal is every three years.
-// - Emergency First Aid at Work: Skills Training Group course booked for 12 October 2026.
+// - Emergency First Aid at Work: Skills Training Group course completed on 12 October 2026 (James,
+//   12 Oct 2026). `held` stays false until Claude has seen the certificate; then flip it and give the dates.
 // Logos (James, 6 Oct 2026: "use the organisations actual images"). The ICO image is the file James
 // supplied; the nasen mark is its site logo (white) on its own header green; first aid carries the
 // training provider's logo, greyed until the certificate is in hand. Claude told James that the ICO's
@@ -222,7 +223,7 @@ export const REGISTRATIONS = [
     imageSize: [125, 53],
     icon: "cross",
     name: "Emergency First Aid at Work",
-    detail: "Course booked, 12 October 2026",
+    detail: "Course completed 12 October 2026, certificate awaited",
     held: false,
   },
 ];
