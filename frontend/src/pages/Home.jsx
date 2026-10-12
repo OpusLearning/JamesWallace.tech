@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import usePageMeta from "../hooks/usePageMeta";
+import OnTheCalendar from "../components/OnTheCalendar";
 import { Link } from "react-router-dom";
 import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
 
@@ -130,7 +131,7 @@ export default function Home() {
           </div>
         </div>
         <div className="jw-container">
-          <div className="jw-hero-footnote"><p>One young person. Their own way forward.</p><a href="#find-your-route">Find the right support <span aria-hidden="true">↓</span></a></div>
+          <div className="jw-hero-footnote"><p>One young person. Their own way forward.</p><OnTheCalendar /><a href="#find-your-route">Find the right support <span aria-hidden="true">↓</span></a></div>
         </div>
       </section>
 
