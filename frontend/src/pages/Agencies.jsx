@@ -51,7 +51,7 @@ const placement = [
   },
   {
     title: "Commissioning experience",
-    body: "Five years in a county council's children's commissioning team, supporting commissioning and quality assurance. I know what a monitoring visit asks for.",
+    body: "Five years in a county council's commissioning team as a Public Health Support Officer, supporting the commissioning and quality assurance of services for children and young people. I know what a monitoring visit asks for.",
   },
 ];
 
@@ -101,13 +101,13 @@ export default function Agencies() {
             <div className="col-12 col-lg-7">
               <p className="jw-lede">
                 QTS since 2004, a Master of Education, thirteen years teaching in specialist provision — twelve of them in a
-                special school — and five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
+                special school — and five years in a commissioning team at Nottinghamshire County Council.
               </p>
               <p style={{ marginBottom: "1rem" }}>
                 Enhanced DBS on the Update Service, with safeguarding and Prevent training records available to review.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                I am already registered with four UK education agencies. Names and compliance evidence are available on request.
+                I am already registered with a number of UK education agencies. Names and compliance evidence are available on request.
               </p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/contact?for=agency" className="jw-btn-primary">

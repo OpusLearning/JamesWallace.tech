@@ -529,7 +529,7 @@ const whyItMatters = [
   },
   {
     title: "LA-fluent",
-    desc: "Direct experience inside a Local Authority commissioning team. I understand the process, the paperwork, and what panels need to see.",
+    desc: "Five years supporting commissioning and quality assurance inside a local authority commissioning team. I understand the process, the paperwork, and what panels need to see.",
   },
   {
     title: "Safeguarding built in",
@@ -603,7 +603,7 @@ export default function Credentials() {
           <p className="jw-eyebrow">James Wallace · QTS, MEd</p>
           <dl>
             <div><dt>Teaching</dt><dd>Thirteen years in specialist provision.<span>Twelve of them at Foxwood Academy.</span></dd></div>
-            <div><dt>Commissioning</dt><dd>Five years in a local authority.<span>Nottinghamshire County Council’s children’s commissioning team.</span></dd></div>
+            <div><dt>Commissioning</dt><dd>Five years in a local authority.<span>Public Health Support Officer in a commissioning team at Nottinghamshire County Council.</span></dd></div>
             <div><dt>Professional checks</dt><dd>Enhanced DBS.<span>Registered with the Update Service.</span></dd></div>
           </dl>
           <Link to="/compliance" className="jw-text-link">Compliance and safeguarding <span aria-hidden="true">↗</span></Link>

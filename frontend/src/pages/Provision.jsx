@@ -167,7 +167,7 @@ export default function Provision() {
               <ul className="jw-row-list">
                 {[
                   { step: "Plan", desc: `Weekly session plan submitted in ${PRODUCT.name} - PLP criteria, planned activities, session logistics. The plan is locked before delivery begins, so the week has an evidence baseline. Where a commissioner wants sight of it first, approval is recorded against the plan.` },
-                  { step: "Deliver", desc: "I deliver the session, with a lone working check-in at the start and check-out at the end, timestamped. The portal's panic alert and live supervisor feed are built for providers with a supervisory team; as a sole practitioner, my escalation route is agreed in writing with the commissioner before teaching begins." },
+                  { step: "Deliver", desc: "I deliver the session, with a lone working check-in at the start and check-out at the end, timestamped. The portal's panic alert and live supervisor feed are built for providers with a supervisory team; as a sole practitioner I have a named monitor who knows where each lesson is and checks that I have arrived and left, and the steps they follow are shared with the commissioner before teaching begins." },
                   { step: "Evidence", desc: "Daily report submitted within 24 hours - attendance, engagement (0 to 5), per-subject activity notes, PLP criterion progress, safeguarding observations." },
                 ].map((item) => (
                   <li key={item.step}>
@@ -205,7 +205,7 @@ export default function Provision() {
                 <li>{SAFEGUARDING_ROLES.dsl.name} is the {SAFEGUARDING_ROLES.dsl.role}, and I am the {SAFEGUARDING_ROLES.deputy.role}; we have both completed {TRAINING.dsl.provider}&apos;s {TRAINING.dsl.name} course, certificated {TRAINING.dsl.completed}</li>
                 <li>All concerns logged immediately in an encrypted, audit-trailed system</li>
                 <li>Physical Intervention Recording Forms (PIRFs) completed before caseload can proceed</li>
-                <li>Timestamped lone working check-in and check-out for every solo session, with the escalation route agreed in writing with the commissioner</li>
+                <li>Timestamped lone working check-in and check-out for every solo session, with a named monitor and written escalation steps shared with the commissioner</li>
                 <li>Automated daily alerts for stale or unactioned safeguarding concerns</li>
               </ul>
               <p className="jw-body">{SAFEGUARDING_ROLES.dsl.intro}</p>

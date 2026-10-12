@@ -19,7 +19,7 @@ const staffComplianceRows = [
 const dataProtectionPoints = [
   {
     title: "AES-256-GCM encryption",
-    desc: "All personally identifiable data - learner names, diagnoses, carer contacts, medical information, session notes - encrypted at rest.",
+    desc: "The database is encrypted at rest and in transit by the hosting provider. Health, safeguarding and session-note fields are encrypted again by the portal, and documents are encrypted before upload.",
   },
   {
     title: "Full audit trail",
@@ -116,10 +116,8 @@ export default function Compliance() {
               <p className="jw-body">
                 On a placement commissioned directly from James Wallace Education, every solo session
                 is checked in through the portal at the start and checked out at the end, so there is
-                a timestamped record of where I was and for how long. {PLATFORM_STATUS.follow} The portal supports a live supervisor feed
-                and overdue-session alerting for multi-practitioner providers; as a
-                sole practitioner the escalation route is agreed in writing with the
-                commissioning school or local authority before teaching begins.
+                a timestamped record of where I was and for how long. {PLATFORM_STATUS.follow} The portal&apos;s live supervisor feed
+                and overdue-session alerting are built for multi-practitioner providers. Every in-person session has a named monitor at James Wallace Education who knows where the lesson is and checks that I have arrived and left. The steps they follow if a check is missed are written down and shared with the commissioner before teaching begins.
               </p>
               <ul className="jw-list">
                 <li>

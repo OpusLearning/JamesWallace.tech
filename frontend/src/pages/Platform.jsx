@@ -81,11 +81,11 @@ const screenshots = [
   {
     file: "07-lone-working",
     title: "Lone working safety",
-    note: "Portal capability. Built for multi-practitioner providers; as a sole practitioner James uses the check-in, check-out and audit trail, and the escalation route is agreed with the commissioner before teaching starts.",
+    note: "Portal capability. Built for multi-practitioner providers; as a sole practitioner James uses the check-in, check-out and audit trail, with a named monitor who checks he has arrived and left; the written escalation steps are shared with the commissioner before teaching starts.",
     bullets: [
       "Check-in at session start; check-out at session end",
       "Live supervisor feed showing all active sessions, time elapsed, and check-in location",
-      "Automatic alert and email to supervisory team if a session goes overdue",
+      "Automatic alert and email if a session goes overdue (to the supervisory team, for providers that have one)",
       "Panic button in practitioner’s session view - immediate supervisor notification",
       "Lone working audit reports available for inspection",
     ],
@@ -154,7 +154,7 @@ const proofTiles = [
 ];
 
 const securityPoints = [
-  { label: "AES-256-GCM encryption", desc: "All PII encrypted at rest - learner names, diagnoses, carer contacts, session notes" },
+  { label: "AES-256-GCM encryption", desc: "Database encrypted at rest and in transit; health, safeguarding and session-note fields encrypted again by the portal; documents encrypted before upload" },
   { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
   { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
   { label: "EU hosting, moving to the UK", desc: `Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data protection information available on request.` },

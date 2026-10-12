@@ -144,7 +144,7 @@ export default function SendTuitionDerbyshire() {
               <h2 style={{ marginBottom: "1rem" }}>How I teach in Derbyshire</h2>
               <p className="jw-body" style={{ color: "var(--text-muted)", marginBottom: "1rem" }}>
                 Thirteen years teaching in specialist provision, twelve of them in a special school, and in between
-                five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team. {AREA.sentence}{" "}
+                five years in a commissioning team at Nottinghamshire County Council. {AREA.sentence}{" "}
                 {SESSIONS.school} For sessions at the child&#39;s home or in a community setting, a responsible adult
                 is present.
               </p>

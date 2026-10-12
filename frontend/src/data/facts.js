@@ -262,6 +262,9 @@ export const POLICY_PACK = {
 // company and not charged, no VAT (the company is not VAT registered). The site used to show "£250 per
 // day" for commissioned work, which matched neither bid. Family rates are James's private rates and are
 // not part of any bid. server/helper.js (the chat assistant) repeats these figures by hand: change both.
+// HIDDEN 12 Oct 2026 until Fri 16 Oct 2026 10:00 (James: the Nottingham Form of Tender promises the tender price is not divulged before submission). To restore: set COMMISSIONED_PRICES_PUBLIC to true here, and restore the two marked blocks in server/helper.js and server/email.js.
+export const COMMISSIONED_PRICES_PUBLIC = false;
+
 export const PRICES = {
   family: "£45",
   familyEhcp: "£50",

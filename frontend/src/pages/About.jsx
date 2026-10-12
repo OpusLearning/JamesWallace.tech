@@ -97,8 +97,9 @@ export default function About() {
             James Wallace Education is operated by James Wallace, and in practice is James
             Wallace: one qualified teacher rather than a staffed agency, which is
             deliberate. Thirteen years teaching in specialist provision, twelve
-            of them in a special school, and five inside a county
-            council&#39;s children&#39;s commissioning team. James holds
+            of them in a special school, and five as a Public Health Support Officer in a county
+            council&#39;s commissioning team, supporting the commissioning and quality
+            assurance of services for children and young people. James holds
             a {BIO.degree}, a Master of Education (MEd), Qualified
             Teacher Status since 2004, and an Enhanced DBS on the Update Service.
           </p>

@@ -1,7 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import PhotoBanner from "../components/PhotoBanner";
 import { Link } from "react-router-dom";
-import { TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS, REFERENCES } from "../data/facts";
+import { COMMISSIONED_PRICES_PUBLIC, TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS, REFERENCES } from "../data/facts";
 import SafeguardingLead from "../components/SafeguardingLead";
 
 const commissionerQA = [
@@ -11,7 +11,7 @@ const commissionerQA = [
   },
   {
     q: "You are one person. What happens if you are ill?",
-    a: "I tell you the same day and agree a catch-up plan, in writing. Missed hours are logged against entitlement and made up, not quietly lost, and the running total is visible to you throughout. A single specialist is the trade: one consistent adult for a child who has usually had far too many, and no cover pool to fall back on. Most of the young people I take on could not tolerate a rotating staff team anyway.",
+    a: "I tell you before the session's start time where I know in advance, and otherwise within 30 minutes of it, and agree a catch-up plan in writing. Missed hours are logged against entitlement and made up, not quietly lost, and the running total is visible to you throughout. A single specialist is the trade: one consistent adult for a child who has usually had far too many, and no cover pool to fall back on. Most of the young people I take on could not tolerate a rotating staff team anyway.",
   },
   {
     q: "How do you handle safeguarding?",
@@ -48,7 +48,7 @@ const referralSteps = [
   {
     step: "1",
     title: "Initial referral",
-    desc: `Submit the referral form on this site or contact me directly. I'll respond ${REPLY.within} to discuss the placement.`,
+    desc: `Submit the referral form on this site or contact me directly. Please do not put a young person's name or any identifying details in that first message. I'll respond ${REPLY.within} to discuss the placement.`,
   },
   {
     step: "2",
@@ -232,6 +232,7 @@ export default function ForLAs() {
       </section>
 
       {/* Prices. The rates come from facts.js and are unchanged. */}
+      {COMMISSIONED_PRICES_PUBLIC ? (
       <section className="jw-section jw-section-white" id="prices">
         <div className="jw-container">
           <h2>What it costs</h2>
@@ -273,10 +274,23 @@ export default function ForLAs() {
           <p className="jw-caption">
             <strong>Not included:</strong> transport for the young person, and exam or
             accreditation fees, which are charged at cost where agreed in advance. James Wallace Education Ltd is not VAT
-            registered, so no VAT is added. Billing is monthly in arrears, session by session.
+            registered, so no VAT is added. Billing is monthly in arrears, session by session, unless the commission or a framework sets a different period.
           </p>
         </div>
       </section>
+      ) : (
+      <section className="jw-section jw-section-white" id="prices">
+        <div className="jw-container">
+          <h2>What it costs</h2>
+          <p className="jw-body jw-measure">
+            Prices for commissioned placements are by the hour, half day or day, with planning, a report within
+            24 hours of every session, safeguarding records and travel included. I send the current prices
+            the same day on request.
+          </p>
+          <Link to="/contact?for=commissioner" className="jw-btn-secondary">Ask for prices</Link>
+        </div>
+      </section>
+      )}
 
       {/* Policies statement */}
       <section className="jw-section jw-section-white">

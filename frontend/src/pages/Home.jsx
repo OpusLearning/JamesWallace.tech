@@ -165,7 +165,7 @@ export default function Home() {
               <Link to="/for-las" className="jw-professional-path">
                 <span className="jw-eyebrow">For local authorities</span>
                 <h3>Individual provision.<br />Accountable delivery.</h3>
-                <p>Teaching informed by five years in Nottinghamshire County Council’s children’s commissioning team.</p>
+                <p>Teaching informed by five years in a commissioning team at Nottinghamshire County Council.</p>
                 <span className="jw-path-link">Explore commissioned provision <Arrow /></span>
               </Link>
             </div>

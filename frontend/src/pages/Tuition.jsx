@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
-import { AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
+import { COMMISSIONED_PRICES_PUBLIC, AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
 import PageHeader from "../components/PageHeader";
 
 // The page's own description, and the service's, both read the area from facts.js (SITEFIX-3).
@@ -152,7 +152,7 @@ export default function Tuition() {
         body={<>
           <p className="jw-body">
             Since 2025 I have delivered education otherwise than at school for autistic, ADHD and PDA learners, commissioned
-            by local authorities. In between I spent five years inside Nottinghamshire County Council&#39;s children&#39;s commissioning team.
+            by local authorities. In between I spent five years in a commissioning team at Nottinghamshire County Council.
           </p>
           <p className="jw-body" style={{ color: "var(--text-muted)" }}>
             I now take a small number of private students alongside that work. {AREA.sentence} For the local
@@ -361,11 +361,16 @@ export default function Tuition() {
                 title: "EHCP-aligned work",
                 body: "Where the tuition is written to the outcomes in a plan and you need the evidence for reviews: a personal learning plan, progress against criteria, and reports you can hand to school or the local authority.",
               },
-              {
+              COMMISSIONED_PRICES_PUBLIC ? {
                 rate: PRICES.commissionedInPerson,
                 unit: "per hour",
                 title: "Commissioned provision",
                 body: `Commissioned by a local authority or school, typically ${DELIVERY.hoursPerWeek}: ${PRICES.commissionedInPerson} an hour in person, ${PRICES.commissionedOnline} an hour online, with half-day and day prices on the page for local authorities. Includes planning, a report after every session, safeguarding records, attendance at reviews and travel. No VAT is added.`,
+              } : {
+                rate: "On request",
+                unit: "",
+                title: "Commissioned provision",
+                body: `Commissioned by a local authority or school, typically ${DELIVERY.hoursPerWeek}. Priced by the hour, half day or day; see the page for local authorities. Includes planning, a report after every session, safeguarding records and travel.`,
               },
             ].map((f) => (
               <div key={f.title} className="col-12 col-md-4">
