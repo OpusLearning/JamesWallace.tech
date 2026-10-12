@@ -26,12 +26,14 @@ export const DATED = [];
 const DAY = 86400000;
 const at = (y, md) => new Date(`${y}-${md}T12:00:00Z`).getTime();
 
-// The one thing to show today, in this order: a single day that is today or within the last three days; a
-// single day or week starting within the next ten days; a month-long observance running now; anything
-// starting within the next 21 days. Returns { item, when } where when is "today", "recent" or "soon".
-export function onTheCalendar(now = new Date()) {
-  const t = now.getTime();
-  const y = now.getUTCFullYear();
+// What to show today, as { now, when, next }:
+// - `now`: a single day that is today, or one within the last three days (when = "today" or "recent");
+//   failing that, a month-long observance that is running (when = "month").
+// - `next`: the next thing to start, within the next 30 days.
+// Either may be null. Returns null when both are.
+export function onTheCalendar(date = new Date()) {
+  const t = date.getTime();
+  const y = date.getUTCFullYear();
   const items = [];
   for (const yy of [y - 1, y, y + 1]) {
     for (const d of FIXED) items.push({ ...d, s: at(yy, d.start) - DAY / 2, e: at(yy, d.end || d.start) + DAY / 2 });
@@ -39,17 +41,12 @@ export function onTheCalendar(now = new Date()) {
   for (const d of DATED) items.push({ ...d, s: new Date(`${d.start}T00:00:00Z`).getTime(), e: new Date(`${d.end || d.start}T23:59:59Z`).getTime() });
   const long = (i) => i.e - i.s > 8 * DAY;
   const short = items.filter((i) => !long(i));
-  const today = short.filter((i) => t >= i.s && t <= i.e).sort((a, b) => b.s - a.s)[0];
-  if (today) return { item: today, when: "today" };
-  const recent = short.filter((i) => t > i.e && t - i.e <= 3 * DAY).sort((a, b) => b.e - a.e)[0];
-  if (recent) return { item: recent, when: "recent" };
-  const upcoming = (days) => items.filter((i) => i.s > t && i.s - t <= days * DAY).sort((a, b) => a.s - b.s)[0];
-  const soon = upcoming(10);
-  if (soon) return { item: soon, when: "soon" };
-  const month = items.filter((i) => long(i) && t >= i.s && t <= i.e).sort((a, b) => a.s - b.s)[0];
-  if (month) return { item: month, when: "today" };
-  const later = upcoming(21);
-  return later ? { item: later, when: "soon" } : null;
+  let now = short.filter((i) => t >= i.s && t <= i.e).sort((a, b) => b.s - a.s)[0] || null;
+  let when = now ? "today" : null;
+  if (!now) { now = short.filter((i) => t > i.e && t - i.e <= 3 * DAY).sort((a, b) => b.e - a.e)[0] || null; when = now ? "recent" : null; }
+  if (!now) { now = items.filter((i) => long(i) && t >= i.s && t <= i.e).sort((a, b) => a.s - b.s)[0] || null; when = now ? "month" : null; }
+  const next = items.filter((i) => i.s > t && i.s - t <= 30 * DAY && i !== now).sort((a, b) => a.s - b.s)[0] || null;
+  return now || next ? { now, when, next } : null;
 }
 
 export function dateLabel(item) {
