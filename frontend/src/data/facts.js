@@ -164,7 +164,8 @@ export const ICO = {
 //   to 6 October 2029. Renewal is every three years.
 // - Emergency First Aid at Work: Skills Training Group course completed on 12 October 2026 (James,
 //   12 Oct 2026). Shown in full at James's word, 12 Oct 2026: "don't grey it out, I have passed and the
-//   certificate isn't needed to prove that". Add the valid-to date when the certificate arrives.
+//   certificate isn't needed to prove that". Certificate seen by Claude on 12 Oct 2026: dated 12/10/2026,
+//   "valid for 3 years from date shown", approved by the First Aid Industry Body.
 // Logos (James, 6 Oct 2026: "use the organisations actual images"). The ICO image is the file James
 // supplied; the nasen mark is its site logo (white) on its own header green; first aid carries the
 // training provider's logo, greyed until the certificate is in hand. Claude told James that the ICO's
@@ -224,7 +225,7 @@ export const REGISTRATIONS = [
     imageSize: [125, 53],
     icon: "cross",
     name: "Emergency First Aid at Work",
-    detail: "Completed 12 October 2026",
+    detail: "Valid to October 2029",
     held: true,
   },
 ];

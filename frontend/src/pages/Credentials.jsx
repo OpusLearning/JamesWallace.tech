@@ -312,6 +312,17 @@ const cpdCerts = [
     cert: "/certificates/cert_academize_advanced-safeguarding-cp-prevent_2026-09-09.pdf",
   },
   {
+    title: "Emergency First Aid at Work (6 hours)",
+    group: "safeguarding",
+    provider: "Skills Training Group",
+    issued: "12 October 2026",
+    detail: "Face to face, with practical assessment. Approved by the First Aid Industry Body. Valid for three years.",
+    desc: "Training and assessment under the Health and Safety (First Aid) Regulations 1981, in line with Resuscitation Council UK guidelines.",
+    badge: "/badges/skills-training-group.svg",
+    wide: true,
+    cert: "/certificates/cert_skills-training-group_emergency-first-aid-at-work_2026-10-12.pdf",
+  },
+  {
     title: "Allergy Awareness and Anaphylaxis",
     group: "safeguarding",
     provider: "Academize",
