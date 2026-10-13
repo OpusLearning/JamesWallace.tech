@@ -780,3 +780,9 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 .jw-home-hero--photo .jw-hero-footnote .jw-hero-calendar a { color: #f5f3ec; text-decoration: underline; text-decoration-color: rgba(169, 211, 174, .5); text-decoration-thickness: 1px; text-underline-offset: .28em; transition: text-decoration-color .2s ease; }
 .jw-home-hero--photo .jw-hero-footnote .jw-hero-calendar a:hover, .jw-home-hero--photo .jw-hero-footnote .jw-hero-calendar a:focus-visible { text-decoration-color: #a9d3ae; }
 .jw-hero-calendar-date { color: rgba(245, 243, 236, .8); margin-left: .5rem; white-space: nowrap; }
+
+/* Published policy text (AllergyPolicy.jsx). */
+.jw-policy-text { font-size: 1.0625rem; line-height: 1.7; color: var(--text-primary); overflow-wrap: anywhere; }
+.jw-policy-text h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; }
+.jw-policy-text p, .jw-policy-text li { margin-bottom: 1rem; }
+.jw-policy-text a { word-break: break-word; }

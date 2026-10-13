@@ -30,7 +30,7 @@ const DIST = new URL('./dist/', import.meta.url).pathname;
 // so the same HTML can serve both as dist/404/index.html and, copied below, as dist/404.html for
 // the server's error page.
 const ROUTES = ['/', '/provision', '/platform', '/compliance', '/for-las', '/tuition',
-                '/send-tuition-derbyshire', '/send-tuition-nottinghamshire', '/agencies', '/students',
+                '/send-tuition-derbyshire', '/send-tuition-nottinghamshire', '/agencies', '/students', '/allergy-policy',
                 '/portfolio', '/about', '/contact', '/privacy', '/cookies', '/accessibility', '/terms',
                 '/complaints', '/credentials', '/sample-report', '/404'];
 const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.jpg':'image/jpeg',

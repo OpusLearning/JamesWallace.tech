@@ -107,7 +107,7 @@ export default function Agencies() {
                 Enhanced DBS on the Update Service, with safeguarding and Prevent training records available to review.
               </p>
               <p style={{ color: "var(--text-muted)", marginBottom: "1.75rem" }}>
-                I am already registered with a number of UK education agencies. Names and compliance evidence are available on request.
+                I am already registered with six UK education agencies. Names and compliance evidence are available on request.
               </p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/contact?for=agency" className="jw-btn-primary">

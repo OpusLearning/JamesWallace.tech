@@ -242,7 +242,8 @@ export default function Compliance() {
                 James Wallace Education, the provision operated by James Wallace, keeps an EOTAS-aligned policy suite - Safeguarding,
                 Lone Working, Data Protection, Health &amp; Safety, Behaviour
                 Support, and more. The suite was {POLICY_PACK.status}; policies
-                are shared with commissioners on request.
+                are shared with commissioners on request. The{" "}
+                <Link to="/allergy-policy">Allergy and Anaphylaxis Safety Policy</Link> is published in full.
               </p>
               <p className="jw-body">
                 The portal is built to version-control policies with review

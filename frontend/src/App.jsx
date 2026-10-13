@@ -28,6 +28,7 @@ import SendTuitionDerbyshire from "./pages/SendTuitionDerbyshire";
 import SendTuitionNottinghamshire from "./pages/SendTuitionNottinghamshire";
 import Agencies from "./pages/Agencies";
 import Students from "./pages/Students";
+import AllergyPolicy from "./pages/AllergyPolicy";
 import NotFound from "./pages/NotFound";
 
 function RouteEffects() {
@@ -75,6 +76,7 @@ const App = () => {
             <Route path="/send-tuition-nottinghamshire" element={<SendTuitionNottinghamshire />} />
             <Route path="/agencies" element={<Agencies />} />
             <Route path="/students" element={<Students />} />
+            <Route path="/allergy-policy" element={<AllergyPolicy />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

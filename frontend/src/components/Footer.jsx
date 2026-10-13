@@ -34,6 +34,7 @@ export default function Footer() {
         <div className="jw-footer-brand"><p className="jw-brand-name">James Wallace</p><p className="jw-brand-subtitle">Specialist teaching for young people who need a different route through education.</p></div>
         <nav className="jw-footer-nav" aria-label="Footer navigation"><ul>
           <li><Link to="/students">For students</Link></li>
+          <li><Link to="/allergy-policy">Allergy policy</Link></li>
           <li><Link to="/credentials">Credentials</Link></li><li><Link to="/compliance">Compliance</Link></li><li><Link to="/privacy">Privacy</Link></li>
           <li><a href="https://blog.jameswallace.tech" target="_blank" rel="noopener noreferrer">Journal<span aria-hidden="true"> ↗</span></a></li>
           <li><a href={GUIDES_HUB.url}>Parent guides</a></li>
