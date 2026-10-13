@@ -64,7 +64,7 @@ export default function Provision() {
       <section className="jw-section jw-section-warm">
         <div className="jw-container">
           <div className="row align-items-center g-5">
-            <div className="col-12 col-lg-7">
+            <div className="col-12 col-lg-9">
               <p className="jw-lede">
                 Structured, specialist teaching for young people who cannot
                 access a mainstream or special school. I work across EOTAS,
@@ -81,19 +81,20 @@ export default function Provision() {
                 </Link>
               </div>
             </div>
-            <div className="col-12 col-lg-5">
-              <figure className="jw-media-figure">
-                <img
-                  className="jw-photo-43 jw-photo-43--left"
-                  src="/hero/with-tutor-clean-1942.webp"
-                  srcSet="/hero/with-tutor-clean-1000.webp 1000w, /hero/with-tutor-clean-1942.webp 1942w"
-                  sizes="(max-width: 991px) 100vw, 34rem"
-                  loading="lazy"
-                  alt="A teenager and a teacher working side by side at a table, both smiling."
-                />
-              </figure>
-            </div>
           </div>
+          {/* The photograph is shown whole, as a band, as on the Families page (13 Oct 2026). */}
+          <figure style={{ margin: "2.5rem 0 0" }}>
+            <img
+              src="/hero/with-tutor-clean-1942.webp"
+              srcSet="/hero/with-tutor-clean-1000.webp 1000w, /hero/with-tutor-clean-1942.webp 1942w"
+              sizes="(max-width: 1320px) 100vw, 1260px"
+              width="1942"
+              height="809"
+              loading="lazy"
+              alt="A teenager and a teacher working side by side at a table, both smiling."
+              style={{ display: "block", width: "100%", height: "auto", borderRadius: "14px" }}
+            />
+          </figure>
         </div>
       </section>
 
