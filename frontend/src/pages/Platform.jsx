@@ -195,7 +195,7 @@ export default function Platform() {
           </a>
         </>}
         image={{
-          src: "/portal/05-plp-analytics.webp",
+          src: "/portal/05-plp-analytics.webp?v=1013",
           alt: `PLP analytics in ${PRODUCT.name}`,
           fetchPriority: "high",
         }}
@@ -224,13 +224,13 @@ export default function Platform() {
             </div>
             <figure className="jw-shot">
               <a
-                href={`/portal/${s.file}.webp`}
+                href={`/portal/${s.file}.webp?v=1013`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Open the ${s.title} screenshot full size`}
               >
                 <img
-                  src={`/portal/${s.file}.webp`}
+                  src={`/portal/${s.file}.webp?v=1013`}
                   alt={`${s.title} in ${PRODUCT.name}`}
                   loading="lazy"
                 />
@@ -239,7 +239,7 @@ export default function Platform() {
                 {s.title} in {PRODUCT.name}.{" "}
                 <a
                   className="jw-shot-open"
-                  href={`/portal/${s.file}.webp`}
+                  href={`/portal/${s.file}.webp?v=1013`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

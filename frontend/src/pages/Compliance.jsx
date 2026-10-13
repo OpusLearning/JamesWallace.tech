@@ -96,9 +96,9 @@ export default function Compliance() {
             </div>
             <div className="col-12 col-lg-6">
               <figure className="jw-shot">
-                <a href="/portal/06-safeguarding.webp" target="_blank" rel="noopener noreferrer">
+                <a href="/portal/06-safeguarding.webp?v=1013" target="_blank" rel="noopener noreferrer">
 <img
-                  src="/portal/06-safeguarding.webp"
+                  src="/portal/06-safeguarding.webp?v=1013"
                   alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
                 /></a>
               </figure>
@@ -127,9 +127,9 @@ export default function Compliance() {
             </div>
             <div className="col-12 col-lg-6">
               <figure className="jw-shot">
-                <a href="/portal/07-lone-working.webp" target="_blank" rel="noopener noreferrer">
+                <a href="/portal/07-lone-working.webp?v=1013" target="_blank" rel="noopener noreferrer">
 <img
-                  src="/portal/07-lone-working.webp"
+                  src="/portal/07-lone-working.webp?v=1013"
                   alt={`Live lone working sessions view in ${PRODUCT.name}`}
                 /></a>
               </figure>
@@ -160,9 +160,9 @@ export default function Compliance() {
             </div>
             <div className="col-12 col-lg-6">
               <figure className="jw-shot">
-                <a href="/portal/08-compliance.webp" target="_blank" rel="noopener noreferrer">
+                <a href="/portal/08-compliance.webp?v=1013" target="_blank" rel="noopener noreferrer">
 <img
-                  src="/portal/08-compliance.webp"
+                  src="/portal/08-compliance.webp?v=1013"
                   alt={`Compliance record and emergency procedure in ${PRODUCT.name}`}
                 /></a>
               </figure>
@@ -258,9 +258,9 @@ export default function Compliance() {
             </div>
             <div className="col-12 col-lg-6">
               <figure className="jw-shot">
-                <a href="/portal/11-policies.webp" target="_blank" rel="noopener noreferrer">
+                <a href="/portal/11-policies.webp?v=1013" target="_blank" rel="noopener noreferrer">
 <img
-                  src="/portal/11-policies.webp"
+                  src="/portal/11-policies.webp?v=1013"
                   alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
                 /></a>
               </figure>
@@ -296,9 +296,9 @@ export default function Compliance() {
             </div>
             <div className="col-12 col-lg-6">
               <figure className="jw-shot">
-                <a href="/portal/12-inspection-bundle.webp" target="_blank" rel="noopener noreferrer">
+                <a href="/portal/12-inspection-bundle.webp?v=1013" target="_blank" rel="noopener noreferrer">
 <img
-                  src="/portal/12-inspection-bundle.webp"
+                  src="/portal/12-inspection-bundle.webp?v=1013"
                   alt={`Case view in ${PRODUCT.name} with the weekly plan, daily reports and exports tabs`}
                 /></a>
               </figure>

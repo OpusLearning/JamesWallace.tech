@@ -132,13 +132,13 @@ export default function ForLAs() {
             <div className="col-12 col-lg-5">
               <figure className="jw-shot">
                 <img
-                  src="/portal/10-finance.webp"
+                  src="/portal/10-finance.webp?v=1013"
                   alt={`Finance and billing view in ${PRODUCT.name}`}
                   loading="lazy"
                 />
                 <figcaption>
                   Finance &amp; billing in {PRODUCT.name}.{" "}
-                  <a className="jw-shot-open" href="/portal/10-finance.webp" target="_blank" rel="noopener noreferrer">
+                  <a className="jw-shot-open" href="/portal/10-finance.webp?v=1013" target="_blank" rel="noopener noreferrer">
                     Open full size<span aria-hidden="true"> ↗</span>
                   </a>
                 </figcaption>
@@ -324,7 +324,7 @@ export default function ForLAs() {
             <div className="col-12 col-lg-6">
               <figure className="jw-shot jw-shot--sm">
                 <img
-                  src="/portal/11-policies.webp"
+                  src="/portal/11-policies.webp?v=1013"
                   alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
                   loading="lazy"
                 />

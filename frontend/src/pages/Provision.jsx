@@ -181,7 +181,7 @@ export default function Provision() {
             <div className="col-12 col-lg-6">
               <figure className="jw-shot">
                 <img
-                  src="/portal/03b-weekly-plan-tab.webp"
+                  src="/portal/03b-weekly-plan-tab.webp?v=1013"
                   alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
                   loading="lazy"
                 />
@@ -218,7 +218,7 @@ export default function Provision() {
             <div className="col-12 col-lg-4">
               <figure className="jw-shot">
                 <img
-                  src="/portal/06-safeguarding.webp"
+                  src="/portal/06-safeguarding.webp?v=1013"
                   alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
                   loading="lazy"
                 />
