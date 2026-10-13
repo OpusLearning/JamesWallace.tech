@@ -473,8 +473,10 @@ html.a11y-spacious .jw-hero-copy h1 { line-height: 1.12; }
   .jw-hero-actions .jw-text-link { font-size: .875rem; }
   .jw-hero-portrait figcaption { flex-direction: column; }
 }
-/* Phones: lift the home page's reading text to at least 15px and give every footer link a 44px
-   touch target. Scoped under 600px, so wider screens are untouched. */
+/* Phones: lift the home page's reading text to at least 15px and give the footer links, the
+   standalone text links and the "open full size" links a 44px touch target. A thumb needs the same
+   room whether the link sits in the footer or beside a picture. Scoped under 600px, so wider
+   screens are untouched. */
 @media (max-width: 600px) {
   .jw-home .jw-hero-description,
   .jw-home .jw-proof-grid strong,
@@ -500,7 +502,9 @@ html.a11y-spacious .jw-hero-copy h1 { line-height: 1.12; }
     font-size: 15px;
   }
   .jw-footer-nav a,
-  .jw-footer-bottom a {
+  .jw-footer-bottom a,
+  .jw-text-link,
+  .jw-shot-open {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
@@ -746,6 +750,17 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 
 .jw-photo-43 { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; }
 .jw-photo-43--left { object-position: 58% center; }
+
+/* DAILY-2026-10-13 — the fixed media boxes above only earn their keep while the lg columns sit side
+   by side and "cover" trims them to a matching height. Below 992px the columns stack, there is no
+   neighbour left to match, and the crop is pure loss: a 2.4:1 photograph forced into a 4:3 box gives
+   up ~45% of its width and drops the second person out of frame, leaving the alt text describing
+   someone who is no longer in the picture. Stacked, each photograph keeps its own proportions, as
+   the Tuition picture has done since 11 Oct. */
+@media (max-width: 991px) {
+  .jw-media-figure img { height: auto; min-height: 0; }
+  .jw-photo-43 { aspect-ratio: auto; }
+}
 
 .jw-object-top { object-position: top; }
 
