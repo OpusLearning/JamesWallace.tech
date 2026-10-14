@@ -503,8 +503,7 @@ html.a11y-spacious .jw-hero-copy h1 { line-height: 1.12; }
   }
   .jw-footer-nav a,
   .jw-footer-bottom a,
-  .jw-text-link,
-  .jw-shot-open {
+  .jw-text-link {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
@@ -684,6 +683,11 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 .jw-shot img { display: block; width: 100%; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
 .jw-shot figcaption { margin-top: .7rem; font-size: .875rem; color: var(--text-muted); }
 .jw-shot-open { display: inline-block; margin-top: .35rem; font-size: .875rem; }
+/* The 44px phone tap target has to out-specify `.jw-shot a { display: block }` (0,1,1): a single
+   class is only (0,1,0), so the rule lives here, after the base declaration, with two classes. */
+@media (max-width: 600px) {
+  .jw-shot .jw-shot-open { display: inline-flex; align-items: center; min-height: 44px; }
+}
 
 /* LOOK-SITE-1 item 4 — the helper's panel and launcher. All sizes live here, not inline, so the
    font gate governs them too. The page reserves the launcher's height so the last content clears it. */
