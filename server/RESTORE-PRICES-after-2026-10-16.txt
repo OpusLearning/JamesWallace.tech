@@ -1,3 +1,9 @@
+DO NOT RESTORE (14 Oct 2026). The signed Nottingham Form of Tender (CPU7109, Part 3) undertakes not to communicate
+the amount or approximate amount of the offer during the procurement or the term of the contract; Part 4 asks for all
+rates to be treated as commercially sensitive for the life of the framework. The day and half-day figures below stay
+off the site, the chat assistant and the enquiry email. The hourly £67.50 / £55 (already in earlier bids) are James's
+decision, and 3 hours at £67.50 equals the half-day price. Kept below only as a record of what was removed.
+
 Restore after Fri 16 Oct 2026 10:00 (see facts.js COMMISSIONED_PRICES_PUBLIC).
 
 == server/helper.js block ==
