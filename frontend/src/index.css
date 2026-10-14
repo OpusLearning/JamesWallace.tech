@@ -684,9 +684,13 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 .jw-shot figcaption { margin-top: .7rem; font-size: .875rem; color: var(--text-muted); }
 .jw-shot-open { display: inline-block; margin-top: .35rem; font-size: .875rem; }
 /* The 44px phone tap target has to out-specify `.jw-shot a { display: block }` (0,1,1): a single
-   class is only (0,1,0), so the rule lives here, after the base declaration, with two classes. */
+   class is only (0,1,0), so the rule lives here, after the base declaration, with two classes.
+   `column-gap` replaces the space that `inline-flex` eats: the arrow is marked up as
+   `Open full size<span aria-hidden="true"> ↗</span>`, and as a flex item that span loses its leading
+   space, so the glyph would sit flush against the word. Measured 0px at 360/390 without this line,
+   3.73px at 601/1280 (review DAILY-2026-10-14-shot-open, defect D1). */
 @media (max-width: 600px) {
-  .jw-shot .jw-shot-open { display: inline-flex; align-items: center; min-height: 44px; }
+  .jw-shot .jw-shot-open { display: inline-flex; align-items: center; min-height: 44px; column-gap: .25em; }
 }
 
 /* LOOK-SITE-1 item 4 — the helper's panel and launcher. All sizes live here, not inline, so the
