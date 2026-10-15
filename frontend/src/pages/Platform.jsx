@@ -6,6 +6,8 @@ import PageHeader from "../components/PageHeader";
 const screenshots = [
   {
     file: "01-dashboard",
+    width: 1600,
+    height: 1000,
     title: "Supervisor dashboard",
     bullets: [
       "Live overview of the full active portfolio",
@@ -16,6 +18,8 @@ const screenshots = [
   },
   {
     file: "02-case-flags",
+    width: 1600,
+    height: 1000,
     title: "Case flags & early warning system",
     bullets: [
       "Automated flags when a learner has had no session in 14+ days",
@@ -27,6 +31,8 @@ const screenshots = [
   },
   {
     file: "03a-case-detail",
+    width: 1600,
+    height: 1000,
     title: "Case management",
     bullets: [
       "Full learner profile: EHCP, risk assessment, carer contacts, medical information",
@@ -37,6 +43,8 @@ const screenshots = [
   },
   {
     file: "03b-weekly-plan-tab",
+    width: 1600,
+    height: 1000,
     title: "Weekly plan workflow",
     bullets: [
       "Structured weekly plan - PLP criteria to target, planned activities per subject, session logistics",
@@ -48,6 +56,8 @@ const screenshots = [
   },
   {
     file: "04-daily-reports",
+    width: 1600,
+    height: 1000,
     title: "Daily session reports",
     bullets: [
       "Submitted within 24 hours of each session",
@@ -59,6 +69,8 @@ const screenshots = [
   },
   {
     file: "05-plp-analytics",
+    width: 1600,
+    height: 1000,
     title: "PLP analytics",
     bullets: [
       "Portfolio-wide view of PLP engagement and criterion completion rates",
@@ -69,6 +81,8 @@ const screenshots = [
   },
   {
     file: "06-safeguarding",
+    width: 1600,
+    height: 1000,
     title: "Safeguarding management",
     bullets: [
       "All concerns logged immediately, stored encrypted, tracked through a structured lifecycle",
@@ -80,6 +94,8 @@ const screenshots = [
   },
   {
     file: "07-lone-working",
+    width: 1600,
+    height: 1000,
     title: "Lone working safety",
     note: "Portal capability. Built for multi-practitioner providers; as a sole practitioner James uses the check-in, check-out and audit trail, with a named monitor who checks he has arrived and left; the written escalation steps are shared with the commissioner before teaching starts.",
     bullets: [
@@ -92,6 +108,8 @@ const screenshots = [
   },
   {
     file: "08-compliance",
+    width: 1600,
+    height: 1000,
     title: "Compliance dashboard",
     bullets: [
       "DBS, safeguarding, right-to-work and mandatory training tracked with RAG status and expiry alerts",
@@ -102,6 +120,8 @@ const screenshots = [
   },
   {
     file: "09-provision",
+    width: 1600,
+    height: 1000,
     title: "Provision assurance",
     bullets: [
       "Live portfolio view of commissioned vs. delivered hours for every active case",
@@ -113,6 +133,8 @@ const screenshots = [
   },
   {
     file: "10-finance",
+    width: 1600,
+    height: 1000,
     title: "Finance & billing",
     note: "Portal capability. The platform is built to turn session records into delivery reports and invoices; what a commission actually receives each month is agreed in the commission.",
     bullets: [
@@ -125,6 +147,8 @@ const screenshots = [
   },
   {
     file: "11-policies",
+    width: 1600,
+    height: 1000,
     title: "Policies & procedures",
     note: `Portal capability. The policy suite was ${POLICY_PACK.status}; policies are shared with commissioners on request.`,
     bullets: [
@@ -136,6 +160,8 @@ const screenshots = [
   },
   {
     file: "12-inspection-bundle",
+    width: 1600,
+    height: 470,
     title: "Inspection-ready exports",
     bullets: [
       "Full Inspection Bundle PDF for any case: PLP, weekly plans, daily evidence, safeguarding timeline, lone working log",
@@ -231,6 +257,8 @@ export default function Platform() {
               >
                 <img
                   src={`/portal/${s.file}.webp?v=1013`}
+                  width={s.width}
+                  height={s.height}
                   alt={`${s.title} in ${PRODUCT.name}`}
                   loading="lazy"
                 />

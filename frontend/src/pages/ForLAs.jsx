@@ -133,6 +133,8 @@ export default function ForLAs() {
               <figure className="jw-shot">
                 <img
                   src="/portal/10-finance.webp?v=1013"
+                  width="1600"
+                  height="1000"
                   alt={`Finance and billing view in ${PRODUCT.name}`}
                   loading="lazy"
                 />
@@ -158,6 +160,8 @@ export default function ForLAs() {
                   src="/hero/evidence-1400.webp"
                   srcSet="/hero/evidence-700.webp 700w, /hero/evidence-1400.webp 1400w"
                   sizes="(max-width: 991px) 100vw, 46rem"
+                  width="1400"
+                  height="788"
                   loading="lazy"
                   alt="A laptop showing charts beside a printed report on a desk."
                 />
@@ -169,6 +173,8 @@ export default function ForLAs() {
                   src="/hero/professionals-1100.webp"
                   srcSet="/hero/professionals-600.webp 600w, /hero/professionals-1100.webp 1100w"
                   sizes="(max-width: 991px) 100vw, 32rem"
+                  width="1100"
+                  height="1100"
                   loading="lazy"
                   alt="Three professionals talking over a folder at a round table."
                 />
@@ -325,6 +331,8 @@ export default function ForLAs() {
               <figure className="jw-shot jw-shot--sm">
                 <img
                   src="/portal/11-policies.webp?v=1013"
+                  width="1600"
+                  height="1000"
                   alt={`Policy library in ${PRODUCT.name}, grouped by category with status and version`}
                   loading="lazy"
                 />

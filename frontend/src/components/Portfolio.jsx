@@ -34,6 +34,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-4 mb-3">
               <img
                 src={PPHomepage}
+                width={1920}
+                height={998}
                 alt="Purple Pixel Desktop View"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "200px", objectFit: "cover" }}
@@ -43,6 +45,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-4 mb-3">
               <img
                 src={PPMobile}
+                width={479}
+                height={1080}
                 alt="Purple Pixel Mobile View"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "200px", objectFit: "cover" }}
@@ -52,6 +56,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-4 mb-3">
               <img
                 src={PPLogo}
+                width={1234}
+                height={1080}
                 alt="Purple Pixel Branding"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "200px", objectFit: "contain" }}
@@ -80,6 +86,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-3 mb-3">
               <img
                 src={LLDesktop}
+                width={1608}
+                height={1080}
                 alt="Learning Legends Desktop"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "180px", objectFit: "cover" }}
@@ -89,6 +97,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-3 mb-3">
               <img
                 src={LLMobile}
+                width={477}
+                height={1080}
                 alt="Learning Legends Mobile"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "180px", objectFit: "cover" }}
@@ -98,6 +108,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-3 mb-3">
               <img
                 src={LLLogo}
+                width={1920}
+                height={527}
                 alt="Learning Legends Logo"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "180px", objectFit: "contain" }}
@@ -107,6 +119,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-3 mb-3">
               <img
                 src={LLWireframe}
+                width={1080}
+                height={1080}
                 alt="Learning Legends Wireframe"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "180px", objectFit: "cover" }}
@@ -163,6 +177,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-4 mb-3">
               <img
                 src={EPDesktop}
+                width={1351}
+                height={1080}
                 alt="Events Platform Desktop"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "200px", objectFit: "cover" }}
@@ -172,6 +188,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-4 mb-3">
               <img
                 src={EPDash}
+                width={499}
+                height={1080}
                 alt="Events Platform Dashboard"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "200px", objectFit: "cover" }}
@@ -181,6 +199,8 @@ export default function Portfolio() {
             <div className="col-12 col-md-4 mb-3">
               <img
                 src={EPMobile}
+                width={574}
+                height={1080}
                 alt="Events Platform Mobile"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: "200px", objectFit: "cover" }}

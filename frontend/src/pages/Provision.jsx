@@ -135,6 +135,8 @@ export default function Provision() {
                   src="/hero/student-working-1600.webp"
                   srcSet="/hero/student-working-800.webp 800w, /hero/student-working-1600.webp 1600w"
                   sizes="(max-width: 991px) 100vw, 34rem"
+                  width="1600"
+                  height="883"
                   loading="lazy"
                   alt="A teenager writing in a notebook beside a laptop, smiling."
                 />
@@ -182,6 +184,8 @@ export default function Provision() {
               <figure className="jw-shot">
                 <img
                   src="/portal/03b-weekly-plan-tab.webp?v=1013"
+                  width="1600"
+                  height="1000"
                   alt={`Case view in ${PRODUCT.name} showing the Weekly Plan tab`}
                   loading="lazy"
                 />
@@ -219,6 +223,8 @@ export default function Provision() {
               <figure className="jw-shot">
                 <img
                   src="/portal/06-safeguarding.webp?v=1013"
+                  width="1600"
+                  height="1000"
                   alt={`Safeguarding concerns and the raise-a-concern button in ${PRODUCT.name}`}
                   loading="lazy"
                 />

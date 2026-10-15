@@ -147,6 +147,8 @@ export default function Agencies() {
                 src="/hero/community-1600.webp"
                 srcSet="/hero/community-800.webp 800w, /hero/community-1600.webp 1600w"
                 sizes="(max-width: 991px) 100vw, 52rem"
+                width="1600"
+                height="667"
                 loading="lazy"
                 alt="A teenager and a tutor working together at a table in a library, both smiling."
               />
@@ -158,6 +160,8 @@ export default function Agencies() {
                 src="/hero/workbag-1100.webp"
                 srcSet="/hero/workbag-600.webp 600w, /hero/workbag-1100.webp 1100w"
                 sizes="(max-width: 991px) 100vw, 26rem"
+                width="1100"
+                height="1100"
                 loading="lazy"
                 alt="A tutor's bag, laptop, folder, mini whiteboard, pens and lanyard laid out on a table."
               />
