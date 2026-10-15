@@ -764,10 +764,15 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
    neighbour left to match, and the crop is pure loss: a 2.4:1 photograph forced into a 4:3 box gives
    up ~45% of its width and drops the second person out of frame, leaving the alt text describing
    someone who is no longer in the picture. Stacked, each photograph keeps its own proportions, as
-   the Tuition picture has done since 11 Oct. */
+   the Tuition picture has done since 11 Oct.
+
+   DAILY-2026-10-15 — "auto" on its own also threw away the ratio the img element's width/height
+   attributes supply, so below 992px this one photograph had no reserved box at all and the page
+   still jumped when it arrived on a phone. Naming the picture's own ratio keeps the 13 Oct intent
+   (no 4:3 crop when stacked) and gives the browser the shape to reserve before the file lands. */
 @media (max-width: 991px) {
   .jw-media-figure img { height: auto; min-height: 0; }
-  .jw-photo-43 { aspect-ratio: auto; }
+  .jw-photo-43 { aspect-ratio: auto 1600 / 883; }
 }
 
 .jw-object-top { object-position: top; }
