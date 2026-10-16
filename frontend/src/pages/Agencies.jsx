@@ -55,6 +55,10 @@ const placement = [
   },
 ];
 
+// Structured data for the person an agency checks. `areaServed` is deliberately absent: it is not a
+// schema.org property of a Person (confirmed by the 9 Oct red team and the 16 Oct audit), so it was
+// ignored there. The area is published on the Service nodes of /tuition, /for-las and the two county
+// pages instead.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -70,7 +74,6 @@ const jsonLd = {
     TRAINING.safeguarding.name,
   ],
   knowsAbout: ["SEMH", "Autism", "ADHD", "PDA", "EBSA", "EHCP", "Alternative provision", "EOTAS"],
-  areaServed: AREA.jsonLd,
 };
 
 export default function Agencies() {

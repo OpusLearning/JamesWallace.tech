@@ -223,15 +223,16 @@ function EnquiryForm({ audience, topic }) {
 
 EnquiryForm.propTypes = { audience: PropTypes.oneOf(["parent", "la"]).isRequired, topic: PropTypes.string };
 
-// Structured data marking this as the contact page, with the same three service areas the other
-// pages publish. The name comes from the page's existing title. No telephone number, email address
-// or postal address is included: they are on the page for people, not asserted as structured data.
+// Structured data marking this as the contact page. The name comes from the page's existing title.
+// No telephone number, email address or postal address is included: they are on the page for people,
+// not asserted as structured data. `areaServed` is deliberately absent: it is not a schema.org
+// property of a ContactPage (confirmed by the 9 Oct red team and the 16 Oct audit), so it was
+// ignored there; the Service nodes on the tuition and commissioning pages publish the area instead.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   name: "Contact James Wallace",
   url: "https://jameswallace.tech/contact",
-  areaServed: AREA.jsonLd,
 };
 
 export default function Contact() {
