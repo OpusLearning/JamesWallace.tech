@@ -42,40 +42,6 @@ const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css',
 // other routes would make React hydrate the wrong page.
 const SHELL = await readFile(join(DIST, 'index.html'));
 
-// After SEO-SPEED the phone LCP was still 2.7 to 2.9 s, almost all of it render delay: the first paint waited
-// for /assets/index-*.css (69 KB, about 15 KB compressed), and on /for-las the hero photo was found only once
-// the body was parsed (live Lighthouse, 18 Oct 2026; QUEUE SEO-2). So the stylesheets are written into the
-// page (the CSP allows inline styles, not inline scripts, so a critical-CSS loader is not an option), and the
-// image marked fetchpriority="high" is preloaded from the head: the phone file for phones, the srcset for the
-// rest, so each screen fetches only the picture it will show.
-const cssCache = new Map();
-async function speedUpHead(html, markup) {
-  const head = html.slice(0, html.indexOf('</head>'));
-  let newHead = head;
-  for (const link of head.match(/<link\b[^>]*rel="stylesheet"[^>]*href="\/assets\/[^"]+\.css"[^>]*>/g) || []) {
-    const href = link.match(/href="([^"]+)"/)[1];
-    if (!cssCache.has(href)) cssCache.set(href, (await readFile(join(DIST, href))).toString());
-    const css = cssCache.get(href);
-    if (/<\/style/i.test(css)) throw new Error(`${href} contains </style`);
-    newHead = newHead.replace(link, () => `<style data-href="${href}">${css}</style>`);
-  }
-  const picture = markup.match(/<picture\b[^>]*>(?:(?!<\/picture>)[\s\S])*?fetchPriority="high"[\s\S]*?<\/picture>/i);
-  if (picture) {
-    const source = picture[0].match(/<source\b[^>]*media="([^"]+)"[^>]*srcSet="([^"]+)"/i);
-    const img = picture[0].match(/<img\b[^>]*>/i)[0];
-    const srcset = img.match(/srcSet="([^"]+)"/i);
-    const sizes = img.match(/sizes="([^"]+)"/i);
-    const links = [];
-    if (source) links.push(`<link rel="preload" as="image" href="${source[2]}" media="${source[1]}" fetchpriority="high">`);
-    if (srcset) {
-      const media = source ? ` media="not all and ${source[1]}"` : '';
-      links.push(`<link rel="preload" as="image" imagesrcset="${srcset[1]}"${sizes ? ` imagesizes="${sizes[1]}"` : ''}${media} fetchpriority="high">`);
-    }
-    newHead = newHead.replace(/<meta charset="UTF-8">/i, (m) => `${m}\n    ${links.join('\n    ')}`);
-  }
-  return newHead + html.slice(head.length);
-}
-
 const server = createServer(async (req, res) => {
   const url = decodeURIComponent((req.url || '/').split('?')[0]);
   let file = join(DIST, url);
@@ -108,12 +74,11 @@ for (const route of ROUTES) {
     // React's server render also emits an image preload for every eager <img>; the old snapshot had none, and on
     // /portfolio ten of them would compete with the main image, so they are dropped (red team, 18 Oct 2026).
     const markup = (await page.evaluate(() => window.__jwPrerender())).replace(/<link rel="preload" as="image"[^>]*>/g, '');
-    const snapshot = await page.evaluate((m) => {
+    const html = await page.evaluate((m) => {
       const doc = document.documentElement.cloneNode(true);
       doc.querySelector('#root').innerHTML = m;
       return '<!doctype html>\n' + doc.outerHTML;
     }, markup);
-    const html = await speedUpHead(snapshot, markup);
     const words = await page.evaluate(() => document.body.innerText.trim().split(/\s+/).length);
     const title = await page.title();
     const dir = route === '/' ? DIST : join(DIST, route);

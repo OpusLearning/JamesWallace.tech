@@ -111,7 +111,7 @@ export function checkRoute(route, html) {
     });
   }
 
-  problems.push(...checkGraph(route, blocks), ...checkHead(route, html));
+  problems.push(...checkGraph(route, blocks));
   return problems;
 }
 
@@ -158,28 +158,6 @@ export function checkGraph(route, blocks) {
     const person = typed("Person").find((n) => n["@id"] === PERSON_ID && n.hasCredential);
     if (!person) problems.push(`JSON-LD: no full Person node "${PERSON_ID}" with credentials`);
     else if (person.worksFor?.["@id"] !== ORG_ID) problems.push("JSON-LD: Person worksFor does not point at the company");
-  }
-  return problems;
-}
-
-// Speed (site audit G1): the main stylesheet is inlined so it no longer blocks the first paint, and the
-// image marked fetchpriority="high" is preloaded from the head, the phone file for phones and the srcset
-// for wider screens, so the browser does not wait for the body to find it.
-export function checkHead(route, html) {
-  const problems = [];
-  const head = html.slice(0, html.indexOf("</head>"));
-  if (/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["']\/assets\//i.test(head)) {
-    problems.push("render-blocking stylesheet: /assets/*.css is linked, not inlined");
-  }
-  const body = html.slice(html.indexOf("</head>"));
-  const hero = body.match(/<picture\b[^>]*>(?:(?!<\/picture>)[\s\S])*?fetchpriority="high"[\s\S]*?<\/picture>/i);
-  if (hero) {
-    const phone = hero[0].match(/<source\b[^>]*media="([^"]+)"[^>]*srcset="([^"]+)"/i);
-    const preloads = head.match(/<link\b[^>]*rel=["']preload["'][^>]*as=["']image["'][^>]*>/gi) || [];
-    if (phone && !preloads.some((l) => l.includes(`href="${phone[2]}"`) && l.includes(`media="${phone[1]}"`))) {
-      problems.push(`hero not preloaded for phones (${phone[2]})`);
-    }
-    if (!preloads.some((l) => /imagesrcset=/i.test(l))) problems.push("hero not preloaded for wider screens");
   }
   return problems;
 }
