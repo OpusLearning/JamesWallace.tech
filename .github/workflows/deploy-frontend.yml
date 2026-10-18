@@ -27,15 +27,17 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install, test and build frontend
+      - name: Build, prove and test frontend
         working-directory: frontend
         run: |
           set -euo pipefail
           npm ci
-          npm test
+          # Build first: the browser tests reuse dist/ rather than each rebuilding it, which keeps
+          # a clean CI checkout from running two concurrent builds over the same directory.
           npm run build
           # Prove the build includes public/, rather than trusting that it must.
           test -f dist/sitemap.xml || { echo 'dist/sitemap.xml missing - build did not include public/'; exit 1; }
+          npm test
 
       - name: Install and test server
         working-directory: server
