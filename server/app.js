@@ -127,37 +127,13 @@ app.post("/api/subscribe", async (req, res) => {
 /**
  * 5. /api/health — is the site still able to record an enquiry?
  *
- * The public body is {ok} and nothing else. Counts, storage state and whether email is configured
- * are operational detail, so they are returned only to a loopback caller whose Host is also
- * loopback. That second test matters: nginx proxies /api over loopback but forwards the public
- * Host, so a public request cannot get detail by arriving through the proxy.
+ * The public body is {ok:true} and nothing else. Counts, storage state and whether email is
+ * configured are operational detail, so they are served by a separate app on a separate listener
+ * bound to 127.0.0.1 (server/index.js), on a port nginx does not proxy. Nothing about the public
+ * request — least of all the client-controlled Host header — can unlock detail.
  */
-const LOOPBACK_ADDRESSES = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
-const LOOPBACK_HOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
-
-function hostWithoutPort(value) {
-  const host = String(value || "").toLowerCase();
-  const bracketed = host.match(/^\[([^\]]+)\](?::\d+)?$/);
-  if (bracketed) return bracketed[1];
-  // A bare IPv6 address has more than one colon; never treat its last group as a port.
-  if ((host.match(/:/g) || []).length > 1) return host;
-  return host.replace(/:\d+$/, "");
-}
-
-export function isLocalRequest(req) {
-  return LOOPBACK_ADDRESSES.has(req.socket.remoteAddress) && LOOPBACK_HOSTS.has(hostWithoutPort(req.headers.host));
-}
-
 app.get("/api/health", (req, res) => {
-  const storage = storageHealth();
-  if (isLocalRequest(req)) {
-    return res.status(storage.writable ? 200 : 503).json({
-      ok: storage.writable,
-      storage,
-      email: Boolean(process.env.RESEND_API_KEY),
-    });
-  }
-  return res.status(storage.writable ? 200 : 503).json({ ok: storage.writable });
+  res.json({ ok: true });
 });
 
 /**
@@ -208,5 +184,26 @@ app.post("/api/helper", async (req, res) => {
 
 // Unknown /api/* routes must be JSON 404s, not Express's HTML "Cannot GET" page.
 app.use("/api", (req, res) => res.status(404).json({ error: "not found" }));
+
+/**
+ * Operational detail, for the monitor only.
+ *
+ * This app is never attached to the public listener. server/index.js binds it to 127.0.0.1 on its
+ * own port (HEALTH_DETAIL_PORT, default 4001), which nginx does not proxy, so the check is the
+ * socket binding rather than a header an internet client can choose.
+ */
+export const healthDetailApp = express();
+healthDetailApp.disable("x-powered-by");
+
+healthDetailApp.get("/api/health", (req, res) => {
+  const storage = storageHealth();
+  res.status(storage.writable ? 200 : 503).json({
+    ok: storage.writable,
+    storage,
+    email: Boolean(process.env.RESEND_API_KEY),
+  });
+});
+
+healthDetailApp.use((req, res) => res.status(404).json({ error: "not found" }));
 
 export default app;

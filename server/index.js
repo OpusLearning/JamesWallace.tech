@@ -17,7 +17,7 @@ console.log("OPENAI_API_KEY", process.env.OPENAI_API_KEY ? "loaded" : "MISSING")
 /**
  * 2. Imports & start
  */
-import { app } from "./app.js";
+import { app, healthDetailApp } from "./app.js";
 import { deleteOldHelperChats } from "./db.js";
 
 /**
@@ -42,3 +42,14 @@ setInterval(runChatRetention, 24 * 60 * 60 * 1000).unref();
  */
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Agent server running on port ${PORT}`));
+
+// Health detail for the monitor: bound to loopback only, on a port nginx does not proxy. A failed
+// detail listener must never stop the public site, so the error is logged rather than thrown.
+const parsedHealthPort = Number.parseInt(process.env.HEALTH_DETAIL_PORT ?? "", 10);
+const HEALTH_DETAIL_PORT = Number.isInteger(parsedHealthPort) && parsedHealthPort > 0 ? parsedHealthPort : 4001;
+const healthDetailServer = healthDetailApp.listen(HEALTH_DETAIL_PORT, "127.0.0.1", () => {
+  console.log(`Health detail listening on 127.0.0.1:${HEALTH_DETAIL_PORT}`);
+});
+healthDetailServer.on("error", (err) => {
+  console.error(`[health] detail listener could not start on 127.0.0.1:${HEALTH_DETAIL_PORT}:`, err.message);
+});
