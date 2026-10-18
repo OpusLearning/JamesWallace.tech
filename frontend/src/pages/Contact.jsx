@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import usePageMeta from "../hooks/usePageMeta";
@@ -243,10 +243,17 @@ export default function Contact() {
     jsonLd,
   });
   const [searchParams, setSearchParams] = useSearchParams();
+  // The prerendered page is built without a query string, so the first render (the one that hydrates it)
+  // must match that: the parent form, no topic. The query is read straight after, before the browser
+  // paints. Otherwise React keeps the prerendered attributes and `?for=commissioner` shows the parent form
+  // (red team, 18 Oct 2026).
+  const [queryReady, setQueryReady] = useState(false);
+  useLayoutEffect(() => setQueryReady(true), []);
+  const query = queryReady ? searchParams : new URLSearchParams();
   // The enquiry source carried on the link (`?topic=referral`, `?topic=evidence-pack`). Capped to
   // the length the server accepts, so a hand-edited URL cannot store anything unbounded.
-  const topic = (searchParams.get("topic") || "").trim().slice(0, 120);
-  const activeAudience = ["commissioner", "la", "agency", "school"].includes(searchParams.get("for")) ? "la" : "parent";
+  const topic = (query.get("topic") || "").trim().slice(0, 120);
+  const activeAudience = ["commissioner", "la", "agency", "school"].includes(query.get("for")) ? "la" : "parent";
 
   function selectAudience(audience) {
     setSearchParams((current) => {

@@ -71,7 +71,9 @@ for (const route of ROUTES) {
     )));
     // The head (title, description, canonical, JSON-LD) comes from the live render above; the body inside
     // #root is replaced with React's server markup so main.jsx can hydrate it in place (site audit G1).
-    const markup = await page.evaluate(() => window.__jwPrerender());
+    // React's server render also emits an image preload for every eager <img>; the old snapshot had none, and on
+    // /portfolio ten of them would compete with the main image, so they are dropped (red team, 18 Oct 2026).
+    const markup = (await page.evaluate(() => window.__jwPrerender())).replace(/<link rel="preload" as="image"[^>]*>/g, '');
     const html = await page.evaluate((m) => {
       const doc = document.documentElement.cloneNode(true);
       doc.querySelector('#root').innerHTML = m;

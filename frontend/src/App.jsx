@@ -12,28 +12,43 @@ import { installClickEvents } from "./lib/analytics";
 // Each page is its own chunk, so the first visit loads one page's text, not all 22 (site audit 18 Oct 2026,
 // G1). The prerendered head keeps Vite's modulepreload for the route's chunk, and hydration waits for it under
 // Suspense.
-const Portfolio = lazy(() => import("./components/Portfolio"));
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const PrivacyPolicy = lazy(() => import("./pages/Privacy"));
-const Cookies = lazy(() => import("./pages/Cookies"));
-const Accessibility = lazy(() => import("./pages/Accessibility"));
-const Terms = lazy(() => import("./pages/Terms"));
-const Complaints = lazy(() => import("./pages/Complaints"));
-const Credentials = lazy(() => import("./pages/Credentials"));
-const Provision = lazy(() => import("./pages/Provision"));
-const Platform = lazy(() => import("./pages/Platform"));
-const Compliance = lazy(() => import("./pages/Compliance"));
-const ForLAs = lazy(() => import("./pages/ForLAs"));
-const SampleReport = lazy(() => import("./pages/SampleReport"));
-const Tuition = lazy(() => import("./pages/Tuition"));
-const SendTuitionDerbyshire = lazy(() => import("./pages/SendTuitionDerbyshire"));
-const SendTuitionNottinghamshire = lazy(() => import("./pages/SendTuitionNottinghamshire"));
-const Agencies = lazy(() => import("./pages/Agencies"));
-const Students = lazy(() => import("./pages/Students"));
-const AllergyPolicy = lazy(() => import("./pages/AllergyPolicy"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+// A deploy replaces the chunk files, so a tab opened before it can ask for a page chunk that has gone. Reload
+// once (at most every 10 s) to pick up the new build instead of leaving a blank page (red team, 18 Oct 2026).
+const page = (load) => lazy(() => load().catch((error) => {
+  try {
+    const last = Number(sessionStorage.getItem("jw-chunk-reload")) || 0;
+    if (Date.now() - last > 10000) {
+      sessionStorage.setItem("jw-chunk-reload", String(Date.now()));
+      window.location.reload();
+      return new Promise(() => {});
+    }
+  } catch {
+    // Without storage there is no guard against a reload loop, so don't reload.
+  }
+  throw error;
+}));
+const Portfolio = page(() => import("./components/Portfolio"));
+const Home = page(() => import("./pages/Home"));
+const About = page(() => import("./pages/About"));
+const Contact = page(() => import("./pages/Contact"));
+const PrivacyPolicy = page(() => import("./pages/Privacy"));
+const Cookies = page(() => import("./pages/Cookies"));
+const Accessibility = page(() => import("./pages/Accessibility"));
+const Terms = page(() => import("./pages/Terms"));
+const Complaints = page(() => import("./pages/Complaints"));
+const Credentials = page(() => import("./pages/Credentials"));
+const Provision = page(() => import("./pages/Provision"));
+const Platform = page(() => import("./pages/Platform"));
+const Compliance = page(() => import("./pages/Compliance"));
+const ForLAs = page(() => import("./pages/ForLAs"));
+const SampleReport = page(() => import("./pages/SampleReport"));
+const Tuition = page(() => import("./pages/Tuition"));
+const SendTuitionDerbyshire = page(() => import("./pages/SendTuitionDerbyshire"));
+const SendTuitionNottinghamshire = page(() => import("./pages/SendTuitionNottinghamshire"));
+const Agencies = page(() => import("./pages/Agencies"));
+const Students = page(() => import("./pages/Students"));
+const AllergyPolicy = page(() => import("./pages/AllergyPolicy"));
+const NotFound = page(() => import("./pages/NotFound"));
 
 function RouteEffects() {
   const { pathname, hash } = useLocation();
