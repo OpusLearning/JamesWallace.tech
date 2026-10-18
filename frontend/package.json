@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && node prerender.mjs",
+    "dev": "node scripts/purge-bootstrap.mjs && vite",
+    "build": "node scripts/purge-bootstrap.mjs && vite build && node prerender.mjs",
     "lint": "eslint .",
     "test": "node --test src/lib/*.test.js && node scripts/font-size-gate.mjs && node scripts/meta-gate.mjs",
     "test:unit": "node --test src/lib/*.test.js",
     "preview": "vite preview",
-    "build:nossg": "vite build"
+    "build:nossg": "node scripts/purge-bootstrap.mjs && vite build"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
@@ -38,6 +38,7 @@
     "globals": "^15.14.0",
     "postcss": "^8.5.26",
     "puppeteer": "^24.40.0",
+    "purgecss": "^6.0.0",
     "tailwindcss": "^4.0.8",
     "vite": "^6.4.3"
   }
