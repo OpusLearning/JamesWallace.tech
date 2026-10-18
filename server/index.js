@@ -1,7 +1,7 @@
 // server/index.js
 //
 // The entry point. Environment loading, the IPv4 DNS order MailerLite needs, starting the app and
-// the daily chat-retention timer live here; the routes themselves are in server/app.js.
+// the daily retention timer live here; the routes themselves are in server/app.js.
 
 // Force IPv4 for all outbound DNS lookups (MailerLite only allows our IPv4)
 import { setDefaultResultOrder } from "node:dns";
@@ -18,24 +18,31 @@ console.log("OPENAI_API_KEY", process.env.OPENAI_API_KEY ? "loaded" : "MISSING")
  * 2. Imports & start
  */
 import { app, healthDetailApp } from "./app.js";
-import { deleteOldHelperChats } from "./db.js";
+import { deleteOldHelperChats, deleteOldEnquiries } from "./db.js";
 
 /**
- * 7. Chat retention — conversations are kept for 12 months (sources/legal/README.md).
+ * 7. Retention — chat conversations and enquiries are kept for 12 months
+ * (sources/legal/README.md; sources/legal/drafts/2026-10-09-privacy-and-policy-corrections.md item 11).
  *
  * Run once at startup so a restart is enough to catch up, then daily. A failure here must never stop
- * the site answering enquiries, so it is caught and logged rather than thrown.
+ * the site answering enquiries, so each table is caught and logged separately rather than thrown.
  */
-function runChatRetention() {
+function runRetention() {
   try {
     const removed = deleteOldHelperChats();
     console.log(`[retention] helper_chats older than 12 months removed: ${removed}`);
   } catch (err) {
     console.error("[retention] could not prune helper_chats:", err.message);
   }
+  try {
+    const removed = deleteOldEnquiries();
+    console.log(`[retention] enquiries older than 12 months removed: ${removed}`);
+  } catch (err) {
+    console.error("[retention] could not prune enquiries:", err.message);
+  }
 }
-runChatRetention();
-setInterval(runChatRetention, 24 * 60 * 60 * 1000).unref();
+runRetention();
+setInterval(runRetention, 24 * 60 * 60 * 1000).unref();
 
 /**
  * 8. Start the server
