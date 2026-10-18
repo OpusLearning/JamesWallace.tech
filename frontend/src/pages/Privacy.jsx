@@ -269,9 +269,9 @@ export default function PrivacyPolicy() {
             ["OpenAI", "Website chat assistant", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             ["Twilio", "The phone line's telephony", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             ["ElevenLabs (using an Anthropic language model)", "The phone line's automated voice assistant", "United States", "UK-US data bridge or the provider's UK transfer terms"],
-            // The brief gives no country for Namecheap Private Email. Do not assert one:
-            // James confirms the country and safeguard before the notice is republished.
-            ["Namecheap Private Email", "The company mailbox", "To be confirmed", "To be confirmed"],
+            // Country: Namecheap's knowledge base ("Where are your datacenters located?") lists Private
+            // Email on PhoenixNAP, Phoenix, Arizona. James chose 22 Oct 2026 to fill this in from that source.
+            ["Namecheap Private Email", "The company mailbox", "United States (Phoenix, Arizona)", "Namecheap's data processing addendum"],
             ["Neon", "Portal database (commissioned provision)", "Frankfurt (EU)", "No transfer outside the UK/EEA"],
             ["Cloudflare R2", "Portal documents (commissioned provision), encrypted before upload", "Western Europe", "Stored in Western Europe; Cloudflare data processing addendum"],
           ]}
