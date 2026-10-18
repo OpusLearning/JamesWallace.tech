@@ -4,7 +4,9 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const db = new Database(path.join(__dirname, 'orders.db'))
+// DB_PATH is for tests: they point it at a throwaway file so server/orders.db is never opened.
+// Production keeps the default, the live database beside this module.
+const db = new Database(process.env.DB_PATH || path.join(__dirname, 'orders.db'))
 
 // Every contact form submission is stored before any email is attempted.
 // 11 Sep 2026: Postmark is returning "This account is not approved to send email", so a submission that depended on the
