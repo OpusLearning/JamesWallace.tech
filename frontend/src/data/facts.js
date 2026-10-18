@@ -410,6 +410,10 @@ export const PROFILES = [
   "https://www.youtube.com/@JamesWallaceEducation",
 ];
 
+// The company's Google Business Profile, the share link James gave on 18 Oct 2026 (QUEUE SEO-2, site audit
+// E1). It describes the business, not James, so it is on the Organization node only. Structured data only.
+export const BUSINESS_PROFILE = "https://maps.app.goo.gl/xk6nz93fzWejpEKZ6";
+
 // The company as Companies House records it (sources/company/james-wallace-education.md). The number is
 // in the footer; the incorporation date is used only in structured data (QUEUE SEO-2, site audit E1).
 export const COMPANY = {

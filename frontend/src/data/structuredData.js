@@ -6,7 +6,7 @@
 // that names him adds PERSON_REF so it points at the same person. Every value repeats something the site
 // already shows (footer, /credentials, facts.js). No postal address: the registered office is not where
 // teaching happens.
-import { AREA, BIO, COMPANY, PROFILES, TRAINING } from "./facts";
+import { AREA, BIO, BUSINESS_PROFILE, COMPANY, PROFILES, TRAINING } from "./facts";
 
 export const ORG_ID = "https://jameswallace.tech/#org";
 export const PERSON_ID = "https://jameswallace.tech/#james";
@@ -57,6 +57,6 @@ export const ORGANIZATION = {
   logo: "https://jameswallace.tech/favicon.svg",
   email: "hello@jameswallace.tech",
   telephone: "07897 021077",
-  sameAs: PROFILES,
+  sameAs: [...PROFILES, BUSINESS_PROFILE],
   areaServed: AREA.jsonLd,
 };

@@ -149,6 +149,9 @@ export function checkGraph(route, blocks) {
       if (!JSON.stringify(org.identifier || "").includes("17479328")) problems.push("JSON-LD: Organization has no company number");
       if (org.founder?.["@id"] !== PERSON_ID) problems.push("JSON-LD: Organization founder does not point at James");
       if (!org.legalName) problems.push("JSON-LD: Organization has no legalName");
+      if (![].concat(org.sameAs || []).some((u) => u.startsWith("https://maps.app.goo.gl/"))) {
+        problems.push("JSON-LD: Organization sameAs has no Google Business Profile");
+      }
     }
   }
   if (["/", "/about", "/credentials"].includes(route)) {
