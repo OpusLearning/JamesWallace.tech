@@ -37,12 +37,18 @@ const TYPES = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css',
   '.jpeg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.ico':'image/x-icon', '.json':'application/json',
   '.pdf':'application/pdf', '.woff':'font/woff', '.woff2':'font/woff2', '.txt':'text/plain', '.xml':'application/xml' };
 
+// The empty shell, read once before '/' overwrites dist/index.html. Every route renders from it: main.jsx
+// hydrates whenever #root already has content, so serving the prerendered home page as the shell for the
+// other routes would make React hydrate the wrong page.
+const SHELL = await readFile(join(DIST, 'index.html'));
+
 const server = createServer(async (req, res) => {
   const url = decodeURIComponent((req.url || '/').split('?')[0]);
   let file = join(DIST, url);
-  if (!extname(file) || !existsSync(file)) file = join(DIST, 'index.html');
+  if (!extname(file) || !existsSync(file)) file = null;
   try {
-    const buf = await readFile(file);
+    const buf = file ? await readFile(file) : SHELL;
+    if (!file) file = 'index.html';
     res.writeHead(200, { 'Content-Type': TYPES[extname(file)] || 'application/octet-stream' });
     res.end(buf);
   } catch { res.writeHead(404); res.end('nope'); }
@@ -63,8 +69,14 @@ for (const route of ROUTES) {
         ? 1
         : new Promise(r => { i.onload = i.onerror = r; })
     )));
-    // strip the dev-only helper so it is not baked into the static HTML
-    const html = await page.evaluate(() => '<!doctype html>\n' + document.documentElement.outerHTML);
+    // The head (title, description, canonical, JSON-LD) comes from the live render above; the body inside
+    // #root is replaced with React's server markup so main.jsx can hydrate it in place (site audit G1).
+    const markup = await page.evaluate(() => window.__jwPrerender());
+    const html = await page.evaluate((m) => {
+      const doc = document.documentElement.cloneNode(true);
+      doc.querySelector('#root').innerHTML = m;
+      return '<!doctype html>\n' + doc.outerHTML;
+    }, markup);
     const words = await page.evaluate(() => document.body.innerText.trim().split(/\s+/).length);
     const title = await page.title();
     const dir = route === '/' ? DIST : join(DIST, route);

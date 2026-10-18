@@ -23,7 +23,33 @@
     <meta name="theme-color" content="#f6f4ed" />
     <link rel="preload" href="/fonts/dm-sans-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <!-- fonts.css inlined: a render-blocking request for 1 KB of @font-face (audit G1). public/fonts/fonts.css is kept for anything that links it. -->
+    <style>
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/fonts/dm-sans-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/fraunces-italic.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url(/fonts/fraunces-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+    </style>
     <!-- Self-hosted GoatCounter. no_onload keeps it from counting on load: the SPA counts each
          route itself (src/hooks/useAnalytics.js), so the first route is counted once, not twice. -->
     <script data-goatcounter="/count" data-goatcounter-settings='{"no_onload": true}' async src="/count.js"></script>
