@@ -417,6 +417,9 @@ export const BUSINESS_PROFILE = "https://maps.app.goo.gl/xk6nz93fzWejpEKZ6";
 // The company as Companies House records it (sources/company/james-wallace-education.md). The number is
 // in the footer; the incorporation date is used only in structured data (QUEUE SEO-2, site audit E1).
 export const COMPANY = {
+  // The name on the Google Business Profile (James's screenshot, 18 Oct 2026); structured data uses it as the
+  // Organization name so search engines match the site to the profile. legalName stays the registered name.
+  name: "James Wallace Education",
   legalName: "James Wallace Education Ltd",
   number: "17479328",
   incorporated: "2026-09-24",

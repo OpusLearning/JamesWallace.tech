@@ -44,7 +44,7 @@ export const PERSON = {
 export const ORGANIZATION = {
   "@type": "Organization",
   "@id": ORG_ID,
-  name: COMPANY.legalName,
+  name: COMPANY.name,
   legalName: COMPANY.legalName,
   identifier: {
     "@type": "PropertyValue",
