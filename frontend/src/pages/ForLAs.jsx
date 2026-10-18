@@ -2,6 +2,7 @@ import usePageMeta from "../hooks/usePageMeta";
 import PhotoBanner from "../components/PhotoBanner";
 import { Link } from "react-router-dom";
 import { COMMISSIONED_PRICES_PUBLIC, TRAINING, PRODUCT, REPLY, POLICY_PACK, PRICES, DELIVERY, GUIDES_HUB, AREA, SESSIONS, PROFILES, PLATFORM_STATUS, REFERENCES } from "../data/facts";
+import { PERSON_REF } from "../data/structuredData";
 import SafeguardingLead from "../components/SafeguardingLead";
 
 const commissionerQA = [
@@ -76,6 +77,7 @@ const jsonLd = {
   serviceType: "Commissioned EOTAS and alternative provision",
   provider: {
     "@type": "Person",
+    ...PERSON_REF,
     name: "James Wallace",
     sameAs: PROFILES,
     hasCredential: [

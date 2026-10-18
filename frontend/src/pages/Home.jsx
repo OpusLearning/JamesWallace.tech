@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import usePageMeta from "../hooks/usePageMeta";
 import OnTheCalendar from "../components/OnTheCalendar";
 import { Link } from "react-router-dom";
-import { AREA, SESSIONS, PROFILES, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
+import { AREA, SESSIONS, AVAILABILITY, REFERENCES, REVIEWED, GUIDES_HUB } from "../data/facts";
+import { ORGANIZATION, PERSON } from "../data/structuredData";
 
 // One description for the page and its JSON-LD, so the two cannot drift. The area wording comes
 // from facts.js (SITEFIX-3 item 1).
@@ -68,18 +69,11 @@ function Arrow() {
 // Structured data for the organisation. Every value repeats what the site already publishes: the
 // company name, the canonical URL, the site's logo, the contact address and number shown on
 // /contact, the page's own description, the five service areas from facts.js and the two profile
-// URLs. No postal address. Injected and removed by usePageMeta.
+// URLs. No postal address. Injected and removed by usePageMeta. Since 18 Oct 2026 (QUEUE SEO-2) the
+// company node also names its number, founding date and founder, and James is published beside it.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "James Wallace Education Ltd",
-  url: "https://jameswallace.tech/",
-  logo: "https://jameswallace.tech/favicon.svg",
-  email: "hello@jameswallace.tech",
-  telephone: "07897 021077",
-  description: DESCRIPTION,
-  sameAs: PROFILES,
-  areaServed: AREA.jsonLd,
+  "@graph": [{ ...ORGANIZATION, description: DESCRIPTION }, PERSON],
 };
 
 export default function Home() {

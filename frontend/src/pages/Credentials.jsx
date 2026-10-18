@@ -1,6 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING, REVIEWED, PROJECT_SEARCH, REFERENCES as references, POLICY_PACK } from "../data/facts";
+import { PERSON } from "../data/structuredData";
 import PageHeader from "../components/PageHeader";
 import "./Credentials.css";
 
@@ -573,11 +574,15 @@ function renderCertificate(certificate) {
   );
 }
 
+// James as structured data (QUEUE SEO-2, site audit E3): the same node the home page and /about publish.
+const CREDENTIALS_JSON_LD = { "@context": "https://schema.org", ...PERSON };
+
 export default function Credentials() {
   usePageMeta({
     title: "Qualifications & Experience | James Wallace, QTS MEd",
     description: `QTS, MEd, ${BIO.degreeShort}, enhanced DBS on the Update Service, and current safeguarding, Prevent, autism and sensory processing training.`,
     path: "/credentials",
+    jsonLd: CREDENTIALS_JSON_LD,
   });
 
   return (

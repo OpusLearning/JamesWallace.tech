@@ -410,6 +410,14 @@ export const PROFILES = [
   "https://www.youtube.com/@JamesWallaceEducation",
 ];
 
+// The company as Companies House records it (sources/company/james-wallace-education.md). The number is
+// in the footer; the incorporation date is used only in structured data (QUEUE SEO-2, site audit E1).
+export const COMPANY = {
+  legalName: "James Wallace Education Ltd",
+  number: "17479328",
+  incorporated: "2026-09-24",
+};
+
 // Reviewed by hand. If this date is stale the page should not claim currency.
 export const REVIEWED = "25 September 2026";
 

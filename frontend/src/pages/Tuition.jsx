@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
 import { COMMISSIONED_PRICES_PUBLIC, AREA, SESSIONS, PROFILES, BIO, DELIVERY, REPLY, TRAINING, ARMED_FORCES, POLICY_PACK, PRICES, GUIDES, GUIDES_NOTE } from "../data/facts";
+import { PERSON_REF } from "../data/structuredData";
 import PageHeader from "../components/PageHeader";
 
 // The page's own description, and the service's, both read the area from facts.js (SITEFIX-3).
@@ -117,9 +118,10 @@ const jsonLd = {
   name: "Private one-to-one SEND tuition with James Wallace",
   provider: {
     "@type": "Person",
+    ...PERSON_REF,
     name: "James Wallace",
     jobTitle: "Specialist EOTAS and SEND tutor",
-    url: "https://jameswallace.tech/tuition",
+    url: "https://jameswallace.tech/about",
     sameAs: PROFILES,
     hasCredential: [
       "Qualified Teacher Status (QTS)",
