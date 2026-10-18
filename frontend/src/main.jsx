@@ -13,8 +13,13 @@ const app = (
     <App />
   </StrictMode>
 );
-if (root.hasChildNodes()) hydrateRoot(root, app);
-else createRoot(root).render(app);
+// Cloudflare's email obfuscation swaps each address for a link that its decoder later turns back into a separate
+// text node, so a sentence holding an address becomes three text nodes where React expects one (#418 on
+// /compliance, live check 18 Oct 2026). normalize() merges them back; the parsed page has no other adjacent text.
+if (root.hasChildNodes()) {
+  root.normalize();
+  hydrateRoot(root, app);
+} else createRoot(root).render(app);
 
 // prerender.mjs calls this after the page has rendered, and saves React's own server markup as the body.
 // A browser snapshot cannot be hydrated (adjacent text nodes merge, effects have already run), so this
