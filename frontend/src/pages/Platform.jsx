@@ -249,11 +249,15 @@ export default function Platform() {
               </div>
             </div>
             <figure className="jw-shot">
+              {/* The clickable image repeats the "Open full size" link in the caption, so it is
+                  taken out of the tab order and hidden from assistive technology: one link per
+                  screenshot, not two. It stays clickable with a mouse or touch. */}
               <a
                 href={`/portal/${s.file}.webp?v=1013`}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Open the ${s.title} screenshot full size`}
+                tabIndex={-1}
+                aria-hidden="true"
               >
                 <img
                   src={`/portal/${s.file}.webp?v=1013`}
