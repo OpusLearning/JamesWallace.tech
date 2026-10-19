@@ -111,6 +111,64 @@ export function checkRoute(route, html) {
     });
   }
 
+  problems.push(...checkGraph(route, blocks));
+  return problems;
+}
+
+// Audit follow-ups, 18 Oct 2026 (QUEUE SEO-2). The company and James are one node each, joined by @id,
+// so every page that names James points at the same person and the home page says who runs the company
+// (site audit E1, E3).
+const ORG_ID = `${ORIGIN}/#org`;
+const PERSON_ID = `${ORIGIN}/#james`;
+
+function nodesOf(blocks) {
+  const nodes = [];
+  for (const block of blocks) {
+    try {
+      walk(JSON.parse(block.replace(/^<script\b[^>]*>/i, "").replace(/<\/script>$/i, "")), (node) => nodes.push(node));
+    } catch {
+      // A block that does not parse is already reported above.
+    }
+  }
+  return nodes;
+}
+
+export function checkGraph(route, blocks) {
+  const problems = [];
+  const nodes = nodesOf(blocks);
+  const typed = (type) => nodes.filter((n) => [].concat(n["@type"] || []).includes(type));
+  for (const person of typed("Person")) {
+    if (person.name === "James Wallace" && person["@id"] !== PERSON_ID) {
+      problems.push(`JSON-LD: a Person node for James Wallace has no "@id": "${PERSON_ID}"`);
+    }
+  }
+  if (route === "/") {
+    const org = typed("Organization").find((n) => n["@id"] === ORG_ID);
+    if (!org) problems.push(`JSON-LD: no Organization with "@id": "${ORG_ID}"`);
+    else {
+      if (!JSON.stringify(org.identifier || "").includes("17479328")) problems.push("JSON-LD: Organization has no company number");
+      if (org.founder?.["@id"] !== PERSON_ID) problems.push("JSON-LD: Organization founder does not point at James");
+      if (!org.legalName) problems.push("JSON-LD: Organization has no legalName");
+      if (![].concat(org.sameAs || []).some((u) => u.startsWith("https://maps.app.goo.gl/"))) {
+        problems.push("JSON-LD: Organization sameAs has no Google Business Profile");
+      }
+    }
+  }
+  if (["/", "/about", "/credentials"].includes(route)) {
+    const person = typed("Person").find((n) => n["@id"] === PERSON_ID && n.hasCredential);
+    if (!person) problems.push(`JSON-LD: no full Person node "${PERSON_ID}" with credentials`);
+    else if (person.worksFor?.["@id"] !== ORG_ID) problems.push("JSON-LD: Person worksFor does not point at the company");
+  }
+  return problems;
+}
+
+// llms.txt (site audit Q3): it exists, is plain text, and every link on this site goes to a real page or file.
+export function checkLlms(text, exists) {
+  const problems = [];
+  if (!/^# /m.test(text)) problems.push("llms.txt has no '# ' title line");
+  for (const [, url] of text.matchAll(/\((https:\/\/jameswallace\.tech[^)\s]*)\)/g)) {
+    if (!exists(new URL(url).pathname)) problems.push(`llms.txt links to ${url}, which is not in dist`);
+  }
   return problems;
 }
 
@@ -134,6 +192,14 @@ function main() {
       console.log(`ok   ${route}`);
     }
   }
+  const llms = join(dist, "llms.txt");
+  const inDist = (path) => {
+    const clean = path.replace(/\/$/, "");
+    return routes.includes(clean || "/") || existsSync(join(dist, clean));
+  };
+  const llmsProblems = existsSync(llms) ? checkLlms(readFileSync(llms, "utf8"), inDist) : ["dist/llms.txt is missing"];
+  for (const problem of llmsProblems) console.log(`FAIL llms.txt   ${problem}`);
+  failures += llmsProblems.length;
   console.log(`\nmeta gate: ${routes.length} routes checked, ${failures} problems`);
   if (failures) {
     console.error(`meta gate FAILED: ${failures} problems`);

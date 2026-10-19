@@ -1,6 +1,7 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { BIO, SAFEGUARDING_ROLES, STATUTORY, TRAINING } from "../data/facts";
+import { PERSON } from "../data/structuredData";
 import PageHeader from "../components/PageHeader";
 
 // LOOK-SITE-1 item 2: the icon cards are gone. Both "where my experience is most useful" and
@@ -43,12 +44,16 @@ const workingPrinciples = [
   },
 ];
 
+// James as structured data (QUEUE SEO-2, site audit E3): the same node the home page and /credentials publish.
+const ABOUT_JSON_LD = { "@context": "https://schema.org", ...PERSON };
+
 export default function About() {
   usePageMeta({
     title: 'About James Wallace | Specialist SEND Educator | James Wallace Education',
     description:
       'Thirteen years teaching in specialist provision, twelve of them in a special school, five years inside a local authority commissioning team, now delivering EOTAS for neurodiverse young people.',
     path: '/about',
+    jsonLd: ABOUT_JSON_LD,
   });
 
   return (

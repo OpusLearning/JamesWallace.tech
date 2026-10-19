@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import usePageMeta from "../hooks/usePageMeta";
 import { AREA, SESSIONS, PROFILES, BIO, REFERENCES } from "../data/facts";
+import { PERSON_REF } from "../data/structuredData";
 import { councilRows } from "../lib/council-policies";
 import PageHeader from "../components/PageHeader";
 
@@ -29,9 +30,10 @@ const jsonLd = {
   name: "Specialist SEND tuition in Nottinghamshire with James Wallace",
   provider: {
     "@type": "Person",
+    ...PERSON_REF,
     name: "James Wallace",
     jobTitle: "Specialist EOTAS and SEND tutor",
-    url: "https://jameswallace.tech/send-tuition-nottinghamshire",
+    url: "https://jameswallace.tech/about",
     sameAs: PROFILES,
     hasCredential: [
       "Qualified Teacher Status (QTS)",
