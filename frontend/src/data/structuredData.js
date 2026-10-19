@@ -51,7 +51,6 @@ export const ORGANIZATION = {
     propertyID: "Companies House company number",
     value: COMPANY.number,
   },
-  foundingDate: COMPANY.incorporated,
   founder: PERSON_REF,
   url: "https://jameswallace.tech/",
   logo: "https://jameswallace.tech/favicon.svg",

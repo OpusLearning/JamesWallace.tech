@@ -70,7 +70,7 @@ function Arrow() {
 // company name, the canonical URL, the site's logo, the contact address and number shown on
 // /contact, the page's own description, the five service areas from facts.js and the two profile
 // URLs. No postal address. Injected and removed by usePageMeta. Since 18 Oct 2026 (QUEUE SEO-2) the
-// company node also names its number, founding date and founder, and James is published beside it.
+// company node also names its number and founder (founding date removed 19 Oct 2026, James), and James is published beside it.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [{ ...ORGANIZATION, description: DESCRIPTION }, PERSON],
