@@ -208,4 +208,7 @@ function main() {
   console.log("meta gate PASSED");
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+// Always run. A symlinked invocation makes import.meta.url (the real file) differ from
+// process.argv[1] (the link), and the old equality check then skipped main() and exited 0 with no
+// output — a silent pass. font-size-gate.mjs has always called main() unconditionally for this reason.
+main();
