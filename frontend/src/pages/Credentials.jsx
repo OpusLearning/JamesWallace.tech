@@ -449,6 +449,15 @@ const cpdCerts = [
     wide: true,
     cert: "/certificates/cert_food-hygiene-level2_kitchen-documents_2026-09-26_a2170.pdf",
   },
+  {
+    title: TRAINING.saferRecruitment.name,
+    group: "compliance",
+    provider: TRAINING.saferRecruitment.provider,
+    issued: TRAINING.saferRecruitment.completed,
+    detail: `Certificate ID ${TRAINING.saferRecruitment.certificateId}. Assessment 20 out of 20. Recommended renewal ${TRAINING.saferRecruitment.renewal}. Verify at nexiscpd.co.uk/verify-certificate.`,
+    desc: TRAINING.saferRecruitment.summary,
+    cert: "/certificates/cert_nexis-cpd_safer-recruitment-awareness_2026-09-27.pdf",
+  },
 ];
 
 // The Designated Safeguarding Lead's certificate. Published with her consent (name, role and

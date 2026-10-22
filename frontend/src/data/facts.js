@@ -72,6 +72,17 @@ export const TRAINING = {
     modules:
       "Seven modules plus assessment covering lone working and personal safety, recognising dysregulation, non-physical de-escalation, when to pause or end a session, emergency procedures, absconding and incident reporting.",
   },
+  // James, 27 Sep 2026 (QUEUE CERT-SR). Nexis CPD's Safer Recruitment Awareness course; source:
+  // sources/training/safer-recruitment-2026/README.md. The certificate ID, the 20/20 assessment and
+  // the three-year recommended renewal all come from that file.
+  saferRecruitment: {
+    name: "Safer Recruitment Awareness",
+    provider: "Nexis CPD",
+    completed: "27 September 2026",
+    certificateId: "NX-CERT-797FE81D",
+    renewal: "27 September 2029",
+    summary: "Safer recruitment and the single central record under KCSIE 2026 Part three.",
+  },
   // Asmaa Ahmed's Home Office Prevent duty training, completed 26 September 2026. Source:
   // sources/training/asmaa-prevent-2026/README.md. Three courses from the Home Office Prevent duty
   // training service; the Home Office states no expiry, and the org rule renews Prevent every 24
