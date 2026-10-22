@@ -7,7 +7,7 @@
     "dev": "node scripts/purge-bootstrap.mjs && vite",
     "build": "node scripts/purge-bootstrap.mjs && vite build && node prerender.mjs",
     "lint": "eslint .",
-    "test": "node --test src/lib/*.test.js && node scripts/font-size-gate.mjs && node scripts/meta-gate.mjs",
+    "test": "node --test src/lib/*.test.js && node scripts/font-size-gate.mjs && node scripts/meta-gate.mjs && node scripts/bundle-size-gate.mjs",
     "test:unit": "node --test src/lib/*.test.js",
     "preview": "vite preview",
     "build:nossg": "node scripts/purge-bootstrap.mjs && vite build"
