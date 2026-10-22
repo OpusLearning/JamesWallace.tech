@@ -238,10 +238,13 @@ export default function PrivacyPolicy() {
         </p>
         <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
           <li><strong style={{ color: "var(--text-primary)" }}>Hetzner</strong> — hosts this website, stores enquiries and runs the visitor statistics on our own server in Germany.</li>
-          <li><strong style={{ color: "var(--text-primary)" }}>Cloudflare</strong> — content delivery and security in front of the site.</li>
-          <li><strong style={{ color: "var(--text-primary)" }}>Postmark</strong> — delivers the notification email when you send an enquiry.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Cloudflare</strong> — network and security in front of the site.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Resend</strong> — sends enquiry acknowledgements and alerts.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>OpenAI</strong> — generates the chat assistant&apos;s replies; the conversation is stored on our server.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>MailerLite</strong> — manages the newsletter list, in Lithuania (EU).</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Twilio</strong> — provides the phone line&apos;s telephony.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>ElevenLabs</strong> — provides the phone line&apos;s automated voice assistant, which uses an Anthropic language model.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Namecheap Private Email</strong> — provides the company mailbox.</li>
         </ul>
         <p>
           For commissioned provision, the portal stores records on Neon (Frankfurt) and encrypted
@@ -259,11 +262,16 @@ export default function PrivacyPolicy() {
           caption="International transfers and the safeguard for each"
           columns={["Provider", "Purpose", "Location", "Safeguard"]}
           rows={[
-            ["Postmark", "Enquiry notification emails", "United States", "UK Extension to the EU–US Data Privacy Framework"],
-            ["OpenAI", "Generating chat replies", "United States", "OpenAI data processing agreement with Standard Contractual Clauses and the UK Addendum"],
-            ["Cloudflare", "Content delivery and security", "United States", "UK Extension to the EU–US Data Privacy Framework"],
+            ["Hetzner", "Website hosting", "Germany (EU)", "No transfer outside the UK/EEA"],
+            ["Cloudflare", "Network and security in front of the site", "United States", "UK-US data bridge or the provider's UK transfer terms"],
+            ["Resend", "Sending enquiry acknowledgements and alerts", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             ["MailerLite", "Newsletter", "Lithuania (EU)", "No transfer outside the UK/EEA"],
-            ["Hetzner", "Website hosting and enquiry storage", "Germany (EU)", "No transfer outside the UK/EEA"],
+            ["OpenAI", "Website chat assistant", "United States", "UK-US data bridge or the provider's UK transfer terms"],
+            ["Twilio", "The phone line's telephony", "United States", "UK-US data bridge or the provider's UK transfer terms"],
+            ["ElevenLabs (using an Anthropic language model)", "The phone line's automated voice assistant", "United States", "UK-US data bridge or the provider's UK transfer terms"],
+            // Country: Namecheap's knowledge base ("Where are your datacenters located?") lists Private
+            // Email on PhoenixNAP, Phoenix, Arizona. James chose 22 Oct 2026 to fill this in from that source.
+            ["Namecheap Private Email", "The company mailbox", "United States (Phoenix, Arizona)", "Namecheap's data processing addendum"],
             ["Neon", "Portal database (commissioned provision)", "Frankfurt (EU)", "No transfer outside the UK/EEA"],
             ["Cloudflare R2", "Portal documents (commissioned provision), encrypted before upload", "Western Europe", "Stored in Western Europe; Cloudflare data processing addendum"],
           ]}
@@ -272,7 +280,7 @@ export default function PrivacyPolicy() {
 
       <LegalSection heading="6. How long we keep it">
         <ul style={{ color: "var(--text-muted)", lineHeight: 1.8 }}>
-          <li><strong style={{ color: "var(--text-primary)" }}>Enquiries</strong> — up to 2 years.</li>
+          <li><strong style={{ color: "var(--text-primary)" }}>Enquiries</strong> — up to 12 months from our last contact, then deleted.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Chat conversations</strong> — up to 12 months, then deleted automatically.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Newsletter</strong> — until you unsubscribe.</li>
           <li><strong style={{ color: "var(--text-primary)" }}>Visitor statistics</strong> — the counts are kept as aggregate page-view figures and carry no stored IP address or other identifier.</li>

@@ -90,6 +90,16 @@ export function deleteOldHelperChats() {
   return db.prepare("DELETE FROM helper_chats WHERE createdAt < datetime('now', '-12 months')").run().changes
 }
 
+/**
+ * Retention for enquiries: the privacy notice says "up to 12 months from our last contact, then
+ * deleted" (sources/legal/drafts/2026-10-09-privacy-and-policy-corrections.md item 11). Called once
+ * on startup and daily by server/index.js, on the same schedule as the chat clean-up.
+ * Returns the number of rows removed.
+ */
+export function deleteOldEnquiries() {
+  return db.prepare("DELETE FROM enquiries WHERE createdAt < datetime('now', '-12 months')").run().changes
+}
+
 export function markEnquiryEmailed(id, ok, error) {
   db.prepare('UPDATE enquiries SET emailed = ?, emailError = ? WHERE id = ?').run(ok ? 1 : 0, error || null, id)
 }
