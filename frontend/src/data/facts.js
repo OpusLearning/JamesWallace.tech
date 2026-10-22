@@ -171,7 +171,31 @@ export const ICO = {
 // training provider's logo, greyed until the certificate is in hand. Claude told James that the ICO's
 // re-use terms say its logo signifies ICO approval, and that nasen's member e-badge is a Plus-tier
 // benefit; he chose to show them. `icon` is the drawn fallback if an image is ever removed.
+// James, 22 Oct 2026: the company's insurance, bought 22 Oct 2026, in force from 1 November 2026 (Hiscox Insurance
+// Company Limited, policy PL-PSC10004071815/00, to 31 October 2027). Fact source: jw-sites
+// sources/insurance/POLICY-HISCOX-2026-27.md. The footer names the types only (James: "list the types of cover but not
+// the amount"); the limits appear on /compliance, which commissioners read. This change ships on 1 November 2026, not
+// before: until then the cover is bought but not in force. Renewal is 31 October each year: re-check the limits then.
+export const INSURANCE = {
+  insurer: "Hiscox",
+  covers: "Public liability, professional indemnity, employers' liability and cyber",
+  limits: [
+    { cover: "Public and products liability", limit: "£10 million each claim" },
+    { cover: "Professional indemnity", limit: "£5 million each claim" },
+    { cover: "Employers' liability", limit: "£10 million" },
+    { cover: "Cyber and data", limit: "£2 million" },
+  ],
+  period: "1 November 2026 to 31 October 2027",
+};
+
 export const REGISTRATIONS = [
+  {
+    key: "insured",
+    icon: "shield",
+    name: "Fully insured from 1 November 2026",
+    detail: INSURANCE.covers,
+    held: true,
+  },
   {
     key: "ico",
     image: "/badges/ico-registered.png",

@@ -1,6 +1,6 @@
 import usePageMeta from "../hooks/usePageMeta";
 import { Link } from "react-router-dom";
-import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS, HOSTING, PLATFORM_STATUS } from "../data/facts";
+import { STATUTORY, TRAINING, PRODUCT, SAFEGUARDING_ROLES, ARMED_FORCES, POLICY_PACK, CARE_LEAVERS, HOSTING, PLATFORM_STATUS, INSURANCE } from "../data/facts";
 import SafeguardingLead from "../components/SafeguardingLead";
 import PageHeader from "../components/PageHeader";
 
@@ -14,6 +14,10 @@ const staffComplianceRows = [
   { requirement: "Health & Safety Awareness", tracked: "Completion date recorded" },
   { requirement: "Data Protection / UK GDPR", tracked: "Completion date recorded" },
   { requirement: "Right to Work verification", tracked: "Provider + reference date" },
+  ...INSURANCE.limits.map((l) => ({
+    requirement: `${l.cover} insurance`,
+    tracked: `${l.limit} (${INSURANCE.insurer}, ${INSURANCE.period}); certificate on request`,
+  })),
 ];
 
 const dataProtectionPoints = [
