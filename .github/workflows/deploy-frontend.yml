@@ -5,49 +5,171 @@ on:
     branches:
       - main
 
+# The workflow only reads the repository; deployment credentials come from repository secrets.
+permissions:
+  contents: read
+
+# One deploy at a time, and never cancel one halfway through an rsync.
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
 
-      - name: Install and Build Frontend (Placeholder)
+      - name: Build, prove and test frontend
         working-directory: frontend
         run: |
-          npm install
+          set -euo pipefail
+          npm ci
+          # Build first: the browser tests reuse dist/ rather than each rebuilding it, which keeps
+          # a clean CI checkout from running two concurrent builds over the same directory.
           npm run build
+          # Prove the build includes public/, rather than trusting that it must.
+          test -f dist/sitemap.xml || { echo 'dist/sitemap.xml missing - build did not include public/'; exit 1; }
+          npm test
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
-          port: ${{ secrets.SERVER_PORT }}
-          # Without this, only the LAST command decides the result. `git pull` was failing on the server with "Need to
-          # specify how to reconcile divergent branches" while `systemctl reload nginx` succeeded, so every deploy since the
-          # history was rewritten reported success and quietly rebuilt stale code.
-          script_stop: true
-          script: |
-            set -euo pipefail
-            cd /var/www/jameswallace.tech
-            # A deploy target mirrors the remote; it never merges. `git pull` needs a reconcile strategy and dies without one,
-            # and any local edit here would block it forever. fetch + reset --hard is the honest idiom for a build-from-source
-            # checkout, and it survives a rewritten history.
-            git fetch --prune origin main
-            git reset --hard FETCH_HEAD
-            echo "deploying $(git rev-parse --short HEAD) — $(git log -1 --format=%s)"
-            cd frontend
-            npm ci || npm install
-            npm run build
-            # Prove the build is the one we just pulled, rather than trusting that it must be.
-            test -f dist/sitemap.xml || { echo 'dist/sitemap.xml missing — build did not include public/'; exit 1; }
-            sudo systemctl reload nginx
+      - name: Install and test server
+        working-directory: server
+        run: |
+          set -euo pipefail
+          npm ci
+          npm test
+
+      # No third-party SSH action: set up the runner's own OpenSSH from repository secrets.
+      #
+      # SERVER_SSH_KEY is the private half of the deploy key and has a passphrase, held in
+      # SERVER_SSH_PASSPHRASE. ssh-add supplies that passphrase through SSH_ASKPASS so it is
+      # never echoed, written to known_hosts, or passed on a command line. The key itself is
+      # loaded into an ssh-agent and the file is removed; later steps use the agent.
+      #
+      # Host keys: SERVER_KNOWN_HOSTS is optional. Existing deployments keep working with the
+      # secrets they already have: without that secret we scan SERVER_HOST once, keep the result
+      # in known_hosts for the rest of the job, and still use StrictHostKeyChecking=yes. If
+      # SERVER_HOST_FINGERPRINT is set (optional, "SHA256:..." from `ssh-keygen -lf`), the
+      # scanned key must match it or the job fails.
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_PASSPHRASE: ${{ secrets.SERVER_SSH_PASSPHRASE }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
+          SSH_HOST_FINGERPRINT: ${{ secrets.SERVER_HOST_FINGERPRINT }}
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+          SSH_PORT: ${{ secrets.SERVER_PORT || '22' }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d "$HOME/.ssh"
+          key_path="$HOME/.ssh/deploy_key"
+          known_hosts="$HOME/.ssh/known_hosts"
+          askpass="$(mktemp)"
+          trap 'rm -f "$askpass" "$key_path"' EXIT
+
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_path"
+          chmod 600 "$key_path"
+
+          # ssh-add reads the passphrase from the askpass helper. The helper contains only a
+          # reference to the environment variable, never the value, and it is deleted on exit.
+          cat > "$askpass" <<'EOF'
+          #!/bin/sh
+          printf '%s\n' "$SSH_PASSPHRASE"
+          EOF
+          chmod 700 "$askpass"
+
+          eval "$(ssh-agent -s)" >/dev/null
+          test -n "${SSH_AUTH_SOCK:-}" || {
+            echo "ssh-agent did not start" >&2
+            exit 1
+          }
+          SSH_ASKPASS="$askpass" SSH_ASKPASS_REQUIRE=force DISPLAY=:0 \
+            ssh-add "$key_path" </dev/null
+
+          # Export the agent socket to every later step; the key file is no longer needed.
+          {
+            echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
+            echo "SSH_AGENT_PID=$SSH_AGENT_PID"
+          } >> "$GITHUB_ENV"
+          rm -f "$key_path"
+
+          if [ -n "${SSH_KNOWN_HOSTS:-}" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > "$known_hosts"
+          else
+            # No pinned-host-keys secret: discover the key now so deploys work with the
+            # existing secrets only. The scan is trusted for this job only; pinning is
+            # available through SERVER_KNOWN_HOSTS or SERVER_HOST_FINGERPRINT.
+            ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" > "$known_hosts" 2>/dev/null
+            test -s "$known_hosts" || {
+              echo "ssh-keyscan returned no host key for $SSH_HOST" >&2
+              exit 1
+            }
+          fi
+          chmod 600 "$known_hosts"
+
+          if [ -n "${SSH_HOST_FINGERPRINT:-}" ]; then
+            ssh-keygen -lf "$known_hosts" -E sha256 | awk '{print $2}' \
+              | grep -Fxq "$SSH_HOST_FINGERPRINT" || {
+                echo "host key for $SSH_HOST does not match SERVER_HOST_FINGERPRINT" >&2
+                exit 1
+              }
+          else
+            # Log the observed fingerprints (public values only) so a change is visible.
+            ssh-keygen -lf "$known_hosts" -E sha256 || true
+          fi
+
+      - name: Deploy frontend build
+        env:
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+          SSH_USER: ${{ secrets.SERVER_USER }}
+          SSH_PORT: ${{ secrets.SERVER_PORT || '22' }}
+        run: |
+          set -euo pipefail
+          # --delete is safe here: dist/ contains only build output.
+          rsync -az --delete \
+            -e "ssh -p ${SSH_PORT} -o StrictHostKeyChecking=yes -o BatchMode=yes" \
+            frontend/dist/ "${SSH_USER}@${SSH_HOST}:/var/www/jameswallace.tech/frontend/dist/"
+
+      - name: Deploy server code
+        env:
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+          SSH_USER: ${{ secrets.SERVER_USER }}
+          SSH_PORT: ${{ secrets.SERVER_PORT || '22' }}
+        run: |
+          set -euo pipefail
+          # No --delete: this directory holds orders.db and the service's .env, neither of which
+          # may ever be removed by a deploy.
+          rsync -az \
+            --exclude '.env' \
+            --exclude '.env.*' \
+            --exclude 'node_modules/' \
+            --exclude '*.db' \
+            --exclude '*.db-*' \
+            --exclude '*.log' \
+            -e "ssh -p ${SSH_PORT} -o StrictHostKeyChecking=yes -o BatchMode=yes" \
+            server/ "${SSH_USER}@${SSH_HOST}:/var/www/jameswallace.tech/server/"
+
+      - name: Install server dependencies, restart and reload
+        env:
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+          SSH_USER: ${{ secrets.SERVER_USER }}
+          SSH_PORT: ${{ secrets.SERVER_PORT || '22' }}
+        run: |
+          set -euo pipefail
+          # set -euo pipefail runs inside the remote shell too, so a failed install or restart
+          # fails the job instead of being masked by a later successful command.
+          ssh -p "${SSH_PORT}" -o StrictHostKeyChecking=yes -o BatchMode=yes \
+            "${SSH_USER}@${SSH_HOST}" '
+              set -euo pipefail
+              cd /var/www/jameswallace.tech/server
+              npm ci --omit=dev
+              sudo systemctl restart jw-server
+              sudo systemctl reload nginx
+            '
