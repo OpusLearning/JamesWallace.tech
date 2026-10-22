@@ -268,6 +268,19 @@ export const REGISTRATIONS = [
     detail: "Valid to October 2029",
     held: true,
   },
+  {
+    key: "armed-forces-covenant",
+    // Master artwork as embedded in the MoD-issued certificate (22 Oct 2026), unmodified. Brand rules
+    // (AFC Brand Guidelines p.8): white background, keep the crown-height exclusion zone, never altered.
+    // Kept last: the guidelines place the Covenant mark after third-party logos.
+    image: "/badges/armed-forces-covenant.png",
+    imageAlt: "Armed Forces Covenant",
+    imageSize: [290, 422],
+    icon: "shield",
+    name: "Armed Forces Covenant",
+    detail: "Signed 6 October 2026", // ARMED_FORCES is declared further down, so not read from it here
+    held: true,
+  },
 ];
 
 // James, 6 Oct 2026 (QUEUE AFC-1). The company's Armed Forces Covenant pledge was submitted on GOV.UK on
@@ -277,13 +290,16 @@ export const REGISTRATIONS = [
 // children, signposting to support, and display of the logo once issued. `status` flips to "signed"
 // (with the date) when the certificate is in hand; the two sentences below are then rewritten together.
 export const ARMED_FORCES = {
-  status: "submitted",
+  status: "signed",
   submitted: "6 October 2026",
+  // Covenant dated 6 October 2026, countersigned for the MoD by Neil Jackson (DRM); MoD confirmed it
+  // registered by email to hello@ on 22 October 2026. Signed copy: ~/Desktop/01_Admin/Armed_Forces_Covenant/.
+  signed: "6 October 2026",
   covenantUrl: "https://www.armedforcescovenant.gov.uk/",
   families:
     "If someone in your family is serving, I plan around postings and deployments. Sessions can move online or be rearranged, and a move does not have to end the teaching.",
   statement:
-    "James Wallace Education Ltd submitted its pledge to the Armed Forces Covenant on 6 October 2026 and is awaiting confirmation.",
+    "James Wallace Education Ltd signed the Armed Forces Covenant on 6 October 2026, a commitment to support serving personnel, reservists, veterans and their families.",
 };
 
 // The policy pack. Checked against the live portal on 6 October 2026: 46 policies ACTIVE with an
