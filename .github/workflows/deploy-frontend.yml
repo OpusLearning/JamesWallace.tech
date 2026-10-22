@@ -133,7 +133,7 @@ jobs:
         run: |
           set -euo pipefail
           # --delete is safe here: dist/ contains only build output.
-          rsync -az --delete \
+          rsync -az --delete --chown=www-data:www-data \
             -e "ssh -p ${SSH_PORT} -o StrictHostKeyChecking=yes -o BatchMode=yes" \
             frontend/dist/ "${SSH_USER}@${SSH_HOST}:/var/www/jameswallace.tech/frontend/dist/"
 
@@ -146,7 +146,7 @@ jobs:
           set -euo pipefail
           # No --delete: this directory holds orders.db and the service's .env, neither of which
           # may ever be removed by a deploy.
-          rsync -az \
+          rsync -az --chown=www-data:www-data \
             --exclude '.env' \
             --exclude '.env.*' \
             --exclude 'node_modules/' \
