@@ -191,6 +191,11 @@ export const INSURANCE = {
 export const REGISTRATIONS = [
   {
     key: "insured",
+    // The site's own mark (no insurer's logo: Hiscox's terms for using its logo are not published, and the policy
+    // excludes claims for unauthorised use of another's trademark or logo). James, 22 Oct 2026.
+    image: "/badges/insured.svg",
+    imageAlt: "Insured",
+    imageSize: [156, 64],
     icon: "shield",
     name: "Fully insured from 1 November 2026",
     detail: INSURANCE.covers,

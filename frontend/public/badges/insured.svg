@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 64" width="156" height="64" role="img" aria-label="Insured">
+  <path d="M24 4 42 11v14c0 12.6-7.7 23.3-18 28.6C13.7 48.3 6 37.6 6 25V11L24 4Z" fill="#285043"/>
+  <path d="M24 9.2 37.4 14.4v10.6c0 9.8-5.7 18.4-13.4 22.9-7.7-4.5-13.4-13.1-13.4-22.9V14.4L24 9.2Z" fill="none" stroke="#e8ecdf" stroke-width="1.4"/>
+  <path d="m16.6 27.2 5.2 5.2 10.2-10.6" fill="none" stroke="#fffdf7" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="52" y="31" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="700" textLength="98" lengthAdjust="spacingAndGlyphs" fill="#193a31">INSURED</text>
+  <rect x="52" y="38" width="98" height="1.6" fill="#285043"/>
+  <text x="52" y="53" font-family="Arial, Helvetica, sans-serif" font-size="9.4" font-weight="700" textLength="98" lengthAdjust="spacingAndGlyphs" fill="#285043">PL · PI · EL · CYBER</text>
+</svg>
