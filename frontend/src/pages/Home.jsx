@@ -133,7 +133,7 @@ export default function Home() {
         <div className="jw-container jw-proof-grid">
           <p className="jw-proof-intro">Experience you can<br /><em>look into.</em></p>
           <Link to="/credentials"><strong>Qualified teacher</strong><span>QTS since 2004 · MEd</span></Link>
-          <Link to="/about"><strong>13 years in specialist teaching</strong><span>Including 12 at Foxwood Academy</span></Link>
+          <Link to="/about"><strong>13 years in specialist teaching</strong></Link>
           <Link to="/compliance"><strong>Enhanced DBS</strong><span>On the Update Service</span></Link>
           <Link to="/credentials" className="jw-proof-arrow" aria-label="View credentials and professional references"><Arrow /></Link>
         </div>
