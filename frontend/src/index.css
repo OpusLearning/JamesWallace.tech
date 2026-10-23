@@ -691,6 +691,11 @@ html.a11y-contrast-dark .jw-form-feedback[role='alert'] { color: #fff; backgroun
 .jw-shot img { display: block; width: 100%; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
 .jw-shot figcaption { margin-top: .7rem; font-size: .875rem; color: var(--text-muted); }
 .jw-shot-open { display: inline-block; margin-top: .35rem; font-size: .875rem; }
+/* Between 601px and desktop `.jw-shot a { display: block }` makes the link fill the caption and
+   leaves it one 23.1px line box tall (D3, review DAILY-2026-10-14-shot-open). WCAG 2.2 AA needs a
+   24x24 target, so pin the line box to 24px at every width. Two classes out-specify `.jw-shot a`
+   (0,1,1); below 601px the 44px rule takes over. */
+.jw-shot .jw-shot-open { line-height: 24px; }
 /* The 44px phone tap target has to out-specify `.jw-shot a { display: block }` (0,1,1): a single
    class is only (0,1,0), so the rule lives here, after the base declaration, with two classes.
    `column-gap` replaces the space that `inline-flex` eats: the arrow is marked up as
