@@ -15,6 +15,10 @@ export default function OnTheCalendar() {
     <span className="jw-hero-calendar-entry" key={label}>
       <span className="jw-hero-calendar-lead">{label}</span>
       <a href={item.link} rel="noopener" title={`Led by ${item.by}`}>{item.name}</a>
+      {/* A break opportunity before the date: without it the date is glued to the last word of the
+          name, so at 390px "ADHD Awareness Month" broke after "Awareness" and the date sat beside
+          "Month". The <wbr> lets the whole date move to its own line instead. */}
+      <wbr />
       <span className="jw-hero-calendar-date">{dateLabel(item)}</span>
     </span>
   );
