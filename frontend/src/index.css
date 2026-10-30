@@ -151,7 +151,7 @@ a:hover .jw-arrow { transform: translateX(3px); }
 .jw-reference-section { background: #eae8dc; padding-block: clamp(3rem, 5.7vw, 5.5rem); }
 .jw-reference-layout { display: grid; grid-template-columns: 1fr 3fr; gap: 3rem; }
 .jw-reference-label .jw-eyebrow { max-width: 9rem; }
-.jw-reference-label > span { display: block; font-family: var(--display-font); font-size: 8rem; line-height: 1; color: #87947b; margin-top: 2rem; }
+.jw-reference-label > span { display: block; font-family: var(--display-font); font-size: 8rem; line-height: 1; color: #748167; margin-top: 2rem; }
 .jw-reference { margin: 0; }
 .jw-reference blockquote { font-family: var(--display-font); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.5rem); line-height: 1.35; letter-spacing: -.03em; margin: 0 0 2rem; text-wrap: pretty; }
 .jw-reference figcaption { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
