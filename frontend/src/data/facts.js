@@ -208,7 +208,7 @@ export const REGISTRATIONS = [
     imageAlt: "Insured",
     imageSize: [156, 64],
     icon: "shield",
-    name: "Fully insured from 1 November 2026",
+    name: "Fully insured",
     detail: INSURANCE.covers,
     held: true,
   },
