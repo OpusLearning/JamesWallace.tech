@@ -33,6 +33,10 @@ export default function Footer() {
       <div className="jw-footer-grid">
         <div className="jw-footer-brand"><p className="jw-brand-name">James Wallace</p><p className="jw-brand-subtitle">Specialist teaching for young people who need a different route through education.</p></div>
         <nav className="jw-footer-nav" aria-label="Footer navigation"><ul>
+          <li><Link to="/tuition">Families</Link></li>
+          <li><Link to="/for-las">Local authorities</Link></li>
+          <li><Link to="/send-tuition-derbyshire">Specialist SEND tuition in Derbyshire</Link></li>
+          <li><Link to="/send-tuition-nottinghamshire">Specialist SEND tuition in Nottinghamshire</Link></li>
           <li><Link to="/students">For students</Link></li>
           <li><Link to="/allergy-policy">Allergy policy</Link></li>
           <li><Link to="/credentials">Credentials</Link></li><li><Link to="/compliance">Compliance</Link></li><li><Link to="/privacy">Privacy</Link></li>

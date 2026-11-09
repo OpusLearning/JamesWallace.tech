@@ -129,6 +129,9 @@ export default function ForLAs() {
                 <Link to="/compliance" className="jw-btn-secondary">
                   Compliance Details
                 </Link>
+                <Link to="/provision" className="jw-text-link">
+                  Provision
+                </Link>
               </div>
             </div>
             <div className="col-12 col-lg-5">

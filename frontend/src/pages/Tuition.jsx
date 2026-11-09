@@ -165,6 +165,7 @@ export default function Tuition() {
         actions={<>
           <Link to="/contact?for=parent" className="jw-btn-primary">Arrange a conversation</Link>
           <Link to="/credentials" className="jw-btn-secondary">See my full background</Link>
+          <Link to="/provision" className="jw-text-link">Provision</Link>
         </>}
         image={{
           src: "/hero/parent2-1100.webp",

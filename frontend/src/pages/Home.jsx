@@ -166,6 +166,11 @@ export default function Home() {
             </div>
           </div>
           <p className="jw-students-link">Are you the young person? <Link to="/students">This page is for you <Arrow /></Link></p>
+          <p className="jw-students-link">
+            <Link to="/send-tuition-derbyshire">Specialist SEND tuition in Derbyshire</Link>
+            <span aria-hidden="true"> · </span>
+            <Link to="/send-tuition-nottinghamshire">Specialist SEND tuition in Nottinghamshire</Link>
+          </p>
         </div>
       </section>
 
