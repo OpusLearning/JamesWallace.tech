@@ -183,7 +183,7 @@ const securityPoints = [
   { label: "AES-256-GCM encryption", desc: "Database encrypted at rest and in transit; health, safeguarding and session-note fields encrypted again by the portal; documents encrypted before upload" },
   { label: "Role-based access control", desc: "Practitioners, supervisors, and finance staff see only what they need" },
   { label: "Full audit trail", desc: "Every access, change, and export is logged and timestamped" },
-  { label: "EU hosting, moving to the UK", desc: `Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data protection information available on request.` },
+  { label: "UK hosting", desc: `Portal data is stored in the ${HOSTING.now}. ${HOSTING.detail} Data protection information available on request.` },
 ];
 
 export default function Platform() {

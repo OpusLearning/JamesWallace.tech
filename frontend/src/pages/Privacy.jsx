@@ -140,7 +140,7 @@ export default function PrivacyPolicy() {
       metaTitle="Privacy Notice | James Wallace, SEND & EOTAS Provision"
       description="How James Wallace Education handles personal data on this website: what we collect, why, who processes it, how long we keep it, and how to raise a data-protection complaint."
       path="/privacy"
-      updated="Last updated: 9 October 2026"
+      updated="Last updated: 15 November 2026"
     >
       <LegalSection heading="1. Who we are">
         <p>
@@ -247,9 +247,9 @@ export default function PrivacyPolicy() {
           <li><strong style={{ color: "var(--text-primary)" }}>Namecheap Private Email</strong> — provides the company mailbox.</li>
         </ul>
         <p>
-          For commissioned provision, the portal stores records on Neon (Frankfurt) and encrypted
-          documents on Cloudflare R2 (Western Europe). That processing is described in the portal&apos;s
-          own privacy notice. {HOSTING.planned}
+          This website and the journal are hosted on our server at Hetzner in Germany. The portal used
+          for commissioned provision is separate and its data is stored in the UK: {HOSTING.detail}{" "}
+          That processing is described in the portal&apos;s own privacy notice.
         </p>
       </LegalSection>
 
@@ -262,18 +262,18 @@ export default function PrivacyPolicy() {
           caption="International transfers and the safeguard for each"
           columns={["Provider", "Purpose", "Location", "Safeguard"]}
           rows={[
-            ["Hetzner", "Website hosting", "Germany (EU)", "No transfer outside the UK/EEA"],
+            ["Hetzner", "Hosting for this website, the journal and the visitor statistics", "Germany (EU)", "UK adequacy regulations (EEA)"],
             ["Cloudflare", "Network and security in front of the site", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             ["Resend", "Sending enquiry acknowledgements and alerts", "United States", "UK-US data bridge or the provider's UK transfer terms"],
-            ["MailerLite", "Newsletter", "Lithuania (EU)", "No transfer outside the UK/EEA"],
+            ["MailerLite", "Newsletter", "Lithuania (EU)", "UK adequacy regulations (EEA)"],
             ["OpenAI", "Website chat assistant", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             ["Twilio", "The phone line's telephony", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             ["ElevenLabs (using an Anthropic language model)", "The phone line's automated voice assistant", "United States", "UK-US data bridge or the provider's UK transfer terms"],
             // Country: Namecheap's knowledge base ("Where are your datacenters located?") lists Private
             // Email on PhoenixNAP, Phoenix, Arizona. James chose 22 Oct 2026 to fill this in from that source.
             ["Namecheap Private Email", "The company mailbox", "United States (Phoenix, Arizona)", "Namecheap's data processing addendum"],
-            ["Neon", "Portal database (commissioned provision)", "Frankfurt (EU)", "No transfer outside the UK/EEA"],
-            ["Cloudflare R2", "Portal documents (commissioned provision), encrypted before upload", "Western Europe", "Stored in Western Europe; Cloudflare data processing addendum"],
+            ["Mythic Beasts", "Portal hosting, encrypted portal documents and backups (commissioned provision)", "London (UK)", "No transfer outside the UK"],
+            ["Neon", "Portal database (commissioned provision)", "AWS London (UK)", "Stored in the UK; Neon's data processing addendum"],
           ]}
         />
       </LegalSection>

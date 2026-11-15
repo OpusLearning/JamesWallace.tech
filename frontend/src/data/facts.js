@@ -340,14 +340,16 @@ export const PRICES = {
   commissionedDayOnline: "£252.09",
 };
 
-// Where commissioned records are hosted. James, 8 Oct 2026: "write EU and to be ported to UK only". True today:
-// the portal database is in Frankfurt and its documents in Western Europe. The Nottingham tender (CPU7109) commits
-// to UK storage before any Nottingham pupil's data is entered; that framework starts on 14 April 2027, so that is
-// the latest date. When the move is done (QUEUE UK-INSTANCE), change `now` and delete `planned`.
+// Where commissioned records are hosted. James, 15 Nov 2026 (PRIV-UK): "we are now storing data in the UK".
+// The portal moved on 15 Nov 2026 (stages/05-release/output/SWITCH-UK-runbook.md): a Mythic Beasts server in
+// London, the database on Neon in AWS London (eu-west-2), uploaded documents encrypted on that server (UKSTORE),
+// and nightly encrypted backups on that server and on James's computer, both in the UK. This is the portal only:
+// the public site and the blog are still hosted at Hetzner in Germany. It met the Nottingham tender's (CPU7109)
+// UK-storage commitment ahead of 14 April 2027.
 export const HOSTING = {
-  now: "EU (Frankfurt)",
-  planned:
-    "Moving to UK-only hosting before 14 April 2027, and sooner for any placement that needs it.",
+  now: "UK (London)",
+  detail:
+    "The portal runs on a Mythic Beasts server in London, its database is Neon PostgreSQL in AWS London, uploaded documents are encrypted on the London server, and nightly encrypted backups stay in the UK.",
 };
 
 // Care leavers. James, 7 Oct 2026 ("you pick a workable offer for care leaver", then "add this to the

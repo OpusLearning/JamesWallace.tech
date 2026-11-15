@@ -30,8 +30,8 @@ const dataProtectionPoints = [
     desc: "Every access and change to learner data is logged and timestamped - available for inspection or SAR response.",
   },
   {
-    title: "EU hosting, moving to the UK",
-    desc: `Data is hosted on Neon PostgreSQL, ${HOSTING.now}. ${HOSTING.planned} Data processor agreement available on request.`,
+    title: "UK hosting",
+    desc: `Portal data is stored in the ${HOSTING.now}. ${HOSTING.detail} Data processor agreement available on request.`,
   },
   {
     title: "SAR process",
