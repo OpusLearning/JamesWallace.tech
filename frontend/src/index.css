@@ -269,12 +269,12 @@ textarea.form-control { resize: vertical; }
 .jw-badge-mark { flex: none; width: 3rem; height: 3rem; border-radius: 6px; background: var(--brand); color: #fffdf7; display: flex; align-items: center; justify-content: center; }
 .jw-badge-mark svg { width: 1.75rem; height: 1.75rem; }
 .jw-badge-logo { flex: none; height: 3rem; width: auto; max-width: 6.5rem; object-fit: contain; }
-.jw-badge-logo[src$="nasen.png"] { height: 2.5rem; border-radius: 4px; }
+.jw-badge-logo[src$="nasen.webp"] { height: 2.5rem; border-radius: 4px; }
 .jw-badge-logo[src$="skills-training-group.svg"] { height: 2.4rem; }
 /* Armed Forces Covenant brand rules: the mark sits on white with clear space round it (crown-height exclusion zone). */
-.jw-badge-logo[src$="armed-forces-covenant.png"] { box-sizing: content-box; height: 3.6rem; background: #fff; padding: .3rem .5rem; border-radius: 2px; }
+.jw-badge-logo[src$="armed-forces-covenant.webp"] { box-sizing: content-box; height: 3.6rem; background: #fff; padding: .3rem .5rem; border-radius: 2px; }
 @media (min-width: 1000px) {
-  .jw-badge-logo[src$="armed-forces-covenant.png"] { height: 4rem; margin-top: -.5rem; }
+  .jw-badge-logo[src$="armed-forces-covenant.webp"] { height: 4rem; margin-top: -.5rem; }
 }
 .jw-badge-pending .jw-badge-logo { filter: grayscale(1); opacity: .6; }
 .jw-badge-text { display: flex; flex-direction: column; gap: .15rem; }
@@ -289,7 +289,7 @@ textarea.form-control { resize: vertical; }
   .jw-footer-badges { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .jw-badge { flex-direction: column; justify-content: flex-start; text-align: center; gap: .7rem; padding: 1.1rem .8rem 1rem; }
   .jw-badge-logo, .jw-badge-mark { height: 3.2rem; }
-  .jw-badge-logo[src$="nasen.png"], .jw-badge-logo[src$="skills-training-group.svg"] { height: 2.6rem; margin-block: .3rem; }
+  .jw-badge-logo[src$="nasen.webp"], .jw-badge-logo[src$="skills-training-group.svg"] { height: 2.6rem; margin-block: .3rem; }
   .jw-badge-text { align-items: center; }
   .jw-badge-name { justify-content: center; }
 }

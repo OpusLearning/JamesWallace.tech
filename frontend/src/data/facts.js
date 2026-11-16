@@ -214,9 +214,9 @@ export const REGISTRATIONS = [
   },
   {
     key: "ico",
-    image: "/badges/ico-registered.png",
+    image: "/badges/ico-registered.webp",
     imageAlt: "ICO registered",
-    imageSize: [81, 76],
+    imageSize: [110, 103],
     icon: "shield",
     name: "ICO registered",
     detail: `Registration ${ICO.registrationNumber}`,
@@ -227,9 +227,9 @@ export const REGISTRATIONS = [
     // nasen Core (free, individual) membership in James's name, joined 6 October 2026. The member
     // e-badge comes only with the paid Plus tier, so this entry is text only.
     key: "nasen",
-    image: "/badges/nasen.png",
+    image: "/badges/nasen.webp",
     imageAlt: "nasen",
-    imageSize: [478, 200],
+    imageSize: [201, 84],
     icon: "book",
     name: "nasen member",
     detail: "Special educational needs association",
@@ -240,10 +240,11 @@ export const REGISTRATIONS = [
     name: "Disability Confident Committed",
     detail: "Valid to 6 October 2029",
     // DWP's own badge file, downloaded from the employer account on 6 October 2026. The branding
-    // guidance says it must not be recoloured, cropped or redrawn, so it is shown as supplied.
-    image: "/badges/disability-confident-committed.png",
+    // guidance says it must not be recoloured, cropped or redrawn. The served copy is a lossless
+    // WebP of that artwork at the same aspect ratio: no crop, no recolour, no redraw.
+    image: "/badges/disability-confident-committed.webp",
     imageAlt: "Disability Confident Committed badge",
-    imageSize: [500, 241],
+    imageSize: [214, 103],
     held: true,
   },
   {
@@ -251,9 +252,9 @@ export const REGISTRATIONS = [
     // Credly issued to him. Full record on /credentials.
     key: "google-cyber",
     icon: "shield",
-    image: "/badges/google-cybersecurity.png",
+    image: "/badges/google-cybersecurity.webp",
     imageAlt: "Google Cybersecurity Professional Certificate badge",
-    imageSize: [256, 243],
+    imageSize: [109, 103],
     name: "Google Cybersecurity Certificate",
     detail: "Issued December 2023",
     held: true,
@@ -270,12 +271,14 @@ export const REGISTRATIONS = [
   },
   {
     key: "armed-forces-covenant",
-    // Master artwork as embedded in the MoD-issued certificate (22 Oct 2026), unmodified. Brand rules
+    // Master artwork as embedded in the MoD-issued certificate (22 Oct 2026). Brand rules
     // (AFC Brand Guidelines p.8): white background, keep the crown-height exclusion zone, never altered.
+    // The served copy is a lossless WebP of that master at the same aspect ratio, so the mark itself,
+    // the white ground and the exclusion zone are unchanged.
     // Kept last: the guidelines place the Covenant mark after third-party logos.
-    image: "/badges/armed-forces-covenant.png",
+    image: "/badges/armed-forces-covenant.webp",
     imageAlt: "Armed Forces Covenant",
-    imageSize: [290, 422],
+    imageSize: [88, 128],
     icon: "shield",
     name: "Armed Forces Covenant",
     detail: "Signed 6 October 2026", // ARMED_FORCES is declared further down, so not read from it here
