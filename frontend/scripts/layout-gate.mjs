@@ -35,6 +35,45 @@ const WIDTHS = [
 const CROP_LIMIT = 1 / 3;
 const OVERLAP_LIMIT = 0.3; // share of the smaller block's area
 const OVERLAP_MIN_AREA = 100; // px², so touching edges and hairline rules are not findings
+const IMAGE_LOAD_TIMEOUT = 10000; // ms; one broken asset must not hang the gate
+
+// A `loading="lazy"` image below the fold has naturalWidth 0 until the browser decides to fetch it,
+// and the crop check would skip it silently (review LOW-1, 20 Nov 2026). Force every lazy image to
+// eager, walk the page once so anything still deferred starts, then wait for load/error. A failed
+// image keeps naturalWidth 0 and is skipped exactly as before; the timeout only caps the wait.
+async function settleImages(page) {
+  await page.evaluate(() => {
+    for (const img of document.images) {
+      if (img.loading === "lazy") img.loading = "eager";
+    }
+  });
+  await page.evaluate(async () => {
+    const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
+    const height = Math.max(
+      document.body ? document.body.scrollHeight : 0,
+      document.documentElement.scrollHeight
+    );
+    for (let y = 0; y <= height; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.evaluate(
+    (timeout) =>
+      Promise.all(
+        [...document.images].map((img) => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.addEventListener("load", resolve, { once: true });
+            img.addEventListener("error", resolve, { once: true });
+            setTimeout(resolve, timeout);
+          });
+        })
+      ),
+    IMAGE_LOAD_TIMEOUT
+  );
+}
 
 // Runs in the page. Async only because a background-size: cover image has to be loaded before its
 // natural size is known.
@@ -186,6 +225,18 @@ const FIXTURE = `<!doctype html><html><head><style>
  <div>Parent direct text <span>inline run</span><p>Child block text.</p></div>
 </body></html>`;
 
+// Lazy-loading fixture: the cover image sits below a 2500px spacer, so it is out of view at 1440x900.
+// Without settleImages the browser leaves it unloaded and the crop check skips it; with settling it
+// loads and its 50% crop is reported. This is the regression the self-test must catch.
+const LAZY_FIXTURE = `<!doctype html><html><head><style>
+ body { margin: 0; font: 16px sans-serif; }
+ .spacer { height: 2500px; }
+ .crop { width: 100px; height: 100px; object-fit: cover; }
+</style></head><body>
+ <div class="spacer"></div>
+ <img id="lazy" class="crop" loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect width='200' height='100' fill='%23888'/%3E%3C/svg%3E">
+</body></html>`;
+
 async function selfTest() {
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   try {
@@ -197,6 +248,24 @@ async function selfTest() {
       overlap: OVERLAP_LIMIT,
       minArea: OVERLAP_MIN_AREA,
     });
+
+    const lazyPage = await browser.newPage();
+    await lazyPage.setViewport({ width: 1440, height: 900 });
+    await lazyPage.goto(`data:text/html;charset=utf-8,${encodeURIComponent(LAZY_FIXTURE)}`, { waitUntil: "load" });
+    const lazyLimits = { crop: CROP_LIMIT, overlap: OVERLAP_LIMIT, minArea: OVERLAP_MIN_AREA };
+    const lazyState = () =>
+      lazyPage.evaluate(() => {
+        const img = document.getElementById("lazy");
+        const box = img.getBoundingClientRect();
+        return { loading: img.loading, complete: img.complete, naturalWidth: img.naturalWidth, top: box.top };
+      });
+    const lazyBefore = await lazyState();
+    const resultBefore = await lazyPage.evaluate(collectLayout, lazyLimits);
+    await settleImages(lazyPage);
+    const lazyAfter = await lazyState();
+    const resultAfter = await lazyPage.evaluate(collectLayout, lazyLimits);
+    await lazyPage.close();
+
     const checks = [
       ["one cover crop over a third is reported", result.crops.length === 1],
       ["the cover crop is 50% hidden", result.crops[0] && Math.round(result.crops[0].hidden) === 50],
@@ -213,6 +282,16 @@ async function selfTest() {
       [
         "a parent and child block are not an overlap",
         !result.overlaps.some((o) => o.a.includes("Parent direct text") || o.b.includes("Child block text")),
+      ],
+      ["the lazy cover starts unloaded below the fold", lazyBefore.naturalWidth === 0 && lazyBefore.top > 900],
+      ["without settling, the lazy cover is skipped", resultBefore.crops.length === 0],
+      [
+        "settling makes the lazy cover eager and loaded",
+        lazyAfter.loading === "eager" && lazyAfter.complete && lazyAfter.naturalWidth > 0,
+      ],
+      [
+        "after settling, the lazy 50% crop is reported",
+        resultAfter.crops.length === 1 && Math.round(resultAfter.crops[0].hidden) === 50,
       ],
     ];
     let failed = 0;
@@ -239,6 +318,7 @@ async function main() {
         for (const route of PAGES) {
           const response = await page.goto(`${origin}${route}`, { waitUntil: "networkidle0" });
           const status = response ? response.status() : null;
+          await settleImages(page);
           const result = await page.evaluate(collectLayout, {
             crop: CROP_LIMIT,
             overlap: OVERLAP_LIMIT,
