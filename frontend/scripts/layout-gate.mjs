@@ -36,6 +36,8 @@ const CROP_LIMIT = 1 / 3;
 const OVERLAP_LIMIT = 0.3; // share of the smaller block's area
 const OVERLAP_MIN_AREA = 100; // px², so touching edges and hairline rules are not findings
 const IMAGE_LOAD_TIMEOUT = 10000; // ms; one broken asset must not hang the gate
+const SCROLL_TIMEOUT = 5000; // ms; a throttled requestAnimationFrame must not hang the gate either
+const FRAME_TIMEOUT = 250; // ms; per scroll step, so one stuck frame cannot eat the whole budget
 
 // A `loading="lazy"` image below the fold has naturalWidth 0 until the browser decides to fetch it,
 // and the crop check would skip it silently (review LOW-1, 20 Nov 2026). Force every lazy image to
@@ -47,27 +49,48 @@ async function settleImages(page) {
       if (img.loading === "lazy") img.loading = "eager";
     }
   });
-  await page.evaluate(async () => {
-    const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
-    const height = Math.max(
-      document.body ? document.body.scrollHeight : 0,
-      document.documentElement.scrollHeight
-    );
-    for (let y = 0; y <= height; y += step) {
-      window.scrollTo(0, y);
-      await new Promise((resolve) => requestAnimationFrame(resolve));
-    }
-    window.scrollTo(0, 0);
-  });
+  await page.evaluate(
+    async ({ budget, frame }) => {
+      const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
+      const height = Math.max(
+        document.body ? document.body.scrollHeight : 0,
+        document.documentElement.scrollHeight
+      );
+      const deadline = performance.now() + budget;
+      // One stuck frame (throttled or paused rAF) resolves after `frame` ms at most; the whole
+      // walk stops at the budget, then scrolls back to the top (review LOW-3, 24 Nov 2026).
+      const nextFrame = () =>
+        new Promise((resolve) => {
+          let timer;
+          const done = () => {
+            clearTimeout(timer);
+            resolve();
+          };
+          timer = setTimeout(done, frame);
+          requestAnimationFrame(done);
+        });
+      for (let y = 0; y <= height && performance.now() < deadline; y += step) {
+        window.scrollTo(0, y);
+        await nextFrame();
+      }
+      window.scrollTo(0, 0);
+    },
+    { budget: SCROLL_TIMEOUT, frame: FRAME_TIMEOUT }
+  );
   await page.evaluate(
     (timeout) =>
       Promise.all(
         [...document.images].map((img) => {
           if (img.complete) return Promise.resolve();
           return new Promise((resolve) => {
-            img.addEventListener("load", resolve, { once: true });
-            img.addEventListener("error", resolve, { once: true });
-            setTimeout(resolve, timeout);
+            let timer;
+            const done = () => {
+              clearTimeout(timer);
+              resolve();
+            };
+            img.addEventListener("load", done, { once: true });
+            img.addEventListener("error", done, { once: true });
+            timer = setTimeout(done, timeout);
           });
         })
       ),
@@ -225,12 +248,14 @@ const FIXTURE = `<!doctype html><html><head><style>
  <div>Parent direct text <span>inline run</span><p>Child block text.</p></div>
 </body></html>`;
 
-// Lazy-loading fixture: the cover image sits below a 2500px spacer, so it is out of view at 1440x900.
-// Without settleImages the browser leaves it unloaded and the crop check skips it; with settling it
-// loads and its 50% crop is reported. This is the regression the self-test must catch.
+// Lazy-loading fixture: the cover image sits below a 6000px spacer, so it is out of view at 1440x900
+// and well beyond Chrome's lazy-load distance thresholds (a 2500px spacer could auto-load on some
+// profiles and flake the "starts unloaded" check — review LOW-2, 24 Nov 2026). Without settleImages
+// the browser leaves it unloaded and the crop check skips it; with settling it loads and its 50% crop
+// is reported. This is the regression the self-test must catch.
 const LAZY_FIXTURE = `<!doctype html><html><head><style>
  body { margin: 0; font: 16px sans-serif; }
- .spacer { height: 2500px; }
+ .spacer { height: 6000px; }
  .crop { width: 100px; height: 100px; object-fit: cover; }
 </style></head><body>
  <div class="spacer"></div>
