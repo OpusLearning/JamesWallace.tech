@@ -56,13 +56,18 @@ async function resolveFile(pathname) {
   return null;
 }
 
-// The built not-found page, so a 404 is still a real page rather than a blank body.
-async function notFoundBody() {
+// The built not-found page, so a 404 is still a real page rather than a blank body. Read once and
+// reused: it does not change while a server is running, and re-reading it on every unknown request
+// was needless I/O (SERVE-DIST-TIDY, 27 Nov 2026).
+let notFoundCache = null;
+export async function notFoundBody() {
+  if (notFoundCache) return notFoundCache;
   try {
-    return await readFile(join(dist, "404.html"));
+    notFoundCache = await readFile(join(dist, "404.html"));
   } catch {
     return null;
   }
+  return notFoundCache;
 }
 
 /** Run `fn(origin)` with the built site served; the server is always closed afterwards. */

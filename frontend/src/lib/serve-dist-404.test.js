@@ -10,7 +10,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { withDistServer, dist } from "../../scripts/lib/serve-dist.mjs";
+import { withDistServer, notFoundBody, dist } from "../../scripts/lib/serve-dist.mjs";
 
 test("a built route and a static file are served with 200", async () => {
   await withDistServer(async (origin) => {
@@ -24,9 +24,9 @@ test("a built route and a static file are served with 200", async () => {
 });
 
 test("a path the build does not contain returns 404, not the SPA shell", async () => {
-  const home = readFileSync(join(dist, "index.html"), "utf8");
-  const notFound = readFileSync(join(dist, "404.html"), "utf8");
   await withDistServer(async (origin) => {
+    const home = readFileSync(join(dist, "index.html"), "utf8");
+    const notFound = readFileSync(join(dist, "404.html"), "utf8");
     for (const route of ["/not-a-real-route", "/assets/does-not-exist.js"]) {
       const res = await fetch(`${origin}${route}`);
       assert.equal(res.status, 404, `${route} is not in the build and must be 404`);
@@ -36,4 +36,13 @@ test("a path the build does not contain returns 404, not the SPA shell", async (
       assert.equal(body, notFound, `${route} should serve the built 404 page`);
     }
   });
+});
+
+// SERVE-DIST-TIDY (backlog, Claude 26 Nov 2026): the request handler used to read `dist/404.html`
+// from disk on every unknown request. The body is now read once and reused, so two calls return the
+// same Buffer. Without the cache each call allocates a new one and this assertion fails.
+test("the 404 page body is read once and reused", async () => {
+  const first = await notFoundBody();
+  assert.ok(first, "dist/404.html should exist after the build");
+  assert.equal(await notFoundBody(), first, "the 404 body should be cached, not re-read per request");
 });
